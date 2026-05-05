@@ -802,6 +802,7 @@ Evidence:
 - `Scripts/ios_release_gates.sh launch-device` still fails while CoreDevice marks the paired iPhone unavailable.
 - `Scripts/ios_release_gates.sh upload-probe` retried against the current-source archive at `2026-05-05 17:09:43Z`; App Store Connect returned HTTP 200 with `data: []` and `total: 0` for `com.perlantir.stormblocks`, then Xcode failed with `missingApp(bundleId: "com.perlantir.stormblocks")`. Current distribution log: `/var/folders/b2/cl2rv8q13bg48zl073ctm_fc0000gq/T/Unity-iPhone_2026-05-05_12-09-41.988.xcdistributionlogs/IDEDistributionAppStoreConnect.log`.
 - `Scripts/ci_static_checks.sh && Scripts/release_audit.sh full` passes static checks and reports 31 pass, 0 fail, 8 open gates.
+- GitHub `Release Static Checks` passed for pushed board sanctuary commit `f9debe6`: `https://github.com/perlantir/stormblocks/actions/runs/25391028221`.
 
 Known risks / not done:
 
