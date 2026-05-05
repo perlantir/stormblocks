@@ -428,6 +428,7 @@ Evidence:
 
 - `Scripts/verify_prompt_compliance.sh` passes locally.
 - `Scripts/ci_static_checks.sh` passes locally with the prompt compliance verifier included.
+- GitHub Actions run `25361676599` passed for commit `e3e8339` at `https://github.com/perlantir/stormblocks/actions/runs/25361676599` with the prompt compliance verifier included in static checks.
 
 Known risks / not done:
 
