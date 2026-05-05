@@ -827,3 +827,26 @@ Known risks / not done:
 
 - Current-source physical install/launch still needs to be retried after the paired iPhone is available to CoreDevice again.
 - App Store Connect upload still requires an app record for bundle id `com.perlantir.stormblocks`; the upload probe is expected to stay blocked until that external record exists.
+
+## 2026-05-05 — Saved survivor pushback presentation pass
+
+- Added a saved-survivor presentation layer in the runtime placement path: clears that rescue survivors now spawn a compact camp glow, rescued survivor cheer figures, path sparkles, rescue burst, and heart sparkle while preserving the automatic Storm Pushback VFX.
+- Updated score feedback so survivor-rescue clears show `Saved!` messaging, including `Saved! Pushback` when the rescue and automatic Storm Pushback happen together.
+- Extended the signature PlayMode smoke test to verify the saved toast, rescued survivor count, rescue burst, camp glow, storm shatter flare, and four pushback perimeter recoil objects in one actual placement.
+- Updated the visual capture and App Store screenshot generator so the main gameplay capture and screenshot `01_place_blocks_save_camp.png` stage the real saved-pushback moment through the runtime placement API.
+- Regenerated the portrait visual capture and all five App Store screenshots, then copied the refreshed PNGs into `fastlane/screenshots/en-US`.
+
+Evidence:
+
+- EditMode tests: `StormBlocksUnity/editmode-results.xml` reports 26 total, 26 passed, 0 failed at `2026-05-05 17:29:32Z`.
+- PlayMode tests: `StormBlocksUnity/playmode-results.xml` reports 9 total, 9 passed, 0 failed at `2026-05-05 17:29:39Z`.
+- Current logged full-detail mobile baseline after the saved survivor pushback pass: 457 renderers, 166,264 mesh triangles, 1 audio listener, and 1 canvas.
+- Portrait visual capture: `/tmp/stormblocks-visual-saved-pushback.log` completed successfully and wrote `StormBlocksUnity/Builds/VisualChecks/stormblocks-gameplay.png`.
+- App Store screenshot capture: `/tmp/stormblocks-appstore-saved-pushback.log` completed successfully and regenerated all five PNGs under `StormBlocksUnity/Builds/AppStoreScreens/`; the files were copied into `fastlane/screenshots/en-US/`.
+- `Scripts/verify_release_assets.sh` passes locally: 32 pass, 0 fail.
+- `Scripts/ci_static_checks.sh && Scripts/release_audit.sh full` passes static checks and reports 31 pass, 0 fail, 8 open gates.
+
+Known risks / not done:
+
+- Current-source physical install/launch still needs to be retried after the paired iPhone is available to CoreDevice again.
+- App Store Connect upload still requires an app record for bundle id `com.perlantir.stormblocks`; the upload probe is expected to stay blocked until that external record exists.

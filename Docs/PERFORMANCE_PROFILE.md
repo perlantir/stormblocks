@@ -4,7 +4,7 @@ This is the current lightweight performance profile for the Unity playable scene
 
 ## Current Baseline
 
-Source: `StormBlocksUnity/playmode-results.xml` from `2026-05-05 17:22:23Z`.
+Source: `StormBlocksUnity/playmode-results.xml` from `2026-05-05 17:29:39Z`.
 
 - PlayMode tests: 9 total, 9 passed, 0 failed.
 - Playable root renderers: 457.

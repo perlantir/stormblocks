@@ -40,7 +40,7 @@ The playable `StormBlocksGameView` now uses the design references in the runtime
 - The central camp keeps a warm tent/fire/survivor silhouette and no longer has the rejected raw camp GLB overlay.
 - The piece tray includes an optimized GLB toy-block charm while repeated gameplay cells remain procedural for performance.
 - The background uses a blurred design-source phone-layout crop to capture the supplied storm atmosphere without copying the source board/UI into the playable surface.
-- App Store screenshots and the portrait gameplay capture were regenerated after the board pass.
+- App Store screenshots and the portrait gameplay capture were regenerated after the board pass, then refreshed again so the first store screenshot and gameplay capture stage the real saved-pushback moment through the runtime placement API.
 
 ## Reproduction
 

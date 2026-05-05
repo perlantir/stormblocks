@@ -2262,12 +2262,17 @@ namespace StormBlocks.Presentation
                 return result;
             }
 
-            ShowScoreFeedback(result);
-
             if (result.Clear.AutomaticPushbackTriggered)
             {
                 SpawnPushbackFx(result.Clear);
             }
+
+            if (result.Clear.SurvivorsRescuedAt.Count > 0)
+            {
+                SpawnRescueCelebrationFx(result.Clear, !result.Clear.AutomaticPushbackTriggered);
+            }
+
+            ShowScoreFeedback(result);
 
             _saveService.SaveRunSnapshot(StormRunSnapshot.FromState(_session.State));
             if (result.GameOver)
@@ -2289,13 +2294,18 @@ namespace StormBlocks.Presentation
                 return;
             }
 
+            bool rescued = result.Clear.SurvivorsRescuedAt.Count > 0;
             if (result.Clear.ClutchSave)
             {
-                ShowToast("Clutch Save +" + points, 1.1f);
+                ShowToast(rescued ? "Saved! Clutch +" + points : "Clutch Save +" + points, 1.1f);
             }
             else if (result.Clear.AutomaticPushbackTriggered)
             {
-                ShowToast("Pushback +" + points, 1.0f);
+                ShowToast(rescued ? "Saved! Pushback +" + points : "Pushback +" + points, 1.0f);
+            }
+            else if (rescued)
+            {
+                ShowToast("Saved! +" + points, 1.0f);
             }
             else if (result.Clear.Lines.Count > 1)
             {
@@ -2384,6 +2394,28 @@ namespace StormBlocks.Presentation
 
             CreatePushbackPerimeterSurge(lowDetail);
             _fxTimer = reducedMotion ? 0.35f : 0.8f;
+        }
+
+        private void SpawnRescueCelebrationFx(ClearResolution clear, bool clearExistingFx)
+        {
+            if (clearExistingFx)
+            {
+                ClearPooledTransform(_fxRoot);
+            }
+
+            int rescueCount = clear.SurvivorsRescuedAt.Count;
+            for (int i = 0; i < rescueCount; i++)
+            {
+                Vector3 start = CellCenter(clear.SurvivorsRescuedAt[i].X, clear.SurvivorsRescuedAt[i].Y);
+                Vector3 cheer = Vector3.Lerp(start, Vector3.zero, 0.58f) + new Vector3((i - 1) * 0.12f, 0.54f, 0.10f + i * 0.05f);
+                BuildSurvivor(_fxRoot, cheer, i % 2 == 0 ? _survivorYellow : _survivorPink);
+                CreatePooledCube("Saved survivor cheer path", _fxRoot, Vector3.Lerp(start, Vector3.zero, 0.42f) + Vector3.up * 0.50f, new Vector3(0.36f, 0.035f, 0.08f), _campLight);
+                CreatePooledSphere("Saved rescue burst", _fxRoot, start + Vector3.up * 0.58f, new Vector3(0.28f, 0.11f, 0.28f), _campLight);
+                CreatePooledSphere("Saved heart sparkle", _fxRoot, cheer + new Vector3(0.16f, 0.34f, -0.18f), new Vector3(0.11f, 0.08f, 0.045f), _survivorPink);
+            }
+
+            CreatePooledSphere("Saved camp glow", _fxRoot, new Vector3(0f, 0.66f, 0f), new Vector3(1.28f, 0.12f, 1.28f), _campLight);
+            _fxTimer = Mathf.Max(_fxTimer, _profile != null && _profile.Settings.ReducedMotion ? 0.40f : 0.95f);
         }
 
         private void CreatePushbackPerimeterSurge(bool lowDetail)

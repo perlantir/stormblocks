@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using StormBlocks.Core;
 using StormBlocks.Presentation;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -20,6 +21,7 @@ namespace StormBlocks.Editor
             var root = new GameObject("Storm Blocks Visual Capture Root");
             var view = root.AddComponent<StormBlocksGameView>();
             view.StartEndlessForTest(20260505UL);
+            ConfigureSavedPushbackMoment(view);
 
             var camera = Camera.main;
             if (camera == null)
@@ -34,7 +36,7 @@ namespace StormBlocks.Editor
         public static void CaptureAppStoreScreenshots()
         {
             StormBlocksMarketingAssets.GenerateLaunchAssets();
-            CaptureScenario("01_place_blocks_save_camp.png", delegate(StormBlocksGameView view) { }, true);
+            CaptureScenario("01_place_blocks_save_camp.png", ConfigureSavedPushbackMoment, true);
             CaptureScenario("02_beat_daily_storm.png", delegate(StormBlocksGameView view) { view.StartDaily(true); }, true);
             CaptureScenario("03_storm_trail_progression.png", delegate(StormBlocksGameView view)
             {
@@ -69,6 +71,31 @@ namespace StormBlocks.Editor
             }
 
             CaptureCamera(camera, Path.Combine(AppStoreOutputFolder, fileName), includeCanvas);
+        }
+
+        private static void ConfigureSavedPushbackMoment(StormBlocksGameView view)
+        {
+            const int row = 2;
+            view.State.Queue.Clear();
+            view.State.Queue.Add(new PieceDefinition("single", new[] { new GridPosition(0, 0) }));
+            for (int x = 0; x < view.State.Board.Size; x++)
+            {
+                view.State.Board.ClearCell(new GridPosition(x, row));
+            }
+
+            view.State.Board.SetOccupant(new GridPosition(0, row), CellOccupant.Storm, string.Empty);
+            for (int x = 1; x < 7; x++)
+            {
+                view.State.Board.SetOccupant(new GridPosition(x, row), CellOccupant.Block, "capture");
+            }
+
+            view.State.Board.SetSurvivor(new GridPosition(3, row), true);
+
+            var result = view.TryPlaceForTest(0, new GridPosition(7, row));
+            if (!result.Success || !result.Clear.AutomaticPushbackTriggered || result.Clear.SurvivorsRescuedAt.Count == 0)
+            {
+                throw new InvalidOperationException("Storm Blocks capture could not stage the saved pushback moment.");
+            }
         }
 
         private static void CaptureCamera(Camera camera, string outputPath, bool includeCanvas)

@@ -27,7 +27,7 @@ Use the project test runner for batch verification. Unity 6000 can skip `-runTes
   -logFile /tmp/stormblocks-editmode-lowdetail.log
 ```
 
-Current evidence: `StormBlocksUnity/editmode-results.xml` reports 26 total, 26 passed, 0 failed at `2026-05-05 17:22:16Z`.
+Current evidence: `StormBlocksUnity/editmode-results.xml` reports 26 total, 26 passed, 0 failed at `2026-05-05 17:29:32Z`.
 
 ## PlayMode Tests
 
@@ -40,14 +40,14 @@ Current evidence: `StormBlocksUnity/editmode-results.xml` reports 26 total, 26 p
   -logFile /tmp/stormblocks-playmode-lowdetail.log
 ```
 
-Current evidence: `StormBlocksUnity/playmode-results.xml` reports 9 total, 9 passed, 0 failed at `2026-05-05 17:22:23Z`.
+Current evidence: `StormBlocksUnity/playmode-results.xml` reports 9 total, 9 passed, 0 failed at `2026-05-05 17:29:39Z`.
 
 The PlayMode suite includes release smoke guards for the normal flow and active touch controls:
 
 - `NormalFlowDoesNotEmitGameErrors` verifies the generated playable scene completes a normal interaction path without project-level console errors.
 - `ActiveTouchControlsStayInsideSafeAreaWithReleaseSizedTargets` verifies active portrait controls stay inside the safe-area root and meet release-sized touch target thresholds.
 - `FirstMoveCoachTeachesWithNoTextAndDismissesAfterPlacement` verifies the first-run coach is visual-only and disappears after the first placement.
-- `AutomaticPushbackSpawnsSignaturePerimeterRecoil` verifies a real row clear through a storm tile triggers automatic Storm Pushback plus the gold wave, storm shatter flare, and perimeter recoil VFX objects.
+- `AutomaticPushbackSpawnsSignaturePerimeterRecoil` verifies a real row clear through a storm tile triggers automatic Storm Pushback plus the saved-survivor toast, rescue burst, gold wave, storm shatter flare, and perimeter recoil VFX objects.
 
 The PlayMode suite includes a lightweight mobile scene-budget guard. Current logged baseline:
 
@@ -75,7 +75,7 @@ Current optimization notes:
 
 Output is written to ignored path `StormBlocksUnity/Builds/VisualChecks/stormblocks-gameplay.png`.
 
-Current evidence: `/tmp/stormblocks-visual-board-sanctuary-trim.log` completed with no C# errors or Unity exceptions. The capture includes the runtime HUD, text-free first-move coach, deeper grid seams, warm camp sanctuary ring, and perimeter storm wall, and uses the same visible text path as the generated store screenshots.
+Current evidence: `/tmp/stormblocks-visual-saved-pushback.log` completed successfully. The capture stages the actual runtime saved-pushback moment through `TryPlaceForTest`, including the runtime HUD, deeper grid seams, warm camp sanctuary ring, perimeter storm wall, saved toast, rescue burst, and automatic Storm Pushback VFX.
 
 ## App Icon Draft
 
@@ -111,7 +111,7 @@ Outputs are written to ignored path `StormBlocksUnity/Builds/AppStoreScreens/`:
 - `04_tempest_trials_weekly.png`
 - `05_cosmetic_profile.png`
 
-Current evidence: `/tmp/stormblocks-appstore-board-sanctuary-trim.log` completed with no C# errors or Unity exceptions, and regenerated all five 1170 x 2532 PNGs with visible UI labels and the updated board treatment.
+Current evidence: `/tmp/stormblocks-appstore-saved-pushback.log` completed successfully and regenerated all five 1170 x 2532 PNGs. Screenshot `01_place_blocks_save_camp.png` is now staged from the actual saved-pushback gameplay moment; the refreshed Fastlane screenshot package passes `Scripts/verify_release_assets.sh` with 32 pass, 0 fail.
 
 The current Fastlane handoff package includes tracked copies under `fastlane/screenshots/en-US/`. `Scripts/verify_release_assets.sh` validates the five expected PNGs at 1170 x 2532.
 

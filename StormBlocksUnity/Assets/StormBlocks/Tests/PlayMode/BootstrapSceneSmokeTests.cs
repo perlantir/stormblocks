@@ -206,17 +206,23 @@ namespace StormBlocks.Tests.PlayMode
                 view.State.Board.SetOccupant(new GridPosition(x, 0), CellOccupant.Block, "setup");
             }
 
+            view.State.Board.SetSurvivor(new GridPosition(1, 0), true);
+
             var result = view.TryPlaceForTest(0, new GridPosition(7, 0));
             yield return null;
 
             Assert.IsTrue(result.Success, result.FailureReason);
             Assert.IsTrue(result.Clear.AutomaticPushbackTriggered, "Expected automatic pushback when clearing a row through a storm tile.");
+            Assert.AreEqual(1, result.Clear.SurvivorsRescuedAt.Count);
+            AssertTextContains("Saved!");
             Assert.IsNotNull(GameObject.Find("Gold pushback wave row"));
             Assert.IsNotNull(GameObject.Find("Storm shatter flare"));
             Assert.IsNotNull(GameObject.Find("Pushback storm wall recoil north"));
             Assert.IsNotNull(GameObject.Find("Pushback storm wall recoil south"));
             Assert.IsNotNull(GameObject.Find("Pushback storm wall recoil west"));
             Assert.IsNotNull(GameObject.Find("Pushback storm wall recoil east"));
+            Assert.IsNotNull(GameObject.Find("Saved rescue burst"));
+            Assert.IsNotNull(GameObject.Find("Saved camp glow"));
         }
 
         [UnityTest]

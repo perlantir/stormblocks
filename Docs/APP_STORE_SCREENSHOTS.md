@@ -24,7 +24,7 @@ The release handoff copies the current set into Fastlane's tracked screenshot pa
 
 Current files:
 
-- `01_place_blocks_save_camp.png` - core loop, warm camp, readable board.
+- `01_place_blocks_save_camp.png` - staged saved-pushback core loop, warm camp, readable board.
 - `02_beat_daily_storm.png` - Daily Storm retention mode.
 - `03_storm_trail_progression.png` - Storm Trail map/progression mode.
 - `04_tempest_trials_weekly.png` - weekly Tempest Trials run set.
@@ -36,6 +36,6 @@ Each generated image targets iPhone portrait composition at 1170 x 2532.
 
 - The screenshots use the procedural 3D art direction currently in the Unity project.
 - The scenes are draft store assets until final art/audio/signing review.
-- The current Fastlane set was regenerated after the design-source board pass on `2026-05-05`.
+- The current Fastlane set was regenerated after the saved-pushback visual pass on `2026-05-05`.
 - The output should be regenerated after any major visual, UI, mode, or monetization-surface change.
 - After regeneration, copy the five PNGs into `fastlane/screenshots/en-US/` and rerun `Scripts/verify_release_assets.sh`.

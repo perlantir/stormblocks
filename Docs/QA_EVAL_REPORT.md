@@ -4,9 +4,9 @@ Current eval date: 2026-05-05.
 
 ## Automated Coverage
 
-- EditMode: 26 total, 26 passed, 0 failed at `2026-05-05 17:22:16Z`.
-- PlayMode: 9 total, 9 passed, 0 failed at `2026-05-05 17:22:23Z`.
-- Covered core evals: placement, valid move detection, line clears, scoring, storm spread, automatic Storm Pushback, signature pushback VFX, clutch save, game-over states, daily seed determinism, save/load, progression, service seams, visual first-move coaching, normal-flow console cleanliness, portrait safe-area controls, results/retry, UI shell navigation, and mobile scene budgets.
+- EditMode: 26 total, 26 passed, 0 failed at `2026-05-05 17:29:32Z`.
+- PlayMode: 9 total, 9 passed, 0 failed at `2026-05-05 17:29:39Z`.
+- Covered core evals: placement, valid move detection, line clears, scoring, storm spread, automatic Storm Pushback, saved-survivor presentation, signature pushback VFX, clutch save, game-over states, daily seed determinism, save/load, progression, service seams, visual first-move coaching, normal-flow console cleanliness, portrait safe-area controls, results/retry, UI shell navigation, and mobile scene budgets.
 - Current full-detail PlayMode budget: 457 renderers, 166,264 mesh triangles, 1 audio listener, 1 canvas.
 - Local Gate 12 performance coverage now includes primitive pooling for dynamic board/tray/drag/VFX presentation and a persisted Low Detail setting with older-device auto fallback heuristics.
 

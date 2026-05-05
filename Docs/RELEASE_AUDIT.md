@@ -10,7 +10,7 @@ This maps the launch request and repo release gates to concrete evidence. The pr
 | --- | --- | --- |
 | Unity/C# iPhone game, portrait-first | Unity project under `StormBlocksUnity`; iOS export uses portrait-only `Info.plist`; `Docs/BUILD_AND_TEST.md` has the latest export proof. | Pass |
 | Complete 8x8 drag-and-place block puzzle | Core logic and PlayMode interaction tests pass; `Docs/QA_EVAL_REPORT.md` lists placement, valid moves, clears, and touch-control coverage. | Pass |
-| Storm Pushback is automatic and signature | Core tests cover pushback and clutch save; presentation includes gold/cyan pushback VFX; PlayMode now forces a real storm-line clear and verifies the shatter flare plus perimeter recoil objects. | Pass |
+| Storm Pushback is automatic and signature | Core tests cover pushback and clutch save; presentation includes gold/cyan pushback VFX; PlayMode now forces a real storm-line clear and verifies saved-survivor presentation, the shatter flare, and perimeter recoil objects. | Pass |
 | Endless Storm | Release checklist marks complete; local high-score/best-run coverage exists in profile/progression tests. | Pass |
 | Daily Storm | Deterministic daily seed, local history, leaderboard-ready service, and share-card paths are covered by EditMode/PlayMode evidence. | Pass |
 | Storm Trail progression | 120+ deterministic level/challenge definitions and progression/reward tests are covered in the mode/progression implementation. | Pass |
@@ -24,7 +24,7 @@ This maps the launch request and repo release gates to concrete evidence. The pr
 | Audio/haptics | Service interfaces, Unity feedback service, and EditMode coverage for rescue/near-death hooks exist; release checklist marks hooks present. | Pass |
 | No forced ads, paid power, gacha, loot boxes, or paid speedups | Package/settings review in implementation log and privacy/app-store docs; Unity Ads/Purchasing disabled. | Pass |
 | Design references and visual target | Procedural 3D board, storm, camp, survivors, app icon, regenerated screenshots, optimized design-source GLB imports, blurred design-source storm backdrop, deep grid seam lattice, warm camp sanctuary ring, and living perimeter storm wall exist; visual quality still needs final physical-device human review. | Local pass; human review pending |
-| QA tests | Latest EditMode: 26/26 at `2026-05-05 17:22:16Z`; latest PlayMode: 9/9 at `2026-05-05 17:22:23Z`. | Pass |
+| QA tests | Latest EditMode: 26/26 at `2026-05-05 17:29:32Z`; latest PlayMode: 9/9 at `2026-05-05 17:29:39Z`. | Pass |
 | Prompt compliance verifier | `Scripts/verify_prompt_compliance.sh` checks required docs/design refs, major gameplay/system surfaces, passing test result files, and non-monetization/copyright guardrails. | Pass |
 | Performance optimization | Primitive pooling, Low Detail fallback, URP mobile settings, optimized design-source imports, scene-budget guard, and modern-iPhone Game Performance/Power traces exist; latest full-detail budget is 457 renderers and 166,264 triangles. | Partial physical pass; older-device profiling pending |
 | Physical QA handoff | `Docs/PHYSICAL_QA_RUNBOOK.md` and `Scripts/device_qa_session.sh` define launch, five-run QA, Game Center, TestFlight, and profiling steps. | Local pass; physical execution pending |
