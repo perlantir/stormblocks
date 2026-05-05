@@ -349,6 +349,22 @@ Known risks / not done:
 - Unlock the paired iPhone and rerun launch/runtime checks.
 - Live Game Center, TestFlight install, physical QA, physical performance profiling, and human five-run playability gates remain open.
 
+## 2026-05-05 — Fastlane Bundler wrapper
+
+- Found that the default `/usr/bin/bundle` uses Apple Ruby 2.6 and cannot run the checked-in `Gemfile.lock`, which was generated with Bundler 4.0.10 under Homebrew Ruby 4.0.3.
+- Added `Scripts/fastlane_release.sh` to run Fastlane lanes through Bundler with `/opt/homebrew/opt/ruby/bin` ahead of `/usr/bin`.
+- Updated release docs and the machine-verifiable release audit to use the wrapper for credentialed App Store Connect lanes.
+
+Evidence:
+
+- `PATH="/opt/homebrew/opt/ruby/bin:$PATH" bundle exec fastlane lanes` lists `ios create_app_record`, `ios upload_testflight`, and `ios release_candidate_upload`.
+- `Scripts/fastlane_release.sh lanes` lists the same credentialed release lanes.
+- `Scripts/fastlane_release.sh ios create_app_record` now reaches the Fastlane lane through Bundler and fails cleanly only because App Store Connect credentials are not set.
+
+Known risks / not done:
+
+- The wrapper fixes local lane execution, but credentialed lanes still need App Store Connect API-key variables or Apple ID credentials.
+
 ## 2026-05-05 — Gate 12 pooling and Low Detail fallback
 
 - Added primitive pooling for dynamic presentation cubes/spheres used by board refreshes, tray rebuilds, drag ghosts, survivors, storm cells, block cells, and Storm Pushback VFX.

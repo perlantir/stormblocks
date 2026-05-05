@@ -63,9 +63,9 @@ Scripts/ios_release_gates.sh upload-probe
 Credentialed Fastlane lanes are available after App Store Connect credentials are set:
 
 ```bash
-fastlane ios create_app_record
-fastlane ios upload_testflight
-fastlane ios release_candidate_upload
+Scripts/fastlane_release.sh ios create_app_record
+Scripts/fastlane_release.sh ios upload_testflight
+Scripts/fastlane_release.sh ios release_candidate_upload
 ```
 
 After the App Store Connect app record exists, rerun:

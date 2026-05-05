@@ -62,6 +62,18 @@ require_absent_glob_find() {
   fi
 }
 
+require_fastlane_wrapper() {
+  local output
+  if output="$(FASTLANE_SKIP_UPDATE_CHECK=1 "$ROOT/Scripts/fastlane_release.sh" lanes 2>&1)" \
+      && grep -q "ios create_app_record" <<<"$output" \
+      && grep -q "ios upload_testflight" <<<"$output" \
+      && grep -q "ios release_candidate_upload" <<<"$output"; then
+    pass "Fastlane wrapper runs lanes through Bundler"
+  else
+    fail "Fastlane wrapper cannot list release lanes"
+  fi
+}
+
 require_nunit_pass() {
   local file="$1"
   local total="$2"
@@ -120,6 +132,8 @@ audit_local_evidence() {
 
   require_grep "$ROOT/fastlane/Fastfile" "lane :create_app_record" "Fastlane app-record lane exists"
   require_grep "$ROOT/fastlane/Fastfile" "lane :upload_testflight" "Fastlane TestFlight lane exists"
+  require_file "$ROOT/Scripts/fastlane_release.sh" "Fastlane release wrapper exists"
+  require_fastlane_wrapper
   require_grep "$ROOT/Scripts/ios_release_gates.sh" "upload-probe" "iOS release gate runner includes upload probe"
 
   require_absent_glob_find "No transient Unity/Fastlane artifacts remain" \

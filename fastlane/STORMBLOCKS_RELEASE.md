@@ -2,6 +2,12 @@
 
 These lanes are for credentialed App Store Connect work after the local Unity/Xcode gates pass.
 
+Use the repo wrapper so Bundler runs with the same Homebrew Ruby/Fastlane environment that produced the lockfile:
+
+```bash
+Scripts/fastlane_release.sh lanes
+```
+
 ## Required Credentials
 
 Preferred App Store Connect API key environment:
@@ -26,19 +32,19 @@ For upload-only lanes, `FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD` can be use
 Create the missing App Store Connect app record:
 
 ```bash
-fastlane ios create_app_record
+Scripts/fastlane_release.sh ios create_app_record
 ```
 
 Upload the exported IPA:
 
 ```bash
-fastlane ios upload_testflight
+Scripts/fastlane_release.sh ios upload_testflight
 ```
 
 Create the app record and upload:
 
 ```bash
-fastlane ios release_candidate_upload
+Scripts/fastlane_release.sh ios release_candidate_upload
 ```
 
 The IPA path is `StormBlocksUnity/Builds/iOS/ExportAppStoreTeam7JL/StormBlocks.ipa`.

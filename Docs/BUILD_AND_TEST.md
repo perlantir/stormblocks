@@ -303,6 +303,7 @@ The non-UI credential probes currently require human/App Store Connect credentia
 
 - `xcrun altool --list-providers` reports that either JWT API-key auth or username/app-password auth is required.
 - `FASTLANE_SKIP_UPDATE_CHECK=1 fastlane ios create_app_record` refuses to run until App Store Connect API key variables or `STORMBLOCKS_APPLE_ID`/`APPLE_ID` are set.
+- `Scripts/fastlane_release.sh lanes` runs Fastlane through Bundler using Homebrew Ruby, avoiding the system Ruby 2.6 `/usr/bin/bundle` mismatch with `Gemfile.lock`.
 
 ## Credentialed Follow-Up
 
@@ -313,3 +314,4 @@ The non-UI credential probes currently require human/App Store Connect credentia
 - Upload `StormBlocksUnity/Builds/iOS/ExportAppStoreTeam7JL/StormBlocks.ipa` after the App Store Connect app record exists.
 
 The repeatable command runner is `Scripts/ios_release_gates.sh`.
+Credentialed Fastlane lanes should be run through `Scripts/fastlane_release.sh`.
