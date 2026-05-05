@@ -41,7 +41,7 @@ Run five sessions without changing code or assets between runs:
 4. Tempest Trials: complete one weekly run.
 5. Practice Mode: confirm lower-pressure play and no leaderboard pressure.
 
-Score each category from 1 to 5 in `Docs/QA_EVAL_REPORT.md` after the runs:
+Record each run and score each category from 1 to 5 in `Docs/FIVE_RUN_QA_SCORECARD.md`, then summarize the final result in `Docs/QA_EVAL_REPORT.md`:
 
 - Instant understandability.
 - One-more-run pull.
@@ -52,6 +52,8 @@ Score each category from 1 to 5 in `Docs/QA_EVAL_REPORT.md` after the runs:
 - Performance feel.
 
 Release target: 4 or higher in every category.
+
+If any category scores below 4, any required check fails, or any blocker/major defect is found, keep the physical-device QA release checklist item open and create or update a GitHub issue with the evidence.
 
 ## Functional Device Checks
 

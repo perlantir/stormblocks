@@ -922,3 +922,20 @@ Known risks / not done:
 - This strengthens modern-device profiling evidence, but it does not close the release performance gate. An older supported iPhone profile and a longer interactive trace covering large clears, near-death storm, Storm Pushback, menus/results, and reduced-motion/Low Detail paths remain required.
 - App Store Connect app record creation, live Game Center validation, TestFlight upload/install, and human five-run QA remain open.
 - Pending GitHub branch-head static check refresh for this profiling evidence docs commit.
+
+## 2026-05-05 — Structured five-run QA handoff
+
+- Added `Docs/FIVE_RUN_QA_SCORECARD.md` so the required human five-run physical-device pass captures run-by-run mode coverage, release scores, required checks, defects, and signoff in one place.
+- Updated `Docs/PHYSICAL_QA_RUNBOOK.md` to use the scorecard as the source of truth for physical QA execution and to keep the release checklist open if any score is below 4, any required check fails, or any blocker/major defect is found.
+- Updated `Docs/QA_EVAL_REPORT.md` and `Docs/RELEASE_AUDIT.md` to reference the scorecard.
+- Updated `Scripts/release_audit.sh` to require the five-run scorecard as part of local release evidence.
+
+Evidence:
+
+- `Scripts/ci_static_checks.sh` passes locally after the scorecard handoff update.
+- `Scripts/release_audit.sh full` now reports 34 pass, 0 fail, and 6 open external gates; it exits nonzero because those open gates remain unresolved.
+
+Known risks / not done:
+
+- The scorecard improves test execution quality but does not close physical QA; it still needs to be filled from actual iPhone play.
+- App Store Connect app record creation, live Game Center validation, TestFlight upload/install, older-device profiling, and human five-run QA remain open.

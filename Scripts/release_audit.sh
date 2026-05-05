@@ -156,6 +156,7 @@ audit_local_evidence() {
     fail "Prompt compliance verifier failed; see /tmp/stormblocks-prompt-compliance-audit.log"
   fi
   require_file "$ROOT/Docs/PHYSICAL_QA_RUNBOOK.md" "Physical QA runbook exists"
+  require_file "$ROOT/Docs/FIVE_RUN_QA_SCORECARD.md" "Five-run QA scorecard exists"
   require_file "$ROOT/Scripts/device_qa_session.sh" "Physical QA session helper exists"
   require_file "$ROOT/Scripts/ci_static_checks.sh" "Static CI script exists"
   require_file "$ROOT/.github/workflows/release-static.yml" "GitHub static release workflow exists"
