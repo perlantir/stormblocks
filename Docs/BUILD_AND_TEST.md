@@ -27,7 +27,7 @@ Use the project test runner for batch verification. Unity 6000 can skip `-runTes
   -logFile /tmp/stormblocks-editmode-lowdetail.log
 ```
 
-Current evidence: `StormBlocksUnity/editmode-results.xml` reports 26 total, 26 passed, 0 failed at `2026-05-05 17:03:53Z`.
+Current evidence: `StormBlocksUnity/editmode-results.xml` reports 26 total, 26 passed, 0 failed at `2026-05-05 17:22:16Z`.
 
 ## PlayMode Tests
 
@@ -40,18 +40,19 @@ Current evidence: `StormBlocksUnity/editmode-results.xml` reports 26 total, 26 p
   -logFile /tmp/stormblocks-playmode-lowdetail.log
 ```
 
-Current evidence: `StormBlocksUnity/playmode-results.xml` reports 8 total, 8 passed, 0 failed at `2026-05-05 17:04:00Z`.
+Current evidence: `StormBlocksUnity/playmode-results.xml` reports 9 total, 9 passed, 0 failed at `2026-05-05 17:22:23Z`.
 
 The PlayMode suite includes release smoke guards for the normal flow and active touch controls:
 
 - `NormalFlowDoesNotEmitGameErrors` verifies the generated playable scene completes a normal interaction path without project-level console errors.
 - `ActiveTouchControlsStayInsideSafeAreaWithReleaseSizedTargets` verifies active portrait controls stay inside the safe-area root and meet release-sized touch target thresholds.
 - `FirstMoveCoachTeachesWithNoTextAndDismissesAfterPlacement` verifies the first-run coach is visual-only and disappears after the first placement.
+- `AutomaticPushbackSpawnsSignaturePerimeterRecoil` verifies a real row clear through a storm tile triggers automatic Storm Pushback plus the gold wave, storm shatter flare, and perimeter recoil VFX objects.
 
 The PlayMode suite includes a lightweight mobile scene-budget guard. Current logged baseline:
 
-- 442 renderers.
-- 161,544 mesh triangles.
+- 457 renderers.
+- 166,264 mesh triangles.
 - 1 audio listener.
 - 1 canvas.
 

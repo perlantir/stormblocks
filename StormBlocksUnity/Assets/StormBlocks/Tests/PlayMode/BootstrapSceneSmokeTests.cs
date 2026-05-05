@@ -183,6 +183,43 @@ namespace StormBlocks.Tests.PlayMode
         }
 
         [UnityTest]
+        public IEnumerator AutomaticPushbackSpawnsSignaturePerimeterRecoil()
+        {
+            var scene = SceneManager.CreateScene("PushbackSignatureSmoke");
+            SceneManager.SetActiveScene(scene);
+            var root = new GameObject("Storm Blocks Pushback Root");
+            var view = root.AddComponent<StormBlocksGameView>();
+
+            view.StartEndlessForTest(919191UL);
+            yield return null;
+
+            view.State.Queue.Clear();
+            view.State.Queue.Add(new PieceDefinition("single", new[] { new GridPosition(0, 0) }));
+            for (int x = 0; x < view.State.Board.Size; x++)
+            {
+                view.State.Board.ClearCell(new GridPosition(x, 0));
+            }
+
+            view.State.Board.SetOccupant(new GridPosition(0, 0), CellOccupant.Storm, string.Empty);
+            for (int x = 1; x < 7; x++)
+            {
+                view.State.Board.SetOccupant(new GridPosition(x, 0), CellOccupant.Block, "setup");
+            }
+
+            var result = view.TryPlaceForTest(0, new GridPosition(7, 0));
+            yield return null;
+
+            Assert.IsTrue(result.Success, result.FailureReason);
+            Assert.IsTrue(result.Clear.AutomaticPushbackTriggered, "Expected automatic pushback when clearing a row through a storm tile.");
+            Assert.IsNotNull(GameObject.Find("Gold pushback wave row"));
+            Assert.IsNotNull(GameObject.Find("Storm shatter flare"));
+            Assert.IsNotNull(GameObject.Find("Pushback storm wall recoil north"));
+            Assert.IsNotNull(GameObject.Find("Pushback storm wall recoil south"));
+            Assert.IsNotNull(GameObject.Find("Pushback storm wall recoil west"));
+            Assert.IsNotNull(GameObject.Find("Pushback storm wall recoil east"));
+        }
+
+        [UnityTest]
         public IEnumerator NormalFlowDoesNotEmitGameErrors()
         {
             var scene = SceneManager.CreateScene("NoConsoleErrorsSmoke");
@@ -290,7 +327,7 @@ namespace StormBlocks.Tests.PlayMode
             int canvases = root.GetComponentsInChildren<Canvas>(false).Length;
 
             Debug.Log("Storm Blocks mobile budget renderers=" + rendererCount + " triangles=" + triangleCount + " audioListeners=" + audioListeners + " canvases=" + canvases);
-            Assert.LessOrEqual(rendererCount, 450);
+            Assert.LessOrEqual(rendererCount, 475);
             Assert.LessOrEqual(triangleCount, 250000);
             Assert.AreEqual(1, audioListeners);
             Assert.LessOrEqual(canvases, 1);

@@ -132,7 +132,7 @@ require_file "StormBlocksUnity/Assets/StormBlocks/Tests/EditMode/ServiceInterfac
 require_file "StormBlocksUnity/Assets/StormBlocks/Tests/PlayMode/BootstrapSceneSmokeTests.cs" "PlayMode smoke tests exist"
 
 require_grep "StormBlocksUnity/editmode-results.xml" 'result="Passed" total="26" passed="26" failed="0"' "EditMode test results are passing"
-require_grep "StormBlocksUnity/playmode-results.xml" 'result="Passed" total="8" passed="8" failed="0"' "PlayMode test results are passing"
+require_grep "StormBlocksUnity/playmode-results.xml" 'result="Passed" total="9" passed="9" failed="0"' "PlayMode test results are passing"
 require_grep "Docs/RELEASE_AUDIT.md" "Prompt-to-Artifact Checklist" "Prompt-to-artifact audit exists"
 require_grep "Docs/RELEASE_AUDIT.md" "not final-release complete" "Release audit preserves incomplete external-gate conclusion"
 

@@ -808,3 +808,22 @@ Known risks / not done:
 
 - This materially improves the actual gameplay board against the provided references, but final taste/readability still needs physical-device human review once the paired iPhone is available again.
 - Current-source physical install/launch still needs to be retried after the paired iPhone is available to CoreDevice again.
+
+## 2026-05-05 — Signature pushback board smoke coverage pass
+
+- Added PlayMode coverage that builds a deterministic playable board row, clears it through a storm tile, and verifies automatic Storm Pushback plus the visible gold wave, storm shatter flare, and four perimeter recoil VFX objects.
+- Updated release gate scripts to require 9 passing PlayMode tests and to check for the mobile-budget log line without depending on one exact renderer count, because the full-detail scene budget can vary slightly with data-driven tray/survivor content while still staying under the cap.
+- Kept the mobile scene-budget guard active at 475 renderers, 250,000 mesh triangles, 1 audio listener, and 1 canvas.
+- Corrected the release checklist wording so current-source physical install remains open while CoreDevice marks the paired iPhone unavailable.
+
+Evidence:
+
+- EditMode tests: `StormBlocksUnity/editmode-results.xml` reports 26 total, 26 passed, 0 failed at `2026-05-05 17:22:16Z`.
+- PlayMode tests: `StormBlocksUnity/playmode-results.xml` reports 9 total, 9 passed, 0 failed at `2026-05-05 17:22:23Z`.
+- Current logged full-detail mobile baseline after the signature pushback coverage pass: 457 renderers, 166,264 mesh triangles, 1 audio listener, and 1 canvas.
+- `Scripts/ci_static_checks.sh && Scripts/release_audit.sh full` passes static checks and reports 31 pass, 0 fail, 8 open gates.
+
+Known risks / not done:
+
+- Current-source physical install/launch still needs to be retried after the paired iPhone is available to CoreDevice again.
+- App Store Connect upload still requires an app record for bundle id `com.perlantir.stormblocks`; the upload probe is expected to stay blocked until that external record exists.

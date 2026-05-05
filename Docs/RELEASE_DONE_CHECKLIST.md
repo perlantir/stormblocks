@@ -65,7 +65,7 @@ Do not call the project done until this passes.
 - [x] Unsigned `Release-iphoneos` Xcode build succeeds.
 - [x] Signed Xcode device build succeeds with the App Store Connect team and provisioning profile.
 - [x] App Store Connect IPA export succeeds.
-- [x] Signed build installs on a paired physical iPhone.
+- [ ] Current-source signed build installs on a paired physical iPhone.
 - [ ] App Store Connect app record exists for `com.perlantir.stormblocks`.
 - [ ] Game Center leaderboard/achievement identifiers are live in App Store Connect and validated on device.
 - [ ] TestFlight upload and install are validated.
