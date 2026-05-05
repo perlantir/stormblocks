@@ -593,3 +593,27 @@ Known risks / not done:
 
 - This improves the current procedural Unity art direction, but it still is not a substitute for bespoke layered production art/modeling. The GPT-image-2 target-frame route remains blocked on OpenAI organization verification.
 - Physical-device visual QA, touch feel, haptics/audio feel, and physical performance profiling remain required before release signoff.
+
+## 2026-05-05 — Lightweight launch scene cleanup
+
+- Updated the project bootstrap so the saved `StormBlocksMain` scene stays as a lightweight launcher with a single `StormBlocksGameView`; generated board meshes, UI, VFX, and pooled runtime objects are built at runtime instead of being serialized into the scene asset.
+- Changed bootstrap to reuse the existing URP asset instead of deleting and recreating it, preventing unrelated render-pipeline serialization churn during export/bootstrap runs.
+- Normalized the existing scene in-place so repeated bootstrap/export runs preserve the launcher object and do not churn scene file IDs.
+- Kept the strict PlayMode scene-budget baseline on the full-detail runtime path after isolating test saves from the local editor profile: 421 renderers, 142,792 mesh triangles, 1 audio listener, and 1 canvas.
+
+Evidence:
+
+- Bootstrap stability: `/tmp/stormblocks-bootstrap-normalize-3.log` exited successfully after a repeated `StormBlocks.Editor.StormBlocksProjectBootstrap.ConfigureProject` run.
+- `Scripts/ios_release_gates.sh all-local` completed successfully after the full-detail baseline correction; it refreshed Unity tests, Unity iOS export, signed Release build, physical install, Xcode archive, App Store IPA export, and cached status verification.
+- `Scripts/ios_release_gates.sh launch-device` succeeded after the refreshed signed install at `2026-05-05 14:04:14Z`.
+- `Scripts/ios_release_gates.sh upload-probe` still fails at `2026-05-05 14:04:24Z` because App Store Connect returns `data: []` and `missingApp(bundleId: "com.perlantir.stormblocks")`; current distribution log is `/var/folders/b2/cl2rv8q13bg48zl073ctm_fc0000gq/T/Unity-iPhone_2026-05-05_09-04-22.356.xcdistributionlogs/IDEDistributionAppStoreConnect.log`.
+- EditMode tests: `StormBlocksUnity/editmode-results.xml` reports 25 total, 25 passed, 0 failed at `2026-05-05 13:59:05Z`.
+- PlayMode tests: `StormBlocksUnity/playmode-results.xml` reports 7 total, 7 passed, 0 failed at `2026-05-05 13:59:12Z`.
+- Current logged full-detail mobile baseline: 421 renderers, 142,792 mesh triangles, 1 audio listener, 1 canvas.
+- `Scripts/release_audit.sh local` reports 32 pass, 0 fail, 0 open.
+- `Scripts/release_audit.sh full` reports 33 pass, 0 fail, and 6 open external gates.
+- `Scripts/ci_static_checks.sh` passes locally.
+
+Known risks / not done:
+
+- Physical-device profiling is still required before release signoff; this change improves scene hygiene and automated budget evidence but does not replace device FPS/thermal measurement.

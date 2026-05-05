@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using StormBlocks.Core;
 using StormBlocks.Gameplay;
 using StormBlocks.Services;
@@ -100,6 +101,7 @@ namespace StormBlocks.Presentation
         private int _dragQueueIndex = -1;
         private GridPosition _currentDragOrigin;
         private bool _hasDragOrigin;
+        private bool _useIsolatedTestSave;
         private float _toastTimer;
         private float _fxTimer;
         private static Font _cachedUiFont;
@@ -142,6 +144,7 @@ namespace StormBlocks.Presentation
 
         public void StartEndlessForTest(ulong seed)
         {
+            _useIsolatedTestSave = true;
             BuildScene();
             StartEndless(seed);
         }
@@ -250,7 +253,7 @@ namespace StormBlocks.Presentation
         private void CreateServices()
         {
             _services = new MockGameServices();
-            _saveService = new FileSaveService(Application.persistentDataPath);
+            _saveService = new FileSaveService(SaveFolderPath());
             _profile = _saveService.LoadProfile();
             CosmeticCatalog.EnsureDefaultCosmetics(_profile);
             _feedback = GetComponent<UnityLocalFeedbackService>();
@@ -275,6 +278,22 @@ namespace StormBlocks.Presentation
             {
                 _shareService = gameObject.AddComponent<UnityShareService>();
             }
+        }
+
+        private string SaveFolderPath()
+        {
+            if (!_useIsolatedTestSave)
+            {
+                return Application.persistentDataPath;
+            }
+
+            string folder = Path.Combine(Application.temporaryCachePath, "StormBlocksPlayMode", gameObject.GetInstanceID().ToString());
+            if (Directory.Exists(folder))
+            {
+                Directory.Delete(folder, true);
+            }
+
+            return folder;
         }
 
         private void ClearChildren()

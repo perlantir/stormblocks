@@ -91,12 +91,6 @@ namespace StormBlocks.Editor
 
         private static void ConfigureRenderPipeline()
         {
-            var pipeline = AssetDatabase.LoadAssetAtPath<UniversalRenderPipelineAsset>(RenderPipelineAssetPath);
-            if (pipeline != null)
-            {
-                AssetDatabase.DeleteAsset(RenderPipelineAssetPath);
-            }
-
             var rendererData = AssetDatabase.LoadAssetAtPath<UniversalRendererData>(UniversalRendererAssetPath);
             if (rendererData == null)
             {
@@ -104,8 +98,12 @@ namespace StormBlocks.Editor
                 AssetDatabase.CreateAsset(rendererData, UniversalRendererAssetPath);
             }
 
-            pipeline = UniversalRenderPipelineAsset.Create(rendererData);
-            AssetDatabase.CreateAsset(pipeline, RenderPipelineAssetPath);
+            var pipeline = AssetDatabase.LoadAssetAtPath<UniversalRenderPipelineAsset>(RenderPipelineAssetPath);
+            if (pipeline == null)
+            {
+                pipeline = UniversalRenderPipelineAsset.Create(rendererData);
+                AssetDatabase.CreateAsset(pipeline, RenderPipelineAssetPath);
+            }
 
             GraphicsSettings.defaultRenderPipeline = pipeline;
             QualitySettings.renderPipeline = pipeline;
@@ -115,18 +113,67 @@ namespace StormBlocks.Editor
 
         private static void CreateMainScene()
         {
-            var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
-            scene.name = "StormBlocksMain";
+            var sceneExists = File.Exists(ScenePath);
+            var scene = sceneExists
+                ? EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single)
+                : EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+            if (!sceneExists)
+            {
+                scene.name = "StormBlocksMain";
+            }
 
-            var root = new GameObject("Storm Blocks Launch Scene");
-            var gameView = root.AddComponent<StormBlocksGameView>();
-            gameView.BuildScene();
+            RenderSettings.ambientLight = new Color(0.16f, 0.17f, 0.30f);
+
+            var root = FindLaunchRoot(scene);
+            if (root == null)
+            {
+                root = new GameObject("Storm Blocks Launch Scene");
+            }
+
+            foreach (var candidate in scene.GetRootGameObjects())
+            {
+                if (candidate != root)
+                {
+                    UnityEngine.Object.DestroyImmediate(candidate);
+                }
+            }
+
+            for (int i = root.transform.childCount - 1; i >= 0; i--)
+            {
+                UnityEngine.Object.DestroyImmediate(root.transform.GetChild(i).gameObject);
+            }
+
+            var views = root.GetComponents<StormBlocksGameView>();
+            if (views.Length == 0)
+            {
+                root.AddComponent<StormBlocksGameView>();
+            }
+            else
+            {
+                for (int i = views.Length - 1; i > 0; i--)
+                {
+                    UnityEngine.Object.DestroyImmediate(views[i]);
+                }
+            }
 
             EditorSceneManager.SaveScene(scene, ScenePath);
             EditorBuildSettings.scenes = new[]
             {
                 new EditorBuildSettingsScene(ScenePath, true)
             };
+        }
+
+        private static GameObject FindLaunchRoot(Scene scene)
+        {
+            foreach (var root in scene.GetRootGameObjects())
+            {
+                if (root.name == "Storm Blocks Launch Scene")
+                {
+                    return root;
+                }
+            }
+
+            return null;
         }
     }
 }
