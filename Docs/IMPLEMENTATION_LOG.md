@@ -828,47 +828,6 @@ Known risks / not done:
 - Current-source physical install/launch still needs to be retried after the paired iPhone is available to CoreDevice again.
 - App Store Connect upload still requires an app record for bundle id `com.perlantir.stormblocks`; the upload probe is expected to stay blocked until that external record exists.
 
-## 2026-05-05 — Current-source device install/launch retry
-
-- Rechecked App Store Connect through the Xcode-authenticated upload path. Xcode still authenticates to provider `ae62de71-9179-4836-a662-2c92a63e965e`, receives HTTP 200, and gets `data: []` / `total: 0` for bundle id `com.perlantir.stormblocks`, so the App Store Connect app record is still missing.
-- `xcrun devicectl list devices` now shows paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D` as connected.
-- Re-ran the current-source physical install and launch gates. Both now pass against the signed `Release-iphoneos` app.
-- Updated build/test, QA, performance, and release audit docs to remove the stale CoreDevice-unavailable install/launch blocker.
-
-Evidence:
-
-- `Scripts/ios_release_gates.sh upload-probe` retried at `2026-05-05 17:55:42Z`; App Store Connect returned HTTP 200 with `data: []` and `total: 0` for `com.perlantir.stormblocks`, then Xcode failed with `missingApp(bundleId: "com.perlantir.stormblocks")`. Current distribution log: `/var/folders/b2/cl2rv8q13bg48zl073ctm_fc0000gq/T/Unity-iPhone_2026-05-05_12-55-40.043.xcdistributionlogs/IDEDistributionAppStoreConnect.log`.
-- `Scripts/ios_release_gates.sh install-device` succeeded at `2026-05-05 17:56:08Z`; `/tmp/stormblocks-device-install.json` reports `"outcome" : "success"` for `com.perlantir.stormblocks` on paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D`.
-- `Scripts/ios_release_gates.sh launch-device` succeeded at `2026-05-05 17:56:17Z`; `/tmp/stormblocks-device-launch.json` reports `"outcome" : "success"` and process id `1485` for `com.perlantir.stormblocks`.
-- `Scripts/release_audit.sh full` now reports 33 pass, 0 fail, and 6 open external gates; it exits nonzero because those open gates remain unresolved.
-- GitHub `Release Static Checks` passed for pushed device evidence commit `ec3be40`: `https://github.com/perlantir/stormblocks/actions/runs/25393247310`.
-
-Known risks / not done:
-
-- App Store Connect upload still requires an app record for bundle id `com.perlantir.stormblocks`; the upload probe is expected to stay blocked until that external record exists.
-- Live Game Center validation, TestFlight upload/install, physical five-run QA, older-device profiling, and longer interactive trace review remain open.
-
-## 2026-05-05 — Accessibility VFX runtime coverage pass
-
-- Added PlayMode coverage for the runtime Accessibility screen's Reduced Motion and Low Detail toggles.
-- The new smoke test stages a real saved-survivor Storm Pushback clear after both settings are enabled, then verifies essential saved/pushback feedback stays visible while secondary pushback waves, lightning, cyan recoil, and block highlight dots are trimmed.
-- Refactored PlayMode smoke helpers to use root-scoped UI/VFX lookup so accumulated Unity test scenes cannot satisfy assertions from another scene.
-- Updated release gate scripts and prompt compliance checks to require 10 passing PlayMode tests.
-- Updated QA, performance, release audit, build/test, and release checklist docs with the new accessibility VFX coverage and current scene-budget baseline.
-
-Evidence:
-
-- EditMode tests: `StormBlocksUnity/editmode-results.xml` reports 26 total, 26 passed, 0 failed at `2026-05-05 17:52:40Z`.
-- PlayMode tests: `StormBlocksUnity/playmode-results.xml` reports 10 total, 10 passed, 0 failed at `2026-05-05 17:52:47Z`.
-- Current logged full-detail mobile baseline after the accessibility VFX pass: 448 renderers, 163,432 mesh triangles, 1 audio listener, and 1 canvas.
-- `Scripts/ci_static_checks.sh` passes locally.
-- `Scripts/release_audit.sh full` reports 31 pass, 0 fail, and 8 open external gates; it exits nonzero because those open gates remain unresolved.
-
-Known risks / not done:
-
-- Current-source physical install/launch still needs to be retried after the paired iPhone is available to CoreDevice again.
-- App Store Connect upload still requires an app record for bundle id `com.perlantir.stormblocks`; the upload probe is expected to stay blocked until that external record exists.
-
 ## 2026-05-05 — Saved survivor pushback presentation pass
 
 - Added a saved-survivor presentation layer in the runtime placement path: clears that rescue survivors now spawn a compact camp glow, rescued survivor cheer figures, path sparkles, rescue burst, and heart sparkle while preserving the automatic Storm Pushback VFX.
@@ -898,3 +857,66 @@ Known risks / not done:
 
 - Current-source physical install/launch still needs to be retried after the paired iPhone is available to CoreDevice again.
 - App Store Connect upload still requires an app record for bundle id `com.perlantir.stormblocks`; the upload probe is expected to stay blocked until that external record exists.
+
+## 2026-05-05 — Accessibility VFX runtime coverage pass
+
+- Added PlayMode coverage for the runtime Accessibility screen's Reduced Motion and Low Detail toggles.
+- The new smoke test stages a real saved-survivor Storm Pushback clear after both settings are enabled, then verifies essential saved/pushback feedback stays visible while secondary pushback waves, lightning, cyan recoil, and block highlight dots are trimmed.
+- Refactored PlayMode smoke helpers to use root-scoped UI/VFX lookup so accumulated Unity test scenes cannot satisfy assertions from another scene.
+- Updated release gate scripts and prompt compliance checks to require 10 passing PlayMode tests.
+- Updated QA, performance, release audit, build/test, and release checklist docs with the new accessibility VFX coverage and current scene-budget baseline.
+
+Evidence:
+
+- EditMode tests: `StormBlocksUnity/editmode-results.xml` reports 26 total, 26 passed, 0 failed at `2026-05-05 17:52:40Z`.
+- PlayMode tests: `StormBlocksUnity/playmode-results.xml` reports 10 total, 10 passed, 0 failed at `2026-05-05 17:52:47Z`.
+- Current logged full-detail mobile baseline after the accessibility VFX pass: 448 renderers, 163,432 mesh triangles, 1 audio listener, and 1 canvas.
+- `Scripts/ci_static_checks.sh` passes locally.
+- `Scripts/release_audit.sh full` reports 31 pass, 0 fail, and 8 open external gates; it exits nonzero because those open gates remain unresolved.
+
+Known risks / not done:
+
+- Current-source physical install/launch still needs to be retried after the paired iPhone is available to CoreDevice again.
+- App Store Connect upload still requires an app record for bundle id `com.perlantir.stormblocks`; the upload probe is expected to stay blocked until that external record exists.
+
+## 2026-05-05 — Current-source device install/launch retry
+
+- Rechecked App Store Connect through the Xcode-authenticated upload path. Xcode still authenticates to provider `ae62de71-9179-4836-a662-2c92a63e965e`, receives HTTP 200, and gets `data: []` / `total: 0` for bundle id `com.perlantir.stormblocks`, so the App Store Connect app record is still missing.
+- `xcrun devicectl list devices` now shows paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D` as connected.
+- Re-ran the current-source physical install and launch gates. Both now pass against the signed `Release-iphoneos` app.
+- Updated build/test, QA, performance, and release audit docs to remove the stale CoreDevice-unavailable install/launch blocker.
+
+Evidence:
+
+- `Scripts/ios_release_gates.sh upload-probe` retried at `2026-05-05 17:55:42Z`; App Store Connect returned HTTP 200 with `data: []` and `total: 0` for `com.perlantir.stormblocks`, then Xcode failed with `missingApp(bundleId: "com.perlantir.stormblocks")`. Current distribution log: `/var/folders/b2/cl2rv8q13bg48zl073ctm_fc0000gq/T/Unity-iPhone_2026-05-05_12-55-40.043.xcdistributionlogs/IDEDistributionAppStoreConnect.log`.
+- `Scripts/ios_release_gates.sh install-device` succeeded at `2026-05-05 17:56:08Z`; `/tmp/stormblocks-device-install.json` reports `"outcome" : "success"` for `com.perlantir.stormblocks` on paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D`.
+- `Scripts/ios_release_gates.sh launch-device` succeeded at `2026-05-05 17:56:17Z`; `/tmp/stormblocks-device-launch.json` reports `"outcome" : "success"` and process id `1485` for `com.perlantir.stormblocks`.
+- `Scripts/release_audit.sh full` now reports 33 pass, 0 fail, and 6 open external gates; it exits nonzero because those open gates remain unresolved.
+- GitHub `Release Static Checks` passed for pushed device evidence commit `ec3be40`: `https://github.com/perlantir/stormblocks/actions/runs/25393247310`.
+
+Known risks / not done:
+
+- App Store Connect upload still requires an app record for bundle id `com.perlantir.stormblocks`; the upload probe is expected to stay blocked until that external record exists.
+- Live Game Center validation, TestFlight upload/install, physical five-run QA, older-device profiling, and longer interactive trace review remain open.
+
+## 2026-05-05 — Modern iPhone profiling refresh
+
+- Captured additional physical profiling artifacts on the connected iPhone 17 Pro Max while the current-source signed app was installed.
+- Recorded a 2-minute Game Performance request. The trace was saved and is viewable, but the target app exited after 10 seconds, so this is useful launch/runtime evidence and not a replacement for the required longer interactive profile.
+- Recorded a 1-minute Power Profiler trace that reached the time limit.
+- Exported the latest Power trace TOC and key metric tables, then confirmed the `StormBlocks` process was still running on device after the trace.
+- Updated QA, performance, and release audit docs with the new trace paths and measured modern-device metrics.
+
+Evidence:
+
+- `STORMBLOCKS_PROFILE_TIME=2m Scripts/device_qa_session.sh profile-game` wrote `StormBlocksUnity/Builds/DeviceProfiles/stormblocks-game-performance-20260505T180036Z.trace` on hardware UDID `00008150-00040D203A88401C`; the trace is 104 MB and the TOC reports target `iPhone 17 Pro Max`, iOS `26.3 (23D127)`, process `StormBlocks`, and `end-reason` = `Target app exited` after 10 seconds.
+- `STORMBLOCKS_PROFILE_TIME=1m Scripts/device_qa_session.sh profile-power` wrote `StormBlocksUnity/Builds/DeviceProfiles/stormblocks-power-20260505T180251Z.trace`; `xcrun xctrace export --toc` reports `end-reason` = `Time limit reached` and duration `60.862323` seconds.
+- Exported `device-thermal-state-intervals` reports `Nominal` thermal state for the full 60.86-second Power trace.
+- Exported `metal-perf-overview-layer-duration-metric` reports GPU Active Time average `0.549 ms` and Frame Interval average `33.620 ms` across 61 sampled windows / 1,819 frames.
+- `xcrun devicectl device info processes` still listed `StormBlocks` running as process id `1589` after the Power trace.
+
+Known risks / not done:
+
+- This strengthens modern-device profiling evidence, but it does not close the release performance gate. An older supported iPhone profile and a longer interactive trace covering large clears, near-death storm, Storm Pushback, menus/results, and reduced-motion/Low Detail paths remain required.
+- App Store Connect app record creation, live Game Center validation, TestFlight upload/install, and human five-run QA remain open.
+- Pending GitHub branch-head static check refresh for this profiling evidence docs commit.

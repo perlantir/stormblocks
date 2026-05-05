@@ -22,8 +22,8 @@ Current eval date: 2026-05-05.
 - Current-source Xcode archive succeeded at `2026-05-05 17:37:18Z`: `/tmp/stormblocks-xcode-team7jl-archive.log`.
 - Current-source App Store Connect IPA export succeeded at `2026-05-05 17:38:00Z`: `/tmp/stormblocks-xcode-team7jl-export-appstore.log`, output `StormBlocksUnity/Builds/iOS/ExportAppStoreTeam7JL/StormBlocks.ipa`.
 - Current-source App Store Connect upload probe at `2026-05-05 17:55:42Z` authenticated but found no app record for bundle id `com.perlantir.stormblocks`: `/tmp/stormblocks-xcode-team7jl-upload-appstore.log`.
-- Physical Game Performance trace captured on paired iPhone 17 Pro Max: `StormBlocksUnity/Builds/DeviceProfiles/stormblocks-game-performance-20260505T154140Z.trace`.
-- Physical Power Profiler trace captured on paired iPhone 17 Pro Max: `StormBlocksUnity/Builds/DeviceProfiles/stormblocks-power-20260505T154242Z.trace`.
+- Physical Game Performance traces captured on paired iPhone 17 Pro Max: `StormBlocksUnity/Builds/DeviceProfiles/stormblocks-game-performance-20260505T154140Z.trace` and `StormBlocksUnity/Builds/DeviceProfiles/stormblocks-game-performance-20260505T180036Z.trace`. The latest trace is viewable but ended after 10 seconds when the target app exited, so it does not replace the required longer interactive profile.
+- Physical Power Profiler traces captured on paired iPhone 17 Pro Max: `StormBlocksUnity/Builds/DeviceProfiles/stormblocks-power-20260505T154242Z.trace` and `StormBlocksUnity/Builds/DeviceProfiles/stormblocks-power-20260505T180251Z.trace`. The latest 60.86-second trace reached its time limit and exported nominal thermal state, average GPU Active Time `0.549 ms`, and average Frame Interval `33.620 ms` across 1,819 sampled frames.
 
 ## Playability Eval Status
 
@@ -41,7 +41,7 @@ These are not final human scores. They are current local QA estimates from autom
 
 - Five-run addiction test with a human tester.
 - Physical-device QA on a notched/Dynamic Island iPhone.
-- Physical-device performance and thermal profile on one older supported iPhone, plus longer interactive review of the captured modern-device traces.
+- Physical-device performance and thermal profile on one older supported iPhone, plus longer interactive review of captured modern-device traces.
 - Signed Game Center authentication, leaderboard submission, achievement reporting, and Game Center UI validation.
 - App Store Connect app record creation for `com.perlantir.stormblocks`.
 - TestFlight upload, install, and launch validation.
