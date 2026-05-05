@@ -143,6 +143,12 @@ audit_local_evidence() {
   else
     fail "Release asset verifier failed; see /tmp/stormblocks-release-assets-audit.log"
   fi
+  require_file "$ROOT/Scripts/verify_prompt_compliance.sh" "Prompt compliance verifier exists"
+  if "$ROOT/Scripts/verify_prompt_compliance.sh" >/tmp/stormblocks-prompt-compliance-audit.log 2>&1; then
+    pass "Prompt compliance verifier passes"
+  else
+    fail "Prompt compliance verifier failed; see /tmp/stormblocks-prompt-compliance-audit.log"
+  fi
   require_file "$ROOT/Docs/PHYSICAL_QA_RUNBOOK.md" "Physical QA runbook exists"
   require_file "$ROOT/Scripts/device_qa_session.sh" "Physical QA session helper exists"
   require_file "$ROOT/Scripts/ci_static_checks.sh" "Static CI script exists"

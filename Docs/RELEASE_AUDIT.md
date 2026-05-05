@@ -25,6 +25,7 @@ This maps the launch request and repo release gates to concrete evidence. The pr
 | No forced ads, paid power, gacha, loot boxes, or paid speedups | Package/settings review in implementation log and privacy/app-store docs; Unity Ads/Purchasing disabled. | Pass |
 | Design references and visual target | Procedural 3D board, storm, camp, survivors, app icon, and screenshots exist; visual quality still needs final physical-device human review. | Local pass; human review pending |
 | QA tests | Latest EditMode: 25/25 at `2026-05-05 05:30:28Z`; latest PlayMode: 7/7 at `2026-05-05 05:30:53Z`. | Pass |
+| Prompt compliance verifier | `Scripts/verify_prompt_compliance.sh` checks required docs/design refs, major gameplay/system surfaces, passing test result files, and non-monetization/copyright guardrails. | Pass |
 | Performance optimization | Primitive pooling, Low Detail fallback, URP mobile settings, and scene-budget guard exist; latest budget is 274 renderers and 59,232 triangles. | Local pass; physical profiling pending |
 | Physical QA handoff | `Docs/PHYSICAL_QA_RUNBOOK.md` and `Scripts/device_qa_session.sh` define launch, five-run QA, Game Center, TestFlight, and profiling steps. | Local pass; physical execution pending |
 | GitHub static verification | `.github/workflows/release-static.yml` runs `Scripts/ci_static_checks.sh` for shell syntax, release metadata, screenshots, manifest JSON, and transient artifacts. | Workflow added; remote run pending |
@@ -63,6 +64,7 @@ Scripts/ios_release_gates.sh launch-device
 Scripts/ios_release_gates.sh upload-probe
 Scripts/device_qa_session.sh plan
 Scripts/ci_static_checks.sh
+Scripts/verify_prompt_compliance.sh
 ```
 
 Credentialed Fastlane lanes are available after App Store Connect credentials are set:

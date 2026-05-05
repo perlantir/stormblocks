@@ -327,3 +327,5 @@ The repo includes a lightweight GitHub Actions workflow for credential-free rele
 - Script: `Scripts/ci_static_checks.sh`
 
 The workflow runs on macOS so screenshot dimension checks can use `sips`. It validates shell syntax, App Store metadata limits, tracked screenshot dimensions, App Store Connect manifest JSON, Game Center identifier alignment, support/privacy drafts, and absence of transient Unity/Fastlane artifacts. It does not run Unity builds or Apple credentialed gates.
+
+`Scripts/ci_static_checks.sh` also runs `Scripts/verify_prompt_compliance.sh`, which checks the explicit launch prompt surfaces: required source docs, design reference files, core mode/service/presentation files, mode identifiers, automatic Storm Pushback symbols, Storm Trail/Tempest definitions, service interfaces, accessibility settings, tests, and monetization/IP exclusions.

@@ -418,6 +418,21 @@ Known risks / not done:
 
 - Remote GitHub Actions proof requires the workflow to run on GitHub after this commit is pushed.
 
+## 2026-05-05 — Prompt compliance verifier
+
+- Added `Scripts/verify_prompt_compliance.sh` to statically verify the explicit launch prompt against repo artifacts: required docs, required design references, Unity/C# project structure, full-mode symbols, automatic Storm Pushback symbols, service interfaces, accessibility settings, 3D presentation markers, test-result files, release audit presence, and no ad/IAP/clone/copyrighted-IP monetization drift in runtime surfaces.
+- Wired the verifier into `Scripts/ci_static_checks.sh` and `Scripts/release_audit.sh` so both local audit and GitHub static checks cover prompt compliance in addition to App Store metadata.
+- Updated release audit and build/test docs with the new verifier command.
+
+Evidence:
+
+- `Scripts/verify_prompt_compliance.sh` passes locally.
+- `Scripts/ci_static_checks.sh` passes locally with the prompt compliance verifier included.
+
+Known risks / not done:
+
+- The verifier is a static guardrail. It complements but does not replace the still-open physical-device, App Store Connect, Game Center, and TestFlight gates.
+
 ## 2026-05-05 — Gate 12 pooling and Low Detail fallback
 
 - Added primitive pooling for dynamic presentation cubes/spheres used by board refreshes, tray rebuilds, drag ghosts, survivors, storm cells, block cells, and Storm Pushback VFX.

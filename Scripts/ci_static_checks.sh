@@ -11,6 +11,9 @@ bash -n Scripts/*.sh
 echo "==> Checking release assets"
 Scripts/verify_release_assets.sh
 
+echo "==> Checking prompt compliance"
+Scripts/verify_prompt_compliance.sh
+
 echo "==> Checking App Store manifest JSON"
 ruby -rjson -e 'JSON.parse(File.read("Docs/APP_STORE_CONNECT_MANIFEST.json")); puts "Manifest JSON parses"'
 
