@@ -477,3 +477,34 @@ Known risks / not done:
 - Signed build, install, archive, and IPA export were resolved in the later team `7JL22TDB44` pass.
 - Game Center leaderboards and achievement ids still need to be created/enabled in App Store Connect and validated on a signed device.
 - Physical-device touch, visual readability, haptics/audio feel, performance, and thermal profiling are still required before release signoff.
+
+## 2026-05-05 — Reference-led gameplay visual correction
+
+- Reworked the Unity gameplay presentation to move away from the flat primitive look and closer to the supplied design references:
+  - Added runtime rounded/sliced UI sprites for HUD panels, buttons, modal screens, and text shadows/outlines.
+  - Added procedural glossy toy textures for board tiles, storm tiles, warning tiles, camp tiles, and block pieces.
+  - Rebuilt the board shell with a warmer rim, cyan storm barrier, storm cloud corners, lightning accents, and richer storm edge dressing.
+  - Reworked the bottom tray with rounded caps, stitched/warm rails, larger toy-piece pads, and textured piece materials.
+  - Reworked the camp and survivors with a clearer tent silhouette, doorway, folds, flag, fire, string lights, and larger character silhouettes.
+  - Corrected the color balance after an intermediate shader pass over-warmed the scene, restoring the blue-purple storm palette.
+- Regenerated the portrait gameplay capture and App Store screenshot set from the updated Unity presentation.
+- Copied the regenerated screenshot set into `fastlane/screenshots/en-US`.
+- Updated release evidence docs and audit scripts for the new mobile-scene baseline.
+
+Evidence:
+
+- Portrait visual capture: `/tmp/stormblocks-visual-capture-design6.log` completed successfully and wrote `StormBlocksUnity/Builds/VisualChecks/stormblocks-gameplay.png`.
+- App Store screenshot capture: `/tmp/stormblocks-appstore-design.log` completed successfully and wrote five screenshots under `StormBlocksUnity/Builds/AppStoreScreens`.
+- EditMode tests: `StormBlocksUnity/editmode-results.xml` reports 25 total, 25 passed, 0 failed at `2026-05-05 12:22:09Z`.
+- PlayMode tests: `StormBlocksUnity/playmode-results.xml` reports 7 total, 7 passed, 0 failed at `2026-05-05 12:23:33Z`.
+- Current logged mobile baseline: 337 renderers, 75,850 mesh triangles, 1 audio listener, 1 canvas.
+- `Scripts/verify_release_assets.sh` passes locally: 32 pass, 0 fail.
+- `Scripts/verify_prompt_compliance.sh` passes locally: 73 pass, 0 fail.
+- `Scripts/ci_static_checks.sh` passes locally after removing transient Unity test scenes from `StormBlocksUnity/Assets`.
+- `Scripts/release_audit.sh local` passes locally: 32 pass, 0 fail, 0 open.
+- `Scripts/release_audit.sh full` still reports 32 pass, 0 fail, 7 open external gates.
+
+Known risks / not done:
+
+- This pass materially improves the procedural Unity presentation, but it is still not equivalent to bespoke production illustration/modeling. Importing supplied layered design assets or generated target frames would allow a much closer match.
+- Physical-device readability, haptics/audio feel, performance, and thermal profiling remain required before release signoff.

@@ -27,7 +27,7 @@ Use the project test runner for batch verification. Unity 6000 can skip `-runTes
   -logFile /tmp/stormblocks-editmode-lowdetail.log
 ```
 
-Current evidence: `StormBlocksUnity/editmode-results.xml` reports 25 total, 25 passed, 0 failed at `2026-05-05 05:30:28Z`.
+Current evidence: `StormBlocksUnity/editmode-results.xml` reports 25 total, 25 passed, 0 failed at `2026-05-05 12:22:09Z`.
 
 ## PlayMode Tests
 
@@ -40,7 +40,7 @@ Current evidence: `StormBlocksUnity/editmode-results.xml` reports 25 total, 25 p
   -logFile /tmp/stormblocks-playmode-lowdetail.log
 ```
 
-Current evidence: `StormBlocksUnity/playmode-results.xml` reports 7 total, 7 passed, 0 failed at `2026-05-05 05:30:53Z`.
+Current evidence: `StormBlocksUnity/playmode-results.xml` reports 7 total, 7 passed, 0 failed at `2026-05-05 12:23:33Z`.
 
 The PlayMode suite includes release smoke guards for the normal flow and active touch controls:
 
@@ -49,8 +49,8 @@ The PlayMode suite includes release smoke guards for the normal flow and active 
 
 The PlayMode suite includes a lightweight mobile scene-budget guard. Current logged baseline:
 
-- 274 renderers.
-- 59,232 mesh triangles.
+- 337 renderers.
+- 75,850 mesh triangles.
 - 1 audio listener.
 - 1 canvas.
 
@@ -72,7 +72,7 @@ Current optimization notes:
 
 Output is written to ignored path `StormBlocksUnity/Builds/VisualChecks/stormblocks-gameplay.png`.
 
-Current evidence: `/tmp/stormblocks-visual-declutter.log` completed with no C# errors or Unity exceptions. The capture includes the runtime HUD and uses the same visible text path as the generated store screenshots.
+Current evidence: `/tmp/stormblocks-visual-capture-design6.log` completed with no C# errors or Unity exceptions. The capture includes the runtime HUD and uses the same visible text path as the generated store screenshots.
 
 ## App Icon Draft
 

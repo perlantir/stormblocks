@@ -20,6 +20,8 @@ namespace StormBlocks.Presentation
         private readonly GameObject[,] _tileObjects = new GameObject[BoardSize, BoardSize];
         private readonly List<TrayPieceView> _trayPieces = new List<TrayPieceView>();
         private readonly List<Material> _runtimeMaterials = new List<Material>();
+        private readonly List<UnityEngine.Object> _runtimeUiAssets = new List<UnityEngine.Object>();
+        private readonly List<UnityEngine.Object> _runtimeMaterialAssets = new List<UnityEngine.Object>();
         private readonly Dictionary<PrimitiveType, Stack<GameObject>> _primitivePools = new Dictionary<PrimitiveType, Stack<GameObject>>();
 
         private Transform _boardRoot;
@@ -50,18 +52,31 @@ namespace StormBlocks.Presentation
         private Material _goldGlow;
         private Material _campOrange;
         private Material _campLight;
+        private Material _campCanvas;
+        private Material _creamTile;
         private Material _boardRim;
+        private Material _boardWarmRim;
         private Material _boardShadow;
         private Material _trayGlow;
         private Material _nearDeathGlow;
         private Material _survivorYellow;
         private Material _survivorBlue;
         private Material _survivorFace;
+        private Material _survivorPink;
+        private Material _softCloud;
+        private Material _skyBlue;
+        private Material _skyPurple;
+        private Material _sunbeam;
         private Material _uiPanel;
         private Material _uiPanelWarm;
         private Material _ghostValid;
         private Material _ghostInvalid;
         private Material[] _blockMaterials;
+        private Sprite _hudPanelSprite;
+        private Sprite _hudWarmSprite;
+        private Sprite _modalPanelSprite;
+        private Sprite _buttonSprite;
+        private Sprite _buttonWarmSprite;
 
         private StormRunSession _session;
         private GameModeDefinition _modeDefinition;
@@ -113,6 +128,7 @@ namespace StormBlocks.Presentation
             _primitivePools.Clear();
             CreateServices();
             CreateMaterials();
+            CreateUiSprites();
             SetupCameraAndLights();
             BuildBackground();
             BuildBoardShell();
@@ -270,48 +286,67 @@ namespace StormBlocks.Presentation
         {
             bool highContrast = _profile != null && _profile.Settings.HighContrast;
             bool colorblind = _profile != null && _profile.Settings.ColorblindFriendly;
+            for (int i = _runtimeMaterialAssets.Count - 1; i >= 0; i--)
+            {
+                DestroyUnityObject(_runtimeMaterialAssets[i]);
+            }
+
+            _runtimeMaterialAssets.Clear();
             _runtimeMaterials.Clear();
-            _emptyTile = CreateMaterial("SB Empty Tile", highContrast ? new Color(0.11f, 0.20f, 0.46f) : new Color(0.36f, 0.43f, 0.70f), 0.36f);
-            _campTile = CreateMaterial("SB Warm Camp Tile", highContrast ? new Color(1.0f, 0.55f, 0.10f) : new Color(0.76f, 0.45f, 0.27f), 0.42f);
-            _stormTile = CreateMaterial("SB Storm Tile", highContrast ? new Color(0.02f, 0.03f, 0.12f) : new Color(0.17f, 0.18f, 0.35f), 0.16f);
-            _warningTile = CreateMaterial("SB Storm Warning", highContrast ? new Color(1.0f, 0.88f, 0.10f) : new Color(0.12f, 0.68f, 1.0f), 0.3f);
-            _stormCloud = CreateMaterial("SB Storm Cloud", highContrast ? new Color(0.03f, 0.02f, 0.18f) : new Color(0.32f, 0.28f, 0.58f), 0.12f);
-            _stormLightning = CreateMaterial("SB Storm Lightning", new Color(0.38f, 0.88f, 1.0f), 0.65f);
-            _stormRain = CreateMaterial("SB Storm Rain", new Color(0.46f, 0.62f, 0.96f), 0.28f);
-            _goldGlow = CreateMaterial("SB Pushback Gold", new Color(1.0f, 0.62f, 0.16f), 0.6f);
-            _campOrange = CreateMaterial("SB Camp Orange", new Color(0.95f, 0.34f, 0.12f), 0.25f);
-            _campLight = CreateMaterial("SB Camp Lantern Glow", new Color(1.0f, 0.78f, 0.28f), 0.72f);
-            _boardRim = CreateMaterial("SB Board Cyan Rim", new Color(0.20f, 0.78f, 0.95f), 0.55f);
-            _boardShadow = CreateMaterial("SB Board Soft Shadow", new Color(0.06f, 0.06f, 0.19f), 0.18f);
-            _trayGlow = CreateMaterial("SB Tray Pad Glow", new Color(1.0f, 0.70f, 0.24f), 0.55f);
-            _nearDeathGlow = CreateMaterial("SB Near Death Warm Vignette", new Color(1.0f, 0.24f, 0.26f), 0.55f);
-            _survivorYellow = CreateMaterial("SB Survivor Yellow", new Color(1.0f, 0.86f, 0.22f), 0.25f);
-            _survivorBlue = CreateMaterial("SB Survivor Blue", new Color(0.10f, 0.73f, 1.0f), 0.25f);
-            _survivorFace = CreateMaterial("SB Survivor Face", new Color(1.0f, 0.72f, 0.46f), 0.4f);
-            _uiPanel = CreateMaterial("SB UI Purple", new Color(0.46f, 0.38f, 0.74f), 0.35f);
-            _uiPanelWarm = CreateMaterial("SB UI Warm", new Color(0.82f, 0.48f, 0.28f), 0.35f);
+            _emptyTile = CreateToyMaterial("SB Empty Tile Gloss", highContrast ? new Color(0.13f, 0.22f, 0.50f) : new Color(0.42f, 0.48f, 0.72f), new Color(0.70f, 0.76f, 0.96f), new Color(0.20f, 0.24f, 0.46f), 0.72f, false);
+            _campTile = CreateToyMaterial("SB Warm Camp Tile", highContrast ? new Color(1.0f, 0.60f, 0.14f) : new Color(0.76f, 0.50f, 0.32f), new Color(1.0f, 0.76f, 0.42f), new Color(0.46f, 0.24f, 0.18f), 0.66f, false);
+            _creamTile = CreateToyMaterial("SB Cream Tile Highlight", new Color(0.80f, 0.64f, 0.42f), new Color(1.0f, 0.84f, 0.58f), new Color(0.48f, 0.30f, 0.20f), 0.7f, false);
+            _stormTile = CreateToyMaterial("SB Storm Tile Cracked", highContrast ? new Color(0.02f, 0.03f, 0.12f) : new Color(0.13f, 0.17f, 0.34f), new Color(0.24f, 0.30f, 0.54f), new Color(0.04f, 0.05f, 0.14f), 0.34f, true);
+            _warningTile = CreateToyMaterial("SB Storm Warning", highContrast ? new Color(1.0f, 0.88f, 0.10f) : new Color(0.12f, 0.80f, 1.0f), new Color(0.46f, 0.95f, 1.0f), new Color(0.08f, 0.34f, 0.70f), 0.5f, false);
+            _stormCloud = CreateMaterial("SB Storm Cloud", highContrast ? new Color(0.03f, 0.02f, 0.18f) : new Color(0.30f, 0.27f, 0.58f), 0.22f);
+            _softCloud = CreateMaterial("SB Soft Cloud", new Color(0.80f, 0.78f, 0.94f), 0.44f);
+            _stormLightning = CreateMaterial("SB Storm Lightning", new Color(0.34f, 0.86f, 1.0f), 0.78f, 0.45f);
+            _stormRain = CreateMaterial("SB Storm Rain", new Color(0.40f, 0.60f, 0.94f), 0.34f, 0.08f);
+            _goldGlow = CreateMaterial("SB Pushback Gold Glow", new Color(0.95f, 0.50f, 0.10f), 0.82f, 0.22f);
+            _campOrange = CreateMaterial("SB Camp Orange", new Color(1.0f, 0.34f, 0.08f), 0.48f);
+            _campCanvas = CreateMaterial("SB Camp Canvas", new Color(1.0f, 0.67f, 0.28f), 0.58f);
+            _campLight = CreateMaterial("SB Camp Lantern Glow", new Color(0.98f, 0.64f, 0.18f), 0.85f, 0.18f);
+            _boardRim = CreateMaterial("SB Board Cyan Rim Glow", new Color(0.16f, 0.78f, 0.94f), 0.8f, 0.20f);
+            _boardWarmRim = CreateMaterial("SB Board Warm Rounded Rim", new Color(0.33f, 0.20f, 0.25f), 0.55f);
+            _boardShadow = CreateMaterial("SB Board Soft Shadow", new Color(0.06f, 0.06f, 0.18f), 0.28f);
+            _trayGlow = CreateMaterial("SB Tray Pad Glow", new Color(0.95f, 0.56f, 0.16f), 0.82f, 0.18f);
+            _nearDeathGlow = CreateMaterial("SB Near Death Warm Vignette", new Color(0.90f, 0.16f, 0.22f), 0.65f, 0.22f);
+            _survivorYellow = CreateMaterial("SB Survivor Yellow", new Color(1.0f, 0.86f, 0.18f), 0.42f);
+            _survivorBlue = CreateMaterial("SB Survivor Blue", new Color(0.08f, 0.74f, 1.0f), 0.46f);
+            _survivorPink = CreateMaterial("SB Survivor Pink", new Color(1.0f, 0.45f, 0.68f), 0.48f);
+            _survivorFace = CreateMaterial("SB Survivor Face", new Color(1.0f, 0.74f, 0.52f), 0.52f);
+            _skyBlue = CreateMaterial("SB Sky Blue Haze", new Color(0.12f, 0.30f, 0.54f), 0.3f);
+            _skyPurple = CreateMaterial("SB Sky Purple Haze", new Color(0.09f, 0.08f, 0.25f), 0.26f);
+            _sunbeam = CreateMaterial("SB Warm Sunbeam", new Color(0.35f, 0.18f, 0.24f), 0.55f);
+            _uiPanel = CreateMaterial("SB UI Purple", new Color(0.50f, 0.42f, 0.78f), 0.58f);
+            _uiPanelWarm = CreateMaterial("SB UI Warm", new Color(0.88f, 0.50f, 0.26f), 0.58f);
             _ghostValid = CreateTransparentMaterial("SB Ghost Valid", new Color(1.0f, 0.82f, 0.28f, 0.55f));
             _ghostInvalid = CreateTransparentMaterial("SB Ghost Invalid", new Color(1.0f, 0.20f, 0.32f, 0.42f));
             _blockMaterials = colorblind
                 ? new[]
                 {
-                    CreateMaterial("SB Block Sky", new Color(0.0f, 0.62f, 0.95f), 0.55f),
-                    CreateMaterial("SB Block Amber", new Color(0.95f, 0.60f, 0.0f), 0.5f),
-                    CreateMaterial("SB Block Mint", new Color(0.0f, 0.82f, 0.56f), 0.5f),
-                    CreateMaterial("SB Block Rose", new Color(0.94f, 0.24f, 0.50f), 0.5f),
-                    CreateMaterial("SB Block White Gold", new Color(1.0f, 0.84f, 0.20f), 0.55f)
+                    CreateToyMaterial("SB Block Sky", new Color(0.0f, 0.66f, 1.0f), new Color(0.45f, 0.95f, 1.0f), new Color(0.0f, 0.32f, 0.70f), 0.82f, false),
+                    CreateToyMaterial("SB Block Amber", new Color(1.0f, 0.66f, 0.03f), new Color(1.0f, 0.88f, 0.28f), new Color(0.70f, 0.30f, 0.0f), 0.8f, false),
+                    CreateToyMaterial("SB Block Mint", new Color(0.0f, 0.84f, 0.58f), new Color(0.48f, 1.0f, 0.74f), new Color(0.0f, 0.42f, 0.30f), 0.78f, false),
+                    CreateToyMaterial("SB Block Rose", new Color(0.96f, 0.28f, 0.54f), new Color(1.0f, 0.62f, 0.78f), new Color(0.56f, 0.08f, 0.28f), 0.8f, false),
+                    CreateToyMaterial("SB Block White Gold", new Color(1.0f, 0.86f, 0.24f), new Color(1.0f, 0.96f, 0.54f), new Color(0.68f, 0.46f, 0.0f), 0.82f, false)
                 }
                 : new[]
                 {
-                    CreateMaterial("SB Block Cyan", new Color(0.04f, 0.74f, 0.95f), 0.55f),
-                    CreateMaterial("SB Block Coral", new Color(1.0f, 0.34f, 0.30f), 0.5f),
-                    CreateMaterial("SB Block Lime", new Color(0.43f, 0.88f, 0.11f), 0.5f),
-                    CreateMaterial("SB Block Purple", new Color(0.62f, 0.25f, 0.95f), 0.5f),
-                    CreateMaterial("SB Block Honey", new Color(1.0f, 0.70f, 0.15f), 0.55f)
+                    CreateToyMaterial("SB Block Cyan Candy", new Color(0.02f, 0.78f, 1.0f), new Color(0.42f, 0.96f, 1.0f), new Color(0.0f, 0.36f, 0.70f), 0.86f, false),
+                    CreateToyMaterial("SB Block Coral Candy", new Color(1.0f, 0.35f, 0.30f), new Color(1.0f, 0.62f, 0.54f), new Color(0.68f, 0.12f, 0.10f), 0.82f, false),
+                    CreateToyMaterial("SB Block Lime Toy", new Color(0.46f, 0.92f, 0.10f), new Color(0.72f, 1.0f, 0.32f), new Color(0.20f, 0.52f, 0.0f), 0.82f, false),
+                    CreateToyMaterial("SB Block Purple Toy", new Color(0.66f, 0.30f, 1.0f), new Color(0.86f, 0.62f, 1.0f), new Color(0.32f, 0.08f, 0.62f), 0.84f, false),
+                    CreateToyMaterial("SB Block Honey Toy", new Color(1.0f, 0.72f, 0.16f), new Color(1.0f, 0.92f, 0.38f), new Color(0.70f, 0.34f, 0.0f), 0.86f, false)
                 };
         }
 
         private Material CreateMaterial(string materialName, Color color, float smoothness)
+        {
+            return CreateMaterial(materialName, color, smoothness, 0f);
+        }
+
+        private Material CreateMaterial(string materialName, Color color, float smoothness, float emission)
         {
             var shader = Shader.Find("Universal Render Pipeline/Unlit");
             if (shader == null)
@@ -345,8 +380,80 @@ namespace StormBlocks.Presentation
                 material.SetColor("_BaseColor", color);
             }
 
+            if (emission > 0f && material.HasProperty("_EmissionColor"))
+            {
+                material.EnableKeyword("_EMISSION");
+                material.SetColor("_EmissionColor", color * emission);
+            }
+
             _runtimeMaterials.Add(material);
             return material;
+        }
+
+        private Material CreateToyMaterial(string materialName, Color baseColor, Color highlightColor, Color edgeColor, float smoothness, bool stormCracks)
+        {
+            var material = CreateMaterial(materialName, baseColor, smoothness);
+            var texture = new Texture2D(48, 48, TextureFormat.RGBA32, false)
+            {
+                name = materialName + " Toy Texture",
+                hideFlags = HideFlags.HideAndDontSave
+            };
+            texture.wrapMode = TextureWrapMode.Clamp;
+            texture.filterMode = FilterMode.Bilinear;
+
+            var pixels = new Color32[48 * 48];
+            for (int y = 0; y < 48; y++)
+            {
+                for (int x = 0; x < 48; x++)
+                {
+                    pixels[y * 48 + x] = ToyTexturePixel(x, y, 48, baseColor, highlightColor, edgeColor, stormCracks);
+                }
+            }
+
+            texture.SetPixels32(pixels);
+            texture.Apply(false, true);
+            if (material.HasProperty("_BaseMap"))
+            {
+                material.SetTexture("_BaseMap", texture);
+            }
+
+            if (material.HasProperty("_MainTex"))
+            {
+                material.SetTexture("_MainTex", texture);
+            }
+
+            _runtimeMaterialAssets.Add(texture);
+            return material;
+        }
+
+        private static Color ToyTexturePixel(int x, int y, int size, Color baseColor, Color highlightColor, Color edgeColor, bool stormCracks)
+        {
+            float u = (x + 0.5f) / size;
+            float v = (y + 0.5f) / size;
+            float dx = Mathf.Min(u, 1f - u);
+            float dy = Mathf.Min(v, 1f - v);
+            float edge = Mathf.Clamp01(Mathf.Min(dx, dy) * 12f);
+            float highlight = Mathf.Clamp01((1f - Mathf.Abs(u - 0.32f) * 3.0f) * (1f - Mathf.Abs(v - 0.72f) * 3.2f));
+            Color color = Color.Lerp(edgeColor, baseColor, edge);
+            color = Color.Lerp(color, highlightColor, highlight * 0.35f);
+
+            float corner = (u - 0.18f) * (u - 0.18f) + (v - 0.82f) * (v - 0.82f);
+            if (corner < 0.012f)
+            {
+                color = Color.Lerp(color, Color.white, 0.38f);
+            }
+
+            if (stormCracks)
+            {
+                bool crackA = Mathf.Abs((u * 1.4f + v * 0.7f) - 0.74f) < 0.018f && u > 0.18f && u < 0.78f;
+                bool crackB = Mathf.Abs((u * -0.8f + v * 1.2f) - 0.24f) < 0.015f && v > 0.24f && v < 0.86f;
+                if (crackA || crackB)
+                {
+                    color = Color.Lerp(color, new Color(0.48f, 0.85f, 1.0f), 0.55f);
+                }
+            }
+
+            return color;
         }
 
         private Material CreateTransparentMaterial(string materialName, Color color)
@@ -366,6 +473,89 @@ namespace StormBlocks.Presentation
             return material;
         }
 
+        private void CreateUiSprites()
+        {
+            for (int i = _runtimeUiAssets.Count - 1; i >= 0; i--)
+            {
+                DestroyUnityObject(_runtimeUiAssets[i]);
+            }
+
+            _runtimeUiAssets.Clear();
+            _hudPanelSprite = CreateRoundedPanelSprite("SB HUD Rounded Purple Sprite", 160, 80, 28f, 8f, new Color(0.50f, 0.43f, 0.78f, 0.94f), new Color(0.98f, 0.74f, 0.35f, 0.96f), new Color(0.90f, 0.86f, 1.0f, 0.36f));
+            _hudWarmSprite = CreateRoundedPanelSprite("SB HUD Warm Badge Sprite", 160, 80, 28f, 8f, new Color(0.82f, 0.47f, 0.25f, 0.94f), new Color(1.0f, 0.78f, 0.34f, 0.96f), new Color(1.0f, 0.92f, 0.72f, 0.34f));
+            _modalPanelSprite = CreateRoundedPanelSprite("SB Modal Rounded Panel Sprite", 180, 220, 30f, 7f, new Color(0.21f, 0.18f, 0.42f, 0.96f), new Color(0.78f, 0.70f, 1.0f, 0.65f), new Color(0.62f, 0.54f, 0.90f, 0.30f));
+            _buttonSprite = CreateRoundedPanelSprite("SB Button Rounded Purple Sprite", 150, 72, 24f, 6f, new Color(0.40f, 0.34f, 0.66f, 0.98f), new Color(0.75f, 0.68f, 1.0f, 0.65f), new Color(0.72f, 0.64f, 1.0f, 0.32f));
+            _buttonWarmSprite = CreateRoundedPanelSprite("SB Button Warm Rounded Sprite", 150, 72, 24f, 6f, new Color(0.82f, 0.47f, 0.24f, 0.98f), new Color(1.0f, 0.82f, 0.38f, 0.85f), new Color(1.0f, 0.88f, 0.65f, 0.38f));
+        }
+
+        private Sprite CreateRoundedPanelSprite(string spriteName, int width, int height, float radius, float border, Color fill, Color edge, Color highlight)
+        {
+            var texture = new Texture2D(width, height, TextureFormat.RGBA32, false)
+            {
+                name = spriteName + " Texture",
+                hideFlags = HideFlags.HideAndDontSave
+            };
+            texture.wrapMode = TextureWrapMode.Clamp;
+            texture.filterMode = FilterMode.Bilinear;
+
+            var pixels = new Color32[width * height];
+            float maxRadius = Mathf.Min(radius, Mathf.Min(width, height) * 0.5f - 1f);
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    pixels[y * width + x] = RoundedPanelPixel(x, y, width, height, maxRadius, border, fill, edge, highlight);
+                }
+            }
+
+            texture.SetPixels32(pixels);
+            texture.Apply(false, true);
+
+            var sprite = Sprite.Create(texture, new Rect(0f, 0f, width, height), new Vector2(0.5f, 0.5f), 100f, 0, SpriteMeshType.FullRect, new Vector4(border, border, border, border));
+            sprite.name = spriteName;
+            sprite.hideFlags = HideFlags.HideAndDontSave;
+            _runtimeUiAssets.Add(texture);
+            _runtimeUiAssets.Add(sprite);
+            return sprite;
+        }
+
+        private static Color RoundedPanelPixel(int x, int y, int width, int height, float radius, float border, Color fill, Color edge, Color highlight)
+        {
+            float dx = Mathf.Min(x + 0.5f, width - x - 0.5f);
+            float dy = Mathf.Min(y + 0.5f, height - y - 0.5f);
+            bool inside = true;
+
+            if (dx < radius && dy < radius)
+            {
+                float cornerX = dx - radius;
+                float cornerY = dy - radius;
+                inside = cornerX * cornerX + cornerY * cornerY <= radius * radius;
+            }
+
+            if (!inside)
+            {
+                return Color.clear;
+            }
+
+            bool edgePixel = dx < border || dy < border;
+            if (dx < radius && dy < radius)
+            {
+                float cornerX = dx - radius;
+                float cornerY = dy - radius;
+                float innerRadius = Mathf.Max(0f, radius - border);
+                edgePixel = edgePixel || cornerX * cornerX + cornerY * cornerY >= innerRadius * innerRadius;
+            }
+
+            float vertical = y / Mathf.Max(1f, height - 1f);
+            Color color = edgePixel ? edge : fill;
+            if (vertical > 0.62f)
+            {
+                color = Color.Lerp(color, highlight, (vertical - 0.62f) / 0.38f);
+            }
+
+            return color;
+        }
+
         private void SetupCameraAndLights()
         {
             ClearExistingAudioListeners();
@@ -377,27 +567,37 @@ namespace StormBlocks.Presentation
             _camera.transform.position = new Vector3(0f, 9.4f, -9.0f);
             _camera.transform.rotation = Quaternion.Euler(58f, 0f, 0f);
             _camera.orthographic = true;
-            _camera.orthographicSize = 7.65f;
+            _camera.orthographicSize = 7.55f;
             _camera.clearFlags = CameraClearFlags.SolidColor;
-            _camera.backgroundColor = new Color(0.08f, 0.08f, 0.22f);
+            _camera.backgroundColor = new Color(0.07f, 0.08f, 0.24f);
             cameraObject.AddComponent<AudioListener>();
+            RenderSettings.ambientLight = new Color(0.24f, 0.25f, 0.42f);
 
             var key = new GameObject("Warm Camp Key Light");
             key.transform.SetParent(transform);
             var keyLight = key.AddComponent<Light>();
             keyLight.type = LightType.Directional;
-            keyLight.color = new Color(0.95f, 0.94f, 1.0f);
-            keyLight.intensity = 0.62f;
-            key.transform.rotation = Quaternion.Euler(52f, -22f, 0f);
+            keyLight.color = new Color(1.0f, 0.92f, 0.78f);
+            keyLight.intensity = 0.78f;
+            key.transform.rotation = Quaternion.Euler(46f, -28f, 0f);
 
             var storm = new GameObject("Cool Storm Rim Light");
             storm.transform.SetParent(transform);
-            storm.transform.position = new Vector3(-3.8f, 3.0f, 1.2f);
+            storm.transform.position = new Vector3(-3.8f, 3.8f, 2.6f);
             var stormLight = storm.AddComponent<Light>();
             stormLight.type = LightType.Point;
-            stormLight.color = new Color(0.42f, 0.85f, 1f);
-            stormLight.intensity = 3.2f;
-            stormLight.range = 7.0f;
+            stormLight.color = new Color(0.35f, 0.90f, 1f);
+            stormLight.intensity = 3.0f;
+            stormLight.range = 7.8f;
+
+            var camp = new GameObject("Warm Camp Glow Light");
+            camp.transform.SetParent(transform);
+            camp.transform.position = new Vector3(0f, 1.2f, -0.7f);
+            var campLight = camp.AddComponent<Light>();
+            campLight.type = LightType.Point;
+            campLight.color = new Color(1.0f, 0.62f, 0.22f);
+            campLight.intensity = 1.15f;
+            campLight.range = 3.8f;
         }
 
         private static void ClearExistingAudioListeners()
@@ -418,11 +618,22 @@ namespace StormBlocks.Presentation
 
         private void BuildBackground()
         {
-            CreateCube("Soft dusk rescue backdrop", transform, new Vector3(0f, -0.14f, -1.0f), new Vector3(13.0f, 0.08f, 19.0f), CreateMaterial("SB Background Warm Dusk", new Color(0.09f, 0.10f, 0.30f), 0.2f));
-            CreateCube("Warm sunset lower haze", transform, new Vector3(0f, -0.11f, -7.0f), new Vector3(12.0f, 0.05f, 2.4f), CreateMaterial("SB Background Sunset Haze", new Color(0.32f, 0.16f, 0.20f), 0.25f));
-            CreateCube("Warm oval camp glow", transform, new Vector3(0f, -0.055f, -0.1f), new Vector3(7.1f, 0.030f, 2.4f), CreateMaterial("SB Camp Ground Glow", new Color(0.60f, 0.28f, 0.16f), 0.45f));
-            CreateSphere("Left soft storm bank", transform, new Vector3(-5.2f, 0.15f, -1.1f), new Vector3(1.8f, 0.34f, 2.7f), _stormCloud);
-            CreateSphere("Right soft storm bank", transform, new Vector3(5.2f, 0.15f, -0.9f), new Vector3(1.8f, 0.34f, 2.7f), _stormCloud);
+            CreateCube("Deep violet storm sky", transform, new Vector3(0f, -0.18f, 3.8f), new Vector3(13.0f, 0.08f, 9.2f), _skyPurple);
+            CreateCube("Soft blue rescue sky", transform, new Vector3(0f, -0.17f, -2.0f), new Vector3(13.0f, 0.08f, 8.6f), _skyBlue);
+            CreateCube("Warm sunset lower haze", transform, new Vector3(0f, -0.145f, -6.7f), new Vector3(13.0f, 0.07f, 3.2f), _sunbeam);
+            CreateCube("Warm oval camp glow", transform, new Vector3(0f, -0.155f, -0.6f), new Vector3(5.6f, 0.035f, 1.45f), _sunbeam);
+            CreateCube("Soft lower golden halo", transform, new Vector3(0f, -0.150f, -4.8f), new Vector3(5.0f, 0.035f, 0.85f), _sunbeam);
+            CreateAtmosphereCloud("Left upper storm bank", new Vector3(-5.0f, 0.22f, 2.4f), 1.25f, _stormCloud);
+            CreateAtmosphereCloud("Right upper storm bank", new Vector3(5.0f, 0.22f, 2.3f), 1.20f, _stormCloud);
+            CreateLightningBolt("Backdrop left lightning", transform, new Vector3(-4.65f, 0.54f, 1.55f), 0.96f, -16f);
+            CreateLightningBolt("Backdrop right lightning", transform, new Vector3(4.70f, 0.54f, 1.10f), 0.92f, 16f);
+        }
+
+        private void CreateAtmosphereCloud(string objectName, Vector3 center, float scale, Material material)
+        {
+            CreateSphere(objectName + " puff a", transform, center + new Vector3(-0.42f * scale, 0f, 0.02f * scale), new Vector3(1.05f * scale, 0.28f * scale, 0.62f * scale), material);
+            CreateSphere(objectName + " puff b", transform, center + new Vector3(0.12f * scale, 0.06f * scale, 0.02f * scale), new Vector3(1.18f * scale, 0.34f * scale, 0.70f * scale), material);
+            CreateSphere(objectName + " puff c", transform, center + new Vector3(0.58f * scale, -0.02f * scale, 0f), new Vector3(0.92f * scale, 0.24f * scale, 0.54f * scale), material);
         }
 
         private void BuildBoardShell()
@@ -437,56 +648,85 @@ namespace StormBlocks.Presentation
             _poolRoot.SetParent(transform);
             _poolRoot.gameObject.SetActive(false);
 
-            CreateCube("Soft board shadow plate", _boardRoot, new Vector3(0f, -0.05f, 0f), new Vector3(7.30f, 0.10f, 7.30f), _boardShadow);
-            CreateCube("Cyan storm barrier north", _boardRoot, new Vector3(0f, 0.09f, 3.16f), new Vector3(7.22f, 0.08f, 0.08f), _boardRim);
-            CreateCube("Cyan storm barrier south", _boardRoot, new Vector3(0f, 0.09f, -3.16f), new Vector3(7.22f, 0.08f, 0.08f), _boardRim);
-            CreateCube("Cyan storm barrier west", _boardRoot, new Vector3(-3.16f, 0.09f, 0f), new Vector3(0.08f, 0.08f, 7.22f), _boardRim);
-            CreateCube("Cyan storm barrier east", _boardRoot, new Vector3(3.16f, 0.09f, 0f), new Vector3(0.08f, 0.08f, 7.22f), _boardRim);
+            CreateCube("Soft board shadow plate", _boardRoot, new Vector3(0f, -0.08f, 0f), new Vector3(7.64f, 0.12f, 7.64f), _boardShadow);
+            CreateCube("Warm rounded board underlay", _boardRoot, new Vector3(0f, -0.01f, 0f), new Vector3(7.34f, 0.12f, 7.34f), _boardWarmRim);
+            CreateCube("Warm board rim north", _boardRoot, new Vector3(0f, 0.09f, 3.27f), new Vector3(7.42f, 0.16f, 0.20f), _boardWarmRim);
+            CreateCube("Warm board rim south", _boardRoot, new Vector3(0f, 0.09f, -3.27f), new Vector3(7.42f, 0.16f, 0.20f), _boardWarmRim);
+            CreateCube("Warm board rim west", _boardRoot, new Vector3(-3.27f, 0.09f, 0f), new Vector3(0.20f, 0.16f, 7.42f), _boardWarmRim);
+            CreateCube("Warm board rim east", _boardRoot, new Vector3(3.27f, 0.09f, 0f), new Vector3(0.20f, 0.16f, 7.42f), _boardWarmRim);
+            CreateCube("Cyan storm barrier north", _boardRoot, new Vector3(0f, 0.22f, 3.20f), new Vector3(7.15f, 0.06f, 0.06f), _boardRim);
+            CreateCube("Cyan storm barrier south", _boardRoot, new Vector3(0f, 0.22f, -3.20f), new Vector3(7.15f, 0.06f, 0.06f), _boardRim);
+            CreateCube("Cyan storm barrier west", _boardRoot, new Vector3(-3.20f, 0.22f, 0f), new Vector3(0.06f, 0.06f, 7.15f), _boardRim);
+            CreateCube("Cyan storm barrier east", _boardRoot, new Vector3(3.20f, 0.22f, 0f), new Vector3(0.06f, 0.06f, 7.15f), _boardRim);
+            CreateBoardStormCorner("North west storm curl", new Vector3(-3.15f, 0.40f, 3.05f), -20f);
+            CreateBoardStormCorner("North east storm curl", new Vector3(3.15f, 0.40f, 3.05f), 20f);
+            CreateBoardStormCorner("South west storm curl", new Vector3(-3.15f, 0.40f, -3.05f), 20f);
+            CreateBoardStormCorner("South east storm curl", new Vector3(3.15f, 0.40f, -3.05f), -20f);
 
             for (int y = 0; y < BoardSize; y++)
             {
                 for (int x = 0; x < BoardSize; x++)
                 {
                     Vector3 center = CellCenter(x, y);
-                    var tile = CreateCube("Tile " + x + "," + y, _boardRoot, center, new Vector3(0.72f, 0.14f, 0.72f), _emptyTile);
+                    var tile = CreateCube("Tile " + x + "," + y, _boardRoot, center, new Vector3(0.74f, 0.16f, 0.74f), _emptyTile);
                     tile.transform.localPosition += Vector3.up * 0.02f;
                     _tileObjects[x, y] = tile;
-                    CreateCube("Tile bevel top " + x + "," + y, tile.transform, new Vector3(0f, 0.085f, 0f), new Vector3(0.60f, 0.045f, 0.60f), _emptyTile);
+                    CreateCube("Tile bevel top " + x + "," + y, tile.transform, new Vector3(0f, 0.085f, 0f), new Vector3(0.58f, 0.045f, 0.58f), _emptyTile);
                 }
             }
 
             BuildCamp();
         }
 
+        private void CreateBoardStormCorner(string objectName, Vector3 center, float rotation)
+        {
+            CreateSphere(objectName + " cloud large", _boardRoot, center, new Vector3(0.78f, 0.34f, 0.62f), _stormCloud);
+            CreateSphere(objectName + " cloud side", _boardRoot, center + new Vector3(0.34f * Mathf.Sign(center.x), 0.02f, -0.08f * Mathf.Sign(center.z)), new Vector3(0.60f, 0.28f, 0.48f), _stormCloud);
+            CreateSphere(objectName + " cyan core", _boardRoot, center + new Vector3(0.10f * Mathf.Sign(center.x), 0.03f, -0.10f * Mathf.Sign(center.z)), new Vector3(0.28f, 0.12f, 0.22f), _stormLightning);
+            CreateLightningBolt(objectName + " lightning", _boardRoot, center + new Vector3(0.06f * Mathf.Sign(center.x), 0.22f, -0.10f * Mathf.Sign(center.z)), 0.46f, rotation);
+        }
+
         private void BuildCamp()
         {
             var campRoot = new GameObject("Warm Central Rescue Camp");
             campRoot.transform.SetParent(_boardRoot);
-            campRoot.transform.position = new Vector3(0f, 0.24f, 0f);
-            CreateSphere("Camp warm halo", campRoot.transform, new Vector3(0f, -0.05f, 0f), new Vector3(1.44f, 0.10f, 1.44f), _campLight);
-            CreateCube("Tent body left fold", campRoot.transform, new Vector3(-0.17f, 0.24f, 0f), new Vector3(0.52f, 0.46f, 0.76f), _campOrange).transform.rotation = Quaternion.Euler(0f, 0f, -18f);
-            CreateCube("Tent body right fold", campRoot.transform, new Vector3(0.17f, 0.24f, 0f), new Vector3(0.52f, 0.46f, 0.76f), _campOrange).transform.rotation = Quaternion.Euler(0f, 0f, 18f);
-            CreateCube("Signal flag", campRoot.transform, new Vector3(0.48f, 0.78f, -0.28f), new Vector3(0.08f, 0.72f, 0.08f), _survivorYellow);
-            CreateCube("Signal pennant", campRoot.transform, new Vector3(0.68f, 0.98f, -0.28f), new Vector3(0.34f, 0.16f, 0.06f), _campOrange);
-            CreateCube("String light wire", campRoot.transform, new Vector3(0f, 0.61f, -0.37f), new Vector3(0.95f, 0.035f, 0.035f), _boardRim);
+            campRoot.transform.localPosition = new Vector3(0f, 0.24f, 0f);
+            CreateSphere("Camp warm halo", campRoot.transform, new Vector3(0f, -0.05f, 0f), new Vector3(1.72f, 0.10f, 1.72f), _campLight);
+            CreateTentPrism("Camp tent canvas prism", campRoot.transform, new Vector3(0.08f, 0.22f, -0.02f), 1.08f, 0.76f, 0.86f, _campCanvas);
+            CreateTrianglePanel("Camp tent dark doorway", campRoot.transform, new Vector3(0.08f, 0.23f, -0.48f), 0.38f, 0.48f, _boardShadow);
+            CreateCube("Tent bright ridge", campRoot.transform, new Vector3(0.08f, 0.59f, -0.02f), new Vector3(0.08f, 0.06f, 0.94f), _goldGlow);
+            CreateCube("Tent left canvas fold", campRoot.transform, new Vector3(-0.18f, 0.29f, -0.50f), new Vector3(0.08f, 0.58f, 0.055f), _campOrange).transform.rotation = Quaternion.Euler(0f, 0f, -20f);
+            CreateCube("Tent right canvas fold", campRoot.transform, new Vector3(0.34f, 0.29f, -0.50f), new Vector3(0.08f, 0.58f, 0.055f), _campOrange).transform.rotation = Quaternion.Euler(0f, 0f, 20f);
+            CreateCube("Tent warm front trim", campRoot.transform, new Vector3(0.08f, 0.16f, -0.51f), new Vector3(1.05f, 0.07f, 0.08f), _campOrange);
+            CreateCube("Signal flag pole", campRoot.transform, new Vector3(0.63f, 0.72f, -0.31f), new Vector3(0.07f, 0.78f, 0.07f), _survivorYellow);
+            CreateCube("Signal pennant", campRoot.transform, new Vector3(0.84f, 0.97f, -0.31f), new Vector3(0.36f, 0.18f, 0.06f), _campOrange);
+            CreateCube("String light wire", campRoot.transform, new Vector3(0.08f, 0.61f, -0.46f), new Vector3(1.05f, 0.035f, 0.035f), _boardRim);
             for (int i = 0; i < 5; i++)
             {
-                CreateSphere("Camp string bulb", campRoot.transform, new Vector3(-0.42f + i * 0.21f, 0.55f, -0.39f), new Vector3(0.07f, 0.07f, 0.07f), i % 2 == 0 ? _campLight : _goldGlow);
+                CreateSphere("Camp string bulb", campRoot.transform, new Vector3(-0.42f + i * 0.25f, 0.55f, -0.49f), new Vector3(0.08f, 0.08f, 0.08f), i % 2 == 0 ? _campLight : _goldGlow);
             }
-            CreateCube("Camp fire log", campRoot.transform, new Vector3(-0.48f, 0.09f, -0.42f), new Vector3(0.34f, 0.08f, 0.10f), _boardShadow).transform.rotation = Quaternion.Euler(0f, 35f, 0f);
-            CreateSphere("Camp fire glow", campRoot.transform, new Vector3(-0.48f, 0.18f, -0.42f), new Vector3(0.35f, 0.22f, 0.35f), _goldGlow);
+            CreateCube("Camp fire log", campRoot.transform, new Vector3(-0.55f, 0.09f, -0.48f), new Vector3(0.34f, 0.08f, 0.10f), _boardShadow).transform.rotation = Quaternion.Euler(0f, 35f, 0f);
+            CreateCube("Camp fire cross log", campRoot.transform, new Vector3(-0.55f, 0.10f, -0.48f), new Vector3(0.32f, 0.07f, 0.09f), _boardShadow).transform.rotation = Quaternion.Euler(0f, -35f, 0f);
+            CreateSphere("Camp fire glow", campRoot.transform, new Vector3(-0.55f, 0.18f, -0.48f), new Vector3(0.42f, 0.23f, 0.42f), _goldGlow);
+            CreateSphere("Camp fire flame", campRoot.transform, new Vector3(-0.55f, 0.32f, -0.48f), new Vector3(0.20f, 0.34f, 0.20f), _campOrange);
+            CreateCube("Base camp sign post", campRoot.transform, new Vector3(0.82f, 0.21f, 0.35f), new Vector3(0.06f, 0.30f, 0.06f), _boardShadow);
+            CreateCube("Base camp sign board", campRoot.transform, new Vector3(0.82f, 0.39f, 0.35f), new Vector3(0.46f, 0.18f, 0.07f), _campCanvas);
         }
 
         private void BuildTrayShell()
         {
             _trayRoot = new GameObject("Bottom Three Piece Tray").transform;
             _trayRoot.SetParent(transform);
-            _trayRoot.position = new Vector3(0f, 0.18f, -5.0f);
-            CreateCube("Rounded purple tray base", _trayRoot, Vector3.zero, new Vector3(6.30f, 0.18f, 1.46f), _uiPanel);
-            CreateCube("Tray Static stitched lip", _trayRoot, new Vector3(0f, 0.14f, 0.68f), new Vector3(5.80f, 0.06f, 0.06f), _uiPanelWarm);
+            _trayRoot.position = new Vector3(0f, 0.18f, -5.35f);
+            CreateCube("Rounded purple tray base", _trayRoot, Vector3.zero, new Vector3(6.55f, 0.18f, 1.48f), _uiPanel);
+            CreateSphere("Tray Static rounded left cap", _trayRoot, new Vector3(-3.24f, 0.02f, 0f), new Vector3(0.66f, 0.19f, 1.46f), _uiPanel);
+            CreateSphere("Tray Static rounded right cap", _trayRoot, new Vector3(3.24f, 0.02f, 0f), new Vector3(0.66f, 0.19f, 1.46f), _uiPanel);
+            CreateCube("Tray Static stitched top lip", _trayRoot, new Vector3(0f, 0.15f, 0.69f), new Vector3(5.95f, 0.06f, 0.06f), _uiPanelWarm);
+            CreateCube("Tray Static stitched bottom lip", _trayRoot, new Vector3(0f, 0.15f, -0.69f), new Vector3(5.95f, 0.06f, 0.06f), _uiPanelWarm);
+            CreateCube("Tray Static warm top rail", _trayRoot, new Vector3(0f, 0.25f, 0.83f), new Vector3(5.75f, 0.07f, 0.08f), _uiPanelWarm);
             for (int i = 0; i < 3; i++)
             {
-                CreateSphere("Tray Static golden piece pad " + i, _trayRoot, new Vector3(-2.0f + i * 2.0f, 0.18f, 0f), new Vector3(1.06f, 0.10f, 0.62f), _trayGlow);
+                CreateSphere("Tray Static golden piece pad " + i, _trayRoot, new Vector3(-2.05f + i * 2.05f, 0.19f, -0.02f), new Vector3(1.10f, 0.10f, 0.62f), _trayGlow);
             }
         }
 
@@ -503,15 +743,16 @@ namespace StormBlocks.Presentation
 
             RectTransform safeRoot = CreateSafeAreaRoot(canvasObject.transform);
 
-            _scoreLabel = CreateHudPanel(safeRoot, "0\nSCORE", new Vector2(-315f, 1080f), new Vector2(270f, 128f), new Color(0.48f, 0.40f, 0.76f, 0.92f));
-            _rescuedLabel = CreateHudPanel(safeRoot, "0\nRESCUED", new Vector2(0f, 1080f), new Vector2(250f, 150f), new Color(0.58f, 0.48f, 0.82f, 0.94f));
-            _bestLabel = CreateHudPanel(safeRoot, "BEST 0", new Vector2(320f, 1080f), new Vector2(310f, 128f), new Color(0.48f, 0.40f, 0.76f, 0.92f));
-            _modeLabel = CreateHudPanel(safeRoot, "ENDLESS STORM", new Vector2(0f, 910f), new Vector2(460f, 86f), new Color(0.77f, 0.42f, 0.25f, 0.93f));
-            _phaseLabel = CreateHudPanel(safeRoot, "CALM", new Vector2(0f, -925f), new Vector2(310f, 82f), new Color(0.42f, 0.35f, 0.67f, 0.90f));
-            _toastLabel = CreateHudPanel(safeRoot, string.Empty, new Vector2(0f, 720f), new Vector2(410f, 92f), new Color(1.0f, 0.62f, 0.18f, 0.0f));
+            CreateDecorativePanel(safeRoot, "Connected Toy HUD Backplate", new Vector2(0f, 1080f), new Vector2(920f, 162f), new Color(0.54f, 0.47f, 0.80f, 0.82f), _hudPanelSprite, true);
+            _scoreLabel = CreateHudPanel(safeRoot, "0\nSCORE", new Vector2(-320f, 1080f), new Vector2(268f, 120f), new Color(0.58f, 0.50f, 0.82f, 0.44f));
+            _rescuedLabel = CreateHudPanel(safeRoot, "0\nRESCUED", new Vector2(0f, 1080f), new Vector2(250f, 138f), new Color(0.70f, 0.62f, 0.90f, 0.38f));
+            _bestLabel = CreateHudPanel(safeRoot, "BEST 0", new Vector2(320f, 1080f), new Vector2(305f, 120f), new Color(0.58f, 0.50f, 0.82f, 0.44f));
+            _modeLabel = CreateHudPanel(safeRoot, "ENDLESS STORM", new Vector2(0f, 950f), new Vector2(470f, 72f), new Color(0.86f, 0.48f, 0.25f, 0.96f));
+            _phaseLabel = CreateHudPanel(safeRoot, "CALM", new Vector2(0f, 1005f), new Vector2(190f, 48f), new Color(0.38f, 0.32f, 0.62f, 0.70f));
+            _toastLabel = CreateHudPanel(safeRoot, string.Empty, new Vector2(0f, 715f), new Vector2(470f, 90f), new Color(1.0f, 0.62f, 0.18f, 0.0f));
             _toastLabel.gameObject.transform.parent.gameObject.SetActive(false);
 
-            CreateModeButton(safeRoot, "MENU", new Vector2(-430f, 810f), ShowHomeScreen);
+            CreateModeButton(safeRoot, "MENU", new Vector2(-500f, 1082f), ShowHomeScreen);
             BuildOverlayShell(safeRoot);
         }
 
@@ -538,12 +779,36 @@ namespace StormBlocks.Presentation
             return rect;
         }
 
+        private Image CreateDecorativePanel(Transform parent, string objectName, Vector2 anchoredPosition, Vector2 size, Color color, Sprite sprite, bool shadow)
+        {
+            var panel = new GameObject(objectName);
+            panel.transform.SetParent(parent, false);
+            var image = panel.AddComponent<Image>();
+            image.sprite = sprite;
+            image.type = Image.Type.Sliced;
+            image.color = color;
+            if (shadow)
+            {
+                AddGraphicShadow(image, new Color(0.03f, 0.02f, 0.09f, 0.40f), new Vector2(0f, -8f));
+            }
+
+            var rect = panel.GetComponent<RectTransform>();
+            rect.anchorMin = new Vector2(0.5f, 0.5f);
+            rect.anchorMax = new Vector2(0.5f, 0.5f);
+            rect.anchoredPosition = anchoredPosition;
+            rect.sizeDelta = size;
+            return image;
+        }
+
         private Text CreateHudPanel(Transform parent, string text, Vector2 anchoredPosition, Vector2 size, Color color)
         {
             var panel = new GameObject(text.Replace("\n", " "));
             panel.transform.SetParent(parent, false);
             var image = panel.AddComponent<Image>();
+            image.sprite = color.r > color.b ? _hudWarmSprite : _hudPanelSprite;
+            image.type = Image.Type.Sliced;
             image.color = color;
+            AddGraphicShadow(image, new Color(0.03f, 0.02f, 0.09f, Mathf.Min(0.34f, color.a * 0.35f)), new Vector2(0f, -5f));
             var rect = panel.GetComponent<RectTransform>();
             rect.anchorMin = new Vector2(0.5f, 0.5f);
             rect.anchorMax = new Vector2(0.5f, 0.5f);
@@ -564,6 +829,7 @@ namespace StormBlocks.Presentation
             tmp.resizeTextForBestFit = true;
             tmp.resizeTextMinSize = 18;
             tmp.resizeTextMaxSize = tmp.fontSize;
+            StyleUiText(tmp, new Color(0.12f, 0.09f, 0.23f, 0.86f), new Vector2(0f, -3f));
             var labelRect = label.GetComponent<RectTransform>();
             labelRect.anchorMin = Vector2.zero;
             labelRect.anchorMax = Vector2.one;
@@ -572,12 +838,36 @@ namespace StormBlocks.Presentation
             return tmp;
         }
 
+        private static void AddGraphicShadow(Graphic graphic, Color color, Vector2 distance)
+        {
+            var shadow = graphic.gameObject.AddComponent<Shadow>();
+            shadow.effectColor = color;
+            shadow.effectDistance = distance;
+            shadow.useGraphicAlpha = true;
+        }
+
+        private static void StyleUiText(Text text, Color outlineColor, Vector2 shadowDistance)
+        {
+            var outline = text.gameObject.AddComponent<Outline>();
+            outline.effectColor = outlineColor;
+            outline.effectDistance = new Vector2(2f, -2f);
+            outline.useGraphicAlpha = true;
+
+            var shadow = text.gameObject.AddComponent<Shadow>();
+            shadow.effectColor = new Color(0f, 0f, 0f, 0.34f);
+            shadow.effectDistance = shadowDistance;
+            shadow.useGraphicAlpha = true;
+        }
+
         private void CreateModeButton(Transform parent, string text, Vector2 anchoredPosition, UnityEngine.Events.UnityAction action)
         {
             var buttonObject = new GameObject(text + " Mode Button");
             buttonObject.transform.SetParent(parent, false);
             var image = buttonObject.AddComponent<Image>();
+            image.sprite = _buttonSprite;
+            image.type = Image.Type.Sliced;
             image.color = new Color(0.36f, 0.30f, 0.58f, 0.92f);
+            AddGraphicShadow(image, new Color(0.03f, 0.02f, 0.09f, 0.32f), new Vector2(0f, -5f));
             var button = buttonObject.AddComponent<Button>();
             button.onClick.AddListener(delegate
             {
@@ -594,7 +884,7 @@ namespace StormBlocks.Presentation
             rect.anchorMin = new Vector2(0.5f, 0.5f);
             rect.anchorMax = new Vector2(0.5f, 0.5f);
             rect.anchoredPosition = anchoredPosition;
-            rect.sizeDelta = new Vector2(180f, 70f);
+            rect.sizeDelta = new Vector2(142f, 82f);
 
             var label = new GameObject("Label");
             label.transform.SetParent(buttonObject.transform, false);
@@ -610,6 +900,7 @@ namespace StormBlocks.Presentation
             tmp.resizeTextForBestFit = true;
             tmp.resizeTextMinSize = 14;
             tmp.resizeTextMaxSize = tmp.fontSize;
+            StyleUiText(tmp, new Color(0.12f, 0.09f, 0.23f, 0.86f), new Vector2(0f, -3f));
             var labelRect = label.GetComponent<RectTransform>();
             labelRect.anchorMin = Vector2.zero;
             labelRect.anchorMax = Vector2.one;
@@ -640,7 +931,10 @@ namespace StormBlocks.Presentation
             var panel = new GameObject("Storm Blocks Modal Panel");
             panel.transform.SetParent(layer.transform, false);
             var panelImage = panel.AddComponent<Image>();
+            panelImage.sprite = _modalPanelSprite;
+            panelImage.type = Image.Type.Sliced;
             panelImage.color = new Color(0.22f, 0.18f, 0.42f, 0.96f);
+            AddGraphicShadow(panelImage, new Color(0.02f, 0.01f, 0.06f, 0.46f), new Vector2(0f, -10f));
             _screenPanel = panel.GetComponent<RectTransform>();
             _screenPanel.anchorMin = new Vector2(0.5f, 0.5f);
             _screenPanel.anchorMax = new Vector2(0.5f, 0.5f);
@@ -955,6 +1249,7 @@ namespace StormBlocks.Presentation
             tmp.resizeTextForBestFit = true;
             tmp.resizeTextMinSize = 14;
             tmp.resizeTextMaxSize = tmp.fontSize;
+            StyleUiText(tmp, new Color(0.10f, 0.08f, 0.22f, 0.72f), new Vector2(0f, -3f));
             var rect = textObject.GetComponent<RectTransform>();
             rect.anchorMin = new Vector2(0.5f, 0.5f);
             rect.anchorMax = new Vector2(0.5f, 0.5f);
@@ -968,7 +1263,10 @@ namespace StormBlocks.Presentation
             var buttonObject = new GameObject(text.Replace("\n", " ") + " Button");
             buttonObject.transform.SetParent(_screenPanel, false);
             var image = buttonObject.AddComponent<Image>();
+            image.sprite = color.r > color.b ? _buttonWarmSprite : _buttonSprite;
+            image.type = Image.Type.Sliced;
             image.color = color;
+            AddGraphicShadow(image, new Color(0.02f, 0.01f, 0.06f, 0.40f), new Vector2(0f, -5f));
             var button = buttonObject.AddComponent<Button>();
             var colors = button.colors;
             colors.highlightedColor = color + new Color(0.10f, 0.10f, 0.10f, 0f);
@@ -1000,6 +1298,7 @@ namespace StormBlocks.Presentation
             tmp.resizeTextForBestFit = true;
             tmp.resizeTextMinSize = 12;
             tmp.resizeTextMaxSize = tmp.fontSize;
+            StyleUiText(tmp, new Color(0.10f, 0.08f, 0.22f, 0.86f), new Vector2(0f, -3f));
             var labelRect = label.GetComponent<RectTransform>();
             labelRect.anchorMin = Vector2.zero;
             labelRect.anchorMax = Vector2.one;
@@ -1331,7 +1630,7 @@ namespace StormBlocks.Presentation
                 return;
             }
 
-            float[] centers = { -2.0f, 0f, 2.0f };
+            float[] centers = { -2.05f, 0f, 2.05f };
             for (int i = 0; i < _session.State.Queue.Count; i++)
             {
                 var piece = _session.State.Queue[i];
@@ -1722,11 +2021,13 @@ namespace StormBlocks.Presentation
 
         private void BuildSurvivor(Transform parent, Vector3 center, Material outfit)
         {
-            CreatePooledSphere("Survivor hood", parent, center + Vector3.up * 0.16f, new Vector3(0.22f, 0.22f, 0.22f), outfit);
-            CreatePooledSphere("Survivor face", parent, center + new Vector3(0f, 0.17f, -0.04f), new Vector3(0.14f, 0.13f, 0.10f), _survivorFace);
-            CreatePooledCube("Survivor body", parent, center + new Vector3(0f, -0.03f, 0f), new Vector3(0.20f, 0.26f, 0.14f), outfit);
-            CreatePooledCube("Survivor boots", parent, center + new Vector3(-0.055f, -0.20f, 0f), new Vector3(0.06f, 0.10f, 0.08f), _boardShadow);
-            CreatePooledCube("Survivor boots", parent, center + new Vector3(0.055f, -0.20f, 0f), new Vector3(0.06f, 0.10f, 0.08f), _boardShadow);
+            CreatePooledCube("Survivor raincoat body", parent, center + new Vector3(0f, -0.05f, 0.02f), new Vector3(0.24f, 0.30f, 0.16f), outfit);
+            CreatePooledSphere("Survivor hood", parent, center + new Vector3(0f, 0.18f, 0.02f), new Vector3(0.27f, 0.27f, 0.27f), outfit);
+            CreatePooledSphere("Survivor face", parent, center + new Vector3(0f, 0.18f, -0.14f), new Vector3(0.18f, 0.15f, 0.08f), _survivorFace);
+            CreatePooledCube("Survivor left arm", parent, center + new Vector3(-0.16f, -0.02f, -0.03f), new Vector3(0.06f, 0.18f, 0.06f), outfit).transform.rotation = Quaternion.Euler(0f, 0f, -20f);
+            CreatePooledCube("Survivor right arm", parent, center + new Vector3(0.16f, -0.02f, -0.03f), new Vector3(0.06f, 0.18f, 0.06f), outfit).transform.rotation = Quaternion.Euler(0f, 0f, 20f);
+            CreatePooledCube("Survivor boots", parent, center + new Vector3(-0.065f, -0.24f, 0f), new Vector3(0.065f, 0.11f, 0.08f), _boardShadow);
+            CreatePooledCube("Survivor boots", parent, center + new Vector3(0.065f, -0.24f, 0f), new Vector3(0.065f, 0.11f, 0.08f), _boardShadow);
         }
 
         private void BuildPieceCells(Transform parent, PieceDefinition piece, Vector3 origin, Material material, float footprint, float height, float pitch)
@@ -1814,6 +2115,67 @@ namespace StormBlocks.Presentation
             sphere.transform.localScale = localScale;
             sphere.GetComponent<Renderer>().sharedMaterial = material;
             return sphere;
+        }
+
+        private GameObject CreateTentPrism(string objectName, Transform parent, Vector3 localPosition, float width, float height, float depth, Material material)
+        {
+            var vertices = new[]
+            {
+                new Vector3(-width * 0.5f, 0f, -depth * 0.5f),
+                new Vector3(width * 0.5f, 0f, -depth * 0.5f),
+                new Vector3(0f, height, -depth * 0.5f),
+                new Vector3(-width * 0.5f, 0f, depth * 0.5f),
+                new Vector3(width * 0.5f, 0f, depth * 0.5f),
+                new Vector3(0f, height, depth * 0.5f)
+            };
+
+            var triangles = new[]
+            {
+                0, 2, 1,
+                3, 4, 5,
+                0, 3, 5,
+                0, 5, 2,
+                1, 2, 5,
+                1, 5, 4,
+                0, 1, 4,
+                0, 4, 3
+            };
+
+            return CreateMeshObject(objectName, parent, localPosition, vertices, triangles, material);
+        }
+
+        private GameObject CreateTrianglePanel(string objectName, Transform parent, Vector3 localPosition, float width, float height, Material material)
+        {
+            var vertices = new[]
+            {
+                new Vector3(-width * 0.5f, 0f, 0f),
+                new Vector3(width * 0.5f, 0f, 0f),
+                new Vector3(0f, height, 0f)
+            };
+            var triangles = new[] { 0, 2, 1, 0, 1, 2 };
+            return CreateMeshObject(objectName, parent, localPosition, vertices, triangles, material);
+        }
+
+        private GameObject CreateMeshObject(string objectName, Transform parent, Vector3 localPosition, Vector3[] vertices, int[] triangles, Material material)
+        {
+            var gameObject = new GameObject(objectName);
+            gameObject.transform.SetParent(parent, false);
+            gameObject.transform.localPosition = localPosition;
+
+            var mesh = new Mesh
+            {
+                name = objectName + " Mesh",
+                vertices = vertices,
+                triangles = triangles
+            };
+            mesh.RecalculateNormals();
+            mesh.RecalculateBounds();
+
+            var filter = gameObject.AddComponent<MeshFilter>();
+            filter.sharedMesh = mesh;
+            var renderer = gameObject.AddComponent<MeshRenderer>();
+            renderer.sharedMaterial = material;
+            return gameObject;
         }
 
         private GameObject CreatePooledCube(string objectName, Transform parent, Vector3 localPosition, Vector3 localScale, Material material)
@@ -1938,6 +2300,23 @@ namespace StormBlocks.Presentation
             else
             {
                 DestroyImmediate(gameObject);
+            }
+        }
+
+        private static void DestroyUnityObject(UnityEngine.Object unityObject)
+        {
+            if (unityObject == null)
+            {
+                return;
+            }
+
+            if (Application.isPlaying)
+            {
+                Destroy(unityObject);
+            }
+            else
+            {
+                DestroyImmediate(unityObject);
             }
         }
 
