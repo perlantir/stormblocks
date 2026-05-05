@@ -313,6 +313,12 @@ The non-UI credential probes currently require human/App Store Connect credentia
 - `Scripts/fastlane_release.sh lanes` runs Fastlane through Bundler using Homebrew Ruby, avoiding the system Ruby 2.6 `/usr/bin/bundle` mismatch with `Gemfile.lock`.
 - `Scripts/verify_release_assets.sh` validates App Store metadata limits, tracked screenshot dimensions, and Game Center identifier alignment between `Docs/APP_STORE_CONNECT_MANIFEST.json`, `Docs/GAME_CENTER_SETUP.md`, and `UnityGameCenterServices.cs`.
 
+Public metadata URL evidence:
+
+- `curl -L -I https://github.com/perlantir/stormblocks/blob/main/Docs/PUBLIC_SUPPORT.md` returned HTTP 200 on `2026-05-05`.
+- `curl -L -I https://github.com/perlantir/stormblocks/blob/main/Docs/PUBLIC_PRIVACY.md` returned HTTP 200 on `2026-05-05`.
+- `curl -L -I https://github.com/perlantir/stormblocks` returned HTTP 200 on `2026-05-05`.
+
 ## Credentialed Follow-Up
 
 - Create the App Store Connect app record for bundle id `com.perlantir.stormblocks` under team `7JL22TDB44` / `UBER KIWI LLC`.

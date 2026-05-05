@@ -939,3 +939,20 @@ Known risks / not done:
 
 - The scorecard improves test execution quality but does not close physical QA; it still needs to be filled from actual iPhone play.
 - App Store Connect app record creation, live Game Center validation, TestFlight upload/install, older-device profiling, and human five-run QA remain open.
+
+## 2026-05-05 — Public metadata URL and install checklist refresh
+
+- Closed the release checklist item for current-source physical install now that the signed build installs successfully on paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D`.
+- Verified the App Store metadata package's support, privacy, and marketing URLs are publicly reachable through the GitHub-hosted release docs.
+- Updated the release audit so the App Store metadata package row reflects the completed public URL review instead of leaving it as a stale local-only pass.
+
+Evidence:
+
+- `gh repo view perlantir/stormblocks --json visibility,url,nameWithOwner` reports `visibility = PUBLIC` and `url = https://github.com/perlantir/stormblocks`.
+- `curl -L -I https://github.com/perlantir/stormblocks/blob/main/Docs/PUBLIC_SUPPORT.md` returned HTTP 200.
+- `curl -L -I https://github.com/perlantir/stormblocks/blob/main/Docs/PUBLIC_PRIVACY.md` returned HTTP 200.
+- `curl -L -I https://github.com/perlantir/stormblocks` returned HTTP 200.
+
+Known risks / not done:
+
+- App Store Connect app record creation, live Game Center validation, TestFlight upload/install, older-device profiling, and human five-run QA remain open.

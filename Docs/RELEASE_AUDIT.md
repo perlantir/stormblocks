@@ -35,7 +35,7 @@ This maps the launch request and repo release gates to concrete evidence. The pr
 | Physical-device launch | Current-source `Scripts/ios_release_gates.sh launch-device` succeeded at `2026-05-05 17:56:17Z`; `/tmp/stormblocks-device-launch.json` reports `"outcome" : "success"` and process id `1485` for `com.perlantir.stormblocks`. | Pass |
 | Xcode archive | Current-source `/tmp/stormblocks-xcode-team7jl-archive.log` reports `** ARCHIVE SUCCEEDED **`. | Pass |
 | App Store Connect IPA export | Current-source `/tmp/stormblocks-xcode-team7jl-export-appstore.log` reports `** EXPORT SUCCEEDED **`; IPA at `StormBlocksUnity/Builds/iOS/ExportAppStoreTeam7JL/StormBlocks.ipa`. | Pass |
-| App Store metadata package | `fastlane/metadata/en-US/`, `fastlane/screenshots/en-US/`, and `Docs/APP_STORE_CONNECT_MANIFEST.json` are verified by `Scripts/verify_release_assets.sh`. | Local pass; public URL review pending |
+| App Store metadata package | `fastlane/metadata/en-US/`, `fastlane/screenshots/en-US/`, and `Docs/APP_STORE_CONNECT_MANIFEST.json` are verified by `Scripts/verify_release_assets.sh`. Public support, privacy, and marketing URLs from the manifest returned HTTP 200 on `2026-05-05`. | Pass |
 | TestFlight upload | Current-source upload probe authenticated to App Store Connect at `2026-05-05 17:55:42Z`; Apple returned HTTP 200 with `data: []` and `total: 0` for `filter[bundleId]=com.perlantir.stormblocks`, then Xcode failed with `missingApp(bundleId: "com.perlantir.stormblocks")` because no app record exists. | Blocked by missing app record |
 
 ## Open Release Gates
