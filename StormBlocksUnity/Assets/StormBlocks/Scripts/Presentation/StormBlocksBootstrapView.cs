@@ -92,17 +92,13 @@ namespace StormBlocks.Presentation
 
         private Material CreateMaterial(string materialName, Color color, float smoothness)
         {
-            var shader = Shader.Find("Universal Render Pipeline/Lit");
-            if (shader == null)
-            {
-                shader = Shader.Find("Standard");
-            }
-
-            var material = new Material(shader)
-            {
-                name = materialName,
-                color = color
-            };
+            var material = StormBlocksRuntimeMaterialFactory.Create(
+                materialName,
+                color,
+                "Universal Render Pipeline/Lit",
+                "Universal Render Pipeline/Unlit",
+                "Sprites/Default",
+                "Standard");
 
             if (material.HasProperty("_Smoothness"))
             {

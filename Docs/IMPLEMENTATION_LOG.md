@@ -974,3 +974,25 @@ Evidence:
 Known risks / not done:
 
 - The verifier protects the gate but does not replace the human five-run playability test. App Store Connect app record creation, live Game Center validation, TestFlight upload/install, older-device profiling, and human five-run QA remain open.
+
+## 2026-05-05 — iPhone launch shader fallback fix
+
+- Investigated the user-reported launch failure after opening the installed iPhone app. Device crash logs showed prior `StormBlocks` crashes at 08:30 AM during Unity preload, and the user-facing error text matched the runtime material path that could call `new Material(...)` with a null stripped shader.
+- Added a shared runtime material factory that searches URP, built-in unlit/sprite, and Standard shader names, then falls back through Unity built-in materials before any material is constructed.
+- Routed the playable game view and bootstrap view material creation through the shared factory, including sky/backdrop materials.
+- Rebuilt, installed, and launched the patched signed iPhone app on the connected device.
+
+Evidence:
+
+- `Scripts/ci_static_checks.sh` passes locally.
+- `Scripts/ios_release_gates.sh test` refreshed Unity tests: EditMode `26/26` passed at `2026-05-05 18:44:58Z`; PlayMode `10/10` passed at `2026-05-05 18:45:05Z`.
+- `Scripts/ios_release_gates.sh export-ios` completed successfully after the shader fallback fix.
+- `Scripts/ios_release_gates.sh build-signed` completed successfully for the signed `Release-iphoneos` app.
+- `Scripts/ios_release_gates.sh install-device` installed `com.perlantir.stormblocks` successfully at `2026-05-05 13:46:26` local time.
+- `Scripts/ios_release_gates.sh launch-device` launched `com.perlantir.stormblocks` successfully at `2026-05-05 13:46:37` local time.
+- After a 12-second launch wait, `xcrun devicectl device info processes` still listed `StormBlocks` running as process id `1915`.
+- Post-launch crash-log listing still only showed the old `StormBlocks-2026-05-05-083032.ips`, `StormBlocks-2026-05-05-083046.ips`, and `StormBlocks-2026-05-05-083048.ips` files; no new `StormBlocks` crash report appeared after the patched launch.
+
+Known risks / not done:
+
+- This fixes and verifies the immediate iPhone launch blocker. Full release gates still remain open for App Store Connect app record creation, live Game Center validation, TestFlight upload/install, older-device profiling, longer interactive trace review, and human five-run QA.

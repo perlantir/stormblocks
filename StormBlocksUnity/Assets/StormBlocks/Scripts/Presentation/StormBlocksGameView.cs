@@ -408,22 +408,14 @@ namespace StormBlocks.Presentation
 
         private Material CreateMaterial(string materialName, Color color, float smoothness, float emission)
         {
-            var shader = Shader.Find("Universal Render Pipeline/Unlit");
-            if (shader == null)
-            {
-                shader = Shader.Find("Universal Render Pipeline/Lit");
-            }
-
-            if (shader == null)
-            {
-                shader = Shader.Find("Standard");
-            }
-
-            var material = new Material(shader)
-            {
-                name = materialName,
-                color = color
-            };
+            var material = StormBlocksRuntimeMaterialFactory.Create(
+                materialName,
+                color,
+                "Universal Render Pipeline/Unlit",
+                "Universal Render Pipeline/Lit",
+                "Unlit/Color",
+                "Sprites/Default",
+                "Standard");
 
             if (material.HasProperty("_Smoothness"))
             {
@@ -465,22 +457,13 @@ namespace StormBlocks.Presentation
             Texture2D designBackdrop = Resources.Load<Texture2D>("StormSky/storm_sky_backdrop");
             if (designBackdrop != null)
             {
-                var backdropShader = Shader.Find("Universal Render Pipeline/Unlit");
-                if (backdropShader == null)
-                {
-                    backdropShader = Shader.Find("Unlit/Texture");
-                }
-
-                if (backdropShader == null)
-                {
-                    backdropShader = Shader.Find("Standard");
-                }
-
-                var backdropMaterial = new Material(backdropShader)
-                {
-                    name = "SB Design Source Storm Backdrop",
-                    color = Color.white
-                };
+                var backdropMaterial = StormBlocksRuntimeMaterialFactory.Create(
+                    "SB Design Source Storm Backdrop",
+                    Color.white,
+                    "Universal Render Pipeline/Unlit",
+                    "Unlit/Texture",
+                    "Sprites/Default",
+                    "Standard");
 
                 if (backdropMaterial.HasProperty("_BaseMap"))
                 {
@@ -531,22 +514,13 @@ namespace StormBlocks.Presentation
             texture.SetPixels32(pixels);
             texture.Apply(false, true);
 
-            var shader = Shader.Find("Universal Render Pipeline/Unlit");
-            if (shader == null)
-            {
-                shader = Shader.Find("Unlit/Texture");
-            }
-
-            if (shader == null)
-            {
-                shader = Shader.Find("Standard");
-            }
-
-            var material = new Material(shader)
-            {
-                name = "SB Painted Storm Sunset Sky",
-                color = Color.white
-            };
+            var material = StormBlocksRuntimeMaterialFactory.Create(
+                "SB Painted Storm Sunset Sky",
+                Color.white,
+                "Universal Render Pipeline/Unlit",
+                "Unlit/Texture",
+                "Sprites/Default",
+                "Standard");
 
             if (material.HasProperty("_BaseMap"))
             {
