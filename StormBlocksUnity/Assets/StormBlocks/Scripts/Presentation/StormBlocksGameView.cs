@@ -296,8 +296,8 @@ namespace StormBlocks.Presentation
 
             _runtimeMaterialAssets.Clear();
             _runtimeMaterials.Clear();
-            _emptyTile = CreateToyMaterial("SB Empty Tile Gloss", highContrast ? new Color(0.13f, 0.22f, 0.50f) : new Color(0.40f, 0.48f, 0.74f), new Color(0.68f, 0.76f, 0.98f), new Color(0.18f, 0.23f, 0.45f), 0.72f, false);
-            _campTile = CreateToyMaterial("SB Warm Camp Tile", highContrast ? new Color(1.0f, 0.60f, 0.14f) : new Color(0.76f, 0.50f, 0.32f), new Color(1.0f, 0.76f, 0.42f), new Color(0.46f, 0.24f, 0.18f), 0.66f, false);
+            _emptyTile = CreateToyMaterial("SB Empty Tile Gloss", highContrast ? new Color(0.13f, 0.22f, 0.50f) : new Color(0.58f, 0.62f, 0.80f), new Color(0.86f, 0.89f, 1.0f), new Color(0.34f, 0.36f, 0.56f), 0.72f, false);
+            _campTile = CreateToyMaterial("SB Warm Camp Tile", highContrast ? new Color(1.0f, 0.60f, 0.14f) : new Color(0.82f, 0.61f, 0.38f), new Color(1.0f, 0.82f, 0.48f), new Color(0.50f, 0.30f, 0.20f), 0.66f, false);
             _creamTile = CreateToyMaterial("SB Cream Tile Highlight", new Color(0.80f, 0.64f, 0.42f), new Color(1.0f, 0.84f, 0.58f), new Color(0.48f, 0.30f, 0.20f), 0.7f, false);
             _stormTile = CreateToyMaterial("SB Storm Tile Cracked", highContrast ? new Color(0.02f, 0.03f, 0.12f) : new Color(0.17f, 0.19f, 0.40f), new Color(0.34f, 0.38f, 0.66f), new Color(0.06f, 0.07f, 0.18f), 0.34f, true);
             _warningTile = CreateToyMaterial("SB Storm Warning", highContrast ? new Color(1.0f, 0.88f, 0.10f) : new Color(0.12f, 0.80f, 1.0f), new Color(0.46f, 0.95f, 1.0f), new Color(0.08f, 0.34f, 0.70f), 0.5f, false);
@@ -308,9 +308,9 @@ namespace StormBlocks.Presentation
             _goldGlow = CreateMaterial("SB Pushback Gold Glow", new Color(0.95f, 0.50f, 0.10f), 0.82f, 0.22f);
             _campOrange = CreateMaterial("SB Camp Orange", new Color(1.0f, 0.34f, 0.08f), 0.48f);
             _campCanvas = CreateMaterial("SB Camp Canvas", new Color(1.0f, 0.67f, 0.28f), 0.58f);
-            _campLight = CreateMaterial("SB Camp Lantern Glow", new Color(0.98f, 0.64f, 0.18f), 0.85f, 0.18f);
+            _campLight = CreateMaterial("SB Camp Lantern Glow", new Color(0.92f, 0.54f, 0.16f), 0.85f, 0.07f);
             _boardRim = CreateMaterial("SB Board Cyan Rim Glow", new Color(0.16f, 0.78f, 0.94f), 0.8f, 0.20f);
-            _boardWarmRim = CreateMaterial("SB Board Warm Rounded Rim", new Color(0.24f, 0.17f, 0.30f), 0.55f);
+            _boardWarmRim = CreateMaterial("SB Board Warm Rounded Rim", new Color(0.30f, 0.24f, 0.43f), 0.55f);
             _boardShadow = CreateMaterial("SB Board Soft Shadow", new Color(0.06f, 0.06f, 0.18f), 0.28f);
             _trayGlow = CreateMaterial("SB Tray Pad Glow", new Color(0.95f, 0.56f, 0.16f), 0.82f, 0.18f);
             _nearDeathGlow = CreateMaterial("SB Near Death Warm Vignette", new Color(0.90f, 0.16f, 0.22f), 0.65f, 0.22f);
@@ -323,7 +323,7 @@ namespace StormBlocks.Presentation
             _speechBubble = CreateMaterial("SB Survivor Heart Bubble", new Color(1.0f, 0.96f, 0.94f), 0.50f);
             _skyBlue = CreateMaterial("SB Sky Blue Haze", new Color(0.12f, 0.30f, 0.54f), 0.3f);
             _skyPurple = CreateMaterial("SB Sky Purple Haze", new Color(0.09f, 0.08f, 0.25f), 0.26f);
-            _sunbeam = CreateMaterial("SB Warm Sunbeam", new Color(0.35f, 0.18f, 0.24f), 0.55f);
+            _sunbeam = CreateMaterial("SB Warm Sunbeam", new Color(0.95f, 0.54f, 0.20f), 0.55f, 0.08f);
             _uiPanel = CreateMaterial("SB UI Purple", new Color(0.50f, 0.42f, 0.78f), 0.58f);
             _uiPanelWarm = CreateMaterial("SB UI Warm", new Color(0.88f, 0.50f, 0.26f), 0.58f);
             _ghostValid = CreateTransparentMaterial("SB Ghost Valid", new Color(1.0f, 0.82f, 0.28f, 0.55f));
@@ -420,9 +420,9 @@ namespace StormBlocks.Presentation
             for (int y = 0; y < 160; y++)
             {
                 float v = y / 159f;
-                Color top = new Color(0.055f, 0.055f, 0.22f);
-                Color mid = new Color(0.23f, 0.22f, 0.48f);
-                Color bottom = new Color(0.72f, 0.42f, 0.40f);
+                Color top = new Color(0.08f, 0.09f, 0.28f);
+                Color mid = new Color(0.34f, 0.30f, 0.56f);
+                Color bottom = new Color(0.86f, 0.55f, 0.42f);
                 Color baseColor = v < 0.56f
                     ? Color.Lerp(bottom, mid, v / 0.56f)
                     : Color.Lerp(mid, top, (v - 0.56f) / 0.44f);
@@ -430,10 +430,12 @@ namespace StormBlocks.Presentation
                 for (int x = 0; x < 96; x++)
                 {
                     float u = x / 95f;
-                    float campGlow = Mathf.Clamp01(1f - Vector2.Distance(new Vector2(u, v), new Vector2(0.5f, 0.30f)) * 2.55f);
-                    float stormVignette = Mathf.Clamp01(Mathf.Abs(u - 0.5f) * 1.85f + Mathf.Max(0f, v - 0.66f) * 1.4f);
-                    Color color = Color.Lerp(baseColor, new Color(1.0f, 0.70f, 0.34f), campGlow * 0.36f);
-                    color = Color.Lerp(color, new Color(0.09f, 0.07f, 0.28f), stormVignette * 0.34f);
+                    float campGlow = Mathf.Clamp01(1f - Vector2.Distance(new Vector2(u, v), new Vector2(0.5f, 0.35f)) * 2.35f);
+                    float stormVignette = Mathf.Clamp01(Mathf.Abs(u - 0.5f) * 1.65f + Mathf.Max(0f, v - 0.66f) * 1.2f);
+                    float cloudBand = Mathf.Clamp01(1f - Mathf.Abs(v - 0.18f) * 8f) * (0.10f + Mathf.Sin(u * Mathf.PI * 4f) * 0.03f);
+                    Color color = Color.Lerp(baseColor, new Color(1.0f, 0.74f, 0.34f), campGlow * 0.38f);
+                    color = Color.Lerp(color, new Color(0.72f, 0.62f, 0.82f), cloudBand * 0.08f);
+                    color = Color.Lerp(color, new Color(0.09f, 0.08f, 0.30f), stormVignette * 0.30f);
                     pixels[y * 96 + x] = color;
                 }
             }
@@ -650,18 +652,18 @@ namespace StormBlocks.Presentation
             _camera.transform.position = new Vector3(0f, 9.4f, -9.0f);
             _camera.transform.rotation = Quaternion.Euler(58f, 0f, 0f);
             _camera.orthographic = true;
-            _camera.orthographicSize = 7.55f;
+            _camera.orthographicSize = 8.05f;
             _camera.clearFlags = CameraClearFlags.SolidColor;
             _camera.backgroundColor = new Color(0.07f, 0.08f, 0.24f);
             cameraObject.AddComponent<AudioListener>();
-            RenderSettings.ambientLight = new Color(0.24f, 0.25f, 0.42f);
+            RenderSettings.ambientLight = new Color(0.16f, 0.17f, 0.30f);
 
             var key = new GameObject("Warm Camp Key Light");
             key.transform.SetParent(transform);
             var keyLight = key.AddComponent<Light>();
             keyLight.type = LightType.Directional;
             keyLight.color = new Color(1.0f, 0.92f, 0.78f);
-            keyLight.intensity = 0.78f;
+            keyLight.intensity = 0.42f;
             key.transform.rotation = Quaternion.Euler(46f, -28f, 0f);
 
             var storm = new GameObject("Cool Storm Rim Light");
@@ -670,7 +672,7 @@ namespace StormBlocks.Presentation
             var stormLight = storm.AddComponent<Light>();
             stormLight.type = LightType.Point;
             stormLight.color = new Color(0.35f, 0.90f, 1f);
-            stormLight.intensity = 3.0f;
+            stormLight.intensity = 1.25f;
             stormLight.range = 7.8f;
 
             var camp = new GameObject("Warm Camp Glow Light");
@@ -679,7 +681,7 @@ namespace StormBlocks.Presentation
             var campLight = camp.AddComponent<Light>();
             campLight.type = LightType.Point;
             campLight.color = new Color(1.0f, 0.62f, 0.22f);
-            campLight.intensity = 1.15f;
+            campLight.intensity = 0.52f;
             campLight.range = 3.8f;
         }
 
@@ -706,6 +708,8 @@ namespace StormBlocks.Presentation
             CreateCube("Soft lower golden halo", transform, new Vector3(0f, -0.150f, -4.8f), new Vector3(5.0f, 0.035f, 0.85f), _sunbeam);
             CreateAtmosphereCloud("Far left lower cloud", new Vector3(-4.85f, 0.05f, -4.85f), 0.84f, _softCloud);
             CreateAtmosphereCloud("Far right lower cloud", new Vector3(4.95f, 0.05f, -4.55f), 0.88f, _softCloud);
+            CreateAtmosphereCloud("Foreground peach cloud left", new Vector3(-3.35f, 0.03f, -7.25f), 1.15f, _softCloud);
+            CreateAtmosphereCloud("Foreground peach cloud right", new Vector3(3.45f, 0.03f, -7.15f), 1.10f, _softCloud);
             CreateAtmosphereCloud("Left upper storm bank", new Vector3(-5.0f, 0.22f, 2.4f), 1.25f, _stormCloud);
             CreateAtmosphereCloud("Right upper storm bank", new Vector3(5.0f, 0.22f, 2.3f), 1.20f, _stormCloud);
             CreateLightningBolt("Backdrop left lightning", transform, new Vector3(-4.65f, 0.54f, 1.55f), 0.96f, -16f);
@@ -802,7 +806,7 @@ namespace StormBlocks.Presentation
         {
             _trayRoot = new GameObject("Bottom Three Piece Tray").transform;
             _trayRoot.SetParent(transform);
-            _trayRoot.position = new Vector3(0f, 0.18f, -5.70f);
+            _trayRoot.position = new Vector3(0f, 0.18f, -6.25f);
             CreateRoundedBox("Rounded purple tray base", _trayRoot, Vector3.zero, new Vector3(6.55f, 0.18f, 1.48f), 0.38f, 10, _uiPanel);
             CreateSphere("Tray Static rounded left cap", _trayRoot, new Vector3(-3.24f, 0.02f, 0f), new Vector3(0.66f, 0.19f, 1.46f), _uiPanel);
             CreateSphere("Tray Static rounded right cap", _trayRoot, new Vector3(3.24f, 0.02f, 0f), new Vector3(0.66f, 0.19f, 1.46f), _uiPanel);
@@ -1422,6 +1426,32 @@ namespace StormBlocks.Presentation
             if (_cachedUiFont != null)
             {
                 return _cachedUiFont;
+            }
+
+            string[] preferredFonts =
+            {
+                "Arial Rounded MT Bold",
+                "Avenir Next Heavy",
+                "AvenirNext-Heavy",
+                "Helvetica Neue Bold",
+                "HelveticaNeue-Bold"
+            };
+
+            for (int i = 0; i < preferredFonts.Length; i++)
+            {
+                try
+                {
+                    _cachedUiFont = Font.CreateDynamicFontFromOSFont(preferredFonts[i], 48);
+                }
+                catch (Exception)
+                {
+                    _cachedUiFont = null;
+                }
+
+                if (_cachedUiFont != null)
+                {
+                    return _cachedUiFont;
+                }
             }
 
             _cachedUiFont = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");

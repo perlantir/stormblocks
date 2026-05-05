@@ -23,8 +23,8 @@ Storm Blocks physical QA plan
 6. Update Docs/QA_EVAL_REPORT.md and Docs/PERFORMANCE_PROFILE.md with results
 7. Rerun Scripts/release_audit.sh full
 
-Open external gates remain until the device is unlocked, App Store Connect has the app record,
-Game Center identifiers are live, TestFlight is installed, and human/device QA is recorded.
+Open external gates remain until App Store Connect has the app record, Game Center identifiers
+are live, TestFlight is installed, and human/device QA plus profiling are recorded.
 PLAN
 }
 
