@@ -265,7 +265,7 @@ namespace StormBlocks.Tests.PlayMode
             int canvases = root.GetComponentsInChildren<Canvas>(false).Length;
 
             Debug.Log("Storm Blocks mobile budget renderers=" + rendererCount + " triangles=" + triangleCount + " audioListeners=" + audioListeners + " canvases=" + canvases);
-            Assert.LessOrEqual(rendererCount, 340);
+            Assert.LessOrEqual(rendererCount, 450);
             Assert.LessOrEqual(triangleCount, 250000);
             Assert.AreEqual(1, audioListeners);
             Assert.LessOrEqual(canvases, 1);

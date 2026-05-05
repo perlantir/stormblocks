@@ -26,7 +26,7 @@ This maps the launch request and repo release gates to concrete evidence. The pr
 | Design references and visual target | Procedural 3D board, storm, camp, survivors, app icon, and screenshots exist; visual quality still needs final physical-device human review. | Local pass; human review pending |
 | QA tests | Latest EditMode: 25/25 at `2026-05-05 12:22:09Z`; latest PlayMode: 7/7 at `2026-05-05 12:23:33Z`. | Pass |
 | Prompt compliance verifier | `Scripts/verify_prompt_compliance.sh` checks required docs/design refs, major gameplay/system surfaces, passing test result files, and non-monetization/copyright guardrails. | Pass |
-| Performance optimization | Primitive pooling, Low Detail fallback, URP mobile settings, and scene-budget guard exist; latest budget is 337 renderers and 75,850 triangles. | Local pass; physical profiling pending |
+| Performance optimization | Primitive pooling, Low Detail fallback, URP mobile settings, and scene-budget guard exist; latest rounded-visuals budget is 409 renderers and 136,600 triangles. | Local pass; physical profiling pending |
 | Physical QA handoff | `Docs/PHYSICAL_QA_RUNBOOK.md` and `Scripts/device_qa_session.sh` define launch, five-run QA, Game Center, TestFlight, and profiling steps. | Local pass; physical execution pending |
 | GitHub static verification | `.github/workflows/release-static.yml` runs `Scripts/ci_static_checks.sh`; branch-head run `25376369090` passed for commit `def09d6` at `https://github.com/perlantir/stormblocks/actions/runs/25376369090`. | Pass |
 | iOS unsigned build | `/tmp/stormblocks-xcode-lowdetail-pool-unsigned.log` reports `** BUILD SUCCEEDED **`. | Pass |

@@ -40,7 +40,7 @@ Current evidence: `StormBlocksUnity/editmode-results.xml` reports 25 total, 25 p
   -logFile /tmp/stormblocks-playmode-lowdetail.log
 ```
 
-Current evidence: `StormBlocksUnity/playmode-results.xml` reports 7 total, 7 passed, 0 failed at `2026-05-05 12:23:33Z`.
+Current evidence: `StormBlocksUnity/playmode-results.xml` reports 7 total, 7 passed, 0 failed at `2026-05-05 12:53:21Z`.
 
 The PlayMode suite includes release smoke guards for the normal flow and active touch controls:
 
@@ -49,8 +49,8 @@ The PlayMode suite includes release smoke guards for the normal flow and active 
 
 The PlayMode suite includes a lightweight mobile scene-budget guard. Current logged baseline:
 
-- 337 renderers.
-- 75,850 mesh triangles.
+- 409 renderers.
+- 136,600 mesh triangles.
 - 1 audio listener.
 - 1 canvas.
 

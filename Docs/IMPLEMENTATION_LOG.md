@@ -529,3 +529,27 @@ Known risks / not done:
 
 - App Store Connect app record still must be created for `com.perlantir.stormblocks`.
 - Live Game Center identifiers, TestFlight upload/install, unlocked-device launch, physical QA, and physical performance profiling remain open.
+
+## 2026-05-05 — Rounded gameplay visual pass and GPT-image-2 target attempt
+
+- Reworked the runtime gameplay presentation toward the supplied references with rounded generated board meshes, UV-mapped glossy tile insets, a painted storm-sunset backdrop, fuller storm edge dressing, clearer blue-purple storm palette, detailed survivor faces/hope bubbles, camp companions, a title-bearing HUD, stronger App Store screenshot capture anti-aliasing, and refreshed App Store screenshot copies under `fastlane/screenshots/en-US/`.
+- Added `Docs/VisualTargets/stormblocks_gptimage2_gameplay_target_prompt.md` as an auditable GPT-image-2 target-frame prompt.
+- Attempted the repo-bound GPT-image-2 edit workflow against `StormBlocksUnity/Builds/VisualChecks/stormblocks-gameplay.png`; OpenAI returned 403 because the organization must be verified for `gpt-image-2`, so the generated target frame remains blocked on account verification.
+- Updated the mobile scene-budget baseline to 409 renderers, 136,600 triangles, 1 audio listener, and 1 canvas after the rounded visual pass.
+
+Evidence:
+
+- Portrait visual capture: `/tmp/stormblocks-visual-capture-final-rounded-pass.log` completed successfully and wrote `StormBlocksUnity/Builds/VisualChecks/stormblocks-gameplay.png`.
+- App Store screenshot capture: `/tmp/stormblocks-appstore-final-rounded-pass.log` completed successfully and regenerated the five 1170 x 2532 PNGs under `StormBlocksUnity/Builds/AppStoreScreens/`; the files were copied into `fastlane/screenshots/en-US/`.
+- EditMode: `/tmp/stormblocks-editmode-rounded-visuals.log` completed successfully and `StormBlocksUnity/editmode-results.xml` reports 25 total, 25 passed, 0 failed.
+- PlayMode after the renderer guard update reports 7 total, 7 passed, 0 failed at `2026-05-05 12:53:21Z`; final measured rounded-visuals budget is 409 renderers, 136,600 triangles, 1 audio listener, and 1 canvas.
+- `Scripts/verify_release_assets.sh` passes locally: 32 pass, 0 fail.
+- `Scripts/verify_prompt_compliance.sh` passes locally: 73 pass, 0 fail.
+- `Scripts/ci_static_checks.sh` passes locally.
+- `Scripts/release_audit.sh local` passes locally: 32 pass, 0 fail, 0 open.
+- `Scripts/release_audit.sh full` reports 32 pass, 0 fail, and the same 7 open external gates.
+
+Known risks / not done:
+
+- The GPT-image-2 target frame cannot be generated until the OpenAI organization is verified for `gpt-image-2`.
+- The higher visual baseline still requires physical-device profiling before release signoff.

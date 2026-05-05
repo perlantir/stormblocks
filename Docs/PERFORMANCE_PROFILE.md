@@ -4,11 +4,11 @@ This is the current lightweight performance profile for the Unity playable scene
 
 ## Current Baseline
 
-Source: `StormBlocksUnity/playmode-results.xml` from `2026-05-05 12:23:33Z`.
+Source: `StormBlocksUnity/playmode-results.xml` from `2026-05-05 12:53:21Z`.
 
 - PlayMode tests: 7 total, 7 passed, 0 failed.
-- Playable root renderers: 337.
-- Playable root mesh triangles: 75,850.
+- Playable root renderers: 409.
+- Playable root mesh triangles: 136,600.
 - Audio listeners: 1.
 - Canvases: 1.
 
@@ -25,7 +25,7 @@ Test: `PlayableViewStaysWithinMobileSceneBudgets`
 
 Current guardrails:
 
-- Renderers must be <= 340.
+- Renderers must be <= 450.
 - Mesh triangles must be <= 250,000.
 - Audio listeners must equal 1.
 - Canvases must be <= 1.

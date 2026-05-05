@@ -81,7 +81,7 @@ namespace StormBlocks.Editor
             var texture = new Texture2D(1170, 2532, TextureFormat.RGB24, false);
             var renderTexture = new RenderTexture(1170, 2532, 24)
             {
-                antiAliasing = 2
+                antiAliasing = 4
             };
 
             RenderTexture previous = RenderTexture.active;
