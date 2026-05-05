@@ -328,6 +328,27 @@ Known risks / not done:
 
 - The full audit intentionally remains non-green until the external release gates are complete.
 
+## 2026-05-05 — Xcode and App Store Connect retry handoff
+
+- Re-ran the full release audit after Xcode/App Store Connect were open locally; it still reports 21 pass, 0 fail, and 7 open external gates.
+- Retried signed physical-device launch through `Scripts/ios_release_gates.sh launch-device`; the app still cannot be launched because the paired iPhone is locked.
+- Retried Xcode's App Store Connect upload probe; Xcode authenticated to the provider and failed at the app-record fetch step with `missingApp(bundleId: "com.perlantir.stormblocks")`.
+- Checked non-UI credential paths: `xcrun altool --list-providers` requires JWT API-key auth or username/app-password auth, and Fastlane's app-record lane requires App Store Connect API key variables or an Apple ID env var.
+- Attempted desktop UI automation for App Store Connect/Xcode, but macOS rejected the automation sender with `Sender process is not authenticated`.
+
+Evidence:
+
+- `Scripts/release_audit.sh full` reports 21 pass, 0 fail, 7 open.
+- `Scripts/ios_release_gates.sh launch-device` fails with `FBSOpenApplicationErrorDomain` code `7`, `Locked`.
+- `/tmp/stormblocks-xcode-team7jl-upload-appstore.log` fails with `exportArchive Error Downloading App Information`; the distribution log reports `IDEDistribution.DistributionAppRecordProviderError.missingApp(bundleId: "com.perlantir.stormblocks")`.
+- `FASTLANE_SKIP_UPDATE_CHECK=1 fastlane ios create_app_record` fails cleanly with `Set App Store Connect API key env vars or STORMBLOCKS_APPLE_ID/APPLE_ID before running credentialed lanes.`
+
+Known risks / not done:
+
+- Create the App Store Connect app record or provide App Store Connect API-key/Apple-ID credentials for the credentialed Fastlane lane.
+- Unlock the paired iPhone and rerun launch/runtime checks.
+- Live Game Center, TestFlight install, physical QA, physical performance profiling, and human five-run playability gates remain open.
+
 ## 2026-05-05 — Gate 12 pooling and Low Detail fallback
 
 - Added primitive pooling for dynamic presentation cubes/spheres used by board refreshes, tray rebuilds, drag ghosts, survivors, storm cells, block cells, and Storm Pushback VFX.

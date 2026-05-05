@@ -32,7 +32,7 @@ This maps the launch request and repo release gates to concrete evidence. The pr
 | Physical-device launch | `/tmp/stormblocks-device-launch.json` failed only because the iPhone was locked. | Blocked by locked device |
 | Xcode archive | `/tmp/stormblocks-xcode-team7jl-archive.log` reports `** ARCHIVE SUCCEEDED **`. | Pass |
 | App Store Connect IPA export | `/tmp/stormblocks-xcode-team7jl-export-appstore.log` reports `** EXPORT SUCCEEDED **`; IPA at `StormBlocksUnity/Builds/iOS/ExportAppStoreTeam7JL/StormBlocks.ipa`. | Pass |
-| TestFlight upload | Upload probe authenticated to App Store Connect, then found no app record for `com.perlantir.stormblocks`. | Blocked by missing app record |
+| TestFlight upload | Upload probe authenticated to App Store Connect, then failed at `IDEDistributionFetchAppRecordStep` with `missingApp(bundleId: "com.perlantir.stormblocks")`. | Blocked by missing app record |
 
 ## Open Release Gates
 
@@ -46,6 +46,7 @@ This maps the launch request and repo release gates to concrete evidence. The pr
 - Install and launch the TestFlight build.
 - Run the human five-run playability test.
 - Provide App Store Connect API key credentials or Apple ID app-specific password if using the Fastlane lanes.
+- Grant desktop automation permission or drive the App Store Connect browser/Xcode UI manually; the current desktop automation channel reports `Sender process is not authenticated`.
 
 ## Reproduction Commands
 

@@ -244,6 +244,7 @@ xcrun devicectl device process launch \
 Current evidence:
 
 - Launch was blocked because the iPhone was locked: `/tmp/stormblocks-device-launch.json` reports `FBSOpenApplicationErrorDomain` code `7`, `Locked`.
+- Latest retry at `2026-05-05 06:11Z` reached the device tunnel and failed for the same device-state reason: `Unable to launch com.perlantir.stormblocks because the device was not, or could not be, unlocked`.
 - This is a device state blocker, not a signing or install blocker.
 
 ## Xcode Archive and App Store IPA Export
@@ -296,6 +297,12 @@ Current evidence:
 - `/tmp/stormblocks-xcode-team7jl-upload-appstore.log` fails with `exportArchive Error Downloading App Information`.
 - Distribution logs show Xcode authenticated to App Store Connect provider `ae62de71-9179-4836-a662-2c92a63e965e` and queried bundle id `com.perlantir.stormblocks`.
 - App Store Connect returned `data: []` and `total: 0`, meaning no app record currently exists for `com.perlantir.stormblocks` under the selected provider/team.
+- Latest Xcode retry at `2026-05-05 06:11Z` failed at `IDEDistributionFetchAppRecordStep` with `IDEDistribution.DistributionAppRecordProviderError.missingApp(bundleId: "com.perlantir.stormblocks")`.
+
+The non-UI credential probes currently require human/App Store Connect credentials:
+
+- `xcrun altool --list-providers` reports that either JWT API-key auth or username/app-password auth is required.
+- `FASTLANE_SKIP_UPDATE_CHECK=1 fastlane ios create_app_record` refuses to run until App Store Connect API key variables or `STORMBLOCKS_APPLE_ID`/`APPLE_ID` are set.
 
 ## Credentialed Follow-Up
 
