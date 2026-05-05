@@ -845,6 +845,13 @@ Evidence:
 - App Store screenshot capture: `/tmp/stormblocks-appstore-saved-pushback.log` completed successfully and regenerated all five PNGs under `StormBlocksUnity/Builds/AppStoreScreens/`; the files were copied into `fastlane/screenshots/en-US/`.
 - `Scripts/verify_release_assets.sh` passes locally: 32 pass, 0 fail.
 - `Scripts/ci_static_checks.sh && Scripts/release_audit.sh full` passes static checks and reports 31 pass, 0 fail, 8 open gates.
+- `Scripts/ios_release_gates.sh export-ios` refreshed the Unity iOS export for the saved-pushback source at `2026-05-05 17:33:27Z`.
+- `Scripts/ios_release_gates.sh build-signed` refreshed the signed `Release-iphoneos` build at `2026-05-05 17:34:39Z`.
+- `Scripts/ios_release_gates.sh install-device` retried the current-source signed app at `2026-05-05 17:34:43Z` and remains blocked because CoreDevice cannot locate paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D`.
+- `Scripts/ios_release_gates.sh archive` and `Scripts/ios_release_gates.sh export-appstore` refreshed the current-source archive and IPA; `/tmp/stormblocks-xcode-team7jl-archive.log` reports `** ARCHIVE SUCCEEDED **` at `2026-05-05 17:37:18Z`, `/tmp/stormblocks-xcode-team7jl-export-appstore.log` reports `** EXPORT SUCCEEDED **` at `2026-05-05 17:38:00Z`, and the IPA exists at `StormBlocksUnity/Builds/iOS/ExportAppStoreTeam7JL/StormBlocks.ipa`.
+- `Scripts/ios_release_gates.sh status` passes against the refreshed current-source tests, signed build, archive, and IPA evidence.
+- `Scripts/ios_release_gates.sh launch-device` retried at `2026-05-05 17:38:07Z` and remains blocked by the same CoreDevice unavailable device state.
+- `Scripts/ios_release_gates.sh upload-probe` retried at `2026-05-05 17:38:09Z`; App Store Connect returned HTTP 200 with `data: []` and `total: 0` for `com.perlantir.stormblocks`, then Xcode failed with `missingApp(bundleId: "com.perlantir.stormblocks")`. Current distribution log: `/var/folders/b2/cl2rv8q13bg48zl073ctm_fc0000gq/T/Unity-iPhone_2026-05-05_12-38-07.819.xcdistributionlogs/IDEDistributionAppStoreConnect.log`.
 
 Known risks / not done:
 

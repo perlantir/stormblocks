@@ -229,7 +229,7 @@ xcrun devicectl device install app \
 
 Current evidence:
 
-- Latest current-source install attempt reached CoreDevice at `2026-05-05 17:05:00Z` and failed before transfer.
+- Latest current-source install attempt reached CoreDevice at `2026-05-05 17:34:43Z` and failed before transfer.
 - `/tmp/stormblocks-device-install.json` reports `outcome = failed`.
 - CoreDevice reports it cannot locate the paired device identifier and `xcrun devicectl list devices` currently shows `iPhone 17 Pro Max (iPhone18,2)` identifier `907E2EE7-9C7B-5D0D-9EC0-32E69912287D` as `unavailable`.
 - The signed `Release-iphoneos` app still exists locally and needs a device-available install retry.
@@ -249,7 +249,7 @@ xcrun devicectl device process launch \
 
 Current evidence:
 
-- Latest `Scripts/ios_release_gates.sh launch-device` retry for the current board sanctuary build ran at `2026-05-05 17:10:00Z`.
+- Latest `Scripts/ios_release_gates.sh launch-device` retry for the current saved-pushback build ran at `2026-05-05 17:38:07Z`.
 - `/tmp/stormblocks-device-launch.json` reports `outcome = failed` because CoreDevice currently cannot locate the paired iPhone.
 - A current-source install/launch retry is still required once the device is available again.
 - Most recent successful launch evidence before the current CoreDevice availability blocker was at `2026-05-05 16:09:13Z`.
@@ -304,8 +304,8 @@ Current evidence:
 - `/tmp/stormblocks-xcode-team7jl-upload-appstore.log` fails with `exportArchive Error Downloading App Information`.
 - Distribution logs show Xcode authenticated to App Store Connect provider `ae62de71-9179-4836-a662-2c92a63e965e` and queried bundle id `com.perlantir.stormblocks`.
 - App Store Connect returned `data: []` and `total: 0`, meaning no app record currently exists for `com.perlantir.stormblocks` under the selected provider/team.
-- Latest Xcode retry at `2026-05-05 16:34:37Z` authenticated to App Store Connect, received HTTP 200 with `data: []` / `total: 0`, and failed while downloading app information because no app record exists for `com.perlantir.stormblocks`.
-- Current distribution log: `/var/folders/b2/cl2rv8q13bg48zl073ctm_fc0000gq/T/Unity-iPhone_2026-05-05_11-34-35.358.xcdistributionlogs/IDEDistributionAppStoreConnect.log`.
+- Latest Xcode retry at `2026-05-05 17:38:09Z` authenticated to App Store Connect, received HTTP 200 with `data: []` / `total: 0`, and failed while downloading app information because no app record exists for `com.perlantir.stormblocks`.
+- Current distribution log: `/var/folders/b2/cl2rv8q13bg48zl073ctm_fc0000gq/T/Unity-iPhone_2026-05-05_12-38-07.819.xcdistributionlogs/IDEDistributionAppStoreConnect.log`.
 
 The non-UI credential probes currently require human/App Store Connect credentials:
 
