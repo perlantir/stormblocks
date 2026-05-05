@@ -828,6 +828,25 @@ Known risks / not done:
 - Current-source physical install/launch still needs to be retried after the paired iPhone is available to CoreDevice again.
 - App Store Connect upload still requires an app record for bundle id `com.perlantir.stormblocks`; the upload probe is expected to stay blocked until that external record exists.
 
+## 2026-05-05 — Current-source device install/launch retry
+
+- Rechecked App Store Connect through the Xcode-authenticated upload path. Xcode still authenticates to provider `ae62de71-9179-4836-a662-2c92a63e965e`, receives HTTP 200, and gets `data: []` / `total: 0` for bundle id `com.perlantir.stormblocks`, so the App Store Connect app record is still missing.
+- `xcrun devicectl list devices` now shows paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D` as connected.
+- Re-ran the current-source physical install and launch gates. Both now pass against the signed `Release-iphoneos` app.
+- Updated build/test, QA, performance, and release audit docs to remove the stale CoreDevice-unavailable install/launch blocker.
+
+Evidence:
+
+- `Scripts/ios_release_gates.sh upload-probe` retried at `2026-05-05 17:55:42Z`; App Store Connect returned HTTP 200 with `data: []` and `total: 0` for `com.perlantir.stormblocks`, then Xcode failed with `missingApp(bundleId: "com.perlantir.stormblocks")`. Current distribution log: `/var/folders/b2/cl2rv8q13bg48zl073ctm_fc0000gq/T/Unity-iPhone_2026-05-05_12-55-40.043.xcdistributionlogs/IDEDistributionAppStoreConnect.log`.
+- `Scripts/ios_release_gates.sh install-device` succeeded at `2026-05-05 17:56:08Z`; `/tmp/stormblocks-device-install.json` reports `"outcome" : "success"` for `com.perlantir.stormblocks` on paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D`.
+- `Scripts/ios_release_gates.sh launch-device` succeeded at `2026-05-05 17:56:17Z`; `/tmp/stormblocks-device-launch.json` reports `"outcome" : "success"` and process id `1485` for `com.perlantir.stormblocks`.
+- `Scripts/release_audit.sh full` now reports 33 pass, 0 fail, and 6 open external gates; it exits nonzero because those open gates remain unresolved.
+
+Known risks / not done:
+
+- App Store Connect upload still requires an app record for bundle id `com.perlantir.stormblocks`; the upload probe is expected to stay blocked until that external record exists.
+- Live Game Center validation, TestFlight upload/install, physical five-run QA, older-device profiling, and longer interactive trace review remain open.
+
 ## 2026-05-05 — Accessibility VFX runtime coverage pass
 
 - Added PlayMode coverage for the runtime Accessibility screen's Reduced Motion and Low Detail toggles.

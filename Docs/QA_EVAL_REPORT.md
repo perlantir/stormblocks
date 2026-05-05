@@ -17,11 +17,11 @@ Current eval date: 2026-05-05.
 - Current-source Unity iOS device export succeeded with team `7JL22TDB44` at `2026-05-05 17:33:27Z`: `/tmp/stormblocks-ios-device-team7jl.log`.
 - Unsigned `Release-iphoneos` Xcode build succeeded: `/tmp/stormblocks-xcode-lowdetail-pool-unsigned.log`.
 - Current-source signed `Release-iphoneos` Xcode build succeeded under team `7JL22TDB44` at `2026-05-05 17:34:39Z`: `/tmp/stormblocks-xcode-team7jl-default-signed.log`.
-- Latest current-source physical-device install retry at `2026-05-05 17:34:43Z` on paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D` is blocked because CoreDevice currently marks the device unavailable: `/tmp/stormblocks-device-install.json`.
-- Latest current-source physical-device launch retry at `2026-05-05 17:38:07Z` on paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D` is blocked for the same CoreDevice availability reason: `/tmp/stormblocks-device-launch.json`.
+- Latest current-source physical-device install retry at `2026-05-05 17:56:08Z` on paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D` succeeded: `/tmp/stormblocks-device-install.json`.
+- Latest current-source physical-device launch retry at `2026-05-05 17:56:17Z` on paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D` succeeded for `com.perlantir.stormblocks`: `/tmp/stormblocks-device-launch.json`.
 - Current-source Xcode archive succeeded at `2026-05-05 17:37:18Z`: `/tmp/stormblocks-xcode-team7jl-archive.log`.
 - Current-source App Store Connect IPA export succeeded at `2026-05-05 17:38:00Z`: `/tmp/stormblocks-xcode-team7jl-export-appstore.log`, output `StormBlocksUnity/Builds/iOS/ExportAppStoreTeam7JL/StormBlocks.ipa`.
-- Current-source App Store Connect upload probe at `2026-05-05 17:38:09Z` authenticated but found no app record for bundle id `com.perlantir.stormblocks`: `/tmp/stormblocks-xcode-team7jl-upload-appstore.log`.
+- Current-source App Store Connect upload probe at `2026-05-05 17:55:42Z` authenticated but found no app record for bundle id `com.perlantir.stormblocks`: `/tmp/stormblocks-xcode-team7jl-upload-appstore.log`.
 - Physical Game Performance trace captured on paired iPhone 17 Pro Max: `StormBlocksUnity/Builds/DeviceProfiles/stormblocks-game-performance-20260505T154140Z.trace`.
 - Physical Power Profiler trace captured on paired iPhone 17 Pro Max: `StormBlocksUnity/Builds/DeviceProfiles/stormblocks-power-20260505T154242Z.trace`.
 

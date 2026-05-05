@@ -55,7 +55,7 @@ Trace outputs are written under ignored path `StormBlocksUnity/Builds/DeviceProf
 Latest profiling attempt:
 
 - `Scripts/device_qa_session.sh` now resolves the xctrace hardware UDID from `devicectl` instead of passing the CoreDevice identifier.
-- Earlier signed app launched on paired iPhone CoreDevice id `907E2EE7-9C7B-5D0D-9EC0-32E69912287D` at `2026-05-05 15:37:02Z`; the latest current-source install/launch retry is blocked because CoreDevice currently marks that device unavailable.
+- Current-source signed app installed on paired iPhone CoreDevice id `907E2EE7-9C7B-5D0D-9EC0-32E69912287D` at `2026-05-05 17:56:08Z` and launched at `2026-05-05 17:56:17Z`; the remaining performance gate is still manual/longer profiling, not basic install/launch.
 - `STORMBLOCKS_PROFILE_TIME=15s Scripts/device_qa_session.sh profile-game` captured `StormBlocksUnity/Builds/DeviceProfiles/stormblocks-game-performance-20260505T154140Z.trace` on hardware UDID `00008150-00040D203A88401C`.
 - `STORMBLOCKS_PROFILE_TIME=15s Scripts/device_qa_session.sh profile-power` captured `StormBlocksUnity/Builds/DeviceProfiles/stormblocks-power-20260505T154242Z.trace` on the same paired iPhone.
 - `xcrun xctrace export --toc` reports target device `iPhone 17 Pro Max`, iOS `26.3 (23D127)`, process `StormBlocks`, and normal time-limit completion for both traces.
