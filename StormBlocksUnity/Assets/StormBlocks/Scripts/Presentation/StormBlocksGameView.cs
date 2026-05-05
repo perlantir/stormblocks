@@ -29,6 +29,8 @@ namespace StormBlocks.Presentation
         private Transform _boardContentRoot;
         private Transform _trayRoot;
         private Transform _fxRoot;
+        private Transform _coachRoot;
+        private Transform _coachFinger;
         private Transform _poolRoot;
         private Transform _dragRoot;
         private Transform _ghostRoot;
@@ -107,11 +109,17 @@ namespace StormBlocks.Presentation
         private RunSummary _lastSummary;
         private int _selectedTrailRegionIndex;
         private int _dragQueueIndex = -1;
+        private int _coachQueueIndex = -1;
         private GridPosition _currentDragOrigin;
+        private GridPosition _coachOrigin;
         private bool _hasDragOrigin;
+        private bool _coachCueActive;
         private bool _useIsolatedTestSave;
+        private float _coachStartTime;
         private float _toastTimer;
         private float _fxTimer;
+        private Vector3 _coachStartLocal;
+        private Vector3 _coachEndLocal;
         private static Font _cachedUiFont;
 
         public StormRunState State
@@ -131,6 +139,7 @@ namespace StormBlocks.Presentation
         private void Update()
         {
             UpdateTimers();
+            UpdateFirstMoveCoach();
             HandlePointerInput();
         }
 
@@ -896,6 +905,8 @@ namespace StormBlocks.Presentation
             _boardContentRoot.SetParent(_boardRoot);
             _fxRoot = new GameObject("Juice VFX Root").transform;
             _fxRoot.SetParent(transform);
+            _coachRoot = new GameObject("Text-free First Move Coach").transform;
+            _coachRoot.SetParent(transform);
             _poolRoot = new GameObject("Storm Blocks Primitive Pool").transform;
             _poolRoot.SetParent(transform);
             _poolRoot.gameObject.SetActive(false);
@@ -2021,6 +2032,8 @@ namespace StormBlocks.Presentation
                     HalfSize = new Vector2(0.80f, 0.62f)
                 });
             }
+
+            RefreshFirstMoveCoach();
         }
 
         private void RefreshHud()
@@ -2120,6 +2133,7 @@ namespace StormBlocks.Presentation
                 var tray = _trayPieces[i];
                 if (Mathf.Abs(world.x - tray.Center.x) <= tray.HalfSize.x && Mathf.Abs(world.z - tray.Center.z) <= tray.HalfSize.y)
                 {
+                    ClearFirstMoveCoach();
                     _dragQueueIndex = tray.QueueIndex;
                     _dragRoot = new GameObject("Dragging Piece").transform;
                     _dragRoot.SetParent(transform);
@@ -2321,6 +2335,182 @@ namespace StormBlocks.Presentation
                     ClearPooledTransform(_fxRoot);
                 }
             }
+        }
+
+        private void RefreshFirstMoveCoach()
+        {
+            ClearFirstMoveCoach();
+            if (!ShouldShowFirstMoveCoach())
+            {
+                return;
+            }
+
+            if (!TryFindCoachPlacement(out TrayPieceView tray, out GridPosition origin, out Vector3 targetCenter, out Vector2 targetSize))
+            {
+                return;
+            }
+
+            _coachQueueIndex = tray.QueueIndex;
+            _coachOrigin = origin;
+            _coachStartTime = Time.time;
+            _coachStartLocal = _coachRoot.InverseTransformPoint(tray.Root.position + new Vector3(0f, 0.50f, 0f));
+            _coachEndLocal = _coachRoot.InverseTransformPoint(targetCenter + new Vector3(0f, 0.78f, 0f));
+
+            Vector3 targetPadLocal = _coachRoot.InverseTransformPoint(targetCenter + new Vector3(0f, 0.42f, 0f));
+            CreatePooledSphere("Coach tray piece pulse", _coachRoot, _coachStartLocal + new Vector3(0f, -0.26f, 0f), new Vector3(0.42f, 0.035f, 0.28f), _trayGlow);
+            CreatePooledCube("Coach valid target glow", _coachRoot, targetPadLocal, new Vector3(targetSize.x, 0.035f, targetSize.y), _ghostValid);
+
+            for (int i = 1; i <= 3; i++)
+            {
+                float t = i / 4f;
+                Vector3 dot = Vector3.Lerp(_coachStartLocal, _coachEndLocal, t);
+                float size = Mathf.Lerp(0.080f, 0.115f, t);
+                CreatePooledSphere("Coach gesture dot " + i, _coachRoot, dot, new Vector3(size, size * 0.52f, size), i % 2 == 0 ? _goldGlow : _campLight);
+            }
+
+            _coachFinger = CreatePooledSphere("Coach moving fingertip", _coachRoot, _coachStartLocal, new Vector3(0.18f, 0.10f, 0.18f), _campLight).transform;
+            _coachCueActive = true;
+        }
+
+        private void UpdateFirstMoveCoach()
+        {
+            if (!ShouldShowFirstMoveCoach())
+            {
+                ClearFirstMoveCoach();
+                return;
+            }
+
+            if (!_coachCueActive)
+            {
+                RefreshFirstMoveCoach();
+            }
+
+            if (!_coachCueActive || _coachFinger == null)
+            {
+                return;
+            }
+
+            bool reducedMotion = _profile != null && _profile.Settings.ReducedMotion;
+            float motion = reducedMotion ? 0.72f : Mathf.PingPong((Time.time - _coachStartTime) * 0.72f, 1f);
+            float eased = Mathf.SmoothStep(0f, 1f, motion);
+            _coachFinger.localPosition = Vector3.Lerp(_coachStartLocal, _coachEndLocal, eased);
+            if (!reducedMotion)
+            {
+                float pulse = 1f + Mathf.Sin(Time.time * 4.6f) * 0.10f;
+                _coachFinger.localScale = new Vector3(0.18f * pulse, 0.10f * pulse, 0.18f * pulse);
+            }
+        }
+
+        private bool ShouldShowFirstMoveCoach()
+        {
+            if (_coachRoot == null || _session == null || _session.State == null || _trayPieces.Count == 0)
+            {
+                return false;
+            }
+
+            if (_session.State.Placements > 0 || _session.State.IsGameOver || _dragRoot != null)
+            {
+                return false;
+            }
+
+            return _screenLayer == null || !_screenLayer.gameObject.activeInHierarchy;
+        }
+
+        private void ClearFirstMoveCoach()
+        {
+            if (_coachRoot != null)
+            {
+                ClearPooledTransform(_coachRoot);
+            }
+
+            _coachCueActive = false;
+            _coachFinger = null;
+            _coachQueueIndex = -1;
+            _coachOrigin = new GridPosition(0, 0);
+        }
+
+        private bool TryFindCoachPlacement(out TrayPieceView tray, out GridPosition origin, out Vector3 targetCenter, out Vector2 targetSize)
+        {
+            if (TryFindCoachPlacement(false, out tray, out origin, out targetCenter, out targetSize))
+            {
+                return true;
+            }
+
+            return TryFindCoachPlacement(true, out tray, out origin, out targetCenter, out targetSize);
+        }
+
+        private bool TryFindCoachPlacement(bool allowCampCells, out TrayPieceView tray, out GridPosition origin, out Vector3 targetCenter, out Vector2 targetSize)
+        {
+            tray = new TrayPieceView();
+            origin = new GridPosition(0, 0);
+            targetCenter = Vector3.zero;
+            targetSize = new Vector2(CellPitch * 0.80f, CellPitch * 0.80f);
+            if (_session == null || _session.State == null)
+            {
+                return false;
+            }
+
+            var board = _session.State.Board;
+            float bestScore = float.MaxValue;
+            for (int trayIndex = 0; trayIndex < _trayPieces.Count; trayIndex++)
+            {
+                var candidateTray = _trayPieces[trayIndex];
+                for (int y = 0; y < BoardSize; y++)
+                {
+                    for (int x = 0; x < BoardSize; x++)
+                    {
+                        var candidateOrigin = new GridPosition(x, y);
+                        if (!PlacementRules.TryGetPlacementCells(board, candidateTray.Piece, candidateOrigin, out List<GridPosition> cells, out string _))
+                        {
+                            continue;
+                        }
+
+                        bool touchesCamp = false;
+                        int minX = BoardSize;
+                        int maxX = 0;
+                        int minY = BoardSize;
+                        int maxY = 0;
+                        float averageX = 0f;
+                        float averageY = 0f;
+                        for (int i = 0; i < cells.Count; i++)
+                        {
+                            GridPosition cell = cells[i];
+                            touchesCamp |= board.IsCampVisualCell(cell);
+                            minX = Math.Min(minX, cell.X);
+                            maxX = Math.Max(maxX, cell.X);
+                            minY = Math.Min(minY, cell.Y);
+                            maxY = Math.Max(maxY, cell.Y);
+                            averageX += cell.X;
+                            averageY += cell.Y;
+                        }
+
+                        if (touchesCamp && !allowCampCells)
+                        {
+                            continue;
+                        }
+
+                        averageX /= Math.Max(1, cells.Count);
+                        averageY /= Math.Max(1, cells.Count);
+                        float centerBias = Mathf.Abs(averageX - 3.5f) * 0.58f + Mathf.Abs(averageY - 1.45f);
+                        float trayBias = candidateTray.QueueIndex * 0.20f;
+                        float score = centerBias + trayBias + (touchesCamp ? 2.0f : 0f);
+                        if (score >= bestScore)
+                        {
+                            continue;
+                        }
+
+                        bestScore = score;
+                        tray = candidateTray;
+                        origin = candidateOrigin;
+                        float centerX = (minX + maxX) * 0.5f;
+                        float centerY = (minY + maxY) * 0.5f;
+                        targetCenter = new Vector3(BoardOrigin + centerX * CellPitch, 0f, BoardOrigin + centerY * CellPitch);
+                        targetSize = new Vector2((maxX - minX + 1) * CellPitch * 0.82f, (maxY - minY + 1) * CellPitch * 0.82f);
+                    }
+                }
+            }
+
+            return bestScore < float.MaxValue;
         }
 
         private void ShowToast(string text, float duration)

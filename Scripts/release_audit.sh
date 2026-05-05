@@ -119,8 +119,8 @@ audit_local_evidence() {
   require_file "$ROOT/Docs/BUILD_AND_TEST.md" "Build and test evidence document exists"
 
   require_nunit_pass "$UNITY_PROJECT/editmode-results.xml" 25 "EditMode tests are 25/25 passing"
-  require_nunit_pass "$UNITY_PROJECT/playmode-results.xml" 7 "PlayMode tests are 7/7 passing"
-  require_grep "$UNITY_PROJECT/playmode-results.xml" "Storm Blocks mobile budget renderers=432 triangles=156984 audioListeners=1 canvases=1" "PlayMode mobile budget baseline is current"
+  require_nunit_pass "$UNITY_PROJECT/playmode-results.xml" 8 "PlayMode tests are 8/8 passing"
+  require_grep "$UNITY_PROJECT/playmode-results.xml" "Storm Blocks mobile budget renderers=435 triangles=159892 audioListeners=1 canvases=1" "PlayMode mobile budget baseline is current"
 
   require_grep /tmp/stormblocks-ios-device-team7jl.log "Build Finished, Result: Success" "Unity iOS device export succeeded"
   require_grep /tmp/stormblocks-xcode-lowdetail-pool-unsigned.log "BUILD SUCCEEDED" "Unsigned Xcode device build succeeded"

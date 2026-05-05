@@ -55,6 +55,31 @@ namespace StormBlocks.Tests.PlayMode
         }
 
         [UnityTest]
+        public IEnumerator FirstMoveCoachTeachesWithNoTextAndDismissesAfterPlacement()
+        {
+            var scene = SceneManager.CreateScene("FirstMoveCoachSmoke");
+            SceneManager.SetActiveScene(scene);
+            var root = new GameObject("Storm Blocks Coach Root");
+            var view = root.AddComponent<StormBlocksGameView>();
+
+            view.StartEndlessForTest(24681UL);
+            yield return null;
+
+            var coach = GameObject.Find("Text-free First Move Coach");
+            Assert.IsNotNull(coach);
+            Assert.IsNotNull(GameObject.Find("Coach moving fingertip"));
+            Assert.IsNotNull(GameObject.Find("Coach valid target glow"));
+            Assert.AreEqual(0, coach.GetComponentsInChildren<Text>(false).Length);
+
+            var result = view.TryPlaceForTest(0, FindValidOrigin(view.State, 0));
+            yield return null;
+
+            Assert.IsTrue(result.Success, result.FailureReason);
+            Assert.IsNull(GameObject.Find("Coach moving fingertip"));
+            Assert.AreEqual(0, coach.transform.childCount);
+        }
+
+        [UnityTest]
         public IEnumerator PlayableViewExposesLaunchScreensProgressionAndSettings()
         {
             var scene = SceneManager.CreateScene("LaunchScreensSmoke");

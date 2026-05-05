@@ -4,10 +4,10 @@ Current eval date: 2026-05-05.
 
 ## Automated Coverage
 
-- EditMode: 25 total, 25 passed, 0 failed at `2026-05-05 16:03:53Z`.
-- PlayMode: 7 total, 7 passed, 0 failed at `2026-05-05 16:04:01Z`.
-- Covered core evals: placement, valid move detection, line clears, scoring, storm spread, automatic Storm Pushback, clutch save, game-over states, daily seed determinism, save/load, progression, service seams, normal-flow console cleanliness, portrait safe-area controls, results/retry, UI shell navigation, and mobile scene budgets.
-- Current full-detail PlayMode budget: 432 renderers, 156,984 mesh triangles, 1 audio listener, 1 canvas.
+- EditMode: 25 total, 25 passed, 0 failed at `2026-05-05 16:28:39Z`.
+- PlayMode: 8 total, 8 passed, 0 failed at `2026-05-05 16:28:46Z`.
+- Covered core evals: placement, valid move detection, line clears, scoring, storm spread, automatic Storm Pushback, clutch save, game-over states, daily seed determinism, save/load, progression, service seams, visual first-move coaching, normal-flow console cleanliness, portrait safe-area controls, results/retry, UI shell navigation, and mobile scene budgets.
+- Current full-detail PlayMode budget: 435 renderers, 159,892 mesh triangles, 1 audio listener, 1 canvas.
 - Local Gate 12 performance coverage now includes primitive pooling for dynamic board/tray/drag/VFX presentation and a persisted Low Detail setting with older-device auto fallback heuristics.
 
 ## Build And Runtime Proof
@@ -18,7 +18,7 @@ Current eval date: 2026-05-05.
 - Unsigned `Release-iphoneos` Xcode build succeeded: `/tmp/stormblocks-xcode-lowdetail-pool-unsigned.log`.
 - Signed `Release-iphoneos` Xcode build succeeded under team `7JL22TDB44`: `/tmp/stormblocks-xcode-team7jl-default-signed.log`.
 - Signed app installed on paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D`: `/tmp/stormblocks-device-install.json`.
-- Current-source physical-device launch succeeded on paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D`: `/tmp/stormblocks-device-launch.json`.
+- Latest current-source physical-device launch retry on paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D` is blocked because the device is locked: `/tmp/stormblocks-device-launch.json`.
 - Xcode archive succeeded: `/tmp/stormblocks-xcode-team7jl-archive.log`.
 - App Store Connect IPA export succeeded: `/tmp/stormblocks-xcode-team7jl-export-appstore.log`, output `StormBlocksUnity/Builds/iOS/ExportAppStoreTeam7JL/StormBlocks.ipa`.
 - Current-source App Store Connect upload probe authenticated but found no app record for bundle id `com.perlantir.stormblocks`: `/tmp/stormblocks-xcode-team7jl-upload-appstore.log`.
@@ -29,7 +29,7 @@ Current eval date: 2026-05-05.
 
 These are not final human scores. They are current local QA estimates from automated coverage, generated captures, and simulator launch:
 
-- Instant understandability: 4/5 local estimate; first-run flow is visual and menu-free once gameplay starts.
+- Instant understandability: 4/5 local estimate; first-run flow is visual and menu-free once gameplay starts, with a text-free drag coach covered in PlayMode.
 - One-more-run pull: pending human five-run test.
 - Board readability: 4/5 local estimate; automated safe-area and mobile budget checks pass.
 - Visual polish: 4/5 local estimate for cohesive procedural launch art after the reference-led board pass, optimized GLB source import, and design-source storm backdrop crop; final device visual review is still required.

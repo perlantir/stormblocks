@@ -59,8 +59,8 @@ make_export_options() {
 status() {
   log "Checking cached release evidence"
   require_nunit_pass "$UNITY_PROJECT/editmode-results.xml" 25
-  require_nunit_pass "$UNITY_PROJECT/playmode-results.xml" 7
-  require_log_contains "$UNITY_PROJECT/playmode-results.xml" "Storm Blocks mobile budget renderers=432 triangles=156984 audioListeners=1 canvases=1"
+  require_nunit_pass "$UNITY_PROJECT/playmode-results.xml" 8
+  require_log_contains "$UNITY_PROJECT/playmode-results.xml" "Storm Blocks mobile budget renderers=435 triangles=159892 audioListeners=1 canvases=1"
   require_log_contains /tmp/stormblocks-ios-device-team7jl.log "Build Finished, Result: Success"
   require_log_contains /tmp/stormblocks-xcode-lowdetail-pool-unsigned.log "BUILD SUCCEEDED"
   require_log_contains /tmp/stormblocks-xcode-team7jl-default-signed.log "BUILD SUCCEEDED"

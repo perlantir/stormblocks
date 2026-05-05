@@ -732,3 +732,25 @@ Evidence:
 Known risks / not done:
 
 - App Store Connect upload still requires an app record for bundle id `com.perlantir.stormblocks`; the upload probe is expected to stay blocked until that external record exists.
+
+## 2026-05-05 — Text-free first-move coach pass
+
+- Added a runtime visual first-move coach to `StormBlocksGameView`: a tray pulse, dotted drag path, moving fingertip, and valid target glow that appears before the first placement and clears as soon as the player drags or places.
+- Kept the onboarding pass text-free so it teaches by doing and does not add hint/power-up UI.
+- Added PlayMode smoke coverage proving the coach exists, contains no `Text` components, and dismisses after the first placement.
+
+Evidence:
+
+- EditMode tests: `StormBlocksUnity/editmode-results.xml` reports 25 total, 25 passed, 0 failed at `2026-05-05 16:28:39Z`.
+- PlayMode tests: `StormBlocksUnity/playmode-results.xml` reports 8 total, 8 passed, 0 failed at `2026-05-05 16:28:46Z`.
+- Current logged full-detail mobile baseline after the coach pass: 435 renderers, 159,892 mesh triangles, 1 audio listener, and 1 canvas.
+- Visual capture: `/tmp/stormblocks-visual-first-move-coach-trimmed.log` completed successfully and wrote `StormBlocksUnity/Builds/VisualChecks/stormblocks-gameplay.png`.
+- App Store screenshot capture: `/tmp/stormblocks-appstore-first-move-coach-trimmed.log` completed successfully and regenerated all five PNGs under `StormBlocksUnity/Builds/AppStoreScreens/`; the files were copied into `fastlane/screenshots/en-US/`.
+- `Scripts/ios_release_gates.sh all-local` refreshed Unity iOS export, signed build, paired-iPhone install, Xcode archive, and App Store IPA export for the current coach source; latest install evidence is `/tmp/stormblocks-device-install.json` from `2026-05-05 16:29:59Z`, and the exported IPA was refreshed at `2026-05-05 16:33:30Z`.
+- `Scripts/ios_release_gates.sh launch-device` was retried at `2026-05-05 16:34:18Z` but the paired iPhone was locked, so the exact-source launch retry remains open.
+- `Scripts/ios_release_gates.sh upload-probe` retried against the current-source archive at `2026-05-05 16:34:37Z`; App Store Connect returned HTTP 200 with `data: []` and `total: 0` for `com.perlantir.stormblocks`. Current distribution log: `/var/folders/b2/cl2rv8q13bg48zl073ctm_fc0000gq/T/Unity-iPhone_2026-05-05_11-34-35.358.xcdistributionlogs/IDEDistributionAppStoreConnect.log`.
+
+Known risks / not done:
+
+- Unlock the paired iPhone and rerun `Scripts/ios_release_gates.sh launch-device` for current-source launch evidence.
+- App Store Connect upload still requires an app record for bundle id `com.perlantir.stormblocks`; the upload probe is expected to stay blocked until that external record exists.
