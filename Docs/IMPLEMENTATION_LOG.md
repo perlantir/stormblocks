@@ -411,6 +411,7 @@ Evidence:
 
 - `Scripts/ci_static_checks.sh` passes locally.
 - `Scripts/release_audit.sh full` includes the static CI script and workflow presence checks.
+- GitHub Actions run `25361499244` passed for commit `88625c8` at `https://github.com/perlantir/stormblocks/actions/runs/25361499244`; the initial run used `actions/checkout@v4` and produced a future Node 20 deprecation warning, so the workflow was updated to `actions/checkout@v5`.
 
 Known risks / not done:
 
