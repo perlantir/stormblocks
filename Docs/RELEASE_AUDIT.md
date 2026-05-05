@@ -32,17 +32,17 @@ This maps the launch request and repo release gates to concrete evidence. The pr
 | iOS unsigned build | `/tmp/stormblocks-xcode-lowdetail-pool-unsigned.log` reports `** BUILD SUCCEEDED **`. | Pass |
 | iOS signed build | `/tmp/stormblocks-xcode-team7jl-default-signed.log` reports `** BUILD SUCCEEDED **`; team `7JL22TDB44`, Game Center entitlement. | Pass |
 | Physical-device install | `/tmp/stormblocks-device-install.json` reports success for `com.perlantir.stormblocks` on paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D`. | Pass |
-| Physical-device launch | `xcrun devicectl list devices --json-output /tmp/stormblocks-devicectl-list.json` sees paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D` as available; `Scripts/ios_release_gates.sh launch-device` still failed at `2026-05-05 07:32:09` because the iPhone was locked. | Blocked by locked device |
+| Physical-device launch | `Scripts/ios_release_gates.sh launch-device` succeeded at `2026-05-05 13:00:41Z`; `/tmp/stormblocks-device-launch.json` reports `"outcome" : "success"` and launched `com.perlantir.stormblocks` on paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D`. | Pass |
 | Xcode archive | `/tmp/stormblocks-xcode-team7jl-archive.log` reports `** ARCHIVE SUCCEEDED **`. | Pass |
 | App Store Connect IPA export | `/tmp/stormblocks-xcode-team7jl-export-appstore.log` reports `** EXPORT SUCCEEDED **`; IPA at `StormBlocksUnity/Builds/iOS/ExportAppStoreTeam7JL/StormBlocks.ipa`. | Pass |
 | App Store metadata package | `fastlane/metadata/en-US/`, `fastlane/screenshots/en-US/`, and `Docs/APP_STORE_CONNECT_MANIFEST.json` are verified by `Scripts/verify_release_assets.sh`. | Local pass; public URL review pending |
-| TestFlight upload | Fresh upload probe authenticated to App Store Connect at `2026-05-05 12:30:44Z`; Apple returned HTTP 200 with `data: []` for `filter[bundleId]=com.perlantir.stormblocks`, then Xcode failed at `IDEDistributionFetchAppRecordStep` with `missingApp(bundleId: "com.perlantir.stormblocks")`. | Blocked by missing app record |
+| TestFlight upload | Fresh upload probe authenticated to App Store Connect at `2026-05-05 13:00:43Z`; Apple returned HTTP 200 with `data: []` for `filter[bundleId]=com.perlantir.stormblocks`, then Xcode failed at `IDEDistributionFetchAppRecordStep` with `missingApp(bundleId: "com.perlantir.stormblocks")`. | Blocked by missing app record |
 
 ## Open Release Gates
 
 - Create the App Store Connect app record for bundle id `com.perlantir.stormblocks` under team `7JL22TDB44` / `UBER KIWI LLC`: https://github.com/perlantir/stormblocks/issues/1
 - Create and enable the Game Center leaderboard and achievement identifiers in `Docs/GAME_CENTER_SETUP.md`, then validate them on device: https://github.com/perlantir/stormblocks/issues/2
-- Unlock the paired iPhone, rerun `Scripts/ios_release_gates.sh launch-device`, and complete physical-device QA plus the human five-run playability test: https://github.com/perlantir/stormblocks/issues/9
+- Complete physical-device QA plus the human five-run playability test: https://github.com/perlantir/stormblocks/issues/9
 - Complete physical performance and thermal profiling on one modern and one older supported iPhone: https://github.com/perlantir/stormblocks/issues/8
 - Upload the exported IPA to TestFlight after the App Store Connect app record exists, then install and launch the TestFlight build: https://github.com/perlantir/stormblocks/issues/7
 - Provide App Store Connect API key credentials or Apple ID app-specific password if using the Fastlane lanes.
@@ -89,4 +89,4 @@ Scripts/ios_release_gates.sh all-local
 
 ## Current Conclusion
 
-Storm Blocks is locally release-candidate-ready through signed build, physical-device install, archive, and App Store Connect IPA export. It is not final-release complete because the App Store Connect app record, live Game Center configuration, TestFlight validation, unlocked-device launch, and physical QA/performance gates are still open.
+Storm Blocks is locally release-candidate-ready through signed build, physical-device install and launch, archive, and App Store Connect IPA export. It is not final-release complete because the App Store Connect app record, live Game Center configuration, TestFlight validation, and physical QA/performance gates are still open.

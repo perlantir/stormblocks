@@ -553,3 +553,17 @@ Known risks / not done:
 
 - The GPT-image-2 target frame cannot be generated until the OpenAI organization is verified for `gpt-image-2`.
 - The higher visual baseline still requires physical-device profiling before release signoff.
+
+## 2026-05-05 — Physical-device launch gate cleared
+
+- Re-ran `Scripts/ios_release_gates.sh launch-device`; `devicectl` acquired the paired iPhone connection and launched `com.perlantir.stormblocks`.
+- Re-ran `Scripts/ios_release_gates.sh upload-probe`; Xcode authenticated to App Store Connect but the app-record lookup still returned HTTP 200 with `data: []`, followed by `missingApp(bundleId: "com.perlantir.stormblocks")`.
+- Updated the release audit to remove unlocked-device launch as an open gate. Physical-device QA, physical performance profiling, App Store Connect app record creation, live Game Center validation, and TestFlight validation remain open.
+
+Evidence:
+
+- Device launch success: `/tmp/stormblocks-device-launch.json` reports `"outcome" : "success"` for paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D`.
+- Device launch log: `/tmp/stormblocks-device-launch.log` includes `Launched application with com.perlantir.stormblocks bundle identifier.`
+- Upload probe log: `/tmp/stormblocks-xcode-team7jl-upload-appstore.log`.
+- App Store Connect distribution log: `/var/folders/b2/cl2rv8q13bg48zl073ctm_fc0000gq/T/Unity-iPhone_2026-05-05_08-00-41.823.xcdistributionlogs/IDEDistributionAppStoreConnect.log`.
+- `Scripts/release_audit.sh full` now reports 33 pass, 0 fail, and 6 open external gates.
