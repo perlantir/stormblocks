@@ -4,11 +4,11 @@ This is the current lightweight performance profile for the Unity playable scene
 
 ## Current Baseline
 
-Source: `StormBlocksUnity/playmode-results.xml` from `2026-05-05 13:59:12Z`.
+Source: `StormBlocksUnity/playmode-results.xml` from `2026-05-05 15:00:52Z`.
 
 - PlayMode tests: 7 total, 7 passed, 0 failed.
-- Playable root renderers: 421.
-- Playable root mesh triangles: 142,792.
+- Playable root renderers: 365.
+- Playable root mesh triangles: 136,308.
 - Audio listeners: 1.
 - Canvases: 1.
 
@@ -18,6 +18,7 @@ Source: `StormBlocksUnity/playmode-results.xml` from `2026-05-05 13:59:12Z`.
 - Low Detail mode is available from Accessibility settings and persisted in the local profile.
 - Physical iOS devices automatically fall back to Low Detail on constrained hardware heuristics: <= 4096 MB system memory, <= 1536 MB graphics memory, or <= 4 processors.
 - Low Detail keeps the signature gold Storm Pushback wave and core board readability while trimming duplicate wave accents, rain, extra puffs, lightning shatter accents, and block highlight dots.
+- Raw design GLBs are converted through `Scripts/optimize_design_glbs.sh`; only curated mobile variants are imported into Unity, and only the toy-block charm is currently loaded through `Resources` at runtime. A blurred design-source JPG crop is loaded as the storm backdrop through `Resources/StormSky`.
 
 ## Automated Guardrail
 
@@ -50,3 +51,9 @@ Scripts/device_qa_session.sh profile-power
 ```
 
 Trace outputs are written under ignored path `StormBlocksUnity/Builds/DeviceProfiles/`.
+
+Latest profiling attempt:
+
+- `Scripts/device_qa_session.sh` now resolves the xctrace hardware UDID from `devicectl` instead of passing the CoreDevice identifier.
+- `STORMBLOCKS_PROFILE_TIME=15s Scripts/device_qa_session.sh profile-game` resolved the paired iPhone to `00008150-00040D203A88401C`, but `xctrace` timed out with `Timed out waiting for device to boot: iPhone (26.3)`.
+- `devicectl` can still install and launch the app on CoreDevice id `907E2EE7-9C7B-5D0D-9EC0-32E69912287D`; the remaining profiling blocker is Instruments/xctrace seeing that physical iPhone as offline.

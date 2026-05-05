@@ -28,3 +28,9 @@ mono_crash*.json
 StormBlocksUnity/mono_crash*.json
 *.stackdump
 fastlane/report.xml
+
+# Local design source drops. Commit optimized runtime assets instead; archive raw
+# sources with Git LFS only if source retention is explicitly needed.
+Design GLB/
+Design JPG/
+Design Sample Video/

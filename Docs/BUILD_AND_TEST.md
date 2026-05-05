@@ -27,7 +27,7 @@ Use the project test runner for batch verification. Unity 6000 can skip `-runTes
   -logFile /tmp/stormblocks-editmode-lowdetail.log
 ```
 
-Current evidence: `StormBlocksUnity/editmode-results.xml` reports 25 total, 25 passed, 0 failed at `2026-05-05 13:59:05Z`.
+Current evidence: `StormBlocksUnity/editmode-results.xml` reports 25 total, 25 passed, 0 failed at `2026-05-05 15:00:45Z`.
 
 ## PlayMode Tests
 
@@ -40,7 +40,7 @@ Current evidence: `StormBlocksUnity/editmode-results.xml` reports 25 total, 25 p
   -logFile /tmp/stormblocks-playmode-lowdetail.log
 ```
 
-Current evidence: `StormBlocksUnity/playmode-results.xml` reports 7 total, 7 passed, 0 failed at `2026-05-05 13:59:12Z`.
+Current evidence: `StormBlocksUnity/playmode-results.xml` reports 7 total, 7 passed, 0 failed at `2026-05-05 15:00:52Z`.
 
 The PlayMode suite includes release smoke guards for the normal flow and active touch controls:
 
@@ -49,8 +49,8 @@ The PlayMode suite includes release smoke guards for the normal flow and active 
 
 The PlayMode suite includes a lightweight mobile scene-budget guard. Current logged baseline:
 
-- 421 renderers.
-- 142,792 mesh triangles.
+- 365 renderers.
+- 136,308 mesh triangles.
 - 1 audio listener.
 - 1 canvas.
 
@@ -59,6 +59,7 @@ Current optimization notes:
 - Dynamic board, tray, ghost, survivor, block, storm, and pushback primitives are pooled instead of recreated every refresh.
 - The Accessibility screen includes a persistent Low Detail setting. On physical iOS devices the runtime also auto-selects Low Detail on constrained hardware using memory, graphics memory, and CPU-count heuristics.
 - Low Detail preserves the readable camp, board, placed blocks, survivor, storm, and gold pushback wave while trimming secondary storm puffs, rain, cyan duplicate waves, shatter lightning, and block highlight dots.
+- The current board visual pass imports optimized GLB source art through GLTFast, uses a curated toy-block charm in the runtime tray, and loads a blurred design-source storm backdrop through `Resources/StormSky`. Heavier camp/storm GLB outputs remain import-ready source assets, not direct repeated board-cell meshes.
 
 ## Visual Capture
 
@@ -72,7 +73,7 @@ Current optimization notes:
 
 Output is written to ignored path `StormBlocksUnity/Builds/VisualChecks/stormblocks-gameplay.png`.
 
-Current evidence: `/tmp/stormblocks-visual-safe-palette.log` completed with no C# errors or Unity exceptions. The capture includes the runtime HUD and uses the same visible text path as the generated store screenshots.
+Current evidence: `/tmp/stormblocks-visual-design-backdrop-crop.log` completed with no C# errors or Unity exceptions. The capture includes the runtime HUD and uses the same visible text path as the generated store screenshots.
 
 ## App Icon Draft
 
@@ -108,7 +109,7 @@ Outputs are written to ignored path `StormBlocksUnity/Builds/AppStoreScreens/`:
 - `04_tempest_trials_weekly.png`
 - `05_cosmetic_profile.png`
 
-Current evidence: `/tmp/stormblocks-appstore-safe-palette.log` completed with no C# errors or Unity exceptions, and regenerated all five 1170 x 2532 PNGs with visible UI labels.
+Current evidence: `/tmp/stormblocks-appstore-design-backdrop.log` completed with no C# errors or Unity exceptions, and regenerated all five 1170 x 2532 PNGs with visible UI labels.
 
 The current Fastlane handoff package includes tracked copies under `fastlane/screenshots/en-US/`. `Scripts/verify_release_assets.sh` validates the five expected PNGs at 1170 x 2532.
 

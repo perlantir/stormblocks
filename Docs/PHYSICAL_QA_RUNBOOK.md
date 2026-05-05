@@ -95,6 +95,8 @@ Scripts/device_qa_session.sh profile-game
 Scripts/device_qa_session.sh profile-power
 ```
 
+The profiling helper uses the CoreDevice id for install/launch and automatically resolves the hardware UDID for `xctrace`. Override it with `STORMBLOCKS_XCTRACE_DEVICE_ID=<hardware-udid>` if Instruments lists a different identifier.
+
 During each profile, play through:
 
 - Normal placement and line clears.

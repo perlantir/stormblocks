@@ -1,73 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<test-run id="2" testcasecount="7" result="Passed" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-05-05 13:59:11Z" end-time="2026-05-05 13:59:12Z" duration="0.648923">
-  <test-suite type="TestSuite" id="1016" name="Storm Blocks" fullname="Storm Blocks" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-05-05 13:59:11Z" end-time="2026-05-05 13:59:12Z" duration="0.648923" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+<test-run id="2" testcasecount="7" result="Passed" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-05-05 15:00:52Z" end-time="2026-05-05 15:00:52Z" duration="0.5893296">
+  <test-suite type="TestSuite" id="1016" name="Storm Blocks" fullname="Storm Blocks" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-05-05 15:00:52Z" end-time="2026-05-05 15:00:52Z" duration="0.589330" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
     <properties>
       <property name="platform" value="PlayMode" />
     </properties>
-    <test-suite type="Assembly" id="1009" name="StormBlocks.PlayMode.Tests.dll" fullname="/Users/perlantir/Projects/StormBlocks/StormBlocksUnity/Library/ScriptAssemblies/StormBlocks.PlayMode.Tests.dll" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-05-05 13:59:11Z" end-time="2026-05-05 13:59:12Z" duration="0.645282" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <test-suite type="Assembly" id="1009" name="StormBlocks.PlayMode.Tests.dll" fullname="/Users/perlantir/Projects/StormBlocks/StormBlocksUnity/Library/ScriptAssemblies/StormBlocks.PlayMode.Tests.dll" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-05-05 15:00:52Z" end-time="2026-05-05 15:00:52Z" duration="0.585603" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
       <properties>
-        <property name="_PID" value="46627" />
+        <property name="_PID" value="27289" />
         <property name="_APPDOMAIN" value="Unity Child Domain" />
         <property name="platform" value="PlayMode" />
         <property name="EditorOnly" value="False" />
       </properties>
-      <test-suite type="TestSuite" id="1010" name="StormBlocks" fullname="StormBlocks" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-05-05 13:59:11Z" end-time="2026-05-05 13:59:12Z" duration="0.645130" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <test-suite type="TestSuite" id="1010" name="StormBlocks" fullname="StormBlocks" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-05-05 15:00:52Z" end-time="2026-05-05 15:00:52Z" duration="0.585395" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
         <properties />
-        <test-suite type="TestSuite" id="1011" name="Tests" fullname="StormBlocks.Tests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-05-05 13:59:11Z" end-time="2026-05-05 13:59:12Z" duration="0.645058" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <test-suite type="TestSuite" id="1011" name="Tests" fullname="StormBlocks.Tests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-05-05 15:00:52Z" end-time="2026-05-05 15:00:52Z" duration="0.585323" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
           <properties />
-          <test-suite type="TestSuite" id="1012" name="PlayMode" fullname="StormBlocks.Tests.PlayMode" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-05-05 13:59:11Z" end-time="2026-05-05 13:59:12Z" duration="0.644977" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <test-suite type="TestSuite" id="1012" name="PlayMode" fullname="StormBlocks.Tests.PlayMode" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-05-05 15:00:52Z" end-time="2026-05-05 15:00:52Z" duration="0.585238" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
             <properties />
-            <test-suite type="TestFixture" id="1001" name="BootstrapSceneSmokeTests" fullname="StormBlocks.Tests.PlayMode.BootstrapSceneSmokeTests" classname="StormBlocks.Tests.PlayMode.BootstrapSceneSmokeTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-05-05 13:59:11Z" end-time="2026-05-05 13:59:12Z" duration="0.644538" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <test-suite type="TestFixture" id="1001" name="BootstrapSceneSmokeTests" fullname="StormBlocks.Tests.PlayMode.BootstrapSceneSmokeTests" classname="StormBlocks.Tests.PlayMode.BootstrapSceneSmokeTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-05-05 15:00:52Z" end-time="2026-05-05 15:00:52Z" duration="0.584772" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
               <properties />
-              <test-case id="1007" name="ActiveTouchControlsStayInsideSafeAreaWithReleaseSizedTargets" fullname="StormBlocks.Tests.PlayMode.BootstrapSceneSmokeTests.ActiveTouchControlsStayInsideSafeAreaWithReleaseSizedTargets" methodname="ActiveTouchControlsStayInsideSafeAreaWithReleaseSizedTargets" classname="StormBlocks.Tests.PlayMode.BootstrapSceneSmokeTests" runstate="Runnable" seed="665787396" result="Passed" start-time="2026-05-05 13:59:11Z" end-time="2026-05-05 13:59:12Z" duration="0.237435" asserts="0">
+              <test-case id="1007" name="ActiveTouchControlsStayInsideSafeAreaWithReleaseSizedTargets" fullname="StormBlocks.Tests.PlayMode.BootstrapSceneSmokeTests.ActiveTouchControlsStayInsideSafeAreaWithReleaseSizedTargets" methodname="ActiveTouchControlsStayInsideSafeAreaWithReleaseSizedTargets" classname="StormBlocks.Tests.PlayMode.BootstrapSceneSmokeTests" runstate="Runnable" seed="391957341" result="Passed" start-time="2026-05-05 15:00:52Z" end-time="2026-05-05 15:00:52Z" duration="0.211636" asserts="0">
                 <properties>
                   <property name="_JOINTYPE" value="UnityCombinatorial" />
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1002" name="BootstrapViewBuildsBoardCameraAndHud" fullname="StormBlocks.Tests.PlayMode.BootstrapSceneSmokeTests.BootstrapViewBuildsBoardCameraAndHud" methodname="BootstrapViewBuildsBoardCameraAndHud" classname="StormBlocks.Tests.PlayMode.BootstrapSceneSmokeTests" runstate="Runnable" seed="1245984483" result="Passed" start-time="2026-05-05 13:59:12Z" end-time="2026-05-05 13:59:12Z" duration="0.012423" asserts="0">
+              <test-case id="1002" name="BootstrapViewBuildsBoardCameraAndHud" fullname="StormBlocks.Tests.PlayMode.BootstrapSceneSmokeTests.BootstrapViewBuildsBoardCameraAndHud" methodname="BootstrapViewBuildsBoardCameraAndHud" classname="StormBlocks.Tests.PlayMode.BootstrapSceneSmokeTests" runstate="Runnable" seed="1319943396" result="Passed" start-time="2026-05-05 15:00:52Z" end-time="2026-05-05 15:00:52Z" duration="0.014061" asserts="0">
                 <properties>
                   <property name="_JOINTYPE" value="UnityCombinatorial" />
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1006" name="NormalFlowDoesNotEmitGameErrors" fullname="StormBlocks.Tests.PlayMode.BootstrapSceneSmokeTests.NormalFlowDoesNotEmitGameErrors" methodname="NormalFlowDoesNotEmitGameErrors" classname="StormBlocks.Tests.PlayMode.BootstrapSceneSmokeTests" runstate="Runnable" seed="798315562" result="Passed" start-time="2026-05-05 13:59:12Z" end-time="2026-05-05 13:59:12Z" duration="0.096389" asserts="0">
+              <test-case id="1006" name="NormalFlowDoesNotEmitGameErrors" fullname="StormBlocks.Tests.PlayMode.BootstrapSceneSmokeTests.NormalFlowDoesNotEmitGameErrors" methodname="NormalFlowDoesNotEmitGameErrors" classname="StormBlocks.Tests.PlayMode.BootstrapSceneSmokeTests" runstate="Runnable" seed="965783763" result="Passed" start-time="2026-05-05 15:00:52Z" end-time="2026-05-05 15:00:52Z" duration="0.093194" asserts="0">
                 <properties>
                   <property name="_JOINTYPE" value="UnityCombinatorial" />
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1004" name="PlayableViewExposesLaunchScreensProgressionAndSettings" fullname="StormBlocks.Tests.PlayMode.BootstrapSceneSmokeTests.PlayableViewExposesLaunchScreensProgressionAndSettings" methodname="PlayableViewExposesLaunchScreensProgressionAndSettings" classname="StormBlocks.Tests.PlayMode.BootstrapSceneSmokeTests" runstate="Runnable" seed="157519969" result="Passed" start-time="2026-05-05 13:59:12Z" end-time="2026-05-05 13:59:12Z" duration="0.103314" asserts="0">
+              <test-case id="1004" name="PlayableViewExposesLaunchScreensProgressionAndSettings" fullname="StormBlocks.Tests.PlayMode.BootstrapSceneSmokeTests.PlayableViewExposesLaunchScreensProgressionAndSettings" methodname="PlayableViewExposesLaunchScreensProgressionAndSettings" classname="StormBlocks.Tests.PlayMode.BootstrapSceneSmokeTests" runstate="Runnable" seed="429287096" result="Passed" start-time="2026-05-05 15:00:52Z" end-time="2026-05-05 15:00:52Z" duration="0.099278" asserts="0">
                 <properties>
                   <property name="_JOINTYPE" value="UnityCombinatorial" />
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1005" name="PlayableViewShowsResultsAndRetriesAfterGameOver" fullname="StormBlocks.Tests.PlayMode.BootstrapSceneSmokeTests.PlayableViewShowsResultsAndRetriesAfterGameOver" methodname="PlayableViewShowsResultsAndRetriesAfterGameOver" classname="StormBlocks.Tests.PlayMode.BootstrapSceneSmokeTests" runstate="Runnable" seed="689362114" result="Passed" start-time="2026-05-05 13:59:12Z" end-time="2026-05-05 13:59:12Z" duration="0.069935" asserts="0">
+              <test-case id="1005" name="PlayableViewShowsResultsAndRetriesAfterGameOver" fullname="StormBlocks.Tests.PlayMode.BootstrapSceneSmokeTests.PlayableViewShowsResultsAndRetriesAfterGameOver" methodname="PlayableViewShowsResultsAndRetriesAfterGameOver" classname="StormBlocks.Tests.PlayMode.BootstrapSceneSmokeTests" runstate="Runnable" seed="2105440793" result="Passed" start-time="2026-05-05 15:00:52Z" end-time="2026-05-05 15:00:52Z" duration="0.061544" asserts="0">
                 <properties>
                   <property name="_JOINTYPE" value="UnityCombinatorial" />
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1003" name="PlayableViewStartsRunAndAcceptsPlacement" fullname="StormBlocks.Tests.PlayMode.BootstrapSceneSmokeTests.PlayableViewStartsRunAndAcceptsPlacement" methodname="PlayableViewStartsRunAndAcceptsPlacement" classname="StormBlocks.Tests.PlayMode.BootstrapSceneSmokeTests" runstate="Runnable" seed="1000473674" result="Passed" start-time="2026-05-05 13:59:12Z" end-time="2026-05-05 13:59:12Z" duration="0.060856" asserts="0">
+              <test-case id="1003" name="PlayableViewStartsRunAndAcceptsPlacement" fullname="StormBlocks.Tests.PlayMode.BootstrapSceneSmokeTests.PlayableViewStartsRunAndAcceptsPlacement" methodname="PlayableViewStartsRunAndAcceptsPlacement" classname="StormBlocks.Tests.PlayMode.BootstrapSceneSmokeTests" runstate="Runnable" seed="1540148478" result="Passed" start-time="2026-05-05 15:00:52Z" end-time="2026-05-05 15:00:52Z" duration="0.050120" asserts="0">
                 <properties>
                   <property name="_JOINTYPE" value="UnityCombinatorial" />
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1008" name="PlayableViewStaysWithinMobileSceneBudgets" fullname="StormBlocks.Tests.PlayMode.BootstrapSceneSmokeTests.PlayableViewStaysWithinMobileSceneBudgets" methodname="PlayableViewStaysWithinMobileSceneBudgets" classname="StormBlocks.Tests.PlayMode.BootstrapSceneSmokeTests" runstate="Runnable" seed="988655803" result="Passed" start-time="2026-05-05 13:59:12Z" end-time="2026-05-05 13:59:12Z" duration="0.059109" asserts="0">
+              <test-case id="1008" name="PlayableViewStaysWithinMobileSceneBudgets" fullname="StormBlocks.Tests.PlayMode.BootstrapSceneSmokeTests.PlayableViewStaysWithinMobileSceneBudgets" methodname="PlayableViewStaysWithinMobileSceneBudgets" classname="StormBlocks.Tests.PlayMode.BootstrapSceneSmokeTests" runstate="Runnable" seed="1578406217" result="Passed" start-time="2026-05-05 15:00:52Z" end-time="2026-05-05 15:00:52Z" duration="0.049617" asserts="0">
                 <properties>
                   <property name="_JOINTYPE" value="UnityCombinatorial" />
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
-                <output><![CDATA[Storm Blocks mobile budget renderers=421 triangles=142792 audioListeners=1 canvases=1
+                <output><![CDATA[Storm Blocks mobile budget renderers=365 triangles=136308 audioListeners=1 canvases=1
 Saving results to: /Users/perlantir/Library/Application Support/Perlantir/Storm Blocks/TestResults.xml
 ]]></output>
               </test-case>

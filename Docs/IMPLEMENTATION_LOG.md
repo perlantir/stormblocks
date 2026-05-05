@@ -613,7 +613,55 @@ Evidence:
 - `Scripts/release_audit.sh local` reports 32 pass, 0 fail, 0 open.
 - `Scripts/release_audit.sh full` reports 33 pass, 0 fail, and 6 open external gates.
 - `Scripts/ci_static_checks.sh` passes locally.
+- Branch-head GitHub Actions `Release Static Checks` passed for commit `939c474`: `https://github.com/perlantir/stormblocks/actions/runs/25381352963`.
 
 Known risks / not done:
 
 - Physical-device profiling is still required before release signoff; this change improves scene hygiene and automated budget evidence but does not replace device FPS/thermal measurement.
+
+## 2026-05-05 — Physical profiling helper hardening
+
+- Updated `Scripts/device_qa_session.sh` so profiling commands resolve the hardware UDID that `xctrace` expects from the paired `devicectl` device instead of passing the CoreDevice identifier used for install/launch.
+- Documented the `STORMBLOCKS_XCTRACE_DEVICE_ID` override in the physical QA runbook.
+- Retried a short Game Performance capture; the helper resolved `00008150-00040D203A88401C`, but Instruments timed out with `Timed out waiting for device to boot: iPhone (26.3)`.
+
+Evidence:
+
+- `Scripts/device_qa_session.sh launch` / `Scripts/ios_release_gates.sh launch-device` can launch the signed app through CoreDevice id `907E2EE7-9C7B-5D0D-9EC0-32E69912287D`.
+- `STORMBLOCKS_PROFILE_TIME=15s Scripts/device_qa_session.sh profile-game` now reaches `xctrace` with hardware UDID `00008150-00040D203A88401C` and fails on Instruments device visibility, not on script identifier mismatch.
+- `Scripts/fastlane_release.sh ios create_app_record` still fails immediately without App Store Connect API key variables or `STORMBLOCKS_APPLE_ID` / `APPLE_ID`.
+- Desktop automation for the logged-in App Store Connect UI is still blocked by macOS with `Sender process is not authenticated`.
+
+Known risks / not done:
+
+- Physical performance profiling still requires Instruments/xctrace to see the paired iPhone online, plus an older supported iPhone pass.
+- App Store Connect app-record creation still requires API credentials, Apple ID/app-specific password, or authenticated manual browser/Xcode UI work.
+
+## 2026-05-05 — Design-source GLB optimization and runtime board correction
+
+- Reviewed the new `Design GLB`, `Design JPG`, and `Design Sample Video` folders and documented the source/runtime decisions in `Docs/DESIGN_ASSET_REVIEW.md`.
+- Added `Scripts/optimize_design_glbs.sh` to produce mobile GLB variants with glTF Transform instead of shipping the raw high-poly source models directly.
+- Added `.gitignore` protection for the raw design source folders so the repo keeps optimized runtime assets and avoids accidental 300 MB+ source drops without Git LFS.
+- Added Unity GLTFast package dependency `com.unity.cloud.gltfast` `6.18.0` and imported curated optimized GLBs under `Assets/StormBlocks/Art/Imported`.
+- Generated a blurred 1170 x 2532 design-source storm backdrop from the supplied phone-layout JPG and loaded it at runtime through `Resources/StormSky`.
+- Rejected the direct campfire-rescue GLB overlay in the central board after visual capture because it harmed camp clarity; kept the procedural warm camp as the runtime presentation.
+- Updated the actual playable `StormBlocksGameView` board, not just screenshots: narrower board metrics, camera/tray layout, storm spiral edge accents, bottom halo, and runtime tray charm now move closer to the supplied gameplay references while preserving board readability.
+- Regenerated portrait gameplay and App Store screenshot captures, then refreshed `fastlane/screenshots/en-US`.
+
+Evidence:
+
+- Raw GLB review found 16 valid GLBs totaling 311 MB; individual raw models range from roughly 178k to 383k triangles, with the campfire-rescue source at roughly 1.4M triangles.
+- Optimized runtime/source GLBs now include `blue_2x2_block_mobile_lod1.glb` at 249 KB / 7,452 triangles, `lightning_cloud_cube_mobile_lod1.glb` at 1.1 MB / 3,902 triangles, and `stormy_campfire_rescue_mobile_lod1.glb` at 2.6 MB / 70,165 triangles.
+- EditMode tests: `StormBlocksUnity/editmode-results.xml` reports 25 total, 25 passed, 0 failed at `2026-05-05 15:00:45Z`.
+- PlayMode tests: `StormBlocksUnity/playmode-results.xml` reports 7 total, 7 passed, 0 failed at `2026-05-05 15:00:52Z`.
+- Current logged full-detail mobile baseline after the board pass: 365 renderers, 136,308 mesh triangles, 1 audio listener, and 1 canvas.
+- Portrait visual capture: `/tmp/stormblocks-visual-design-backdrop-crop.log` completed successfully and wrote `StormBlocksUnity/Builds/VisualChecks/stormblocks-gameplay.png`.
+- App Store screenshot capture: `/tmp/stormblocks-appstore-design-backdrop.log` completed successfully and regenerated all five 1170 x 2532 PNGs under `StormBlocksUnity/Builds/AppStoreScreens/`; the files were copied into `fastlane/screenshots/en-US/`.
+- `Scripts/ci_static_checks.sh` passed after clearing Unity test-runner transient scenes.
+- `Scripts/release_audit.sh local` passed with 32 pass, 0 fail, 0 open.
+- `Scripts/release_audit.sh full` reported 33 pass, 0 fail, 6 open external gates.
+
+Known risks / not done:
+
+- The optimized GLB path makes the assets usable, but final art quality still needs physical-device human review against the references.
+- The raw design source folders are large; commit/runtime inclusion should stay limited to optimized mobile variants unless Git LFS source archival is explicitly needed.
