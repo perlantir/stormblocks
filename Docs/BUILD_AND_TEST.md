@@ -27,7 +27,7 @@ Use the project test runner for batch verification. Unity 6000 can skip `-runTes
   -logFile /tmp/stormblocks-editmode-lowdetail.log
 ```
 
-Current evidence: `StormBlocksUnity/editmode-results.xml` reports 25 total, 25 passed, 0 failed at `2026-05-05 16:28:39Z`.
+Current evidence: `StormBlocksUnity/editmode-results.xml` reports 26 total, 26 passed, 0 failed at `2026-05-05 16:46:38Z`.
 
 ## PlayMode Tests
 
@@ -40,7 +40,7 @@ Current evidence: `StormBlocksUnity/editmode-results.xml` reports 25 total, 25 p
   -logFile /tmp/stormblocks-playmode-lowdetail.log
 ```
 
-Current evidence: `StormBlocksUnity/playmode-results.xml` reports 8 total, 8 passed, 0 failed at `2026-05-05 16:28:46Z`.
+Current evidence: `StormBlocksUnity/playmode-results.xml` reports 8 total, 8 passed, 0 failed at `2026-05-05 16:46:46Z`.
 
 The PlayMode suite includes release smoke guards for the normal flow and active touch controls:
 
@@ -50,8 +50,8 @@ The PlayMode suite includes release smoke guards for the normal flow and active 
 
 The PlayMode suite includes a lightweight mobile scene-budget guard. Current logged baseline:
 
-- 435 renderers.
-- 159,892 mesh triangles.
+- 426 renderers.
+- 157,060 mesh triangles.
 - 1 audio listener.
 - 1 canvas.
 
@@ -228,10 +228,10 @@ xcrun devicectl device install app \
 
 Current evidence:
 
-- `/tmp/stormblocks-device-install.json` reports `outcome = success`.
-- Installed app bundle id is `com.perlantir.stormblocks`.
-- Device is the paired `iPhone 17 Pro Max (iPhone18,2)`, identifier `907E2EE7-9C7B-5D0D-9EC0-32E69912287D`.
-- Latest current-source install evidence was refreshed at `2026-05-05 16:29:59Z`.
+- Latest current-source install attempt reached CoreDevice at `2026-05-05 16:47:00Z` and failed before transfer.
+- `/tmp/stormblocks-device-install.json` reports `outcome = failed`.
+- CoreDevice reports it cannot locate the paired device identifier and `xcrun devicectl list devices` currently shows `iPhone 17 Pro Max (iPhone18,2)` identifier `907E2EE7-9C7B-5D0D-9EC0-32E69912287D` as `unavailable`.
+- The signed `Release-iphoneos` app still exists locally and needs a device-available install retry.
 
 Launch probe:
 
@@ -249,8 +249,8 @@ xcrun devicectl device process launch \
 Current evidence:
 
 - Latest `Scripts/ios_release_gates.sh launch-device` retry for the current coach build ran at `2026-05-05 16:34:18Z`.
-- `/tmp/stormblocks-device-launch.json` reports `outcome = failed` because the paired iPhone was locked.
-- The current exact-source signed build is installed; an unlocked-device launch retry is still required.
+- `/tmp/stormblocks-device-launch.json` reports `outcome = failed` because CoreDevice currently cannot locate the paired iPhone.
+- A current-source install/launch retry is still required once the device is available again.
 - Most recent successful launch evidence before this coach pass was at `2026-05-05 16:09:13Z`.
 
 ## Xcode Archive and App Store IPA Export

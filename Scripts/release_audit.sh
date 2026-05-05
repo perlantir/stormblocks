@@ -118,14 +118,20 @@ audit_local_evidence() {
   require_file "$ROOT/Docs/QA_EVAL_REPORT.md" "QA eval report exists"
   require_file "$ROOT/Docs/BUILD_AND_TEST.md" "Build and test evidence document exists"
 
-  require_nunit_pass "$UNITY_PROJECT/editmode-results.xml" 25 "EditMode tests are 25/25 passing"
+  require_nunit_pass "$UNITY_PROJECT/editmode-results.xml" 26 "EditMode tests are 26/26 passing"
   require_nunit_pass "$UNITY_PROJECT/playmode-results.xml" 8 "PlayMode tests are 8/8 passing"
-  require_grep "$UNITY_PROJECT/playmode-results.xml" "Storm Blocks mobile budget renderers=435 triangles=159892 audioListeners=1 canvases=1" "PlayMode mobile budget baseline is current"
+  require_grep "$UNITY_PROJECT/playmode-results.xml" "Storm Blocks mobile budget renderers=426 triangles=157060 audioListeners=1 canvases=1" "PlayMode mobile budget baseline is current"
 
   require_grep /tmp/stormblocks-ios-device-team7jl.log "Build Finished, Result: Success" "Unity iOS device export succeeded"
   require_grep /tmp/stormblocks-xcode-lowdetail-pool-unsigned.log "BUILD SUCCEEDED" "Unsigned Xcode device build succeeded"
   require_grep /tmp/stormblocks-xcode-team7jl-default-signed.log "BUILD SUCCEEDED" "Signed Xcode device build succeeded"
-  require_grep /tmp/stormblocks-device-install.json "\"outcome\" : \"success\"" "Signed app installed on paired iPhone"
+  if grep -q "\"outcome\" : \"success\"" /tmp/stormblocks-device-install.json 2>/dev/null; then
+    pass "Signed app installed on paired iPhone"
+  elif grep -q "CoreDeviceService was unable to locate a device matching" /tmp/stormblocks-device-install.json /tmp/stormblocks-device-install.log 2>/dev/null; then
+    open_gate "Physical-device install is blocked because CoreDevice currently cannot locate the paired iPhone."
+  else
+    fail "Signed app installed on paired iPhone"
+  fi
   require_grep /tmp/stormblocks-xcode-team7jl-archive.log "ARCHIVE SUCCEEDED" "Xcode archive succeeded"
   require_grep /tmp/stormblocks-xcode-team7jl-export-appstore.log "EXPORT SUCCEEDED" "App Store IPA export succeeded"
   require_file "$ARCHIVE_PATH/Info.plist" "Xcode archive exists"
@@ -161,8 +167,12 @@ audit_local_evidence() {
 }
 
 audit_open_gates() {
-  if grep -q "FBSOpenApplicationErrorDomain.*Locked\\|\"string\" : \"Locked\"" /tmp/stormblocks-device-launch.json 2>/dev/null; then
+  if grep -q "\"outcome\" : \"success\"" /tmp/stormblocks-device-launch.json 2>/dev/null; then
+    pass "Physical-device launch succeeded"
+  elif grep -q "FBSOpenApplicationErrorDomain.*Locked\\|\"string\" : \"Locked\"" /tmp/stormblocks-device-launch.json 2>/dev/null; then
     open_gate "Physical-device launch is still blocked because the paired iPhone is locked."
+  elif grep -q "CoreDeviceService was unable to locate a device matching" /tmp/stormblocks-device-launch.json /tmp/stormblocks-device-launch.log 2>/dev/null; then
+    open_gate "Physical-device launch is blocked because CoreDevice currently cannot locate the paired iPhone."
   else
     require_grep /tmp/stormblocks-device-launch.json "\"outcome\" : \"success\"" "Physical-device launch succeeded"
   fi

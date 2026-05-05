@@ -3,6 +3,7 @@
   "rootNamespace": "StormBlocks.Tests.EditMode",
   "references": [
     "StormBlocks.Core",
+    "StormBlocks.Gameplay",
     "StormBlocks.Services"
   ],
   "includePlatforms": [

@@ -55,6 +55,12 @@ namespace StormBlocks.Gameplay
                 _haptics.Play(HapticEventId.HeavyClear);
             }
 
+            if (result.Clear.SurvivorsRescuedAt.Count > 0)
+            {
+                _audio.Play(AudioEventId.SurvivorRescued);
+                _haptics.Play(HapticEventId.SuccessBurst);
+            }
+
             if (result.Clear.AutomaticPushbackTriggered)
             {
                 _audio.Play(result.Clear.ClutchSave ? AudioEventId.ClutchSave : AudioEventId.StormPushback);
@@ -70,6 +76,12 @@ namespace StormBlocks.Gameplay
             if (result.StormSpread.SpreadResolved)
             {
                 _audio.Play(AudioEventId.StormSpread);
+            }
+
+            if (!result.GameOver && StormResolver.IsNearDeath(State.Board, State.Config.StormRules))
+            {
+                _audio.Play(AudioEventId.NearDeathLoop);
+                _haptics.Play(HapticEventId.LongNearDeathWarning);
             }
 
             if (result.GameOver)

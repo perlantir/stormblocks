@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using StormBlocks.Core;
+using StormBlocks.Gameplay;
 using StormBlocks.Services;
 
 namespace StormBlocks.Tests.EditMode
@@ -87,6 +88,53 @@ namespace StormBlocks.Tests.EditMode
             Assert.AreEqual(1, services.AudioEvents.Count);
             Assert.AreEqual(1, services.HapticEvents.Count);
             Assert.AreEqual(3400, services.LastSharedRun.Score);
+        }
+
+        [Test]
+        public void RunSessionEmitsRescueAndNearDeathFeedbackHooks()
+        {
+            var single = new PieceDefinition("single", new[] { new GridPosition(0, 0) });
+            var services = new MockGameServices();
+            var session = new StormRunSession(new[] { single }, services, services, services);
+            var config = new RunConfig
+            {
+                QueueSize = 1,
+                StormRules = new StormRulesConfig
+                {
+                    BoardSize = 4,
+                    InitialStormRingThickness = 0,
+                    WarningBeforeSpread = false
+                }
+            };
+
+            var state = session.Start(config, 8081UL);
+            for (int x = 0; x < 3; x++)
+            {
+                state.Board.SetOccupant(new GridPosition(x, 0), CellOccupant.Block, "setup");
+            }
+
+            state.Board.SetSurvivor(new GridPosition(3, 0), true);
+            var rescue = session.PlaceQueuedPiece(0, new GridPosition(3, 0));
+
+            Assert.IsTrue(rescue.Success, rescue.FailureReason);
+            CollectionAssert.Contains(services.AudioEvents, AudioEventId.ValidPlacement);
+            CollectionAssert.Contains(services.AudioEvents, AudioEventId.LineClear);
+            CollectionAssert.Contains(services.AudioEvents, AudioEventId.SurvivorRescued);
+            CollectionAssert.Contains(services.HapticEvents, HapticEventId.MediumPlacement);
+            CollectionAssert.Contains(services.HapticEvents, HapticEventId.HeavyClear);
+            CollectionAssert.Contains(services.HapticEvents, HapticEventId.SuccessBurst);
+
+            services.AudioEvents.Clear();
+            services.HapticEvents.Clear();
+            var nearDeathSession = new StormRunSession(new[] { single }, services, services, services);
+            var nearDeath = nearDeathSession.Start(config, 9091UL);
+            nearDeath.Board.SetOccupant(new GridPosition(0, 1), CellOccupant.Storm, string.Empty);
+
+            var warning = nearDeathSession.PlaceQueuedPiece(0, new GridPosition(3, 3));
+
+            Assert.IsTrue(warning.Success, warning.FailureReason);
+            CollectionAssert.Contains(services.AudioEvents, AudioEventId.NearDeathLoop);
+            CollectionAssert.Contains(services.HapticEvents, HapticEventId.LongNearDeathWarning);
         }
     }
 }

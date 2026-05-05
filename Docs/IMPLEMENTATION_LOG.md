@@ -754,3 +754,27 @@ Known risks / not done:
 
 - Unlock the paired iPhone and rerun `Scripts/ios_release_gates.sh launch-device` for current-source launch evidence.
 - App Store Connect upload still requires an app record for bundle id `com.perlantir.stormblocks`; the upload probe is expected to stay blocked until that external record exists.
+
+## 2026-05-05 — Feedback hook coverage pass
+
+- Added session-level survivor rescue audio plus success haptic hooks when a clear rescues survivors.
+- Added session-level near-death pulse audio plus long-warning haptic hook when a placement leaves the board in near-death without ending the run.
+- Added a piece-hover tone to the Unity feedback service and wired the drag ghost to play it when entering a new valid placement cell.
+- Added EditMode coverage for the rescue and near-death feedback events.
+
+Evidence:
+
+- EditMode tests: `StormBlocksUnity/editmode-results.xml` reports 26 total, 26 passed, 0 failed at `2026-05-05 16:46:38Z`.
+- PlayMode tests: `StormBlocksUnity/playmode-results.xml` reports 8 total, 8 passed, 0 failed at `2026-05-05 16:46:46Z`.
+- Current logged full-detail mobile baseline after the feedback pass: 426 renderers, 157,060 mesh triangles, 1 audio listener, and 1 canvas.
+- `Scripts/ios_release_gates.sh all-local` refreshed Unity tests, Unity iOS export, and signed Xcode build, then stopped at physical-device install because CoreDevice currently cannot locate paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D`.
+- `Scripts/ios_release_gates.sh archive` and `Scripts/ios_release_gates.sh export-appstore` completed after the device blocker; `/tmp/stormblocks-xcode-team7jl-archive.log` reports `** ARCHIVE SUCCEEDED **` and `/tmp/stormblocks-xcode-team7jl-export-appstore.log` reports `** EXPORT SUCCEEDED **`, with IPA output at `StormBlocksUnity/Builds/iOS/ExportAppStoreTeam7JL/StormBlocks.ipa`.
+- `Scripts/ios_release_gates.sh status` passes against the refreshed test, signed build, archive, and IPA evidence.
+- `Scripts/ios_release_gates.sh launch-device` also fails while CoreDevice marks the paired iPhone unavailable.
+- `Scripts/ios_release_gates.sh upload-probe` retried against the current-source archive at `2026-05-05 16:51:34Z`; App Store Connect returned HTTP 200 with `data: []` and `total: 0` for `com.perlantir.stormblocks`, then Xcode failed with `missingApp(bundleId: "com.perlantir.stormblocks")`. Current distribution log: `/var/folders/b2/cl2rv8q13bg48zl073ctm_fc0000gq/T/Unity-iPhone_2026-05-05_11-51-32.110.xcdistributionlogs/IDEDistributionAppStoreConnect.log`.
+- `Scripts/ci_static_checks.sh && Scripts/release_audit.sh full` passes static checks and reports 31 pass, 0 fail, 8 open gates.
+
+Known risks / not done:
+
+- Current-source physical install/launch needs to be retried after the paired iPhone is available to CoreDevice again.
+- App Store Connect upload still requires an app record for bundle id `com.perlantir.stormblocks`; the upload probe is expected to stay blocked until that external record exists.

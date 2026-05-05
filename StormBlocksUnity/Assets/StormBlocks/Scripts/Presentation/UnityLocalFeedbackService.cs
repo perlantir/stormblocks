@@ -136,6 +136,7 @@ namespace StormBlocks.Presentation
 
             _clips[AudioEventId.UiTap] = CreateToneClip("SB UI Tap", 520f, 0.055f, 0.05f, 0.65f);
             _clips[AudioEventId.PiecePickup] = CreateToneClip("SB Piece Pickup", 420f, 0.085f, 0.04f, 0.7f);
+            _clips[AudioEventId.PieceHover] = CreateToneClip("SB Piece Hover", 560f, 0.050f, 0.05f, 0.55f);
             _clips[AudioEventId.ValidPlacement] = CreateToneClip("SB Placement", 620f, 0.075f, 0.05f, 0.75f);
             _clips[AudioEventId.InvalidPlacement] = CreateToneClip("SB Invalid", 150f, 0.11f, 0.08f, 0.55f);
             _clips[AudioEventId.LineClear] = CreateToneClip("SB Line Clear", 740f, 0.16f, 0.08f, 0.8f);
@@ -145,6 +146,7 @@ namespace StormBlocks.Presentation
             _clips[AudioEventId.StormSpread] = CreateToneClip("SB Storm Spread", 112f, 0.22f, 0.18f, 0.55f);
             _clips[AudioEventId.StormPushback] = CreateToneClip("SB Pushback", 1040f, 0.24f, 0.05f, 0.9f);
             _clips[AudioEventId.ClutchSave] = CreateToneClip("SB Clutch", 1220f, 0.32f, 0.04f, 0.95f);
+            _clips[AudioEventId.NearDeathLoop] = CreateToneClip("SB Near Death Pulse", 174f, 0.28f, 0.18f, 0.62f);
             _clips[AudioEventId.GameOver] = CreateToneClip("SB Game Over", 98f, 0.42f, 0.25f, 0.62f);
             _clips[AudioEventId.ResultsCelebration] = CreateToneClip("SB Results", 660f, 0.26f, 0.08f, 0.8f);
             _clips[AudioEventId.CosmeticUnlock] = CreateToneClip("SB Unlock", 1320f, 0.30f, 0.06f, 0.95f);

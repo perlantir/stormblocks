@@ -112,8 +112,10 @@ namespace StormBlocks.Presentation
         private int _coachQueueIndex = -1;
         private GridPosition _currentDragOrigin;
         private GridPosition _coachOrigin;
+        private GridPosition _lastHoverOrigin;
         private bool _hasDragOrigin;
         private bool _coachCueActive;
+        private bool _hasLastHoverOrigin;
         private bool _useIsolatedTestSave;
         private float _coachStartTime;
         private float _toastTimer;
@@ -2135,6 +2137,7 @@ namespace StormBlocks.Presentation
                 {
                     ClearFirstMoveCoach();
                     _dragQueueIndex = tray.QueueIndex;
+                    _hasLastHoverOrigin = false;
                     _dragRoot = new GameObject("Dragging Piece").transform;
                     _dragRoot.SetParent(transform);
                     BuildPieceCells(_dragRoot, tray.Piece, Vector3.zero, BlockMaterial(tray.Piece.Id), CellPitch * 0.78f, 0.28f, CellPitch);
@@ -2165,6 +2168,13 @@ namespace StormBlocks.Presentation
 
             var piece = _session.State.Queue[_dragQueueIndex];
             bool valid = PlacementRules.CanPlace(_session.State.Board, piece, _currentDragOrigin);
+            if (valid && (!_hasLastHoverOrigin || !_lastHoverOrigin.Equals(_currentDragOrigin)))
+            {
+                _feedback.Play(AudioEventId.PieceHover);
+                _hasLastHoverOrigin = true;
+                _lastHoverOrigin = _currentDragOrigin;
+            }
+
             BuildPieceCells(_ghostRoot, piece, CellCenter(_currentDragOrigin.X, _currentDragOrigin.Y) + Vector3.up * 0.06f, valid ? _ghostValid : _ghostInvalid, CellPitch * 0.80f, 0.06f, CellPitch);
         }
 
@@ -2182,6 +2192,7 @@ namespace StormBlocks.Presentation
             _ghostRoot = null;
             _dragQueueIndex = -1;
             _hasDragOrigin = false;
+            _hasLastHoverOrigin = false;
         }
 
         private PlacementResult PlaceQueuedPiece(int queueIndex, GridPosition origin)
