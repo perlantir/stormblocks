@@ -386,6 +386,21 @@ Known risks / not done:
 - The support, marketing, and privacy URLs in the manifest still need public reachability/customer-support review before App Store submission.
 - The metadata upload lane remains credentialed and cannot run until the App Store Connect app record and credentials are available.
 
+## 2026-05-05 — Physical QA and profiling handoff
+
+- Added `Docs/PHYSICAL_QA_RUNBOOK.md` with the exact five-run playability test, physical-device functional checks, Game Center device checks, performance profiling steps, and TestFlight validation pass.
+- Added `Scripts/device_qa_session.sh` with a non-credentialed `plan` mode plus launch and `xctrace` helpers for Game Performance and Power Profiler traces once the iPhone is unlocked.
+- Updated QA, performance, release audit, and implementation docs so the remaining physical gates have a repeatable execution path.
+
+Evidence:
+
+- `Scripts/device_qa_session.sh plan` prints the physical QA sequence and external open gates.
+- `bash -n Scripts/device_qa_session.sh Scripts/release_audit.sh Scripts/ios_release_gates.sh Scripts/fastlane_release.sh Scripts/verify_release_assets.sh` passes.
+
+Known risks / not done:
+
+- The launch/profile modes still require an unlocked physical device and human execution.
+
 ## 2026-05-05 — Gate 12 pooling and Low Detail fallback
 
 - Added primitive pooling for dynamic presentation cubes/spheres used by board refreshes, tray rebuilds, drag ghosts, survivors, storm cells, block cells, and Storm Pushback VFX.

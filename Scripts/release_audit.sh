@@ -143,6 +143,8 @@ audit_local_evidence() {
   else
     fail "Release asset verifier failed; see /tmp/stormblocks-release-assets-audit.log"
   fi
+  require_file "$ROOT/Docs/PHYSICAL_QA_RUNBOOK.md" "Physical QA runbook exists"
+  require_file "$ROOT/Scripts/device_qa_session.sh" "Physical QA session helper exists"
   require_grep "$ROOT/Scripts/ios_release_gates.sh" "upload-probe" "iOS release gate runner includes upload probe"
 
   require_absent_glob_find "No transient Unity/Fastlane artifacts remain" \

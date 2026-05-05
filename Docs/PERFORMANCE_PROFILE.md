@@ -41,3 +41,12 @@ Before TestFlight/release signoff:
 - Confirm reduced-motion mode cuts heavy VFX timing without harming readability.
 - Confirm Low Detail mode maintains readability and reduces visual object pressure on older supported iPhones.
 - Confirm no sustained frame drops during Daily Storm and Tempest Trials.
+
+Profiling helpers:
+
+```bash
+Scripts/device_qa_session.sh profile-game
+Scripts/device_qa_session.sh profile-power
+```
+
+Trace outputs are written under ignored path `StormBlocksUnity/Builds/DeviceProfiles/`.

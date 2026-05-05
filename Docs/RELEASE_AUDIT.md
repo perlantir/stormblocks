@@ -26,6 +26,7 @@ This maps the launch request and repo release gates to concrete evidence. The pr
 | Design references and visual target | Procedural 3D board, storm, camp, survivors, app icon, and screenshots exist; visual quality still needs final physical-device human review. | Local pass; human review pending |
 | QA tests | Latest EditMode: 25/25 at `2026-05-05 05:30:28Z`; latest PlayMode: 7/7 at `2026-05-05 05:30:53Z`. | Pass |
 | Performance optimization | Primitive pooling, Low Detail fallback, URP mobile settings, and scene-budget guard exist; latest budget is 274 renderers and 59,232 triangles. | Local pass; physical profiling pending |
+| Physical QA handoff | `Docs/PHYSICAL_QA_RUNBOOK.md` and `Scripts/device_qa_session.sh` define launch, five-run QA, Game Center, TestFlight, and profiling steps. | Local pass; physical execution pending |
 | iOS unsigned build | `/tmp/stormblocks-xcode-lowdetail-pool-unsigned.log` reports `** BUILD SUCCEEDED **`. | Pass |
 | iOS signed build | `/tmp/stormblocks-xcode-team7jl-default-signed.log` reports `** BUILD SUCCEEDED **`; team `7JL22TDB44`, Game Center entitlement. | Pass |
 | Physical-device install | `/tmp/stormblocks-device-install.json` reports success for `com.perlantir.stormblocks` on paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D`. | Pass |
@@ -59,6 +60,7 @@ Scripts/release_audit.sh full
 Scripts/ios_release_gates.sh status
 Scripts/ios_release_gates.sh launch-device
 Scripts/ios_release_gates.sh upload-probe
+Scripts/device_qa_session.sh plan
 ```
 
 Credentialed Fastlane lanes are available after App Store Connect credentials are set:

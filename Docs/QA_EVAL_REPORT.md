@@ -43,3 +43,8 @@ These are not final human scores. They are current local QA estimates from autom
 - Signed Game Center authentication, leaderboard submission, achievement reporting, and Game Center UI validation.
 - App Store Connect app record creation for `com.perlantir.stormblocks`.
 - TestFlight upload, install, and launch validation.
+
+Execution runbook:
+
+- `Docs/PHYSICAL_QA_RUNBOOK.md`
+- `Scripts/device_qa_session.sh plan`
