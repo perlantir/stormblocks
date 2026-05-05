@@ -28,7 +28,7 @@ This maps the launch request and repo release gates to concrete evidence. The pr
 | Prompt compliance verifier | `Scripts/verify_prompt_compliance.sh` checks required docs/design refs, major gameplay/system surfaces, passing test result files, and non-monetization/copyright guardrails. | Pass |
 | Performance optimization | Primitive pooling, Low Detail fallback, URP mobile settings, and scene-budget guard exist; latest safe-palette budget is 421 renderers and 142,792 triangles. | Local pass; physical profiling pending |
 | Physical QA handoff | `Docs/PHYSICAL_QA_RUNBOOK.md` and `Scripts/device_qa_session.sh` define launch, five-run QA, Game Center, TestFlight, and profiling steps. | Local pass; physical execution pending |
-| GitHub static verification | `.github/workflows/release-static.yml` runs `Scripts/ci_static_checks.sh`; refresh branch-head run evidence with `gh run list --repo perlantir/stormblocks --branch main` after each push. | Pass |
+| GitHub static verification | Branch-head `Release Static Checks` passed for commit `ee0b9f1`; run `25379625311`: `https://github.com/perlantir/stormblocks/actions/runs/25379625311`. | Pass |
 | iOS unsigned build | `/tmp/stormblocks-xcode-lowdetail-pool-unsigned.log` reports `** BUILD SUCCEEDED **`. | Pass |
 | iOS signed build | `/tmp/stormblocks-xcode-team7jl-default-signed.log` reports `** BUILD SUCCEEDED **`; team `7JL22TDB44`, Game Center entitlement. | Pass |
 | Physical-device install | `/tmp/stormblocks-device-install.json` reports success for `com.perlantir.stormblocks` on paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D`. | Pass |

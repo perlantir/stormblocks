@@ -587,6 +587,7 @@ Evidence:
 - `Scripts/ios_release_gates.sh all-local` refreshed Unity iOS export, signed build, physical install, archive, and App Store IPA export; final status initially required the stale 424/143,584 budget, then the audit scripts were updated to the actual PlayMode rerun baseline.
 - `Scripts/ios_release_gates.sh launch-device` succeeded after the refreshed install at `2026-05-05 13:30:29Z`.
 - `Scripts/ios_release_gates.sh upload-probe` still fails at `2026-05-05 13:30:39Z` because App Store Connect returns `data: []` and `missingApp(bundleId: "com.perlantir.stormblocks")`; current distribution log is `/var/folders/b2/cl2rv8q13bg48zl073ctm_fc0000gq/T/Unity-iPhone_2026-05-05_08-30-37.610.xcdistributionlogs/IDEDistributionAppStoreConnect.log`.
+- Branch-head GitHub Actions `Release Static Checks` passed for commit `ee0b9f1`: `https://github.com/perlantir/stormblocks/actions/runs/25379625311`.
 
 Known risks / not done:
 
