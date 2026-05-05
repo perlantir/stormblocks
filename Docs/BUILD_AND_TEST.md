@@ -27,7 +27,7 @@ Use the project test runner for batch verification. Unity 6000 can skip `-runTes
   -logFile /tmp/stormblocks-editmode-lowdetail.log
 ```
 
-Current evidence: `StormBlocksUnity/editmode-results.xml` reports 25 total, 25 passed, 0 failed at `2026-05-05 15:09:10Z`.
+Current evidence: `StormBlocksUnity/editmode-results.xml` reports 25 total, 25 passed, 0 failed at `2026-05-05 15:31:36Z`.
 
 ## PlayMode Tests
 
@@ -40,7 +40,7 @@ Current evidence: `StormBlocksUnity/editmode-results.xml` reports 25 total, 25 p
   -logFile /tmp/stormblocks-playmode-lowdetail.log
 ```
 
-Current evidence: `StormBlocksUnity/playmode-results.xml` reports 7 total, 7 passed, 0 failed at `2026-05-05 15:09:18Z`.
+Current evidence: `StormBlocksUnity/playmode-results.xml` reports 7 total, 7 passed, 0 failed at `2026-05-05 15:31:44Z`.
 
 The PlayMode suite includes release smoke guards for the normal flow and active touch controls:
 
@@ -49,8 +49,8 @@ The PlayMode suite includes release smoke guards for the normal flow and active 
 
 The PlayMode suite includes a lightweight mobile scene-budget guard. Current logged baseline:
 
-- 356 renderers.
-- 133,932 mesh triangles.
+- 423 renderers.
+- 154,152 mesh triangles.
 - 1 audio listener.
 - 1 canvas.
 
@@ -73,7 +73,7 @@ Current optimization notes:
 
 Output is written to ignored path `StormBlocksUnity/Builds/VisualChecks/stormblocks-gameplay.png`.
 
-Current evidence: `/tmp/stormblocks-visual-design-backdrop-crop.log` completed with no C# errors or Unity exceptions. The capture includes the runtime HUD and uses the same visible text path as the generated store screenshots.
+Current evidence: `/tmp/stormblocks-visual-board-pass-2b.log` completed with no C# errors or Unity exceptions. The capture includes the runtime HUD and uses the same visible text path as the generated store screenshots.
 
 ## App Icon Draft
 
@@ -109,7 +109,7 @@ Outputs are written to ignored path `StormBlocksUnity/Builds/AppStoreScreens/`:
 - `04_tempest_trials_weekly.png`
 - `05_cosmetic_profile.png`
 
-Current evidence: `/tmp/stormblocks-appstore-design-backdrop.log` completed with no C# errors or Unity exceptions, and regenerated all five 1170 x 2532 PNGs with visible UI labels.
+Current evidence: `/tmp/stormblocks-appstore-board-pass-2.log` completed with no C# errors or Unity exceptions, and regenerated all five 1170 x 2532 PNGs with visible UI labels.
 
 The current Fastlane handoff package includes tracked copies under `fastlane/screenshots/en-US/`. `Scripts/verify_release_assets.sh` validates the five expected PNGs at 1170 x 2532.
 

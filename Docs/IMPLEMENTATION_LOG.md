@@ -669,3 +669,26 @@ Known risks / not done:
 
 - The optimized GLB path makes the assets usable, but final art quality still needs physical-device human review against the references.
 - The raw design source folders are large; commit/runtime inclusion should stay limited to optimized mobile variants unless Git LFS source archival is explicitly needed.
+
+## 2026-05-05 — Runtime board design pass 2
+
+- Updated the actual playable `StormBlocksGameView` board again against the supplied references, not just marketing captures.
+- Added separate frosted cell lips under the 8x8 tile tops, a warmer central camp floor, lighter readable storm tile colors, softened storm cell puffs, subtler storm-corner vortices, and rounded generated block meshes for placed/tray pieces.
+- Fixed the optimized GLB tray charm so `RefreshTray` keeps it as a static tray child instead of deleting it during queue refresh.
+- Regenerated the portrait visual capture and all five App Store screenshots after the board pass, then copied the refreshed 1170 x 2532 images into `fastlane/screenshots/en-US`.
+
+Evidence:
+
+- Visual capture: `/tmp/stormblocks-visual-board-pass-2b.log` completed successfully and wrote `StormBlocksUnity/Builds/VisualChecks/stormblocks-gameplay.png`.
+- App Store screenshot capture: `/tmp/stormblocks-appstore-board-pass-2.log` completed successfully and regenerated all five PNGs under `StormBlocksUnity/Builds/AppStoreScreens/`; the files were copied into `fastlane/screenshots/en-US/`.
+- EditMode tests: `StormBlocksUnity/editmode-results.xml` reports 25 total, 25 passed, 0 failed at `2026-05-05 15:31:36Z`.
+- PlayMode tests: `StormBlocksUnity/playmode-results.xml` reports 7 total, 7 passed, 0 failed at `2026-05-05 15:31:44Z`.
+- Current logged full-detail mobile baseline after the second runtime board pass: 423 renderers, 154,152 mesh triangles, 1 audio listener, and 1 canvas.
+- `Scripts/ios_release_gates.sh all-local` rebuilt the current-source Unity iOS project, signed the Release-iphoneos app, installed it on the paired iPhone, created the Xcode archive, and exported the App Store Connect IPA on `2026-05-05`; the trailing status check required the updated 423-renderer baseline above.
+- After the baseline update, `Scripts/ios_release_gates.sh launch-device` launched the fresh install on the paired iPhone at `2026-05-05 15:37:02Z`.
+- `Scripts/ios_release_gates.sh upload-probe` retried against the fresh archive at `2026-05-05 15:37:05Z`; App Store Connect returned HTTP 200 with `data: []`, and Xcode failed at `IDEDistributionFetchAppRecordStep` with `missingApp(bundleId: "com.perlantir.stormblocks")`. Current distribution log: `/var/folders/b2/cl2rv8q13bg48zl073ctm_fc0000gq/T/Unity-iPhone_2026-05-05_10-37-02.871.xcdistributionlogs/IDEDistributionAppStoreConnect.log`.
+
+Known risks / not done:
+
+- The second board pass is a clear improvement and stays under automated scene budgets, but final art quality still needs human physical-device review against the supplied references.
+- TestFlight upload still needs the App Store Connect app record for `com.perlantir.stormblocks`.

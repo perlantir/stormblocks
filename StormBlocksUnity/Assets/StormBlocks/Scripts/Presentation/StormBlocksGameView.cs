@@ -55,6 +55,10 @@ namespace StormBlocks.Presentation
         private Material _campLight;
         private Material _campCanvas;
         private Material _creamTile;
+        private Material _cellRim;
+        private Material _campFloor;
+        private Material _stormMist;
+        private Material _stormVortex;
         private Material _boardRim;
         private Material _boardWarmRim;
         private Material _boardShadow;
@@ -317,22 +321,26 @@ namespace StormBlocks.Presentation
 
             _runtimeMaterialAssets.Clear();
             _runtimeMaterials.Clear();
-            _emptyTile = CreateToyMaterial("SB Empty Tile Gloss", highContrast ? new Color(0.13f, 0.22f, 0.50f) : new Color(0.61f, 0.62f, 0.77f), new Color(0.88f, 0.90f, 1.0f), new Color(0.35f, 0.35f, 0.52f), 0.72f, false);
-            _campTile = CreateToyMaterial("SB Warm Camp Tile", highContrast ? new Color(1.0f, 0.60f, 0.14f) : new Color(0.78f, 0.56f, 0.35f), new Color(1.0f, 0.80f, 0.48f), new Color(0.46f, 0.29f, 0.19f), 0.66f, false);
-            _creamTile = CreateToyMaterial("SB Cream Tile Highlight", new Color(0.80f, 0.64f, 0.42f), new Color(1.0f, 0.84f, 0.58f), new Color(0.48f, 0.30f, 0.20f), 0.7f, false);
-            _stormTile = CreateToyMaterial("SB Storm Tile Cracked", highContrast ? new Color(0.02f, 0.03f, 0.12f) : new Color(0.17f, 0.19f, 0.40f), new Color(0.34f, 0.38f, 0.66f), new Color(0.06f, 0.07f, 0.18f), 0.34f, true);
+            _emptyTile = CreateToyMaterial("SB Empty Tile Frosted Gloss", highContrast ? new Color(0.24f, 0.38f, 0.76f) : new Color(0.67f, 0.68f, 0.84f), new Color(0.94f, 0.96f, 1.0f), new Color(0.42f, 0.42f, 0.62f), 0.82f, false);
+            _campTile = CreateToyMaterial("SB Warm Camp Tile", highContrast ? new Color(1.0f, 0.62f, 0.16f) : new Color(0.86f, 0.62f, 0.36f), new Color(1.0f, 0.84f, 0.50f), new Color(0.54f, 0.32f, 0.18f), 0.72f, false);
+            _creamTile = CreateToyMaterial("SB Cream Tile Highlight", new Color(0.88f, 0.72f, 0.48f), new Color(1.0f, 0.88f, 0.62f), new Color(0.56f, 0.34f, 0.20f), 0.78f, false);
+            _cellRim = CreateToyMaterial("SB Frosted Cell Rim", new Color(0.82f, 0.81f, 0.96f), new Color(1.0f, 0.98f, 1.0f), new Color(0.55f, 0.54f, 0.74f), 0.78f, false);
+            _campFloor = CreateToyMaterial("SB Central Camp Warm Floor", new Color(0.78f, 0.46f, 0.22f), new Color(1.0f, 0.72f, 0.34f), new Color(0.46f, 0.24f, 0.14f), 0.70f, false);
+            _stormTile = CreateToyMaterial("SB Storm Tile Cracked", highContrast ? new Color(0.04f, 0.06f, 0.18f) : new Color(0.30f, 0.34f, 0.52f), new Color(0.52f, 0.58f, 0.82f), new Color(0.10f, 0.12f, 0.30f), 0.46f, true);
             _warningTile = CreateToyMaterial("SB Storm Warning", highContrast ? new Color(1.0f, 0.88f, 0.10f) : new Color(0.12f, 0.80f, 1.0f), new Color(0.46f, 0.95f, 1.0f), new Color(0.08f, 0.34f, 0.70f), 0.5f, false);
-            _stormCloud = CreateMaterial("SB Storm Cloud", highContrast ? new Color(0.03f, 0.02f, 0.18f) : new Color(0.25f, 0.23f, 0.55f), 0.22f);
-            _softCloud = CreateMaterial("SB Soft Cloud", new Color(0.48f, 0.46f, 0.74f), 0.44f);
+            _stormCloud = CreateMaterial("SB Storm Cloud", highContrast ? new Color(0.03f, 0.02f, 0.18f) : new Color(0.36f, 0.39f, 0.68f), 0.34f);
+            _stormMist = CreateMaterial("SB Storm Mist Lavender", new Color(0.60f, 0.62f, 0.88f), 0.40f);
+            _stormVortex = CreateMaterial("SB Storm Vortex Purple", new Color(0.29f, 0.22f, 0.58f), 0.36f, 0.06f);
+            _softCloud = CreateMaterial("SB Soft Cloud", new Color(0.64f, 0.58f, 0.82f), 0.50f);
             _stormLightning = CreateMaterial("SB Storm Lightning", new Color(0.34f, 0.86f, 1.0f), 0.78f, 0.45f);
             _stormRain = CreateMaterial("SB Storm Rain", new Color(0.40f, 0.60f, 0.94f), 0.34f, 0.08f);
             _goldGlow = CreateMaterial("SB Pushback Gold Glow", new Color(0.95f, 0.50f, 0.10f), 0.82f, 0.22f);
             _campOrange = CreateMaterial("SB Camp Orange", new Color(1.0f, 0.34f, 0.08f), 0.48f);
             _campCanvas = CreateMaterial("SB Camp Canvas", new Color(1.0f, 0.67f, 0.28f), 0.58f);
             _campLight = CreateMaterial("SB Camp Lantern Glow", new Color(0.92f, 0.54f, 0.16f), 0.85f, 0.07f);
-            _boardRim = CreateMaterial("SB Board Cyan Rim Glow", new Color(0.34f, 0.67f, 0.92f), 0.78f, 0.12f);
-            _boardWarmRim = CreateMaterial("SB Board Warm Rounded Rim", new Color(0.30f, 0.24f, 0.43f), 0.55f);
-            _boardShadow = CreateMaterial("SB Board Soft Shadow", new Color(0.06f, 0.06f, 0.18f), 0.28f);
+            _boardRim = CreateMaterial("SB Board Cyan Rim Glow", new Color(0.34f, 0.78f, 1.0f), 0.82f, 0.20f);
+            _boardWarmRim = CreateMaterial("SB Board Warm Rounded Rim", new Color(0.42f, 0.34f, 0.60f), 0.62f);
+            _boardShadow = CreateMaterial("SB Board Soft Shadow", new Color(0.16f, 0.15f, 0.30f), 0.38f);
             _trayGlow = CreateMaterial("SB Tray Pad Glow", new Color(0.95f, 0.56f, 0.16f), 0.82f, 0.18f);
             _nearDeathGlow = CreateMaterial("SB Near Death Warm Vignette", new Color(0.90f, 0.16f, 0.22f), 0.65f, 0.22f);
             _skyGradient = CreateSkyGradientMaterial();
@@ -799,21 +807,22 @@ namespace StormBlocks.Presentation
             _poolRoot.gameObject.SetActive(false);
 
             float boardSpan = CellPitch * BoardSize;
-            float shadowSpan = boardSpan + 0.82f;
-            float underlaySpan = boardSpan + 0.58f;
-            float rimPosition = boardSpan * 0.5f + 0.02f;
-            float barrierPosition = boardSpan * 0.5f - 0.05f;
+            float shadowSpan = boardSpan + 0.74f;
+            float underlaySpan = boardSpan + 0.48f;
+            float rimPosition = boardSpan * 0.5f + 0.01f;
+            float barrierPosition = boardSpan * 0.5f - 0.06f;
             float stormCorner = boardSpan * 0.5f - 0.12f;
-            CreateRoundedBox("Soft board shadow plate", _boardRoot, new Vector3(0f, -0.08f, 0f), new Vector3(shadowSpan, 0.12f, shadowSpan), 0.42f, 10, _boardShadow);
-            CreateRoundedBox("Warm rounded board underlay", _boardRoot, new Vector3(0f, -0.01f, 0f), new Vector3(underlaySpan, 0.12f, underlaySpan), 0.34f, 10, _boardWarmRim);
-            CreateCube("Warm board rim north", _boardRoot, new Vector3(0f, 0.09f, rimPosition), new Vector3(underlaySpan, 0.16f, 0.16f), _boardWarmRim);
-            CreateCube("Warm board rim south", _boardRoot, new Vector3(0f, 0.09f, -rimPosition), new Vector3(underlaySpan, 0.16f, 0.16f), _boardWarmRim);
-            CreateCube("Warm board rim west", _boardRoot, new Vector3(-rimPosition, 0.09f, 0f), new Vector3(0.16f, 0.16f, underlaySpan), _boardWarmRim);
-            CreateCube("Warm board rim east", _boardRoot, new Vector3(rimPosition, 0.09f, 0f), new Vector3(0.16f, 0.16f, underlaySpan), _boardWarmRim);
-            CreateCube("Cyan storm barrier north", _boardRoot, new Vector3(0f, 0.22f, barrierPosition), new Vector3(boardSpan + 0.28f, 0.04f, 0.035f), _boardRim);
-            CreateCube("Cyan storm barrier south", _boardRoot, new Vector3(0f, 0.22f, -barrierPosition), new Vector3(boardSpan + 0.28f, 0.04f, 0.035f), _boardRim);
-            CreateCube("Cyan storm barrier west", _boardRoot, new Vector3(-barrierPosition, 0.22f, 0f), new Vector3(0.035f, 0.04f, boardSpan + 0.28f), _boardRim);
-            CreateCube("Cyan storm barrier east", _boardRoot, new Vector3(barrierPosition, 0.22f, 0f), new Vector3(0.035f, 0.04f, boardSpan + 0.28f), _boardRim);
+            CreateRoundedBox("Soft lavender board shadow plate", _boardRoot, new Vector3(0f, -0.065f, 0.03f), new Vector3(shadowSpan, 0.055f, shadowSpan), 0.52f, 12, _boardShadow);
+            CreateRoundedBox("Frosted rounded board underlay", _boardRoot, new Vector3(0f, -0.012f, 0f), new Vector3(underlaySpan, 0.075f, underlaySpan), 0.42f, 12, _boardWarmRim);
+            CreateRoundedBox("Warm playable camp floor glow", _boardRoot, new Vector3(0f, 0.065f, 0f), new Vector3(CellPitch * 3.08f, 0.052f, CellPitch * 3.08f), 0.28f, 8, _campFloor);
+            CreateCube("Warm board rim north", _boardRoot, new Vector3(0f, 0.085f, rimPosition), new Vector3(underlaySpan, 0.095f, 0.12f), _boardWarmRim);
+            CreateCube("Warm board rim south", _boardRoot, new Vector3(0f, 0.085f, -rimPosition), new Vector3(underlaySpan, 0.095f, 0.12f), _boardWarmRim);
+            CreateCube("Warm board rim west", _boardRoot, new Vector3(-rimPosition, 0.085f, 0f), new Vector3(0.12f, 0.095f, underlaySpan), _boardWarmRim);
+            CreateCube("Warm board rim east", _boardRoot, new Vector3(rimPosition, 0.085f, 0f), new Vector3(0.12f, 0.095f, underlaySpan), _boardWarmRim);
+            CreateCube("Cyan storm barrier north", _boardRoot, new Vector3(0f, 0.19f, barrierPosition), new Vector3(boardSpan + 0.18f, 0.035f, 0.030f), _boardRim);
+            CreateCube("Cyan storm barrier south", _boardRoot, new Vector3(0f, 0.19f, -barrierPosition), new Vector3(boardSpan + 0.18f, 0.035f, 0.030f), _boardRim);
+            CreateCube("Cyan storm barrier west", _boardRoot, new Vector3(-barrierPosition, 0.19f, 0f), new Vector3(0.030f, 0.035f, boardSpan + 0.18f), _boardRim);
+            CreateCube("Cyan storm barrier east", _boardRoot, new Vector3(barrierPosition, 0.19f, 0f), new Vector3(0.030f, 0.035f, boardSpan + 0.18f), _boardRim);
             CreateBoardStormCorner("North west storm curl", new Vector3(-stormCorner, 0.40f, stormCorner), -20f);
             CreateBoardStormCorner("North east storm curl", new Vector3(stormCorner, 0.40f, stormCorner), 20f);
             CreateBoardStormCorner("South west storm curl", new Vector3(-stormCorner, 0.40f, -stormCorner), 20f);
@@ -824,9 +833,10 @@ namespace StormBlocks.Presentation
                 for (int x = 0; x < BoardSize; x++)
                 {
                     Vector3 center = CellCenter(x, y);
-                    float tileSize = CellPitch * 0.88f;
-                    var tile = CreateRoundedBox("Tile " + x + "," + y, _boardRoot, center, new Vector3(tileSize, 0.16f, tileSize), 0.10f, 6, _emptyTile);
-                    tile.transform.localPosition += Vector3.up * 0.02f;
+                    float rimSize = CellPitch * 0.96f;
+                    float tileSize = CellPitch * 0.84f;
+                    CreateRoundedBox("Cell frosted lip " + x + "," + y, _boardRoot, center + Vector3.up * 0.014f, new Vector3(rimSize, 0.055f, rimSize), 0.13f, 7, _cellRim);
+                    var tile = CreateRoundedBox("Tile " + x + "," + y, _boardRoot, center + Vector3.up * 0.052f, new Vector3(tileSize, 0.115f, tileSize), 0.12f, 7, _emptyTile);
                     _tileObjects[x, y] = tile;
                 }
             }
@@ -836,10 +846,11 @@ namespace StormBlocks.Presentation
 
         private void CreateBoardStormCorner(string objectName, Vector3 center, float rotation)
         {
-            CreateSpiralRibbon(objectName + " purple spiral", _boardRoot, center, 0.15f, 0.66f, 0.14f, 1.35f, rotation, Mathf.Sign(center.x) != Mathf.Sign(center.z), _stormCloud);
-            CreateSpiralRibbon(objectName + " cyan spiral eye", _boardRoot, center + new Vector3(0f, 0.025f, 0f), 0.08f, 0.42f, 0.055f, 1.05f, rotation + 18f, Mathf.Sign(center.x) == Mathf.Sign(center.z), _stormLightning);
-            CreateSphere(objectName + " cloud crown", _boardRoot, center + new Vector3(0.16f * Mathf.Sign(center.x), 0.07f, -0.10f * Mathf.Sign(center.z)), new Vector3(0.54f, 0.22f, 0.42f), _stormCloud);
-            CreateLightningBolt(objectName + " lightning", _boardRoot, center + new Vector3(0.06f * Mathf.Sign(center.x), 0.20f, -0.10f * Mathf.Sign(center.z)), 0.38f, rotation);
+            CreateSpiralRibbon(objectName + " purple storm spiral", _boardRoot, center, 0.12f, 0.58f, 0.20f, 1.24f, rotation, Mathf.Sign(center.x) != Mathf.Sign(center.z), _stormVortex);
+            CreateSpiralRibbon(objectName + " cyan storm eye", _boardRoot, center + new Vector3(0f, 0.026f, 0f), 0.08f, 0.38f, 0.065f, 0.96f, rotation + 18f, Mathf.Sign(center.x) == Mathf.Sign(center.z), _stormLightning);
+            CreateSphere(objectName + " soft cloud crown", _boardRoot, center + new Vector3(0.18f * Mathf.Sign(center.x), 0.08f, -0.10f * Mathf.Sign(center.z)), new Vector3(0.64f, 0.18f, 0.46f), _stormMist);
+            CreateSphere(objectName + " dark cloud core", _boardRoot, center + new Vector3(-0.14f * Mathf.Sign(center.x), 0.10f, 0.14f * Mathf.Sign(center.z)), new Vector3(0.48f, 0.16f, 0.38f), _stormCloud);
+            CreateLightningBolt(objectName + " lightning", _boardRoot, center + new Vector3(0.06f * Mathf.Sign(center.x), 0.19f, -0.10f * Mathf.Sign(center.z)), 0.34f, rotation);
         }
 
         private void BuildCamp()
@@ -876,24 +887,24 @@ namespace StormBlocks.Presentation
         {
             _trayRoot = new GameObject("Bottom Three Piece Tray").transform;
             _trayRoot.SetParent(transform);
-            _trayRoot.position = new Vector3(0f, 0.18f, -6.38f);
-            CreateRoundedBox("Rounded purple tray base", _trayRoot, Vector3.zero, new Vector3(6.55f, 0.18f, 1.26f), 0.38f, 10, _uiPanel);
-            CreateSphere("Tray Static rounded left cap", _trayRoot, new Vector3(-3.24f, 0.02f, 0f), new Vector3(0.66f, 0.19f, 1.46f), _uiPanel);
-            CreateSphere("Tray Static rounded right cap", _trayRoot, new Vector3(3.24f, 0.02f, 0f), new Vector3(0.66f, 0.19f, 1.46f), _uiPanel);
-            CreateCube("Tray Static stitched top lip", _trayRoot, new Vector3(0f, 0.15f, 0.58f), new Vector3(5.95f, 0.06f, 0.06f), _uiPanelWarm);
-            CreateCube("Tray Static stitched bottom lip", _trayRoot, new Vector3(0f, 0.15f, -0.58f), new Vector3(5.95f, 0.06f, 0.06f), _uiPanelWarm);
-            CreateCube("Tray Static warm top rail", _trayRoot, new Vector3(0f, 0.25f, 0.71f), new Vector3(5.75f, 0.07f, 0.08f), _uiPanelWarm);
+            _trayRoot.position = new Vector3(0f, 0.18f, -5.88f);
+            CreateRoundedBox("Rounded purple tray base", _trayRoot, Vector3.zero, new Vector3(6.20f, 0.16f, 1.12f), 0.34f, 10, _uiPanel);
+            CreateSphere("Tray Static rounded left cap", _trayRoot, new Vector3(-3.02f, 0.02f, 0f), new Vector3(0.58f, 0.17f, 1.28f), _uiPanel);
+            CreateSphere("Tray Static rounded right cap", _trayRoot, new Vector3(3.02f, 0.02f, 0f), new Vector3(0.58f, 0.17f, 1.28f), _uiPanel);
+            CreateCube("Tray Static stitched top lip", _trayRoot, new Vector3(0f, 0.15f, 0.51f), new Vector3(5.55f, 0.052f, 0.052f), _uiPanelWarm);
+            CreateCube("Tray Static stitched bottom lip", _trayRoot, new Vector3(0f, 0.15f, -0.51f), new Vector3(5.55f, 0.052f, 0.052f), _uiPanelWarm);
+            CreateCube("Tray Static warm top rail", _trayRoot, new Vector3(0f, 0.25f, 0.64f), new Vector3(5.36f, 0.06f, 0.07f), _uiPanelWarm);
             for (int i = 0; i < 3; i++)
             {
-                CreateSphere("Tray Static golden piece pad " + i, _trayRoot, new Vector3(-2.05f + i * 2.05f, 0.19f, -0.02f), new Vector3(1.10f, 0.10f, 0.62f), _trayGlow);
+                CreateSphere("Tray Static golden piece pad " + i, _trayRoot, new Vector3(-1.88f + i * 1.88f, 0.19f, -0.03f), new Vector3(0.96f, 0.09f, 0.54f), _trayGlow);
             }
 
             TryInstantiateDesignModel(
                 _sourceBlockCharmPrefab,
-                "Optimized source blue toy block tray charm",
+                "Tray Static optimized source blue toy block charm",
                 _trayRoot,
-                new Vector3(-3.08f, 0.30f, -0.18f),
-                new Vector3(0.34f, 0.34f, 0.34f),
+                new Vector3(-2.82f, 0.28f, -0.18f),
+                new Vector3(0.30f, 0.30f, 0.30f),
                 new Vector3(0f, -24f, 0f),
                 true);
         }
@@ -1879,21 +1890,21 @@ namespace StormBlocks.Presentation
                 return;
             }
 
-            float[] centers = { -2.05f, 0f, 2.05f };
+            float[] centers = { -1.88f, 0f, 1.88f };
             for (int i = 0; i < _session.State.Queue.Count; i++)
             {
                 var piece = _session.State.Queue[i];
                 var root = new GameObject("Tray Piece " + i + " " + piece.Id).transform;
                 root.SetParent(_trayRoot, false);
                 root.localPosition = new Vector3(centers[i], 0.34f, 0f);
-                BuildPieceCells(root, piece, Vector3.zero, BlockMaterial(piece.Id), 0.38f, 0.30f, 0.39f);
+                BuildPieceCells(root, piece, Vector3.zero, BlockMaterial(piece.Id), 0.36f, 0.30f, 0.37f);
                 _trayPieces.Add(new TrayPieceView
                 {
                     QueueIndex = i,
                     Piece = piece,
                     Root = root,
                     Center = _trayRoot.TransformPoint(root.localPosition),
-                    HalfSize = new Vector2(0.88f, 0.68f)
+                    HalfSize = new Vector2(0.80f, 0.62f)
                 });
             }
         }
@@ -2234,26 +2245,26 @@ namespace StormBlocks.Presentation
         private void BuildStormCell(Vector3 center, int x, int y)
         {
             bool lowDetail = UseLowDetailVisuals();
-            CreatePooledSphere("Storm body puff", _boardContentRoot, center + new Vector3(-0.08f, 0.31f, 0.02f), new Vector3(0.46f, 0.22f, 0.36f), _stormCloud);
+            CreatePooledSphere("Storm body puff", _boardContentRoot, center + new Vector3(-0.06f, 0.25f, 0.02f), new Vector3(0.34f, 0.13f, 0.30f), _stormMist);
             if ((x + y) % 2 == 0)
             {
                 if (!lowDetail)
                 {
-                    CreatePooledSphere("Storm upper puff", _boardContentRoot, center + new Vector3(0.18f, 0.35f, 0.02f), new Vector3(0.44f, 0.26f, 0.34f), _stormCloud);
-                    CreatePooledSphere("Storm lower mist", _boardContentRoot, center + new Vector3(-0.02f, 0.22f, -0.18f), new Vector3(0.56f, 0.10f, 0.22f), _softCloud);
+                    CreatePooledSphere("Storm upper puff", _boardContentRoot, center + new Vector3(0.14f, 0.30f, 0.02f), new Vector3(0.36f, 0.15f, 0.30f), _stormCloud);
+                    CreatePooledSphere("Storm lower mist", _boardContentRoot, center + new Vector3(-0.02f, 0.19f, -0.18f), new Vector3(0.48f, 0.070f, 0.20f), _softCloud);
                 }
 
-                CreatePooledSphere("Storm puff glow", _boardContentRoot, center + new Vector3(0f, 0.40f, -0.10f), new Vector3(0.25f, 0.11f, 0.20f), _stormLightning);
+                CreatePooledSphere("Storm puff glow", _boardContentRoot, center + new Vector3(0f, 0.34f, -0.10f), new Vector3(0.18f, 0.070f, 0.16f), _stormLightning);
             }
 
             if (!lowDetail && (x * 3 + y) % 5 == 0)
             {
-                CreateLightningBolt("Storm cell lightning", _boardContentRoot, center + new Vector3(0.04f, 0.48f, -0.02f), 0.34f, -18f);
+                CreateLightningBolt("Storm cell lightning", _boardContentRoot, center + new Vector3(0.04f, 0.40f, -0.02f), 0.28f, -18f);
             }
 
             if (!lowDetail && (x + y) % 3 == 0)
             {
-                var rain = CreatePooledCube("Storm rain streak", _boardContentRoot, center + new Vector3(-0.18f, 0.44f, -0.18f), new Vector3(0.035f, 0.025f, 0.34f), _stormRain);
+                var rain = CreatePooledCube("Storm rain streak", _boardContentRoot, center + new Vector3(-0.18f, 0.36f, -0.18f), new Vector3(0.030f, 0.020f, 0.26f), _stormRain);
                 rain.transform.rotation = Quaternion.Euler(0f, 0f, -22f);
             }
         }
@@ -2302,11 +2313,20 @@ namespace StormBlocks.Presentation
 
         private void CreateBlockCell(Transform parent, Vector3 center, Material material, float footprint, float height)
         {
-            CreatePooledCube("Chunky toy block", parent, center, new Vector3(footprint, height, footprint), material);
-            CreatePooledCube("Chunky toy block top bevel", parent, center + new Vector3(0f, height * 0.53f, 0f), new Vector3(footprint * 0.78f, height * 0.08f, footprint * 0.78f), material);
+            if (height <= 0.12f || UseLowDetailVisuals())
+            {
+                CreatePooledCube("Chunky toy block", parent, center, new Vector3(footprint, height, footprint), material);
+                CreatePooledCube("Chunky toy block top bevel", parent, center + new Vector3(0f, height * 0.53f, 0f), new Vector3(footprint * 0.78f, height * 0.08f, footprint * 0.78f), material);
+            }
+            else
+            {
+                CreateRoundedBox("Chunky rounded toy block", parent, center, new Vector3(footprint, height, footprint), footprint * 0.20f, 5, material);
+                CreateRoundedBox("Chunky rounded top bevel", parent, center + new Vector3(0f, height * 0.53f, 0f), new Vector3(footprint * 0.76f, height * 0.08f, footprint * 0.76f), footprint * 0.12f, 4, material);
+            }
+
             if (!UseLowDetailVisuals())
             {
-                CreatePooledSphere("Block highlight dot", parent, center + new Vector3(footprint * 0.24f, height * 0.55f, -footprint * 0.24f), new Vector3(footprint * 0.14f, height * 0.10f, footprint * 0.14f), _goldGlow);
+                CreatePooledSphere("Block highlight dot", parent, center + new Vector3(footprint * 0.22f, height * 0.56f, -footprint * 0.22f), new Vector3(footprint * 0.12f, height * 0.07f, footprint * 0.12f), _creamTile);
             }
         }
 
