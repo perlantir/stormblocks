@@ -903,6 +903,7 @@ Known risks / not done:
 
 - Captured additional physical profiling artifacts on the connected iPhone 17 Pro Max while the current-source signed app was installed.
 - Recorded a 2-minute Game Performance request. The trace was saved and is viewable, but the target app exited after 10 seconds, so this is useful launch/runtime evidence and not a replacement for the required longer interactive profile.
+- Retried Game Performance against the already-running app. This saved a second trace, exported its TOC cleanly, reached the template's 10-second windowed time limit, and left `StormBlocks` running on device afterward.
 - Recorded a 1-minute Power Profiler trace that reached the time limit.
 - Exported the latest Power trace TOC and key metric tables, then confirmed the `StormBlocks` process was still running on device after the trace.
 - Updated QA, performance, and release audit docs with the new trace paths and measured modern-device metrics.
@@ -910,10 +911,11 @@ Known risks / not done:
 Evidence:
 
 - `STORMBLOCKS_PROFILE_TIME=2m Scripts/device_qa_session.sh profile-game` wrote `StormBlocksUnity/Builds/DeviceProfiles/stormblocks-game-performance-20260505T180036Z.trace` on hardware UDID `00008150-00040D203A88401C`; the trace is 104 MB and the TOC reports target `iPhone 17 Pro Max`, iOS `26.3 (23D127)`, process `StormBlocks`, and `end-reason` = `Target app exited` after 10 seconds.
+- `STORMBLOCKS_PROFILE_TIME=1m Scripts/device_qa_session.sh profile-game` wrote `StormBlocksUnity/Builds/DeviceProfiles/stormblocks-game-performance-20260505T181049Z.trace`; the trace is 100 MB and the TOC reports target `iPhone 17 Pro Max`, iOS `26.3 (23D127)`, process `StormBlocks`, and `end-reason` = `Time limit reached` for a 10-second windowed Game Performance duration.
 - `STORMBLOCKS_PROFILE_TIME=1m Scripts/device_qa_session.sh profile-power` wrote `StormBlocksUnity/Builds/DeviceProfiles/stormblocks-power-20260505T180251Z.trace`; `xcrun xctrace export --toc` reports `end-reason` = `Time limit reached` and duration `60.862323` seconds.
 - Exported `device-thermal-state-intervals` reports `Nominal` thermal state for the full 60.86-second Power trace.
 - Exported `metal-perf-overview-layer-duration-metric` reports GPU Active Time average `0.549 ms` and Frame Interval average `33.620 ms` across 61 sampled windows / 1,819 frames.
-- `xcrun devicectl device info processes` still listed `StormBlocks` running as process id `1589` after the Power trace.
+- `xcrun devicectl device info processes` still listed `StormBlocks` running as process id `1589` after both the Power trace and the Game Performance retry.
 
 Known risks / not done:
 
