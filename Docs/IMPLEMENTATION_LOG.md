@@ -841,6 +841,7 @@ Evidence:
 - `Scripts/ios_release_gates.sh install-device` succeeded at `2026-05-05 17:56:08Z`; `/tmp/stormblocks-device-install.json` reports `"outcome" : "success"` for `com.perlantir.stormblocks` on paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D`.
 - `Scripts/ios_release_gates.sh launch-device` succeeded at `2026-05-05 17:56:17Z`; `/tmp/stormblocks-device-launch.json` reports `"outcome" : "success"` and process id `1485` for `com.perlantir.stormblocks`.
 - `Scripts/release_audit.sh full` now reports 33 pass, 0 fail, and 6 open external gates; it exits nonzero because those open gates remain unresolved.
+- GitHub `Release Static Checks` passed for pushed device evidence commit `ec3be40`: `https://github.com/perlantir/stormblocks/actions/runs/25393247310`.
 
 Known risks / not done:
 
