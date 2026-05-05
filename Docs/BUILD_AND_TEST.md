@@ -27,7 +27,7 @@ Use the project test runner for batch verification. Unity 6000 can skip `-runTes
   -logFile /tmp/stormblocks-editmode-lowdetail.log
 ```
 
-Current evidence: `StormBlocksUnity/editmode-results.xml` reports 25 total, 25 passed, 0 failed at `2026-05-05 15:00:45Z`.
+Current evidence: `StormBlocksUnity/editmode-results.xml` reports 25 total, 25 passed, 0 failed at `2026-05-05 15:09:10Z`.
 
 ## PlayMode Tests
 
@@ -40,7 +40,7 @@ Current evidence: `StormBlocksUnity/editmode-results.xml` reports 25 total, 25 p
   -logFile /tmp/stormblocks-playmode-lowdetail.log
 ```
 
-Current evidence: `StormBlocksUnity/playmode-results.xml` reports 7 total, 7 passed, 0 failed at `2026-05-05 15:00:52Z`.
+Current evidence: `StormBlocksUnity/playmode-results.xml` reports 7 total, 7 passed, 0 failed at `2026-05-05 15:09:18Z`.
 
 The PlayMode suite includes release smoke guards for the normal flow and active touch controls:
 
@@ -49,8 +49,8 @@ The PlayMode suite includes release smoke guards for the normal flow and active 
 
 The PlayMode suite includes a lightweight mobile scene-budget guard. Current logged baseline:
 
-- 365 renderers.
-- 136,308 mesh triangles.
+- 356 renderers.
+- 133,932 mesh triangles.
 - 1 audio listener.
 - 1 canvas.
 
@@ -246,7 +246,7 @@ xcrun devicectl device process launch \
 
 Current evidence:
 
-- `Scripts/ios_release_gates.sh launch-device` succeeded after the latest signed install at `2026-05-05 14:04:14Z`.
+- `Scripts/ios_release_gates.sh launch-device` succeeded after the latest signed install at `2026-05-05 15:16:42Z`.
 - `/tmp/stormblocks-device-launch.json` reports `outcome = success`.
 - `/tmp/stormblocks-device-launch.log` includes `Launched application with com.perlantir.stormblocks bundle identifier.`
 
@@ -300,8 +300,8 @@ Current evidence:
 - `/tmp/stormblocks-xcode-team7jl-upload-appstore.log` fails with `exportArchive Error Downloading App Information`.
 - Distribution logs show Xcode authenticated to App Store Connect provider `ae62de71-9179-4836-a662-2c92a63e965e` and queried bundle id `com.perlantir.stormblocks`.
 - App Store Connect returned `data: []` and `total: 0`, meaning no app record currently exists for `com.perlantir.stormblocks` under the selected provider/team.
-- Latest Xcode retry at `2026-05-05 14:04:24Z` failed at `IDEDistributionFetchAppRecordStep` with `IDEDistribution.DistributionAppRecordProviderError.missingApp(bundleId: "com.perlantir.stormblocks")`.
-- Current distribution log: `/var/folders/b2/cl2rv8q13bg48zl073ctm_fc0000gq/T/Unity-iPhone_2026-05-05_09-04-22.356.xcdistributionlogs/IDEDistributionAppStoreConnect.log`.
+- Latest Xcode retry at `2026-05-05 15:16:59Z` failed at `IDEDistributionFetchAppRecordStep` with `IDEDistribution.DistributionAppRecordProviderError.missingApp(bundleId: "com.perlantir.stormblocks")`.
+- Current distribution log: `/var/folders/b2/cl2rv8q13bg48zl073ctm_fc0000gq/T/Unity-iPhone_2026-05-05_10-16-57.253.xcdistributionlogs/IDEDistributionAppStoreConnect.log`.
 
 The non-UI credential probes currently require human/App Store Connect credentials:
 
@@ -315,7 +315,6 @@ The non-UI credential probes currently require human/App Store Connect credentia
 - Create the App Store Connect app record for bundle id `com.perlantir.stormblocks` under team `7JL22TDB44` / `UBER KIWI LLC`.
 - App Store Connect API key or Apple ID app-specific password for upload automation.
 - Game Center leaderboard and achievement ids matching `Docs/GAME_CENTER_SETUP.md`.
-- Unlock the paired iPhone and rerun the launch probe for signed-device runtime validation.
 - Upload `StormBlocksUnity/Builds/iOS/ExportAppStoreTeam7JL/StormBlocks.ipa` after the App Store Connect app record exists.
 
 The repeatable command runner is `Scripts/ios_release_gates.sh`.

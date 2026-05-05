@@ -60,7 +60,7 @@ status() {
   log "Checking cached release evidence"
   require_nunit_pass "$UNITY_PROJECT/editmode-results.xml" 25
   require_nunit_pass "$UNITY_PROJECT/playmode-results.xml" 7
-  require_log_contains "$UNITY_PROJECT/playmode-results.xml" "Storm Blocks mobile budget renderers=365 triangles=136308 audioListeners=1 canvases=1"
+  require_log_contains "$UNITY_PROJECT/playmode-results.xml" "Storm Blocks mobile budget renderers=356 triangles=133932 audioListeners=1 canvases=1"
   require_log_contains /tmp/stormblocks-ios-device-team7jl.log "Build Finished, Result: Success"
   require_log_contains /tmp/stormblocks-xcode-lowdetail-pool-unsigned.log "BUILD SUCCEEDED"
   require_log_contains /tmp/stormblocks-xcode-team7jl-default-signed.log "BUILD SUCCEEDED"

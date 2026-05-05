@@ -652,14 +652,18 @@ Evidence:
 
 - Raw GLB review found 16 valid GLBs totaling 311 MB; individual raw models range from roughly 178k to 383k triangles, with the campfire-rescue source at roughly 1.4M triangles.
 - Optimized runtime/source GLBs now include `blue_2x2_block_mobile_lod1.glb` at 249 KB / 7,452 triangles, `lightning_cloud_cube_mobile_lod1.glb` at 1.1 MB / 3,902 triangles, and `stormy_campfire_rescue_mobile_lod1.glb` at 2.6 MB / 70,165 triangles.
-- EditMode tests: `StormBlocksUnity/editmode-results.xml` reports 25 total, 25 passed, 0 failed at `2026-05-05 15:00:45Z`.
-- PlayMode tests: `StormBlocksUnity/playmode-results.xml` reports 7 total, 7 passed, 0 failed at `2026-05-05 15:00:52Z`.
-- Current logged full-detail mobile baseline after the board pass: 365 renderers, 136,308 mesh triangles, 1 audio listener, and 1 canvas.
+- EditMode tests: `StormBlocksUnity/editmode-results.xml` reports 25 total, 25 passed, 0 failed at `2026-05-05 15:09:10Z`.
+- PlayMode tests: `StormBlocksUnity/playmode-results.xml` reports 7 total, 7 passed, 0 failed at `2026-05-05 15:09:18Z`.
+- Current logged full-detail mobile baseline after the board pass: 356 renderers, 133,932 mesh triangles, 1 audio listener, and 1 canvas.
 - Portrait visual capture: `/tmp/stormblocks-visual-design-backdrop-crop.log` completed successfully and wrote `StormBlocksUnity/Builds/VisualChecks/stormblocks-gameplay.png`.
 - App Store screenshot capture: `/tmp/stormblocks-appstore-design-backdrop.log` completed successfully and regenerated all five 1170 x 2532 PNGs under `StormBlocksUnity/Builds/AppStoreScreens/`; the files were copied into `fastlane/screenshots/en-US/`.
 - `Scripts/ci_static_checks.sh` passed after clearing Unity test-runner transient scenes.
 - `Scripts/release_audit.sh local` passed with 32 pass, 0 fail, 0 open.
 - `Scripts/release_audit.sh full` reported 33 pass, 0 fail, 6 open external gates.
+- `Scripts/ios_release_gates.sh all-local` rebuilt the current-source Unity iOS project, signed Release-iphoneos app, installed it on the paired iPhone, created the Xcode archive, and exported the App Store Connect IPA on `2026-05-05`; the trailing status check required the updated 356-renderer baseline above.
+- After the baseline update, `Scripts/ios_release_gates.sh status` passed against the fresh current-source IPA and `Scripts/ios_release_gates.sh launch-device` launched the fresh install on the paired iPhone at `2026-05-05 15:16:42Z`.
+- `Scripts/ios_release_gates.sh upload-probe` retried against the fresh archive at `2026-05-05 15:16:59Z`; App Store Connect returned HTTP 200 with `data: []`, and Xcode failed at `IDEDistributionFetchAppRecordStep` with `missingApp(bundleId: "com.perlantir.stormblocks")`.
+- `Scripts/fastlane_release.sh ios create_app_record` is still blocked until App Store Connect API key variables or `STORMBLOCKS_APPLE_ID`/`APPLE_ID` are set.
 
 Known risks / not done:
 
