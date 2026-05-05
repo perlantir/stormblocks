@@ -1,0 +1,30 @@
+.DS_Store
+
+# Unity generated state
+StormBlocksUnity/Library/
+StormBlocksUnity/Temp/
+StormBlocksUnity/Obj/
+StormBlocksUnity/Logs/
+StormBlocksUnity/UserSettings/
+StormBlocksUnity/MemoryCaptures/
+StormBlocksUnity/Recordings/
+StormBlocksUnity/Builds/
+StormBlocksUnity/Build/
+StormBlocksUnity/Assets/Resources/PerformanceTestRun*.json
+StormBlocksUnity/Assets/Resources/PerformanceTestRun*.json.meta
+StormBlocksUnity/Assets/InitTestScene*.unity
+StormBlocksUnity/Assets/InitTestScene*.unity.meta
+
+# Unity generated solution/project files
+StormBlocksUnity/*.csproj
+StormBlocksUnity/*.sln
+StormBlocksUnity/*.user
+StormBlocksUnity/*.pidb
+StormBlocksUnity/*.booproj
+
+# Crash and local machine artifacts
+sysinfo.txt
+mono_crash*.json
+StormBlocksUnity/mono_crash*.json
+*.stackdump
+fastlane/report.xml

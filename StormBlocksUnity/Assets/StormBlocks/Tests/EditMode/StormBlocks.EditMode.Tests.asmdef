@@ -1,0 +1,22 @@
+{
+  "name": "StormBlocks.EditMode.Tests",
+  "rootNamespace": "StormBlocks.Tests.EditMode",
+  "references": [
+    "StormBlocks.Core",
+    "StormBlocks.Services"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": false,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "optionalUnityReferences": [
+    "TestAssemblies"
+  ],
+  "noEngineReferences": false
+}

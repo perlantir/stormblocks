@@ -1,0 +1,99 @@
+opt_out_usage
+
+default_platform(:ios)
+
+APP_IDENTIFIER = "com.perlantir.stormblocks"
+APP_NAME = "Storm Blocks"
+SKU = "stormblocks-ios"
+VERSION = "0.1.0"
+TEAM_ID = "7JL22TDB44"
+PROVIDER_PUBLIC_ID = "ae62de71-9179-4836-a662-2c92a63e965e"
+IPA_PATH = "StormBlocksUnity/Builds/iOS/ExportAppStoreTeam7JL/StormBlocks.ipa"
+
+def configure_app_store_connect_api_key_if_available
+  key_id = ENV["APP_STORE_CONNECT_API_KEY_KEY_ID"]
+  issuer_id = ENV["APP_STORE_CONNECT_API_KEY_ISSUER_ID"]
+  key_filepath = ENV["APP_STORE_CONNECT_API_KEY_KEY_FILEPATH"]
+  key_content = ENV["APP_STORE_CONNECT_API_KEY_KEY"]
+
+  return nil if key_id.to_s.empty?
+
+  params = {
+    key_id: key_id,
+    issuer_id: issuer_id,
+    duration: 500,
+    in_house: false
+  }
+
+  if !key_filepath.to_s.empty?
+    params[:key_filepath] = key_filepath
+  elsif !key_content.to_s.empty?
+    params[:key_content] = key_content
+    params[:is_key_content_base64] = ENV["APP_STORE_CONNECT_API_KEY_IS_KEY_CONTENT_BASE64"] == "true"
+  else
+    UI.user_error!("Set APP_STORE_CONNECT_API_KEY_KEY_FILEPATH or APP_STORE_CONNECT_API_KEY_KEY.")
+  end
+
+  app_store_connect_api_key(params)
+end
+
+def require_app_store_auth!
+  token = configure_app_store_connect_api_key_if_available
+  return token unless token.nil?
+
+  return nil unless ENV["STORMBLOCKS_APPLE_ID"].to_s.empty? && ENV["APPLE_ID"].to_s.empty?
+
+  UI.user_error!("Set App Store Connect API key env vars or STORMBLOCKS_APPLE_ID/APPLE_ID before running credentialed lanes.")
+end
+
+def require_ipa!
+  UI.user_error!("Missing IPA at #{IPA_PATH}. Run Scripts/ios_release_gates.sh export-appstore first.") unless File.exist?(IPA_PATH)
+end
+
+platform :ios do
+  desc "Create the missing App Store Connect app record and enable Game Center capability."
+  lane :create_app_record do
+    require_app_store_auth!
+
+    produce_options = {
+      app_identifier: APP_IDENTIFIER,
+      app_name: APP_NAME,
+      app_version: VERSION,
+      sku: SKU,
+      platform: "ios",
+      language: "English",
+      team_id: TEAM_ID,
+      itc_team_id: TEAM_ID,
+      enable_services: {
+        game_center: "ios"
+      }
+    }
+
+    apple_id = ENV["STORMBLOCKS_APPLE_ID"] || ENV["APPLE_ID"]
+    produce_options[:username] = apple_id unless apple_id.to_s.empty?
+
+    produce(produce_options)
+  end
+
+  desc "Upload the already exported Storm Blocks IPA to TestFlight."
+  lane :upload_testflight do
+    require_app_store_auth!
+    require_ipa!
+
+    pilot(
+      app_identifier: APP_IDENTIFIER,
+      ipa: IPA_PATH,
+      team_id: TEAM_ID,
+      provider_public_id: PROVIDER_PUBLIC_ID,
+      skip_submission: true,
+      skip_waiting_for_build_processing: true,
+      changelog: "Release-candidate validation build for Storm Blocks: Daily Storm, Storm Trail, Tempest Trials, Practice mode, cosmetic progression, Game Center-ready interfaces, and iOS release QA."
+    )
+  end
+
+  desc "Create the App Store Connect app record if needed, then upload the exported IPA."
+  lane :release_candidate_upload do
+    create_app_record
+    upload_testflight
+  end
+end

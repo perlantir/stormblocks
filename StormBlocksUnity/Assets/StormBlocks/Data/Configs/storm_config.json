@@ -1,0 +1,14 @@
+{
+  "boardSize": 8,
+  "campMode": "centerVisualZone",
+  "calmSpreadEveryPlacements": 4,
+  "strategicSpreadEveryPlacements": 3,
+  "panicSpreadEveryPlacements": 2,
+  "nearDeathDistanceToCamp": 2,
+  "warningBeforeSpread": true,
+  "pushbackAutomatic": true,
+  "initialStormRingThickness": 1,
+  "baseStormSpreadCells": 4,
+  "comboBonusPushbackRadius": 1,
+  "clutchBonusPushbackRadius": 1
+}

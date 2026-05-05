@@ -1,0 +1,15 @@
+{
+  "clearedCell": 10,
+  "lineClear": 100,
+  "survivorRescued": 25,
+  "stormTileDestroyed": 50,
+  "clutchSave": 500,
+  "perfectSet": 250,
+  "comboMultipliers": [
+    1,
+    2,
+    3,
+    5,
+    8
+  ]
+}

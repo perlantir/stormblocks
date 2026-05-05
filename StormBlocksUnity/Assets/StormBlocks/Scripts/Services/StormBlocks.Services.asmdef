@@ -1,0 +1,16 @@
+{
+  "name": "StormBlocks.Services",
+  "rootNamespace": "StormBlocks.Services",
+  "references": [
+    "StormBlocks.Core"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": true
+}

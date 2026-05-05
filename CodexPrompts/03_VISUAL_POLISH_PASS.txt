@@ -1,0 +1,20 @@
+Perform a production visual polish pass for Storm Blocks.
+
+Use Docs/ART_DIRECTION.md and DesignReferences. The target is Premium Casual Toy-Puzzle Storm Rescue with studio-quality stylized 3D.
+
+Focus on:
+
+- 3D tile and piece polish.
+- Warm camp lighting.
+- Storm tile readability.
+- Storm warning telegraphs.
+- Storm Pushback VFX.
+- Near-death cinematic state.
+- Combo celebration.
+- UI hierarchy and typography.
+- Touch feedback.
+- Performance-safe particles.
+
+Do not add confusing buttons or power-up UI unless already specified. Storm Pushback is automatic.
+
+After changes, report visual systems modified, prefabs/assets touched, performance considerations, and remaining polish tasks.

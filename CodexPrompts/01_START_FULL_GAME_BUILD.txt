@@ -1,0 +1,19 @@
+Read AGENTS.md, GOAL.md, and every file in Docs. Review DesignReferences. Then produce a brief implementation plan that confirms:
+
+1. Final product understanding.
+2. Unity/project setup assumptions.
+3. Required packages.
+4. Full-game milestone order.
+5. Main technical risks.
+6. Visual production risks.
+7. Exact first implementation actions.
+
+Then start building the full game in milestone order. Begin with repo/project setup and core logic architecture, but every decision must align with the final full-game target.
+
+Do not build a throwaway prototype. Build production architecture from the start.
+
+After each significant pass:
+
+- Run available tests/checks.
+- Update Docs/IMPLEMENTATION_LOG.md.
+- Report changed files, test status, risks, and next gate.

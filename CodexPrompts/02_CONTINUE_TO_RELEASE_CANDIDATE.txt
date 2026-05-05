@@ -1,0 +1,7 @@
+Continue the Storm Blocks full-game `/goal`.
+
+Read Docs/IMPLEMENTATION_LOG.md, Docs/FULL_GAME_MILESTONES.md, Docs/ACCEPTANCE_CRITERIA.md, and Docs/RELEASE_DONE_CHECKLIST.md.
+
+Find the next incomplete production gate and implement it. Keep advancing toward the release candidate. Do not stop at a prototype or partial demo.
+
+Before coding, state the next gate and acceptance criteria. After coding, run checks, update the implementation log, and report status.

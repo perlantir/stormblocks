@@ -1,0 +1,13 @@
+Audit Storm Blocks against Docs/RELEASE_DONE_CHECKLIST.md.
+
+Produce:
+
+1. Pass/fail checklist.
+2. Missing features.
+3. Bugs/risks.
+4. Visual polish gaps.
+5. Performance risks.
+6. Test failures.
+7. Exact tasks required to reach release candidate.
+
+Then implement the highest-priority missing items until the checklist is satisfied or blocked by missing external credentials/assets.

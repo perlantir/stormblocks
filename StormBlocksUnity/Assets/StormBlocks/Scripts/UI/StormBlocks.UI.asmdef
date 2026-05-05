@@ -1,0 +1,19 @@
+{
+  "name": "StormBlocks.UI",
+  "rootNamespace": "StormBlocks.UI",
+  "references": [
+    "StormBlocks.Core",
+    "StormBlocks.Services",
+    "StormBlocks.Gameplay",
+    "StormBlocks.Presentation"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

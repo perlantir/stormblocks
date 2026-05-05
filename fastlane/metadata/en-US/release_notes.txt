@@ -1,0 +1,1 @@
+Release-candidate validation build for Storm Blocks. Please verify drag placement, line clears, survivor rescues, automatic Storm Pushback, Daily Storm, Storm Trail, Tempest Trials, Practice mode, accessibility settings, Game Center entry points, haptics/audio feel, and physical-device performance.

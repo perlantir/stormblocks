@@ -1,0 +1,17 @@
+{
+  "name": "StormBlocks.Gameplay",
+  "rootNamespace": "StormBlocks.Gameplay",
+  "references": [
+    "StormBlocks.Core",
+    "StormBlocks.Services"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

@@ -1,0 +1,21 @@
+{
+  "name": "StormBlocks.PlayMode.Tests",
+  "rootNamespace": "StormBlocks.Tests.PlayMode",
+  "references": [
+    "StormBlocks.Core",
+    "StormBlocks.Gameplay",
+    "StormBlocks.Presentation"
+  ],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": false,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "optionalUnityReferences": [
+    "TestAssemblies"
+  ],
+  "noEngineReferences": false
+}

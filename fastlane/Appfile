@@ -1,0 +1,4 @@
+app_identifier("com.perlantir.stormblocks")
+apple_id(ENV["STORMBLOCKS_APPLE_ID"] || ENV["APPLE_ID"])
+team_id("7JL22TDB44")
+itc_team_id("7JL22TDB44")

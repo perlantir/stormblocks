@@ -1,0 +1,15 @@
+/goal Build the complete launch-quality iPhone game Storm Blocks, not a prototype and not an MVP.
+
+Storm Blocks is a free, portrait-first, premium casual 3D block puzzle game. The player drags colorful toy-like 3D block pieces onto an 8x8 grid, clears rows and columns, rescues tiny survivors, and automatically pushes back a living blue-purple storm before it reaches a warm central camp.
+
+Core promise: Place blocks. Clear lines. Rescue survivors. Push back the storm. Beat today’s Daily Storm.
+
+Use the repo docs as source of truth: AGENTS.md, GOAL.md, Docs/GAME_DESIGN_SPEC.md, Docs/ART_DIRECTION.md, Docs/TECH_SPEC.md, Docs/FULL_GAME_MILESTONES.md, Docs/ACCEPTANCE_CRITERIA.md, Docs/RELEASE_DONE_CHECKLIST.md, Docs/EVALS.md. and the GitHub is https://github.com/perlantir/stormblocks
+
+Use /DesignReferences as the visual target: primary gameplay reference 04, charm/palette reference 02, storm/combo reference 03, title atmosphere reference 01.
+
+The final game must include Endless Storm, Daily Storm, Storm Trail progression, Tempest Trials weekly mode, Practice/Chill Mode, local profile/save, cosmetic-only progression, achievements, polished 3D visuals, juicy VFX/audio/haptics, Game Center-ready interfaces, accessibility/settings, QA tests, and iOS build readiness.
+
+Non-negotiables: no forced ads, no paid power, no paid speedups, no gacha, no loot boxes, no copyrighted IP, no default Unity-looking UI, no clone of Block Blast, no sloppy presentation. Storm Pushback must be a real automatic mechanic and the signature visual moment.
+
+Build through the full-game milestones as production gates. Do not stop at a basic playable loop. Continue toward the release-candidate checklist until the game is feature-complete, polished, tested, and documented.

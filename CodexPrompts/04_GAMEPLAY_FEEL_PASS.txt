@@ -1,0 +1,17 @@
+Perform a gameplay feel and addiction-loop pass for Storm Blocks.
+
+Goal: losing should make players instantly retry, and clutch Storm Pushback saves should feel amazing.
+
+Tune and improve:
+
+- Piece queue fairness.
+- Storm spread timing.
+- Pushback strength.
+- Scoring feedback.
+- Combo pacing.
+- Near-death threshold.
+- Instant restart flow.
+- Results screen motivation.
+- Daily Storm clarity.
+
+Run deterministic tests after tuning. Update balance configs, not hard-coded values.
