@@ -828,6 +828,27 @@ Known risks / not done:
 - Current-source physical install/launch still needs to be retried after the paired iPhone is available to CoreDevice again.
 - App Store Connect upload still requires an app record for bundle id `com.perlantir.stormblocks`; the upload probe is expected to stay blocked until that external record exists.
 
+## 2026-05-05 — Accessibility VFX runtime coverage pass
+
+- Added PlayMode coverage for the runtime Accessibility screen's Reduced Motion and Low Detail toggles.
+- The new smoke test stages a real saved-survivor Storm Pushback clear after both settings are enabled, then verifies essential saved/pushback feedback stays visible while secondary pushback waves, lightning, cyan recoil, and block highlight dots are trimmed.
+- Refactored PlayMode smoke helpers to use root-scoped UI/VFX lookup so accumulated Unity test scenes cannot satisfy assertions from another scene.
+- Updated release gate scripts and prompt compliance checks to require 10 passing PlayMode tests.
+- Updated QA, performance, release audit, build/test, and release checklist docs with the new accessibility VFX coverage and current scene-budget baseline.
+
+Evidence:
+
+- EditMode tests: `StormBlocksUnity/editmode-results.xml` reports 26 total, 26 passed, 0 failed at `2026-05-05 17:52:40Z`.
+- PlayMode tests: `StormBlocksUnity/playmode-results.xml` reports 10 total, 10 passed, 0 failed at `2026-05-05 17:52:47Z`.
+- Current logged full-detail mobile baseline after the accessibility VFX pass: 448 renderers, 163,432 mesh triangles, 1 audio listener, and 1 canvas.
+- `Scripts/ci_static_checks.sh` passes locally.
+- `Scripts/release_audit.sh full` reports 31 pass, 0 fail, and 8 open external gates; it exits nonzero because those open gates remain unresolved.
+
+Known risks / not done:
+
+- Current-source physical install/launch still needs to be retried after the paired iPhone is available to CoreDevice again.
+- App Store Connect upload still requires an app record for bundle id `com.perlantir.stormblocks`; the upload probe is expected to stay blocked until that external record exists.
+
 ## 2026-05-05 — Saved survivor pushback presentation pass
 
 - Added a saved-survivor presentation layer in the runtime placement path: clears that rescue survivors now spawn a compact camp glow, rescued survivor cheer figures, path sparkles, rescue burst, and heart sparkle while preserving the automatic Storm Pushback VFX.

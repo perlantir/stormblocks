@@ -65,17 +65,17 @@ namespace StormBlocks.Tests.PlayMode
             view.StartEndlessForTest(24681UL);
             yield return null;
 
-            var coach = GameObject.Find("Text-free First Move Coach");
+            var coach = FindChild(root, "Text-free First Move Coach");
             Assert.IsNotNull(coach);
-            Assert.IsNotNull(GameObject.Find("Coach moving fingertip"));
-            Assert.IsNotNull(GameObject.Find("Coach valid target glow"));
+            Assert.IsNotNull(FindChild(root, "Coach moving fingertip"));
+            Assert.IsNotNull(FindChild(root, "Coach valid target glow"));
             Assert.AreEqual(0, coach.GetComponentsInChildren<Text>(false).Length);
 
             var result = view.TryPlaceForTest(0, FindValidOrigin(view.State, 0));
             yield return null;
 
             Assert.IsTrue(result.Success, result.FailureReason);
-            Assert.IsNull(GameObject.Find("Coach moving fingertip"));
+            Assert.IsNull(FindChild(root, "Coach moving fingertip"));
             Assert.AreEqual(0, coach.transform.childCount);
         }
 
@@ -90,66 +90,66 @@ namespace StormBlocks.Tests.PlayMode
             view.StartEndlessForTest(67890UL);
             yield return null;
 
-            Click("MENU Mode Button");
+            Click(root, "MENU Mode Button");
             yield return null;
 
-            Assert.IsNotNull(GameObject.Find("Endless Storm Button"));
-            Assert.IsNotNull(GameObject.Find("Storm Trail Button"));
-            Assert.IsNotNull(GameObject.Find("Tempest Trials Button"));
-            Assert.IsNotNull(GameObject.Find("Settings Button"));
-            Assert.IsNotNull(GameObject.Find("Accessibility Button"));
-            Assert.IsNotNull(GameObject.Find("Credits Button"));
+            Assert.IsNotNull(FindChild(root, "Endless Storm Button"));
+            Assert.IsNotNull(FindChild(root, "Storm Trail Button"));
+            Assert.IsNotNull(FindChild(root, "Tempest Trials Button"));
+            Assert.IsNotNull(FindChild(root, "Settings Button"));
+            Assert.IsNotNull(FindChild(root, "Accessibility Button"));
+            Assert.IsNotNull(FindChild(root, "Credits Button"));
 
-            Click("Storm Trail Button");
+            Click(root, "Storm Trail Button");
             yield return null;
 
-            Assert.IsNotNull(GameObject.Find("Next Level Button"));
-            Assert.IsNotNull(GameObject.Find("Modes Button"));
+            Assert.IsNotNull(FindChild(root, "Next Level Button"));
+            Assert.IsNotNull(FindChild(root, "Modes Button"));
 
-            Click("Modes Button");
+            Click(root, "Modes Button");
             yield return null;
-            Click("Tempest Trials Button");
-            yield return null;
-
-            AssertButtonStartingWith("Run 1");
-            Assert.IsNotNull(GameObject.Find("Next Run Button"));
-
-            Click("Modes Button");
-            yield return null;
-            Click("Settings Button");
+            Click(root, "Tempest Trials Button");
             yield return null;
 
-            Assert.IsNotNull(GameObject.Find("Music On Button"));
-            Assert.IsNotNull(GameObject.Find("High Contrast Off Button"));
-            Assert.IsNotNull(GameObject.Find("Large Text Off Button"));
-            Assert.IsNotNull(GameObject.Find("Accessibility Button"));
+            AssertButtonStartingWith(root, "Run 1");
+            Assert.IsNotNull(FindChild(root, "Next Run Button"));
 
-            Click("Accessibility Button");
+            Click(root, "Modes Button");
+            yield return null;
+            Click(root, "Settings Button");
             yield return null;
 
-            Assert.IsNotNull(GameObject.Find("Reduced Motion Off Button"));
-            Assert.IsNotNull(GameObject.Find("Color Safe Off Button"));
-            Assert.IsNotNull(GameObject.Find("Low Detail Off Button"));
-            Assert.IsNotNull(GameObject.Find("Settings Button"));
+            Assert.IsNotNull(FindChild(root, "Music On Button"));
+            Assert.IsNotNull(FindChild(root, "High Contrast Off Button"));
+            Assert.IsNotNull(FindChild(root, "Large Text Off Button"));
+            Assert.IsNotNull(FindChild(root, "Accessibility Button"));
 
-            Click("Modes Button");
-            yield return null;
-            Click("Credits Button");
+            Click(root, "Accessibility Button");
             yield return null;
 
-            AssertTextContains("Original puzzle game");
+            Assert.IsNotNull(FindChild(root, "Reduced Motion Off Button"));
+            Assert.IsNotNull(FindChild(root, "Color Safe Off Button"));
+            Assert.IsNotNull(FindChild(root, "Low Detail Off Button"));
+            Assert.IsNotNull(FindChild(root, "Settings Button"));
 
-            Click("Modes Button");
+            Click(root, "Modes Button");
             yield return null;
-            Click("Profile Button");
-            yield return null;
-
-            Assert.IsNotNull(GameObject.Find("Leaderboards Button"));
-
-            Click("Achievements Button");
+            Click(root, "Credits Button");
             yield return null;
 
-            Assert.IsNotNull(GameObject.Find("Game Center Button"));
+            AssertTextContains(root, "Original puzzle game");
+
+            Click(root, "Modes Button");
+            yield return null;
+            Click(root, "Profile Button");
+            yield return null;
+
+            Assert.IsNotNull(FindChild(root, "Leaderboards Button"));
+
+            Click(root, "Achievements Button");
+            yield return null;
+
+            Assert.IsNotNull(FindChild(root, "Game Center Button"));
             Assert.IsNotNull(view.State);
         }
 
@@ -171,15 +171,15 @@ namespace StormBlocks.Tests.PlayMode
 
             Assert.IsTrue(result.Success, result.FailureReason);
             Assert.IsTrue(result.GameOver);
-            Assert.IsNotNull(GameObject.Find("Storm Blocks Screen Layer"));
-            Assert.IsNotNull(GameObject.Find("Retry Button"));
+            Assert.IsNotNull(FindChild(root, "Storm Blocks Screen Layer"));
+            Assert.IsNotNull(FindChild(root, "Retry Button"));
 
-            Click("Retry Button");
+            Click(root, "Retry Button");
             yield return null;
 
             Assert.IsNotNull(view.State);
             Assert.IsFalse(view.State.IsGameOver);
-            Assert.IsNull(GameObject.Find("Retry Button"));
+            Assert.IsNull(FindChild(root, "Retry Button"));
         }
 
         [UnityTest]
@@ -193,36 +193,62 @@ namespace StormBlocks.Tests.PlayMode
             view.StartEndlessForTest(919191UL);
             yield return null;
 
-            view.State.Queue.Clear();
-            view.State.Queue.Add(new PieceDefinition("single", new[] { new GridPosition(0, 0) }));
-            for (int x = 0; x < view.State.Board.Size; x++)
-            {
-                view.State.Board.ClearCell(new GridPosition(x, 0));
-            }
-
-            view.State.Board.SetOccupant(new GridPosition(0, 0), CellOccupant.Storm, string.Empty);
-            for (int x = 1; x < 7; x++)
-            {
-                view.State.Board.SetOccupant(new GridPosition(x, 0), CellOccupant.Block, "setup");
-            }
-
-            view.State.Board.SetSurvivor(new GridPosition(1, 0), true);
-
-            var result = view.TryPlaceForTest(0, new GridPosition(7, 0));
+            var result = StageSavedPushbackRow(view, 0);
             yield return null;
 
             Assert.IsTrue(result.Success, result.FailureReason);
             Assert.IsTrue(result.Clear.AutomaticPushbackTriggered, "Expected automatic pushback when clearing a row through a storm tile.");
             Assert.AreEqual(1, result.Clear.SurvivorsRescuedAt.Count);
-            AssertTextContains("Saved!");
-            Assert.IsNotNull(GameObject.Find("Gold pushback wave row"));
-            Assert.IsNotNull(GameObject.Find("Storm shatter flare"));
-            Assert.IsNotNull(GameObject.Find("Pushback storm wall recoil north"));
-            Assert.IsNotNull(GameObject.Find("Pushback storm wall recoil south"));
-            Assert.IsNotNull(GameObject.Find("Pushback storm wall recoil west"));
-            Assert.IsNotNull(GameObject.Find("Pushback storm wall recoil east"));
-            Assert.IsNotNull(GameObject.Find("Saved rescue burst"));
-            Assert.IsNotNull(GameObject.Find("Saved camp glow"));
+            AssertTextContains(root, "Saved!");
+            Assert.IsNotNull(FindChild(root, "Gold pushback wave row"));
+            Assert.IsNotNull(FindChild(root, "Storm shatter flare"));
+            Assert.IsNotNull(FindChild(root, "Pushback storm wall recoil north"));
+            Assert.IsNotNull(FindChild(root, "Pushback storm wall recoil south"));
+            Assert.IsNotNull(FindChild(root, "Pushback storm wall recoil west"));
+            Assert.IsNotNull(FindChild(root, "Pushback storm wall recoil east"));
+            Assert.IsNotNull(FindChild(root, "Saved rescue burst"));
+            Assert.IsNotNull(FindChild(root, "Saved camp glow"));
+        }
+
+        [UnityTest]
+        public IEnumerator AccessibilityReducedMotionAndLowDetailTrimSecondaryPushbackFx()
+        {
+            var scene = SceneManager.CreateScene("AccessibilityVfxSmoke");
+            SceneManager.SetActiveScene(scene);
+            var root = new GameObject("Storm Blocks Accessibility VFX Root");
+            var view = root.AddComponent<StormBlocksGameView>();
+
+            view.StartEndlessForTest(717171UL);
+            yield return null;
+
+            Click(root, "MENU Mode Button");
+            yield return null;
+            Click(root, "Accessibility Button");
+            yield return null;
+            Click(root, "Reduced Motion Off Button");
+            yield return null;
+            Click(root, "Low Detail Off Button");
+            yield return null;
+
+            Assert.IsNotNull(FindChild(root, "Reduced Motion On Button"));
+            Assert.IsNotNull(FindChild(root, "Low Detail On Button"));
+
+            var result = StageSavedPushbackRow(view, 1);
+            yield return null;
+
+            Assert.IsTrue(result.Success, result.FailureReason);
+            Assert.IsTrue(result.Clear.AutomaticPushbackTriggered);
+            Assert.AreEqual(1, result.Clear.SurvivorsRescuedAt.Count);
+            AssertTextContains(root, "Saved!");
+            Assert.IsNotNull(FindChild(root, "Storm shatter flare"));
+            Assert.IsNotNull(FindChild(root, "Pushback storm wall recoil north"));
+            Assert.IsNotNull(FindChild(root, "Saved rescue burst"));
+            Assert.IsNotNull(FindChild(root, "Saved camp glow"));
+            Assert.IsNull(FindChild(root, "Gold pushback wave row"));
+            Assert.IsNull(FindChild(root, "Cyan pushback wave row"));
+            Assert.IsNull(FindChild(root, "Storm shatter lightning top"));
+            Assert.IsNull(FindChild(root, "Pushback cyan recoil north"));
+            Assert.IsNull(FindChild(root, "Block highlight dot"));
         }
 
         [UnityTest]
@@ -252,23 +278,23 @@ namespace StormBlocks.Tests.PlayMode
                 yield return null;
                 Assert.IsTrue(result.Success, result.FailureReason);
 
-                Click("MENU Mode Button");
+                Click(root, "MENU Mode Button");
                 yield return null;
-                Click("Storm Trail Button");
+                Click(root, "Storm Trail Button");
                 yield return null;
-                Click("Modes Button");
+                Click(root, "Modes Button");
                 yield return null;
-                Click("Tempest Trials Button");
+                Click(root, "Tempest Trials Button");
                 yield return null;
-                Click("Modes Button");
+                Click(root, "Modes Button");
                 yield return null;
-                Click("Settings Button");
+                Click(root, "Settings Button");
                 yield return null;
-                Click("Modes Button");
+                Click(root, "Modes Button");
                 yield return null;
-                Click("Profile Button");
+                Click(root, "Profile Button");
                 yield return null;
-                Click("Achievements Button");
+                Click(root, "Achievements Button");
                 yield return null;
 
                 Assert.IsEmpty(capturedErrors, string.Join("\n", capturedErrors));
@@ -290,28 +316,28 @@ namespace StormBlocks.Tests.PlayMode
             view.StartEndlessForTest(616161UL);
             yield return null;
 
-            var safeArea = GameObject.Find("Storm Blocks Safe Area");
+            var safeArea = FindChild(root, "Storm Blocks Safe Area");
             Assert.IsNotNull(safeArea);
             var safeTransform = safeArea.transform;
             AssertActiveButtonsAreSafe(safeTransform);
 
-            Click("MENU Mode Button");
+            Click(root, "MENU Mode Button");
             yield return null;
             AssertActiveButtonsAreSafe(safeTransform);
 
-            Click("Storm Trail Button");
+            Click(root, "Storm Trail Button");
             yield return null;
             AssertActiveButtonsAreSafe(safeTransform);
 
-            Click("Modes Button");
+            Click(root, "Modes Button");
             yield return null;
-            Click("Settings Button");
+            Click(root, "Settings Button");
             yield return null;
             AssertActiveButtonsAreSafe(safeTransform);
 
-            Click("Modes Button");
+            Click(root, "Modes Button");
             yield return null;
-            Click("Profile Button");
+            Click(root, "Profile Button");
             yield return null;
             AssertActiveButtonsAreSafe(safeTransform);
         }
@@ -339,18 +365,51 @@ namespace StormBlocks.Tests.PlayMode
             Assert.LessOrEqual(canvases, 1);
         }
 
-        private static void Click(string objectName)
+        private static void Click(GameObject root, string objectName)
         {
-            var buttonObject = GameObject.Find(objectName);
+            var buttonObject = FindChild(root, objectName);
             Assert.IsNotNull(buttonObject, objectName);
             var button = buttonObject.GetComponent<Button>();
             Assert.IsNotNull(button, objectName);
             button.onClick.Invoke();
         }
 
-        private static void AssertButtonStartingWith(string prefix)
+        private static GameObject FindChild(GameObject root, string objectName)
         {
-            var buttons = Object.FindObjectsByType<Button>(FindObjectsInactive.Exclude);
+            var transforms = root.GetComponentsInChildren<Transform>(false);
+            for (int i = 0; i < transforms.Length; i++)
+            {
+                if (transforms[i].gameObject.name == objectName)
+                {
+                    return transforms[i].gameObject;
+                }
+            }
+
+            return null;
+        }
+
+        private static PlacementResult StageSavedPushbackRow(StormBlocksGameView view, int row)
+        {
+            view.State.Queue.Clear();
+            view.State.Queue.Add(new PieceDefinition("single", new[] { new GridPosition(0, 0) }));
+            for (int x = 0; x < view.State.Board.Size; x++)
+            {
+                view.State.Board.ClearCell(new GridPosition(x, row));
+            }
+
+            view.State.Board.SetOccupant(new GridPosition(0, row), CellOccupant.Storm, string.Empty);
+            for (int x = 1; x < 7; x++)
+            {
+                view.State.Board.SetOccupant(new GridPosition(x, row), CellOccupant.Block, "setup");
+            }
+
+            view.State.Board.SetSurvivor(new GridPosition(1, row), true);
+            return view.TryPlaceForTest(0, new GridPosition(7, row));
+        }
+
+        private static void AssertButtonStartingWith(GameObject root, string prefix)
+        {
+            var buttons = root.GetComponentsInChildren<Button>(false);
             for (int i = 0; i < buttons.Length; i++)
             {
                 if (buttons[i].gameObject.name.StartsWith(prefix))
@@ -362,9 +421,9 @@ namespace StormBlocks.Tests.PlayMode
             Assert.Fail("Missing button starting with " + prefix);
         }
 
-        private static void AssertTextContains(string fragment)
+        private static void AssertTextContains(GameObject root, string fragment)
         {
-            var labels = Object.FindObjectsByType<Text>(FindObjectsInactive.Exclude);
+            var labels = root.GetComponentsInChildren<Text>(false);
             for (int i = 0; i < labels.Length; i++)
             {
                 if (!string.IsNullOrEmpty(labels[i].text) && labels[i].text.Contains(fragment))
@@ -378,7 +437,7 @@ namespace StormBlocks.Tests.PlayMode
 
         private static void AssertActiveButtonsAreSafe(Transform safeTransform)
         {
-            var buttons = Object.FindObjectsByType<Button>(FindObjectsInactive.Exclude);
+            var buttons = safeTransform.GetComponentsInChildren<Button>(false);
             Assert.Greater(buttons.Length, 0);
 
             for (int i = 0; i < buttons.Length; i++)

@@ -4,11 +4,11 @@ Current eval date: 2026-05-05.
 
 ## Automated Coverage
 
-- EditMode: 26 total, 26 passed, 0 failed at `2026-05-05 17:29:32Z`.
-- PlayMode: 9 total, 9 passed, 0 failed at `2026-05-05 17:29:39Z`.
-- Covered core evals: placement, valid move detection, line clears, scoring, storm spread, automatic Storm Pushback, saved-survivor presentation, signature pushback VFX, clutch save, game-over states, daily seed determinism, save/load, progression, service seams, visual first-move coaching, normal-flow console cleanliness, portrait safe-area controls, results/retry, UI shell navigation, and mobile scene budgets.
-- Current full-detail PlayMode budget: 457 renderers, 166,264 mesh triangles, 1 audio listener, 1 canvas.
-- Local Gate 12 performance coverage now includes primitive pooling for dynamic board/tray/drag/VFX presentation and a persisted Low Detail setting with older-device auto fallback heuristics.
+- EditMode: 26 total, 26 passed, 0 failed at `2026-05-05 17:52:40Z`.
+- PlayMode: 10 total, 10 passed, 0 failed at `2026-05-05 17:52:47Z`.
+- Covered core evals: placement, valid move detection, line clears, scoring, storm spread, automatic Storm Pushback, saved-survivor presentation, signature pushback VFX, reduced-motion/Low Detail VFX trimming, clutch save, game-over states, daily seed determinism, save/load, progression, service seams, visual first-move coaching, normal-flow console cleanliness, portrait safe-area controls, results/retry, UI shell navigation, and mobile scene budgets.
+- Current full-detail PlayMode budget: 448 renderers, 163,432 mesh triangles, 1 audio listener, 1 canvas.
+- Local Gate 12 performance coverage now includes primitive pooling for dynamic board/tray/drag/VFX presentation, a persisted Low Detail setting with older-device auto fallback heuristics, and PlayMode proof that Reduced Motion plus Low Detail trims nonessential pushback effects without hiding saved/pushback feedback.
 
 ## Build And Runtime Proof
 

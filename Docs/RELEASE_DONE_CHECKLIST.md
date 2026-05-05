@@ -37,6 +37,7 @@ Do not call the project done until this passes.
 - [x] Sharing interface exists with native iOS bridge and editor fallback.
 - [x] Dedicated Accessibility and Credits screens exist in the UI shell.
 - [x] Low Detail mode exists, persists locally, and auto-falls back on constrained iOS hardware.
+- [x] Reduced Motion and Low Detail preserve essential saved/pushback feedback while trimming secondary animated VFX under PlayMode coverage.
 - [x] Audio service works.
 - [x] Haptic service works.
 

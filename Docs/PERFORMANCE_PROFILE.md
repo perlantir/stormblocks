@@ -4,11 +4,11 @@ This is the current lightweight performance profile for the Unity playable scene
 
 ## Current Baseline
 
-Source: `StormBlocksUnity/playmode-results.xml` from `2026-05-05 17:29:39Z`.
+Source: `StormBlocksUnity/playmode-results.xml` from `2026-05-05 17:52:47Z`.
 
-- PlayMode tests: 9 total, 9 passed, 0 failed.
-- Playable root renderers: 457.
-- Playable root mesh triangles: 166,264.
+- PlayMode tests: 10 total, 10 passed, 0 failed.
+- Playable root renderers: 448.
+- Playable root mesh triangles: 163,432.
 - Audio listeners: 1.
 - Canvases: 1.
 
@@ -17,7 +17,7 @@ Source: `StormBlocksUnity/playmode-results.xml` from `2026-05-05 17:29:39Z`.
 - Dynamic cube/sphere presentation objects are pooled for board refreshes, tray rebuilds, drag ghosts, survivor bodies, storm cells, and Storm Pushback VFX.
 - Low Detail mode is available from Accessibility settings and persisted in the local profile.
 - Physical iOS devices automatically fall back to Low Detail on constrained hardware heuristics: <= 4096 MB system memory, <= 1536 MB graphics memory, or <= 4 processors.
-- Low Detail keeps the signature gold Storm Pushback wave and core board readability while trimming duplicate wave accents, rain, extra puffs, lightning shatter accents, and block highlight dots.
+- Low Detail keeps the signature Storm Pushback identity and core board readability while trimming duplicate wave accents, rain, extra puffs, lightning shatter accents, and block highlight dots. The PlayMode accessibility guard also covers the reduced-motion plus Low Detail path, where essential saved/pushback feedback remains visible and secondary animated accents are removed.
 - Raw design GLBs are converted through `Scripts/optimize_design_glbs.sh`; only curated mobile variants are imported into Unity, and only the toy-block charm is currently loaded through `Resources` at runtime. A blurred design-source JPG crop is loaded as the storm backdrop through `Resources/StormSky`. The board itself now uses one mesh for the deep grid seam lattice plus low-count perimeter storm wall geometry, keeping the visual upgrade inside the mobile guardrail.
 
 ## Automated Guardrail

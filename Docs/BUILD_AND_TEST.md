@@ -27,7 +27,7 @@ Use the project test runner for batch verification. Unity 6000 can skip `-runTes
   -logFile /tmp/stormblocks-editmode-lowdetail.log
 ```
 
-Current evidence: `StormBlocksUnity/editmode-results.xml` reports 26 total, 26 passed, 0 failed at `2026-05-05 17:29:32Z`.
+Current evidence: `StormBlocksUnity/editmode-results.xml` reports 26 total, 26 passed, 0 failed at `2026-05-05 17:52:40Z`.
 
 ## PlayMode Tests
 
@@ -40,7 +40,7 @@ Current evidence: `StormBlocksUnity/editmode-results.xml` reports 26 total, 26 p
   -logFile /tmp/stormblocks-playmode-lowdetail.log
 ```
 
-Current evidence: `StormBlocksUnity/playmode-results.xml` reports 9 total, 9 passed, 0 failed at `2026-05-05 17:29:39Z`.
+Current evidence: `StormBlocksUnity/playmode-results.xml` reports 10 total, 10 passed, 0 failed at `2026-05-05 17:52:47Z`.
 
 The PlayMode suite includes release smoke guards for the normal flow and active touch controls:
 
@@ -48,11 +48,12 @@ The PlayMode suite includes release smoke guards for the normal flow and active 
 - `ActiveTouchControlsStayInsideSafeAreaWithReleaseSizedTargets` verifies active portrait controls stay inside the safe-area root and meet release-sized touch target thresholds.
 - `FirstMoveCoachTeachesWithNoTextAndDismissesAfterPlacement` verifies the first-run coach is visual-only and disappears after the first placement.
 - `AutomaticPushbackSpawnsSignaturePerimeterRecoil` verifies a real row clear through a storm tile triggers automatic Storm Pushback plus the saved-survivor toast, rescue burst, gold wave, storm shatter flare, and perimeter recoil VFX objects.
+- `AccessibilityReducedMotionAndLowDetailTrimSecondaryPushbackFx` verifies Reduced Motion and Low Detail can be enabled from the runtime Accessibility screen, then confirms a real saved-pushback clear keeps essential saved/pushback feedback while trimming secondary waves, lightning, cyan recoil, and block highlight dots.
 
 The PlayMode suite includes a lightweight mobile scene-budget guard. Current logged baseline:
 
-- 457 renderers.
-- 166,264 mesh triangles.
+- 448 renderers.
+- 163,432 mesh triangles.
 - 1 audio listener.
 - 1 canvas.
 
@@ -60,7 +61,7 @@ Current optimization notes:
 
 - Dynamic board, tray, ghost, survivor, block, storm, and pushback primitives are pooled instead of recreated every refresh.
 - The Accessibility screen includes a persistent Low Detail setting. On physical iOS devices the runtime also auto-selects Low Detail on constrained hardware using memory, graphics memory, and CPU-count heuristics.
-- Low Detail preserves the readable camp, board, placed blocks, survivor, storm, and gold pushback wave while trimming secondary storm puffs, rain, cyan duplicate waves, shatter lightning, and block highlight dots.
+- Low Detail preserves the readable camp, board, placed blocks, survivor, storm, and signature pushback identity while trimming secondary storm puffs, rain, duplicate waves, shatter lightning, and block highlight dots. Reduced Motion plus Low Detail is covered in PlayMode to keep the saved toast, rescue burst, camp glow, storm shatter flare, and perimeter recoil while removing extra animated wave/accent objects.
 - The current board visual pass imports optimized GLB source art through GLTFast, uses a curated toy-block charm in the runtime tray, loads a blurred design-source storm backdrop through `Resources/StormSky`, and builds the real playfield with a deep grid seam lattice, warm camp sanctuary ring, living perimeter storm wall, and pushback perimeter recoil. Heavier camp/storm GLB outputs remain import-ready source assets, not direct repeated board-cell meshes.
 
 ## Visual Capture
