@@ -401,6 +401,21 @@ Known risks / not done:
 
 - The launch/profile modes still require an unlocked physical device and human execution.
 
+## 2026-05-05 — GitHub static release checks
+
+- Added `Scripts/ci_static_checks.sh` for credential-free static release verification: shell syntax, App Store metadata/screenshot validation, manifest JSON parsing, and transient artifact checks.
+- Added `.github/workflows/release-static.yml` to run the static release checks on macOS for pushes, pull requests, and manual workflow dispatch.
+- Updated the release audit and build/test docs to track the GitHub static workflow as local release infrastructure.
+
+Evidence:
+
+- `Scripts/ci_static_checks.sh` passes locally.
+- `Scripts/release_audit.sh full` includes the static CI script and workflow presence checks.
+
+Known risks / not done:
+
+- Remote GitHub Actions proof requires the workflow to run on GitHub after this commit is pushed.
+
 ## 2026-05-05 — Gate 12 pooling and Low Detail fallback
 
 - Added primitive pooling for dynamic presentation cubes/spheres used by board refreshes, tray rebuilds, drag ghosts, survivors, storm cells, block cells, and Storm Pushback VFX.

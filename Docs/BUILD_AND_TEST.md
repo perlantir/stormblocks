@@ -318,3 +318,12 @@ The non-UI credential probes currently require human/App Store Connect credentia
 
 The repeatable command runner is `Scripts/ios_release_gates.sh`.
 Credentialed Fastlane lanes should be run through `Scripts/fastlane_release.sh`.
+
+## GitHub Static Checks
+
+The repo includes a lightweight GitHub Actions workflow for credential-free release checks:
+
+- Workflow: `.github/workflows/release-static.yml`
+- Script: `Scripts/ci_static_checks.sh`
+
+The workflow runs on macOS so screenshot dimension checks can use `sips`. It validates shell syntax, App Store metadata limits, tracked screenshot dimensions, App Store Connect manifest JSON, Game Center identifier alignment, support/privacy drafts, and absence of transient Unity/Fastlane artifacts. It does not run Unity builds or Apple credentialed gates.

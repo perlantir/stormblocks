@@ -1,0 +1,19 @@
+name: Release Static Checks
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  release-static:
+    name: Release static checks
+    runs-on: macos-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Run static release checks
+        run: Scripts/ci_static_checks.sh
