@@ -779,3 +779,31 @@ Known risks / not done:
 
 - Current-source physical install/launch needs to be retried after the paired iPhone is available to CoreDevice again.
 - App Store Connect upload still requires an app record for bundle id `com.perlantir.stormblocks`; the upload probe is expected to stay blocked until that external record exists.
+
+## 2026-05-05 — Board sanctuary and living storm pass
+
+- Reworked the actual gameplay board surface with richer blue-purple storm tile colors, sharper frosted empty tile contrast, and a warmer camp tile palette.
+- Added a single-mesh deep grid seam lattice over the 8x8 board so cell boundaries read more like the primary gameplay reference without adding 64 extra renderers.
+- Added a warm sanctuary ring around the central camp and a low-count living blue-purple storm wall around the board perimeter.
+- Added a perimeter recoil surge to automatic Storm Pushback VFX so cleared storm pressure visibly snaps back from the board edge.
+- Regenerated gameplay and App Store screenshot captures, then refreshed the tracked Fastlane screenshots from the updated capture output.
+
+Evidence:
+
+- EditMode tests: `StormBlocksUnity/editmode-results.xml` reports 26 total, 26 passed, 0 failed at `2026-05-05 17:03:53Z`.
+- PlayMode tests: `StormBlocksUnity/playmode-results.xml` reports 8 total, 8 passed, 0 failed at `2026-05-05 17:04:00Z`.
+- Current logged full-detail mobile baseline after the board sanctuary pass: 442 renderers, 161,544 mesh triangles, 1 audio listener, and 1 canvas.
+- Visual capture: `/tmp/stormblocks-visual-board-sanctuary-trim.log` completed successfully and wrote `StormBlocksUnity/Builds/VisualChecks/stormblocks-gameplay.png`.
+- App Store screenshot capture: `/tmp/stormblocks-appstore-board-sanctuary-trim.log` completed successfully and regenerated all five PNGs under `StormBlocksUnity/Builds/AppStoreScreens/`; the files were copied into `fastlane/screenshots/en-US/`.
+- `Scripts/verify_release_assets.sh` passes locally: 32 pass, 0 fail.
+- `Scripts/ios_release_gates.sh all-local` refreshed Unity tests, Unity iOS export, and signed Xcode build, then stopped at physical-device install because CoreDevice still cannot locate paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D`.
+- `Scripts/ios_release_gates.sh archive` and `Scripts/ios_release_gates.sh export-appstore` completed after the device blocker; `/tmp/stormblocks-xcode-team7jl-archive.log` reports `** ARCHIVE SUCCEEDED **` and `/tmp/stormblocks-xcode-team7jl-export-appstore.log` reports `** EXPORT SUCCEEDED **`, with IPA output at `StormBlocksUnity/Builds/iOS/ExportAppStoreTeam7JL/StormBlocks.ipa`.
+- `Scripts/ios_release_gates.sh status` passes against the refreshed board sanctuary test, signed build, archive, and IPA evidence.
+- `Scripts/ios_release_gates.sh launch-device` still fails while CoreDevice marks the paired iPhone unavailable.
+- `Scripts/ios_release_gates.sh upload-probe` retried against the current-source archive at `2026-05-05 17:09:43Z`; App Store Connect returned HTTP 200 with `data: []` and `total: 0` for `com.perlantir.stormblocks`, then Xcode failed with `missingApp(bundleId: "com.perlantir.stormblocks")`. Current distribution log: `/var/folders/b2/cl2rv8q13bg48zl073ctm_fc0000gq/T/Unity-iPhone_2026-05-05_12-09-41.988.xcdistributionlogs/IDEDistributionAppStoreConnect.log`.
+- `Scripts/ci_static_checks.sh && Scripts/release_audit.sh full` passes static checks and reports 31 pass, 0 fail, 8 open gates.
+
+Known risks / not done:
+
+- This materially improves the actual gameplay board against the provided references, but final taste/readability still needs physical-device human review once the paired iPhone is available again.
+- Current-source physical install/launch still needs to be retried after the paired iPhone is available to CoreDevice again.

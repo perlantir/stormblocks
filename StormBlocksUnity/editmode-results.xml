@@ -1,181 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<test-run id="2" testcasecount="26" result="Passed" total="26" passed="26" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.0486286">
-  <test-suite type="TestSuite" id="1000" name="Storm Blocks" fullname="Storm Blocks" runstate="Runnable" testcasecount="27" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.048629" total="26" passed="26" failed="0" inconclusive="0" skipped="0" asserts="0">
+<test-run id="2" testcasecount="26" result="Passed" total="26" passed="26" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.0435335">
+  <test-suite type="TestSuite" id="1000" name="Storm Blocks" fullname="Storm Blocks" runstate="Runnable" testcasecount="27" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.043534" total="26" passed="26" failed="0" inconclusive="0" skipped="0" asserts="0">
     <properties>
       <property name="platform" value="EditMode" />
     </properties>
-    <test-suite type="Assembly" id="1031" name="StormBlocks.EditMode.Tests.dll" fullname="/Users/perlantir/Projects/StormBlocks/StormBlocksUnity/Library/ScriptAssemblies/StormBlocks.EditMode.Tests.dll" runstate="Runnable" testcasecount="26" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.045344" total="26" passed="26" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <test-suite type="Assembly" id="1031" name="StormBlocks.EditMode.Tests.dll" fullname="/Users/perlantir/Projects/StormBlocks/StormBlocksUnity/Library/ScriptAssemblies/StormBlocks.EditMode.Tests.dll" runstate="Runnable" testcasecount="26" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.040249" total="26" passed="26" failed="0" inconclusive="0" skipped="0" asserts="0">
       <properties>
-        <property name="_PID" value="14613" />
+        <property name="_PID" value="36258" />
         <property name="_APPDOMAIN" value="Unity Child Domain" />
         <property name="platform" value="EditMode" />
         <property name="EditorOnly" value="True" />
       </properties>
-      <test-suite type="TestSuite" id="1032" name="StormBlocks" fullname="StormBlocks" runstate="Runnable" testcasecount="26" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.045228" total="26" passed="26" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <test-suite type="TestSuite" id="1032" name="StormBlocks" fullname="StormBlocks" runstate="Runnable" testcasecount="26" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.040138" total="26" passed="26" failed="0" inconclusive="0" skipped="0" asserts="0">
         <properties />
-        <test-suite type="TestSuite" id="1033" name="Tests" fullname="StormBlocks.Tests" runstate="Runnable" testcasecount="26" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.045177" total="26" passed="26" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <test-suite type="TestSuite" id="1033" name="Tests" fullname="StormBlocks.Tests" runstate="Runnable" testcasecount="26" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.040092" total="26" passed="26" failed="0" inconclusive="0" skipped="0" asserts="0">
           <properties />
-          <test-suite type="TestSuite" id="1034" name="EditMode" fullname="StormBlocks.Tests.EditMode" runstate="Runnable" testcasecount="26" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.045097" total="26" passed="26" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <test-suite type="TestSuite" id="1034" name="EditMode" fullname="StormBlocks.Tests.EditMode" runstate="Runnable" testcasecount="26" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.040031" total="26" passed="26" failed="0" inconclusive="0" skipped="0" asserts="0">
             <properties />
-            <test-suite type="TestFixture" id="1002" name="CoreRulesTests" fullname="StormBlocks.Tests.EditMode.CoreRulesTests" classname="StormBlocks.Tests.EditMode.CoreRulesTests" runstate="Runnable" testcasecount="13" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.025355" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <test-suite type="TestFixture" id="1002" name="CoreRulesTests" fullname="StormBlocks.Tests.EditMode.CoreRulesTests" classname="StormBlocks.Tests.EditMode.CoreRulesTests" runstate="Runnable" testcasecount="13" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.020835" total="13" passed="13" failed="0" inconclusive="0" skipped="0" asserts="0">
               <properties />
-              <test-case id="1008" name="ClutchSaveTriggersWhenPushbackHappensNearCamp" fullname="StormBlocks.Tests.EditMode.CoreRulesTests.ClutchSaveTriggersWhenPushbackHappensNearCamp" methodname="ClutchSaveTriggersWhenPushbackHappensNearCamp" classname="StormBlocks.Tests.EditMode.CoreRulesTests" runstate="Runnable" seed="1642600704" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.006846" asserts="0">
+              <test-case id="1008" name="ClutchSaveTriggersWhenPushbackHappensNearCamp" fullname="StormBlocks.Tests.EditMode.CoreRulesTests.ClutchSaveTriggersWhenPushbackHappensNearCamp" methodname="ClutchSaveTriggersWhenPushbackHappensNearCamp" classname="StormBlocks.Tests.EditMode.CoreRulesTests" runstate="Runnable" seed="301689284" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.006618" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1005" name="ColumnClearRescuesSurvivors" fullname="StormBlocks.Tests.EditMode.CoreRulesTests.ColumnClearRescuesSurvivors" methodname="ColumnClearRescuesSurvivors" classname="StormBlocks.Tests.EditMode.CoreRulesTests" runstate="Runnable" seed="125930836" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.000513" asserts="0">
+              <test-case id="1005" name="ColumnClearRescuesSurvivors" fullname="StormBlocks.Tests.EditMode.CoreRulesTests.ColumnClearRescuesSurvivors" methodname="ColumnClearRescuesSurvivors" classname="StormBlocks.Tests.EditMode.CoreRulesTests" runstate="Runnable" seed="1863242937" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.000513" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1010" name="DailySeedIsStableForSameInputsAndChangesByDate" fullname="StormBlocks.Tests.EditMode.CoreRulesTests.DailySeedIsStableForSameInputsAndChangesByDate" methodname="DailySeedIsStableForSameInputsAndChangesByDate" classname="StormBlocks.Tests.EditMode.CoreRulesTests" runstate="Runnable" seed="1204088281" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.002259" asserts="0">
+              <test-case id="1010" name="DailySeedIsStableForSameInputsAndChangesByDate" fullname="StormBlocks.Tests.EditMode.CoreRulesTests.DailySeedIsStableForSameInputsAndChangesByDate" methodname="DailySeedIsStableForSameInputsAndChangesByDate" classname="StormBlocks.Tests.EditMode.CoreRulesTests" runstate="Runnable" seed="1728216992" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.002207" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1006" name="MultiLineClearAppliesComboMultiplierWithoutDoubleCountingIntersection" fullname="StormBlocks.Tests.EditMode.CoreRulesTests.MultiLineClearAppliesComboMultiplierWithoutDoubleCountingIntersection" methodname="MultiLineClearAppliesComboMultiplierWithoutDoubleCountingIntersection" classname="StormBlocks.Tests.EditMode.CoreRulesTests" runstate="Runnable" seed="1544172361" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.000131" asserts="0">
+              <test-case id="1006" name="MultiLineClearAppliesComboMultiplierWithoutDoubleCountingIntersection" fullname="StormBlocks.Tests.EditMode.CoreRulesTests.MultiLineClearAppliesComboMultiplierWithoutDoubleCountingIntersection" methodname="MultiLineClearAppliesComboMultiplierWithoutDoubleCountingIntersection" classname="StormBlocks.Tests.EditMode.CoreRulesTests" runstate="Runnable" seed="270867055" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.000125" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1003" name="PlacementRejectsOutOfBoundsAndCollisions" fullname="StormBlocks.Tests.EditMode.CoreRulesTests.PlacementRejectsOutOfBoundsAndCollisions" methodname="PlacementRejectsOutOfBoundsAndCollisions" classname="StormBlocks.Tests.EditMode.CoreRulesTests" runstate="Runnable" seed="1492904624" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.001097" asserts="0">
+              <test-case id="1003" name="PlacementRejectsOutOfBoundsAndCollisions" fullname="StormBlocks.Tests.EditMode.CoreRulesTests.PlacementRejectsOutOfBoundsAndCollisions" methodname="PlacementRejectsOutOfBoundsAndCollisions" classname="StormBlocks.Tests.EditMode.CoreRulesTests" runstate="Runnable" seed="942467984" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.001071" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1004" name="RowClearRemovesFilledRowAndScoresCells" fullname="StormBlocks.Tests.EditMode.CoreRulesTests.RowClearRemovesFilledRowAndScoresCells" methodname="RowClearRemovesFilledRowAndScoresCells" classname="StormBlocks.Tests.EditMode.CoreRulesTests" runstate="Runnable" seed="905065097" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.000144" asserts="0">
+              <test-case id="1004" name="RowClearRemovesFilledRowAndScoresCells" fullname="StormBlocks.Tests.EditMode.CoreRulesTests.RowClearRemovesFilledRowAndScoresCells" methodname="RowClearRemovesFilledRowAndScoresCells" classname="StormBlocks.Tests.EditMode.CoreRulesTests" runstate="Runnable" seed="103712650" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.000140" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1014" name="RunEndsWhenNoQueuedPieceCanBePlaced" fullname="StormBlocks.Tests.EditMode.CoreRulesTests.RunEndsWhenNoQueuedPieceCanBePlaced" methodname="RunEndsWhenNoQueuedPieceCanBePlaced" classname="StormBlocks.Tests.EditMode.CoreRulesTests" runstate="Runnable" seed="993437113" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.001331" asserts="0">
+              <test-case id="1014" name="RunEndsWhenNoQueuedPieceCanBePlaced" fullname="StormBlocks.Tests.EditMode.CoreRulesTests.RunEndsWhenNoQueuedPieceCanBePlaced" methodname="RunEndsWhenNoQueuedPieceCanBePlaced" classname="StormBlocks.Tests.EditMode.CoreRulesTests" runstate="Runnable" seed="621394486" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.001328" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1013" name="RunEndsWhenStormReachesCamp" fullname="StormBlocks.Tests.EditMode.CoreRulesTests.RunEndsWhenStormReachesCamp" methodname="RunEndsWhenStormReachesCamp" classname="StormBlocks.Tests.EditMode.CoreRulesTests" runstate="Runnable" seed="43445929" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.000103" asserts="0">
+              <test-case id="1013" name="RunEndsWhenStormReachesCamp" fullname="StormBlocks.Tests.EditMode.CoreRulesTests.RunEndsWhenStormReachesCamp" methodname="RunEndsWhenStormReachesCamp" classname="StormBlocks.Tests.EditMode.CoreRulesTests" runstate="Runnable" seed="1321178426" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.000108" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1011" name="RunEngineProducesSameQueueAndStormForSameSeed" fullname="StormBlocks.Tests.EditMode.CoreRulesTests.RunEngineProducesSameQueueAndStormForSameSeed" methodname="RunEngineProducesSameQueueAndStormForSameSeed" classname="StormBlocks.Tests.EditMode.CoreRulesTests" runstate="Runnable" seed="370800997" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.000474" asserts="0">
+              <test-case id="1011" name="RunEngineProducesSameQueueAndStormForSameSeed" fullname="StormBlocks.Tests.EditMode.CoreRulesTests.RunEngineProducesSameQueueAndStormForSameSeed" methodname="RunEngineProducesSameQueueAndStormForSameSeed" classname="StormBlocks.Tests.EditMode.CoreRulesTests" runstate="Runnable" seed="188878225" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.000454" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1015" name="SaveSnapshotRoundTripsRunSummaryAndBoard" fullname="StormBlocks.Tests.EditMode.CoreRulesTests.SaveSnapshotRoundTripsRunSummaryAndBoard" methodname="SaveSnapshotRoundTripsRunSummaryAndBoard" classname="StormBlocks.Tests.EditMode.CoreRulesTests" runstate="Runnable" seed="1554536413" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.001599" asserts="0">
+              <test-case id="1015" name="SaveSnapshotRoundTripsRunSummaryAndBoard" fullname="StormBlocks.Tests.EditMode.CoreRulesTests.SaveSnapshotRoundTripsRunSummaryAndBoard" methodname="SaveSnapshotRoundTripsRunSummaryAndBoard" classname="StormBlocks.Tests.EditMode.CoreRulesTests" runstate="Runnable" seed="1328604762" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.001561" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1007" name="StormPushbackIsAutomaticWhenClearIntersectsStorm" fullname="StormBlocks.Tests.EditMode.CoreRulesTests.StormPushbackIsAutomaticWhenClearIntersectsStorm" methodname="StormPushbackIsAutomaticWhenClearIntersectsStorm" classname="StormBlocks.Tests.EditMode.CoreRulesTests" runstate="Runnable" seed="2065415996" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.000112" asserts="0">
+              <test-case id="1007" name="StormPushbackIsAutomaticWhenClearIntersectsStorm" fullname="StormBlocks.Tests.EditMode.CoreRulesTests.StormPushbackIsAutomaticWhenClearIntersectsStorm" methodname="StormPushbackIsAutomaticWhenClearIntersectsStorm" classname="StormBlocks.Tests.EditMode.CoreRulesTests" runstate="Runnable" seed="1953654539" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.000112" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1009" name="StormWarningsAndSpreadAreDeterministic" fullname="StormBlocks.Tests.EditMode.CoreRulesTests.StormWarningsAndSpreadAreDeterministic" methodname="StormWarningsAndSpreadAreDeterministic" classname="StormBlocks.Tests.EditMode.CoreRulesTests" runstate="Runnable" seed="1161526344" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.000985" asserts="0">
+              <test-case id="1009" name="StormWarningsAndSpreadAreDeterministic" fullname="StormBlocks.Tests.EditMode.CoreRulesTests.StormWarningsAndSpreadAreDeterministic" methodname="StormWarningsAndSpreadAreDeterministic" classname="StormBlocks.Tests.EditMode.CoreRulesTests" runstate="Runnable" seed="1523395681" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.001003" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1012" name="ValidMoveDetectionFindsNoMoveOnFullBoard" fullname="StormBlocks.Tests.EditMode.CoreRulesTests.ValidMoveDetectionFindsNoMoveOnFullBoard" methodname="ValidMoveDetectionFindsNoMoveOnFullBoard" classname="StormBlocks.Tests.EditMode.CoreRulesTests" runstate="Runnable" seed="195888909" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.000193" asserts="0">
+              <test-case id="1012" name="ValidMoveDetectionFindsNoMoveOnFullBoard" fullname="StormBlocks.Tests.EditMode.CoreRulesTests.ValidMoveDetectionFindsNoMoveOnFullBoard" methodname="ValidMoveDetectionFindsNoMoveOnFullBoard" classname="StormBlocks.Tests.EditMode.CoreRulesTests" runstate="Runnable" seed="1866937211" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.000189" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
             </test-suite>
-            <test-suite type="TestFixture" id="1016" name="ModeProgressionTests" fullname="StormBlocks.Tests.EditMode.ModeProgressionTests" classname="StormBlocks.Tests.EditMode.ModeProgressionTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.015990" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <test-suite type="TestFixture" id="1016" name="ModeProgressionTests" fullname="StormBlocks.Tests.EditMode.ModeProgressionTests" classname="StormBlocks.Tests.EditMode.ModeProgressionTests" runstate="Runnable" testcasecount="9" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.015685" total="9" passed="9" failed="0" inconclusive="0" skipped="0" asserts="0">
               <properties />
-              <test-case id="1021" name="CosmeticsAreProgressionOnlyAndEquipRequiresUnlock" fullname="StormBlocks.Tests.EditMode.ModeProgressionTests.CosmeticsAreProgressionOnlyAndEquipRequiresUnlock" methodname="CosmeticsAreProgressionOnlyAndEquipRequiresUnlock" classname="StormBlocks.Tests.EditMode.ModeProgressionTests" runstate="Runnable" seed="1422520577" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.002506" asserts="0">
+              <test-case id="1021" name="CosmeticsAreProgressionOnlyAndEquipRequiresUnlock" fullname="StormBlocks.Tests.EditMode.ModeProgressionTests.CosmeticsAreProgressionOnlyAndEquipRequiresUnlock" methodname="CosmeticsAreProgressionOnlyAndEquipRequiresUnlock" classname="StormBlocks.Tests.EditMode.ModeProgressionTests" runstate="Runnable" seed="2030702211" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.002492" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1017" name="DailyStormDefinitionIsDeterministicAndOfficialFlagControlsLeaderboardEligibility" fullname="StormBlocks.Tests.EditMode.ModeProgressionTests.DailyStormDefinitionIsDeterministicAndOfficialFlagControlsLeaderboardEligibility" methodname="DailyStormDefinitionIsDeterministicAndOfficialFlagControlsLeaderboardEligibility" classname="StormBlocks.Tests.EditMode.ModeProgressionTests" runstate="Runnable" seed="1138619457" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.000452" asserts="0">
+              <test-case id="1017" name="DailyStormDefinitionIsDeterministicAndOfficialFlagControlsLeaderboardEligibility" fullname="StormBlocks.Tests.EditMode.ModeProgressionTests.DailyStormDefinitionIsDeterministicAndOfficialFlagControlsLeaderboardEligibility" methodname="DailyStormDefinitionIsDeterministicAndOfficialFlagControlsLeaderboardEligibility" classname="StormBlocks.Tests.EditMode.ModeProgressionTests" runstate="Runnable" seed="1258280366" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.000465" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1025" name="FileSaveServiceRoundTripsProfileAndRunSnapshot" fullname="StormBlocks.Tests.EditMode.ModeProgressionTests.FileSaveServiceRoundTripsProfileAndRunSnapshot" methodname="FileSaveServiceRoundTripsProfileAndRunSnapshot" classname="StormBlocks.Tests.EditMode.ModeProgressionTests" runstate="Runnable" seed="1827559483" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.006562" asserts="0">
+              <test-case id="1025" name="FileSaveServiceRoundTripsProfileAndRunSnapshot" fullname="StormBlocks.Tests.EditMode.ModeProgressionTests.FileSaveServiceRoundTripsProfileAndRunSnapshot" methodname="FileSaveServiceRoundTripsProfileAndRunSnapshot" classname="StormBlocks.Tests.EditMode.ModeProgressionTests" runstate="Runnable" seed="140769928" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.006485" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1024" name="ProfileCodecPersistsAccessibilitySettingsAndTempestHistory" fullname="StormBlocks.Tests.EditMode.ModeProgressionTests.ProfileCodecPersistsAccessibilitySettingsAndTempestHistory" methodname="ProfileCodecPersistsAccessibilitySettingsAndTempestHistory" classname="StormBlocks.Tests.EditMode.ModeProgressionTests" runstate="Runnable" seed="1007329459" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.000589" asserts="0">
+              <test-case id="1024" name="ProfileCodecPersistsAccessibilitySettingsAndTempestHistory" fullname="StormBlocks.Tests.EditMode.ModeProgressionTests.ProfileCodecPersistsAccessibilitySettingsAndTempestHistory" methodname="ProfileCodecPersistsAccessibilitySettingsAndTempestHistory" classname="StormBlocks.Tests.EditMode.ModeProgressionTests" runstate="Runnable" seed="122301859" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.000570" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1020" name="ProfileProgressionKeepsOneOfficialDailyScoreAndUpdatesStreak" fullname="StormBlocks.Tests.EditMode.ModeProgressionTests.ProfileProgressionKeepsOneOfficialDailyScoreAndUpdatesStreak" methodname="ProfileProgressionKeepsOneOfficialDailyScoreAndUpdatesStreak" classname="StormBlocks.Tests.EditMode.ModeProgressionTests" runstate="Runnable" seed="1114246378" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.002182" asserts="0">
+              <test-case id="1020" name="ProfileProgressionKeepsOneOfficialDailyScoreAndUpdatesStreak" fullname="StormBlocks.Tests.EditMode.ModeProgressionTests.ProfileProgressionKeepsOneOfficialDailyScoreAndUpdatesStreak" methodname="ProfileProgressionKeepsOneOfficialDailyScoreAndUpdatesStreak" classname="StormBlocks.Tests.EditMode.ModeProgressionTests" runstate="Runnable" seed="1321650972" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.002135" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1018" name="StormTrailCatalogContainsTwelveRegionsAndOneHundredTwentyLevels" fullname="StormBlocks.Tests.EditMode.ModeProgressionTests.StormTrailCatalogContainsTwelveRegionsAndOneHundredTwentyLevels" methodname="StormTrailCatalogContainsTwelveRegionsAndOneHundredTwentyLevels" classname="StormBlocks.Tests.EditMode.ModeProgressionTests" runstate="Runnable" seed="1297371569" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.000869" asserts="0">
+              <test-case id="1018" name="StormTrailCatalogContainsTwelveRegionsAndOneHundredTwentyLevels" fullname="StormBlocks.Tests.EditMode.ModeProgressionTests.StormTrailCatalogContainsTwelveRegionsAndOneHundredTwentyLevels" methodname="StormTrailCatalogContainsTwelveRegionsAndOneHundredTwentyLevels" classname="StormBlocks.Tests.EditMode.ModeProgressionTests" runstate="Runnable" seed="154209326" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.000830" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1022" name="StormTrailStarsUnlockRegionReward" fullname="StormBlocks.Tests.EditMode.ModeProgressionTests.StormTrailStarsUnlockRegionReward" methodname="StormTrailStarsUnlockRegionReward" classname="StormBlocks.Tests.EditMode.ModeProgressionTests" runstate="Runnable" seed="559331303" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.000436" asserts="0">
+              <test-case id="1022" name="StormTrailStarsUnlockRegionReward" fullname="StormBlocks.Tests.EditMode.ModeProgressionTests.StormTrailStarsUnlockRegionReward" methodname="StormTrailStarsUnlockRegionReward" classname="StormBlocks.Tests.EditMode.ModeProgressionTests" runstate="Runnable" seed="145803560" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.000429" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1023" name="TempestTrialsTrackFiveRunWeeklyTotalAndUnlockCosmeticBadge" fullname="StormBlocks.Tests.EditMode.ModeProgressionTests.TempestTrialsTrackFiveRunWeeklyTotalAndUnlockCosmeticBadge" methodname="TempestTrialsTrackFiveRunWeeklyTotalAndUnlockCosmeticBadge" classname="StormBlocks.Tests.EditMode.ModeProgressionTests" runstate="Runnable" seed="308176653" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.000987" asserts="0">
+              <test-case id="1023" name="TempestTrialsTrackFiveRunWeeklyTotalAndUnlockCosmeticBadge" fullname="StormBlocks.Tests.EditMode.ModeProgressionTests.TempestTrialsTrackFiveRunWeeklyTotalAndUnlockCosmeticBadge" methodname="TempestTrialsTrackFiveRunWeeklyTotalAndUnlockCosmeticBadge" classname="StormBlocks.Tests.EditMode.ModeProgressionTests" runstate="Runnable" seed="442600221" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.000949" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1019" name="TempestWeekBuildsFiveDeterministicChallengeRuns" fullname="StormBlocks.Tests.EditMode.ModeProgressionTests.TempestWeekBuildsFiveDeterministicChallengeRuns" methodname="TempestWeekBuildsFiveDeterministicChallengeRuns" classname="StormBlocks.Tests.EditMode.ModeProgressionTests" runstate="Runnable" seed="1845729566" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.000632" asserts="0">
+              <test-case id="1019" name="TempestWeekBuildsFiveDeterministicChallengeRuns" fullname="StormBlocks.Tests.EditMode.ModeProgressionTests.TempestWeekBuildsFiveDeterministicChallengeRuns" methodname="TempestWeekBuildsFiveDeterministicChallengeRuns" classname="StormBlocks.Tests.EditMode.ModeProgressionTests" runstate="Runnable" seed="114540534" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.000594" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
             </test-suite>
-            <test-suite type="TestFixture" id="1026" name="ServiceInterfaceTests" fullname="StormBlocks.Tests.EditMode.ServiceInterfaceTests" classname="StormBlocks.Tests.EditMode.ServiceInterfaceTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.003189" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <test-suite type="TestFixture" id="1026" name="ServiceInterfaceTests" fullname="StormBlocks.Tests.EditMode.ServiceInterfaceTests" classname="StormBlocks.Tests.EditMode.ServiceInterfaceTests" runstate="Runnable" testcasecount="4" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.002999" total="4" passed="4" failed="0" inconclusive="0" skipped="0" asserts="0">
               <properties />
-              <test-case id="1029" name="MockServicesCoverCredentialDependentInterfaces" fullname="StormBlocks.Tests.EditMode.ServiceInterfaceTests.MockServicesCoverCredentialDependentInterfaces" methodname="MockServicesCoverCredentialDependentInterfaces" classname="StormBlocks.Tests.EditMode.ServiceInterfaceTests" runstate="Runnable" seed="2096974865" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.001329" asserts="0">
+              <test-case id="1029" name="MockServicesCoverCredentialDependentInterfaces" fullname="StormBlocks.Tests.EditMode.ServiceInterfaceTests.MockServicesCoverCredentialDependentInterfaces" methodname="MockServicesCoverCredentialDependentInterfaces" classname="StormBlocks.Tests.EditMode.ServiceInterfaceTests" runstate="Runnable" seed="467289184" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.001230" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1027" name="MockServicesKeepLocalPlayIndependentFromExternalCredentials" fullname="StormBlocks.Tests.EditMode.ServiceInterfaceTests.MockServicesKeepLocalPlayIndependentFromExternalCredentials" methodname="MockServicesKeepLocalPlayIndependentFromExternalCredentials" classname="StormBlocks.Tests.EditMode.ServiceInterfaceTests" runstate="Runnable" seed="307585990" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.000131" asserts="0">
+              <test-case id="1027" name="MockServicesKeepLocalPlayIndependentFromExternalCredentials" fullname="StormBlocks.Tests.EditMode.ServiceInterfaceTests.MockServicesKeepLocalPlayIndependentFromExternalCredentials" methodname="MockServicesKeepLocalPlayIndependentFromExternalCredentials" classname="StormBlocks.Tests.EditMode.ServiceInterfaceTests" runstate="Runnable" seed="2096225964" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.000133" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1028" name="MockServicesRoundTripRunSnapshot" fullname="StormBlocks.Tests.EditMode.ServiceInterfaceTests.MockServicesRoundTripRunSnapshot" methodname="MockServicesRoundTripRunSnapshot" classname="StormBlocks.Tests.EditMode.ServiceInterfaceTests" runstate="Runnable" seed="1584748623" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.000111" asserts="0">
+              <test-case id="1028" name="MockServicesRoundTripRunSnapshot" fullname="StormBlocks.Tests.EditMode.ServiceInterfaceTests.MockServicesRoundTripRunSnapshot" methodname="MockServicesRoundTripRunSnapshot" classname="StormBlocks.Tests.EditMode.ServiceInterfaceTests" runstate="Runnable" seed="278575332" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.000106" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />
                 </properties>
               </test-case>
-              <test-case id="1030" name="RunSessionEmitsRescueAndNearDeathFeedbackHooks" fullname="StormBlocks.Tests.EditMode.ServiceInterfaceTests.RunSessionEmitsRescueAndNearDeathFeedbackHooks" methodname="RunSessionEmitsRescueAndNearDeathFeedbackHooks" classname="StormBlocks.Tests.EditMode.ServiceInterfaceTests" runstate="Runnable" seed="87318394" result="Passed" start-time="2026-05-05 16:46:38Z" end-time="2026-05-05 16:46:38Z" duration="0.001136" asserts="0">
+              <test-case id="1030" name="RunSessionEmitsRescueAndNearDeathFeedbackHooks" fullname="StormBlocks.Tests.EditMode.ServiceInterfaceTests.RunSessionEmitsRescueAndNearDeathFeedbackHooks" methodname="RunSessionEmitsRescueAndNearDeathFeedbackHooks" classname="StormBlocks.Tests.EditMode.ServiceInterfaceTests" runstate="Runnable" seed="515946302" result="Passed" start-time="2026-05-05 17:03:53Z" end-time="2026-05-05 17:03:53Z" duration="0.001060" asserts="0">
                 <properties>
                   <property name="retryIteration" value="0" />
                   <property name="repeatIteration" value="0" />

@@ -27,7 +27,7 @@ Use the project test runner for batch verification. Unity 6000 can skip `-runTes
   -logFile /tmp/stormblocks-editmode-lowdetail.log
 ```
 
-Current evidence: `StormBlocksUnity/editmode-results.xml` reports 26 total, 26 passed, 0 failed at `2026-05-05 16:46:38Z`.
+Current evidence: `StormBlocksUnity/editmode-results.xml` reports 26 total, 26 passed, 0 failed at `2026-05-05 17:03:53Z`.
 
 ## PlayMode Tests
 
@@ -40,7 +40,7 @@ Current evidence: `StormBlocksUnity/editmode-results.xml` reports 26 total, 26 p
   -logFile /tmp/stormblocks-playmode-lowdetail.log
 ```
 
-Current evidence: `StormBlocksUnity/playmode-results.xml` reports 8 total, 8 passed, 0 failed at `2026-05-05 16:46:46Z`.
+Current evidence: `StormBlocksUnity/playmode-results.xml` reports 8 total, 8 passed, 0 failed at `2026-05-05 17:04:00Z`.
 
 The PlayMode suite includes release smoke guards for the normal flow and active touch controls:
 
@@ -50,8 +50,8 @@ The PlayMode suite includes release smoke guards for the normal flow and active 
 
 The PlayMode suite includes a lightweight mobile scene-budget guard. Current logged baseline:
 
-- 426 renderers.
-- 157,060 mesh triangles.
+- 442 renderers.
+- 161,544 mesh triangles.
 - 1 audio listener.
 - 1 canvas.
 
@@ -60,7 +60,7 @@ Current optimization notes:
 - Dynamic board, tray, ghost, survivor, block, storm, and pushback primitives are pooled instead of recreated every refresh.
 - The Accessibility screen includes a persistent Low Detail setting. On physical iOS devices the runtime also auto-selects Low Detail on constrained hardware using memory, graphics memory, and CPU-count heuristics.
 - Low Detail preserves the readable camp, board, placed blocks, survivor, storm, and gold pushback wave while trimming secondary storm puffs, rain, cyan duplicate waves, shatter lightning, and block highlight dots.
-- The current board visual pass imports optimized GLB source art through GLTFast, uses a curated toy-block charm in the runtime tray, and loads a blurred design-source storm backdrop through `Resources/StormSky`. Heavier camp/storm GLB outputs remain import-ready source assets, not direct repeated board-cell meshes.
+- The current board visual pass imports optimized GLB source art through GLTFast, uses a curated toy-block charm in the runtime tray, loads a blurred design-source storm backdrop through `Resources/StormSky`, and builds the real playfield with a deep grid seam lattice, warm camp sanctuary ring, living perimeter storm wall, and pushback perimeter recoil. Heavier camp/storm GLB outputs remain import-ready source assets, not direct repeated board-cell meshes.
 
 ## Visual Capture
 
@@ -74,7 +74,7 @@ Current optimization notes:
 
 Output is written to ignored path `StormBlocksUnity/Builds/VisualChecks/stormblocks-gameplay.png`.
 
-Current evidence: `/tmp/stormblocks-visual-first-move-coach-trimmed.log` completed with no C# errors or Unity exceptions. The capture includes the runtime HUD and text-free first-move coach, and uses the same visible text path as the generated store screenshots.
+Current evidence: `/tmp/stormblocks-visual-board-sanctuary-trim.log` completed with no C# errors or Unity exceptions. The capture includes the runtime HUD, text-free first-move coach, deeper grid seams, warm camp sanctuary ring, and perimeter storm wall, and uses the same visible text path as the generated store screenshots.
 
 ## App Icon Draft
 
@@ -110,7 +110,7 @@ Outputs are written to ignored path `StormBlocksUnity/Builds/AppStoreScreens/`:
 - `04_tempest_trials_weekly.png`
 - `05_cosmetic_profile.png`
 
-Current evidence: `/tmp/stormblocks-appstore-first-move-coach-trimmed.log` completed with no C# errors or Unity exceptions, and regenerated all five 1170 x 2532 PNGs with visible UI labels.
+Current evidence: `/tmp/stormblocks-appstore-board-sanctuary-trim.log` completed with no C# errors or Unity exceptions, and regenerated all five 1170 x 2532 PNGs with visible UI labels and the updated board treatment.
 
 The current Fastlane handoff package includes tracked copies under `fastlane/screenshots/en-US/`. `Scripts/verify_release_assets.sh` validates the five expected PNGs at 1170 x 2532.
 
@@ -228,7 +228,7 @@ xcrun devicectl device install app \
 
 Current evidence:
 
-- Latest current-source install attempt reached CoreDevice at `2026-05-05 16:47:00Z` and failed before transfer.
+- Latest current-source install attempt reached CoreDevice at `2026-05-05 17:05:00Z` and failed before transfer.
 - `/tmp/stormblocks-device-install.json` reports `outcome = failed`.
 - CoreDevice reports it cannot locate the paired device identifier and `xcrun devicectl list devices` currently shows `iPhone 17 Pro Max (iPhone18,2)` identifier `907E2EE7-9C7B-5D0D-9EC0-32E69912287D` as `unavailable`.
 - The signed `Release-iphoneos` app still exists locally and needs a device-available install retry.
@@ -248,10 +248,10 @@ xcrun devicectl device process launch \
 
 Current evidence:
 
-- Latest `Scripts/ios_release_gates.sh launch-device` retry for the current coach build ran at `2026-05-05 16:34:18Z`.
+- Latest `Scripts/ios_release_gates.sh launch-device` retry for the current board sanctuary build ran at `2026-05-05 17:10:00Z`.
 - `/tmp/stormblocks-device-launch.json` reports `outcome = failed` because CoreDevice currently cannot locate the paired iPhone.
 - A current-source install/launch retry is still required once the device is available again.
-- Most recent successful launch evidence before this coach pass was at `2026-05-05 16:09:13Z`.
+- Most recent successful launch evidence before the current CoreDevice availability blocker was at `2026-05-05 16:09:13Z`.
 
 ## Xcode Archive and App Store IPA Export
 

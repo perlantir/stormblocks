@@ -4,11 +4,11 @@ This is the current lightweight performance profile for the Unity playable scene
 
 ## Current Baseline
 
-Source: `StormBlocksUnity/playmode-results.xml` from `2026-05-05 16:46:46Z`.
+Source: `StormBlocksUnity/playmode-results.xml` from `2026-05-05 17:04:00Z`.
 
 - PlayMode tests: 8 total, 8 passed, 0 failed.
-- Playable root renderers: 426.
-- Playable root mesh triangles: 157,060.
+- Playable root renderers: 442.
+- Playable root mesh triangles: 161,544.
 - Audio listeners: 1.
 - Canvases: 1.
 
@@ -18,7 +18,7 @@ Source: `StormBlocksUnity/playmode-results.xml` from `2026-05-05 16:46:46Z`.
 - Low Detail mode is available from Accessibility settings and persisted in the local profile.
 - Physical iOS devices automatically fall back to Low Detail on constrained hardware heuristics: <= 4096 MB system memory, <= 1536 MB graphics memory, or <= 4 processors.
 - Low Detail keeps the signature gold Storm Pushback wave and core board readability while trimming duplicate wave accents, rain, extra puffs, lightning shatter accents, and block highlight dots.
-- Raw design GLBs are converted through `Scripts/optimize_design_glbs.sh`; only curated mobile variants are imported into Unity, and only the toy-block charm is currently loaded through `Resources` at runtime. A blurred design-source JPG crop is loaded as the storm backdrop through `Resources/StormSky`.
+- Raw design GLBs are converted through `Scripts/optimize_design_glbs.sh`; only curated mobile variants are imported into Unity, and only the toy-block charm is currently loaded through `Resources` at runtime. A blurred design-source JPG crop is loaded as the storm backdrop through `Resources/StormSky`. The board itself now uses one mesh for the deep grid seam lattice plus low-count perimeter storm wall geometry, keeping the visual upgrade inside the mobile guardrail.
 
 ## Automated Guardrail
 

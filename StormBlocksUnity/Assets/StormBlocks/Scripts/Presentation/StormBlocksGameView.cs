@@ -64,6 +64,9 @@ namespace StormBlocks.Presentation
         private Material _boardRim;
         private Material _boardWarmRim;
         private Material _boardShadow;
+        private Material _boardGridSeam;
+        private Material _sanctuaryRing;
+        private Material _stormEdgeFoam;
         private Material _trayGlow;
         private Material _nearDeathGlow;
         private Material _skyGradient;
@@ -335,12 +338,12 @@ namespace StormBlocks.Presentation
 
             _runtimeMaterialAssets.Clear();
             _runtimeMaterials.Clear();
-            _emptyTile = CreateToyMaterial("SB Empty Tile Frosted Gloss", highContrast ? new Color(0.24f, 0.38f, 0.76f) : new Color(0.67f, 0.68f, 0.84f), new Color(0.94f, 0.96f, 1.0f), new Color(0.42f, 0.42f, 0.62f), 0.82f, false);
-            _campTile = CreateToyMaterial("SB Warm Camp Tile", highContrast ? new Color(1.0f, 0.62f, 0.16f) : new Color(0.86f, 0.62f, 0.36f), new Color(1.0f, 0.84f, 0.50f), new Color(0.54f, 0.32f, 0.18f), 0.72f, false);
+            _emptyTile = CreateToyMaterial("SB Empty Tile Frosted Gloss", highContrast ? new Color(0.24f, 0.38f, 0.76f) : new Color(0.50f, 0.60f, 0.86f), new Color(0.92f, 0.96f, 1.0f), new Color(0.24f, 0.28f, 0.56f), 0.84f, false);
+            _campTile = CreateToyMaterial("SB Warm Camp Tile", highContrast ? new Color(1.0f, 0.62f, 0.16f) : new Color(0.90f, 0.58f, 0.28f), new Color(1.0f, 0.84f, 0.50f), new Color(0.54f, 0.28f, 0.13f), 0.74f, false);
             _creamTile = CreateToyMaterial("SB Cream Tile Highlight", new Color(0.88f, 0.72f, 0.48f), new Color(1.0f, 0.88f, 0.62f), new Color(0.56f, 0.34f, 0.20f), 0.78f, false);
             _cellRim = CreateToyMaterial("SB Frosted Cell Rim", new Color(0.82f, 0.81f, 0.96f), new Color(1.0f, 0.98f, 1.0f), new Color(0.55f, 0.54f, 0.74f), 0.78f, false);
             _campFloor = CreateToyMaterial("SB Central Camp Warm Floor", new Color(0.78f, 0.46f, 0.22f), new Color(1.0f, 0.72f, 0.34f), new Color(0.46f, 0.24f, 0.14f), 0.70f, false);
-            _stormTile = CreateToyMaterial("SB Storm Tile Cracked", highContrast ? new Color(0.04f, 0.06f, 0.18f) : new Color(0.30f, 0.34f, 0.52f), new Color(0.52f, 0.58f, 0.82f), new Color(0.10f, 0.12f, 0.30f), 0.46f, true);
+            _stormTile = CreateToyMaterial("SB Storm Tile Cracked", highContrast ? new Color(0.04f, 0.06f, 0.18f) : new Color(0.20f, 0.22f, 0.48f), new Color(0.42f, 0.54f, 0.92f), new Color(0.07f, 0.08f, 0.25f), 0.48f, true);
             _warningTile = CreateToyMaterial("SB Storm Warning", highContrast ? new Color(1.0f, 0.88f, 0.10f) : new Color(0.12f, 0.80f, 1.0f), new Color(0.46f, 0.95f, 1.0f), new Color(0.08f, 0.34f, 0.70f), 0.5f, false);
             _stormCloud = CreateMaterial("SB Storm Cloud", highContrast ? new Color(0.03f, 0.02f, 0.18f) : new Color(0.36f, 0.39f, 0.68f), 0.34f);
             _stormMist = CreateMaterial("SB Storm Mist Lavender", new Color(0.60f, 0.62f, 0.88f), 0.40f);
@@ -355,6 +358,9 @@ namespace StormBlocks.Presentation
             _boardRim = CreateMaterial("SB Board Cyan Rim Glow", new Color(0.34f, 0.78f, 1.0f), 0.82f, 0.20f);
             _boardWarmRim = CreateMaterial("SB Board Warm Rounded Rim", new Color(0.42f, 0.34f, 0.60f), 0.62f);
             _boardShadow = CreateMaterial("SB Board Soft Shadow", new Color(0.16f, 0.15f, 0.30f), 0.38f);
+            _boardGridSeam = CreateMaterial("SB Deep Board Grid Seams", new Color(0.18f, 0.18f, 0.42f), 0.58f, 0.03f);
+            _sanctuaryRing = CreateMaterial("SB Camp Sanctuary Ring", new Color(1.0f, 0.70f, 0.20f), 0.84f, 0.12f);
+            _stormEdgeFoam = CreateMaterial("SB Storm Edge Foam", new Color(0.52f, 0.58f, 0.88f), 0.42f, 0.04f);
             _trayGlow = CreateMaterial("SB Tray Pad Glow", new Color(0.95f, 0.56f, 0.16f), 0.82f, 0.18f);
             _nearDeathGlow = CreateMaterial("SB Near Death Warm Vignette", new Color(0.90f, 0.16f, 0.22f), 0.65f, 0.22f);
             _skyGradient = CreateSkyGradientMaterial();
@@ -948,7 +954,59 @@ namespace StormBlocks.Presentation
                 }
             }
 
+            CreateBoardGridSeams(boardSpan);
+            CreateCampSanctuaryRing();
+            CreateStormPressureWall(boardSpan);
             BuildCamp();
+        }
+
+        private void CreateBoardGridSeams(float boardSpan)
+        {
+            const float seamWidth = 0.034f;
+            float start = BoardOrigin - CellPitch * 0.5f;
+            float end = start + boardSpan;
+            var vertices = new List<Vector3>((BoardSize + 1) * 8);
+            var triangles = new List<int>((BoardSize + 1) * 12);
+
+            for (int i = 0; i <= BoardSize; i++)
+            {
+                float coordinate = start + i * CellPitch;
+                AddFlatRect(vertices, triangles, coordinate - seamWidth * 0.5f, coordinate + seamWidth * 0.5f, start, end);
+                AddFlatRect(vertices, triangles, start, end, coordinate - seamWidth * 0.5f, coordinate + seamWidth * 0.5f);
+            }
+
+            CreateMeshObject("Single-piece deep blue 8x8 grid seam lattice", _boardRoot, new Vector3(0f, 0.134f, 0f), vertices.ToArray(), triangles.ToArray(), _boardGridSeam);
+        }
+
+        private void CreateCampSanctuaryRing()
+        {
+            float ringOffset = CellPitch * 1.13f;
+            float ringSpan = CellPitch * 2.58f;
+            CreateCube("Warm sanctuary ring north", _boardRoot, new Vector3(0f, 0.188f, ringOffset), new Vector3(ringSpan, 0.050f, 0.060f), _sanctuaryRing);
+            CreateCube("Warm sanctuary ring south", _boardRoot, new Vector3(0f, 0.188f, -ringOffset), new Vector3(ringSpan, 0.050f, 0.060f), _sanctuaryRing);
+            CreateCube("Warm sanctuary ring west", _boardRoot, new Vector3(-ringOffset, 0.188f, 0f), new Vector3(0.060f, 0.050f, ringSpan), _sanctuaryRing);
+            CreateCube("Warm sanctuary ring east", _boardRoot, new Vector3(ringOffset, 0.188f, 0f), new Vector3(0.060f, 0.050f, ringSpan), _sanctuaryRing);
+        }
+
+        private void CreateStormPressureWall(float boardSpan)
+        {
+            float edge = boardSpan * 0.5f + 0.34f;
+            float longSpan = boardSpan + 0.82f;
+            CreateRoundedBox("Living storm wall north", _boardRoot, new Vector3(0f, 0.285f, edge), new Vector3(longSpan, 0.13f, 0.23f), 0.10f, 5, _stormVortex);
+            CreateRoundedBox("Living storm wall south", _boardRoot, new Vector3(0f, 0.285f, -edge), new Vector3(longSpan, 0.13f, 0.23f), 0.10f, 5, _stormVortex);
+            CreateRoundedBox("Living storm wall west", _boardRoot, new Vector3(-edge, 0.285f, 0f), new Vector3(0.23f, 0.13f, longSpan), 0.10f, 5, _stormVortex);
+            CreateRoundedBox("Living storm wall east", _boardRoot, new Vector3(edge, 0.285f, 0f), new Vector3(0.23f, 0.13f, longSpan), 0.10f, 5, _stormVortex);
+
+            if (UseLowDetailVisuals())
+            {
+                return;
+            }
+
+            float offset = boardSpan * 0.24f;
+            CreateSphere("Storm wall north left foam", _boardRoot, new Vector3(-offset, 0.38f, edge + 0.02f), new Vector3(0.62f, 0.16f, 0.28f), _stormEdgeFoam);
+            CreateSphere("Storm wall south right foam", _boardRoot, new Vector3(offset, 0.38f, -edge - 0.02f), new Vector3(0.62f, 0.16f, 0.28f), _stormEdgeFoam);
+            CreateSphere("Storm wall west lower foam", _boardRoot, new Vector3(-edge - 0.02f, 0.39f, -offset), new Vector3(0.26f, 0.15f, 0.58f), _stormEdgeFoam);
+            CreateSphere("Storm wall east upper foam", _boardRoot, new Vector3(edge + 0.02f, 0.39f, offset), new Vector3(0.26f, 0.15f, 0.58f), _stormEdgeFoam);
         }
 
         private void CreateBoardStormCorner(string objectName, Vector3 center, float rotation)
@@ -2324,7 +2382,27 @@ namespace StormBlocks.Presentation
                 }
             }
 
+            CreatePushbackPerimeterSurge(lowDetail);
             _fxTimer = reducedMotion ? 0.35f : 0.8f;
+        }
+
+        private void CreatePushbackPerimeterSurge(bool lowDetail)
+        {
+            float boardSpan = CellPitch * BoardSize;
+            float edge = boardSpan * 0.5f + 0.34f;
+            CreatePooledCube("Pushback storm wall recoil north", _fxRoot, new Vector3(0f, 0.64f, edge), new Vector3(boardSpan + 0.92f, 0.055f, 0.12f), _goldGlow);
+            CreatePooledCube("Pushback storm wall recoil south", _fxRoot, new Vector3(0f, 0.64f, -edge), new Vector3(boardSpan + 0.92f, 0.055f, 0.12f), _goldGlow);
+            CreatePooledCube("Pushback storm wall recoil west", _fxRoot, new Vector3(-edge, 0.64f, 0f), new Vector3(0.12f, 0.055f, boardSpan + 0.92f), _goldGlow);
+            CreatePooledCube("Pushback storm wall recoil east", _fxRoot, new Vector3(edge, 0.64f, 0f), new Vector3(0.12f, 0.055f, boardSpan + 0.92f), _goldGlow);
+            if (lowDetail)
+            {
+                return;
+            }
+
+            CreatePooledCube("Pushback cyan recoil north", _fxRoot, new Vector3(0f, 0.71f, edge - 0.08f), new Vector3(boardSpan * 0.62f, 0.035f, 0.055f), _stormLightning);
+            CreatePooledCube("Pushback cyan recoil south", _fxRoot, new Vector3(0f, 0.71f, -edge + 0.08f), new Vector3(boardSpan * 0.62f, 0.035f, 0.055f), _stormLightning);
+            CreatePooledCube("Pushback cyan recoil west", _fxRoot, new Vector3(-edge + 0.08f, 0.71f, 0f), new Vector3(0.055f, 0.035f, boardSpan * 0.62f), _stormLightning);
+            CreatePooledCube("Pushback cyan recoil east", _fxRoot, new Vector3(edge - 0.08f, 0.71f, 0f), new Vector3(0.055f, 0.035f, boardSpan * 0.62f), _stormLightning);
         }
 
         private void UpdateTimers()
@@ -2840,6 +2918,21 @@ namespace StormBlocks.Presentation
             var gameObject = CreateMeshObject(objectName, parent, localPosition, vertices.ToArray(), triangles.ToArray(), material);
             gameObject.GetComponent<MeshFilter>().sharedMesh.uv = uvs.ToArray();
             return gameObject;
+        }
+
+        private static void AddFlatRect(List<Vector3> vertices, List<int> triangles, float minX, float maxX, float minZ, float maxZ)
+        {
+            int start = vertices.Count;
+            vertices.Add(new Vector3(minX, 0f, minZ));
+            vertices.Add(new Vector3(minX, 0f, maxZ));
+            vertices.Add(new Vector3(maxX, 0f, minZ));
+            vertices.Add(new Vector3(maxX, 0f, maxZ));
+            triangles.Add(start);
+            triangles.Add(start + 1);
+            triangles.Add(start + 2);
+            triangles.Add(start + 2);
+            triangles.Add(start + 1);
+            triangles.Add(start + 3);
         }
 
         private static List<Vector2> BuildRoundedPerimeter(float halfX, float halfZ, float radius, int cornerSegments)
