@@ -53,7 +53,13 @@ Record each run and score each category from 1 to 5 in `Docs/FIVE_RUN_QA_SCORECA
 
 Release target: 4 or higher in every category.
 
-If any category scores below 4, any required check fails, or any blocker/major defect is found, keep the physical-device QA release checklist item open and create or update a GitHub issue with the evidence.
+After filling the scorecard, run:
+
+```bash
+Scripts/verify_five_run_scorecard.sh
+```
+
+If the verifier fails, any category scores below 4, any required check fails, or any blocker/major defect is found, keep the physical-device QA release checklist item open and create or update a GitHub issue with the evidence.
 
 ## Functional Device Checks
 

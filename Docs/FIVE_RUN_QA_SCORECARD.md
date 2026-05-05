@@ -2,12 +2,20 @@
 
 Use this file for the required human five-run playability pass on a physical iPhone. Do not mark the physical-device QA checklist item complete until every required section is filled, each release score is 4 or higher, and no blocker remains open.
 
+After filling it, run:
+
+```bash
+Scripts/verify_five_run_scorecard.sh
+```
+
+The physical-device QA checklist item must stay open until this verifier passes.
+
 Date:
 Tester:
 Device model:
 iOS version:
 Build source / commit:
-Install source: signed local build / TestFlight / other
+Install source:
 
 ## Run Log
 
@@ -57,14 +65,14 @@ Score each from 1 to 5. Release target is 4 or higher in every category.
 
 | Severity | Area | Steps | Expected | Actual | Screenshot / Video |
 | --- | --- | --- | --- | --- | --- |
-| Blocker / Major / Minor |  |  |  |  |  |
+| None |  |  |  |  |  |
 
 ## Signoff
 
 Physical QA result: Pass / Fail
 
-Release-blocking issues:
+Release-blocking issues: None or issue URL
 
-Follow-up issues created:
+Follow-up issues created: None or issue URL
 
 Tester notes:

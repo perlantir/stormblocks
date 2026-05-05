@@ -49,5 +49,5 @@ These are not final human scores. They are current local QA estimates from autom
 Execution runbook:
 
 - `Docs/PHYSICAL_QA_RUNBOOK.md`
-- `Docs/FIVE_RUN_QA_SCORECARD.md`
+- `Docs/FIVE_RUN_QA_SCORECARD.md` plus `Scripts/verify_five_run_scorecard.sh`
 - `Scripts/device_qa_session.sh plan`

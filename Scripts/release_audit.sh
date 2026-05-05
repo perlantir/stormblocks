@@ -157,6 +157,7 @@ audit_local_evidence() {
   fi
   require_file "$ROOT/Docs/PHYSICAL_QA_RUNBOOK.md" "Physical QA runbook exists"
   require_file "$ROOT/Docs/FIVE_RUN_QA_SCORECARD.md" "Five-run QA scorecard exists"
+  require_file "$ROOT/Scripts/verify_five_run_scorecard.sh" "Five-run QA scorecard verifier exists"
   require_file "$ROOT/Scripts/device_qa_session.sh" "Physical QA session helper exists"
   require_file "$ROOT/Scripts/ci_static_checks.sh" "Static CI script exists"
   require_file "$ROOT/.github/workflows/release-static.yml" "GitHub static release workflow exists"
@@ -195,6 +196,10 @@ audit_open_gates() {
   fi
   if grep -q "\\[ \\].*Physical-device QA pass" "$ROOT/Docs/RELEASE_DONE_CHECKLIST.md"; then
     open_gate "Physical-device QA checkbox remains open."
+  elif "$ROOT/Scripts/verify_five_run_scorecard.sh" >/tmp/stormblocks-five-run-scorecard-audit.log 2>&1; then
+    pass "Five-run QA scorecard is complete"
+  else
+    fail "Five-run QA scorecard is incomplete; see /tmp/stormblocks-five-run-scorecard-audit.log"
   fi
   if grep -q "\\[ \\].*Physical-device performance pass" "$ROOT/Docs/RELEASE_DONE_CHECKLIST.md"; then
     open_gate "Physical-device performance checkbox remains open."

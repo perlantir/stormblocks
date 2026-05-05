@@ -19,10 +19,11 @@ Storm Blocks physical QA plan
 1. Unlock paired device: $DEVICE_ID
 2. Launch signed app: Scripts/device_qa_session.sh launch
 3. Run five manual playability sessions from Docs/PHYSICAL_QA_RUNBOOK.md
-4. Record Game Performance trace: Scripts/device_qa_session.sh profile-game
-5. Record Power Profiler trace: Scripts/device_qa_session.sh profile-power
-6. Update Docs/QA_EVAL_REPORT.md and Docs/PERFORMANCE_PROFILE.md with results
-7. Rerun Scripts/release_audit.sh full
+4. Validate the filled scorecard: Scripts/verify_five_run_scorecard.sh
+5. Record Game Performance trace: Scripts/device_qa_session.sh profile-game
+6. Record Power Profiler trace: Scripts/device_qa_session.sh profile-power
+7. Update Docs/QA_EVAL_REPORT.md and Docs/PERFORMANCE_PROFILE.md with results
+8. Rerun Scripts/release_audit.sh full
 
 Open external gates remain until App Store Connect has the app record, Game Center identifiers
 are live, TestFlight is installed, and human/device QA plus profiling are recorded.

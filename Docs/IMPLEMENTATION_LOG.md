@@ -956,3 +956,21 @@ Evidence:
 Known risks / not done:
 
 - App Store Connect app record creation, live Game Center validation, TestFlight upload/install, older-device profiling, and human five-run QA remain open.
+
+## 2026-05-05 — Five-run QA scorecard verifier
+
+- Added `Scripts/verify_five_run_scorecard.sh` so the required human physical-device scorecard has machine-checkable completion criteria before the QA checkbox can close.
+- Wired the release audit to require the verifier if the physical-device QA checklist item is marked complete, while keeping the current blank scorecard as an open gate instead of a local failure.
+- Updated the physical QA runbook, scorecard template, QA report, device QA helper, and release audit evidence to point testers at the verifier.
+
+Evidence:
+
+- `bash -n Scripts/verify_five_run_scorecard.sh Scripts/release_audit.sh Scripts/device_qa_session.sh` passes.
+- `Scripts/verify_five_run_scorecard.sh` fails the current blank template as expected, preventing accidental physical-QA closure without real run data.
+- A synthetic filled five-run scorecard fixture passes the verifier with 15 pass, 0 fail.
+- `Scripts/ci_static_checks.sh` passes locally.
+- `Scripts/release_audit.sh full` now reports 35 pass, 0 fail, and 6 open external gates; it exits nonzero because those open gates remain unresolved.
+
+Known risks / not done:
+
+- The verifier protects the gate but does not replace the human five-run playability test. App Store Connect app record creation, live Game Center validation, TestFlight upload/install, older-device profiling, and human five-run QA remain open.
