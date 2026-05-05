@@ -26,7 +26,7 @@ This maps the launch request and repo release gates to concrete evidence. The pr
 | Design references and visual target | Procedural 3D board, storm, camp, survivors, app icon, regenerated screenshots, optimized design-source GLB imports, and blurred design-source storm backdrop exist; visual quality still needs final physical-device human review. | Local pass; human review pending |
 | QA tests | Latest EditMode: 25/25 at `2026-05-05 15:31:36Z`; latest PlayMode: 7/7 at `2026-05-05 15:31:44Z`. | Pass |
 | Prompt compliance verifier | `Scripts/verify_prompt_compliance.sh` checks required docs/design refs, major gameplay/system surfaces, passing test result files, and non-monetization/copyright guardrails. | Pass |
-| Performance optimization | Primitive pooling, Low Detail fallback, URP mobile settings, optimized design-source imports, and scene-budget guard exist; latest full-detail budget is 423 renderers and 154,152 triangles. | Local pass; physical profiling pending |
+| Performance optimization | Primitive pooling, Low Detail fallback, URP mobile settings, optimized design-source imports, scene-budget guard, and modern-iPhone Game Performance/Power traces exist; latest full-detail budget is 423 renderers and 154,152 triangles. | Partial physical pass; older-device profiling pending |
 | Physical QA handoff | `Docs/PHYSICAL_QA_RUNBOOK.md` and `Scripts/device_qa_session.sh` define launch, five-run QA, Game Center, TestFlight, and profiling steps. | Local pass; physical execution pending |
 | GitHub static verification | Design-pass `Release Static Checks` passed for commit `b9a2d97`; run `25384474864`: `https://github.com/perlantir/stormblocks/actions/runs/25384474864`. Branch-head status should be checked after any follow-up docs-only commit. | Pass |
 | iOS unsigned build | `/tmp/stormblocks-xcode-lowdetail-pool-unsigned.log` reports `** BUILD SUCCEEDED **`. | Pass |
@@ -44,6 +44,7 @@ This maps the launch request and repo release gates to concrete evidence. The pr
 - Create and enable the Game Center leaderboard and achievement identifiers in `Docs/GAME_CENTER_SETUP.md`, then validate them on device: https://github.com/perlantir/stormblocks/issues/2
 - Complete physical-device QA plus the human five-run playability test: https://github.com/perlantir/stormblocks/issues/9
 - Complete physical performance and thermal profiling on one modern and one older supported iPhone: https://github.com/perlantir/stormblocks/issues/8
+- Modern-iPhone Game Performance and Power traces are captured; older-device and longer interactive trace review remain open.
 - Upload the exported IPA to TestFlight after the App Store Connect app record exists, then install and launch the TestFlight build: https://github.com/perlantir/stormblocks/issues/7
 - Provide App Store Connect API key credentials or Apple ID app-specific password if using the Fastlane lanes.
 - Grant desktop automation permission or drive the App Store Connect browser/Xcode UI manually; the current desktop automation channel reports `Sender process is not authenticated`.

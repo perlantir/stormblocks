@@ -55,5 +55,14 @@ Trace outputs are written under ignored path `StormBlocksUnity/Builds/DeviceProf
 Latest profiling attempt:
 
 - `Scripts/device_qa_session.sh` now resolves the xctrace hardware UDID from `devicectl` instead of passing the CoreDevice identifier.
-- `STORMBLOCKS_PROFILE_TIME=15s Scripts/device_qa_session.sh profile-game` resolved the paired iPhone to `00008150-00040D203A88401C`, but `xctrace` timed out with `Timed out waiting for device to boot: iPhone (26.3)`.
-- `devicectl` can still install and launch the app on CoreDevice id `907E2EE7-9C7B-5D0D-9EC0-32E69912287D`; the remaining profiling blocker is Instruments/xctrace seeing that physical iPhone as offline.
+- Current-source signed app launched on paired iPhone CoreDevice id `907E2EE7-9C7B-5D0D-9EC0-32E69912287D` at `2026-05-05 15:37:02Z`.
+- `STORMBLOCKS_PROFILE_TIME=15s Scripts/device_qa_session.sh profile-game` captured `StormBlocksUnity/Builds/DeviceProfiles/stormblocks-game-performance-20260505T154140Z.trace` on hardware UDID `00008150-00040D203A88401C`.
+- `STORMBLOCKS_PROFILE_TIME=15s Scripts/device_qa_session.sh profile-power` captured `StormBlocksUnity/Builds/DeviceProfiles/stormblocks-power-20260505T154242Z.trace` on the same paired iPhone.
+- `xcrun xctrace export --toc` reports target device `iPhone 17 Pro Max`, iOS `26.3 (23D127)`, process `StormBlocks`, and normal time-limit completion for both traces.
+- Exported Power Profiler layer metrics include GPU active time around `0.52 ms` on sampled 30-frame windows and frame interval around `33.3 ms`; `ProcessSubsystemPowerImpact` rows show no Wi-Fi or cellular bytes during the sample.
+
+Remaining physical-performance gates:
+
+- Repeat profiling on one older supported iPhone.
+- Capture a longer interactive play session covering large clears, near-death storm, Storm Pushback, menus/results, and reduced-motion/Low Detail toggles.
+- Review traces manually in Instruments for thermal trend, frame pacing, memory, and sustained input latency before checking the release done box.

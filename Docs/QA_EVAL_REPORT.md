@@ -22,6 +22,8 @@ Current eval date: 2026-05-05.
 - Xcode archive succeeded: `/tmp/stormblocks-xcode-team7jl-archive.log`.
 - App Store Connect IPA export succeeded: `/tmp/stormblocks-xcode-team7jl-export-appstore.log`, output `StormBlocksUnity/Builds/iOS/ExportAppStoreTeam7JL/StormBlocks.ipa`.
 - Current-source App Store Connect upload probe authenticated but found no app record for bundle id `com.perlantir.stormblocks`: `/tmp/stormblocks-xcode-team7jl-upload-appstore.log`.
+- Physical Game Performance trace captured on paired iPhone 17 Pro Max: `StormBlocksUnity/Builds/DeviceProfiles/stormblocks-game-performance-20260505T154140Z.trace`.
+- Physical Power Profiler trace captured on paired iPhone 17 Pro Max: `StormBlocksUnity/Builds/DeviceProfiles/stormblocks-power-20260505T154242Z.trace`.
 
 ## Playability Eval Status
 
@@ -33,13 +35,13 @@ These are not final human scores. They are current local QA estimates from autom
 - Visual polish: 4/5 local estimate for cohesive procedural launch art after the reference-led board pass, optimized GLB source import, and design-source storm backdrop crop; final device visual review is still required.
 - Storm Pushback satisfaction: 4/5 local estimate; automatic mechanic, VFX, score feedback, audio, and haptic hooks are present.
 - Touch feel: pending signed-device test.
-- Performance: pending physical-device profiling; structural scene budget is under guardrails and now includes a Low Detail fallback path.
+- Performance: partial physical-device profiling captured on a modern iPhone; structural scene budget is under guardrails and includes a Low Detail fallback path. Older-device and longer interactive profiling remain pending.
 
 ## Required Manual Gates
 
 - Five-run addiction test with a human tester.
 - Physical-device QA on a notched/Dynamic Island iPhone.
-- Physical-device performance and thermal profile on one modern and one older supported iPhone.
+- Physical-device performance and thermal profile on one older supported iPhone, plus longer interactive review of the captured modern-device traces.
 - Signed Game Center authentication, leaderboard submission, achievement reporting, and Game Center UI validation.
 - App Store Connect app record creation for `com.perlantir.stormblocks`.
 - TestFlight upload, install, and launch validation.

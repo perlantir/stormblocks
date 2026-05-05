@@ -692,3 +692,22 @@ Known risks / not done:
 
 - The second board pass is a clear improvement and stays under automated scene budgets, but final art quality still needs human physical-device review against the supplied references.
 - TestFlight upload still needs the App Store Connect app record for `com.perlantir.stormblocks`.
+
+## 2026-05-05 — Physical profiling partial pass
+
+- Launched the current-source signed app on the paired iPhone after the second board pass.
+- Captured Game Performance and Power Profiler traces with `Scripts/device_qa_session.sh` using the hardware UDID resolved from `devicectl`.
+- Exported trace tables with `xcrun xctrace export --toc` / `--xpath` to confirm the target and read key power/frame metrics.
+
+Evidence:
+
+- Device launch: `/tmp/stormblocks-device-launch.json` reports `"outcome": "success"` for `com.perlantir.stormblocks` on paired iPhone CoreDevice id `907E2EE7-9C7B-5D0D-9EC0-32E69912287D` at `2026-05-05 15:37:02Z`.
+- Game Performance trace: `StormBlocksUnity/Builds/DeviceProfiles/stormblocks-game-performance-20260505T154140Z.trace`.
+- Power Profiler trace: `StormBlocksUnity/Builds/DeviceProfiles/stormblocks-power-20260505T154242Z.trace`.
+- Trace TOC identifies target device as `iPhone 17 Pro Max`, iOS `26.3 (23D127)`, hardware UDID `00008150-00040D203A88401C`, process `StormBlocks`.
+- Exported Power Profiler layer metrics show GPU active time around `0.52 ms` on sampled 30-frame windows and frame interval around `33.3 ms`; `ProcessSubsystemPowerImpact` rows show zero Wi-Fi and cellular bytes during the sample.
+
+Known risks / not done:
+
+- This is a partial modern-device profiling pass, not final release performance signoff.
+- Still need an older supported iPhone trace and longer manual interactive profiling through normal play, near-death storm, Storm Pushback, menus/results, and reduced-motion/Low Detail paths.
