@@ -1,0 +1,135 @@
+{
+  "app": {
+    "name": "Storm Blocks",
+    "subtitle": "Block Puzzle Storm Rescue",
+    "bundleId": "com.perlantir.stormblocks",
+    "sku": "stormblocks-ios",
+    "version": "0.1.0",
+    "primaryLanguage": "en-US",
+    "primaryCategory": "Games",
+    "secondaryCategory": "Puzzle",
+    "teamId": "7JL22TDB44",
+    "providerPublicId": "ae62de71-9179-4836-a662-2c92a63e965e"
+  },
+  "metadata": {
+    "locale": "en-US",
+    "supportUrl": "https://github.com/perlantir/stormblocks/blob/main/Docs/PUBLIC_SUPPORT.md",
+    "marketingUrl": "https://github.com/perlantir/stormblocks",
+    "privacyUrl": "https://github.com/perlantir/stormblocks/blob/main/Docs/PUBLIC_PRIVACY.md",
+    "copyright": "2026 UBER KIWI LLC",
+    "contentRights": "Storm Blocks uses original/generated project assets and no third-party copyrighted IP.",
+    "monetization": "No forced ads, no paid power, no paid speedups, no gacha, and no loot boxes."
+  },
+  "screenshots": [
+    "01_place_blocks_save_camp.png",
+    "02_beat_daily_storm.png",
+    "03_storm_trail_progression.png",
+    "04_tempest_trials_weekly.png",
+    "05_cosmetic_profile.png"
+  ],
+  "leaderboards": [
+    {
+      "id": "com.perlantir.stormblocks.leaderboard.endless_high_score",
+      "referenceName": "Endless Storm High Score",
+      "displayName": "Endless Storm",
+      "sortOrder": "HighToLow",
+      "scoreFormat": "Integer"
+    },
+    {
+      "id": "com.perlantir.stormblocks.leaderboard.daily_storm",
+      "referenceName": "Daily Storm Official Score",
+      "displayName": "Daily Storm",
+      "sortOrder": "HighToLow",
+      "scoreFormat": "Integer"
+    },
+    {
+      "id": "com.perlantir.stormblocks.leaderboard.tempest_trials_weekly",
+      "referenceName": "Tempest Trials Weekly Score",
+      "displayName": "Tempest Trials",
+      "sortOrder": "HighToLow",
+      "scoreFormat": "Integer"
+    }
+  ],
+  "achievements": [
+    {
+      "id": "com.perlantir.stormblocks.achievement.first_rescue",
+      "referenceName": "First Rescue",
+      "title": "First Rescue",
+      "preEarnedDescription": "Rescue your first survivor.",
+      "earnedDescription": "You rescued your first survivor.",
+      "points": 10,
+      "hidden": false,
+      "repeatable": false
+    },
+    {
+      "id": "com.perlantir.stormblocks.achievement.first_pushback",
+      "referenceName": "First Pushback",
+      "title": "First Pushback",
+      "preEarnedDescription": "Clear through storm tiles to push the storm back.",
+      "earnedDescription": "You pushed the storm back with a clear.",
+      "points": 10,
+      "hidden": false,
+      "repeatable": false
+    },
+    {
+      "id": "com.perlantir.stormblocks.achievement.clutch_save",
+      "referenceName": "Clutch Save",
+      "title": "Clutch Save",
+      "preEarnedDescription": "Push the storm back while camp is nearly surrounded.",
+      "earnedDescription": "You saved camp at the last moment.",
+      "points": 20,
+      "hidden": false,
+      "repeatable": false
+    },
+    {
+      "id": "com.perlantir.stormblocks.achievement.daily_streak_3",
+      "referenceName": "Daily Streak 3",
+      "title": "Storm Watch",
+      "preEarnedDescription": "Complete Daily Storm three days in a row.",
+      "earnedDescription": "You completed three Daily Storms in a row.",
+      "points": 20,
+      "hidden": false,
+      "repeatable": false
+    },
+    {
+      "id": "com.perlantir.stormblocks.achievement.daily_streak_7",
+      "referenceName": "Daily Streak 7",
+      "title": "Storm Keeper",
+      "preEarnedDescription": "Complete Daily Storm seven days in a row.",
+      "earnedDescription": "You completed seven Daily Storms in a row.",
+      "points": 50,
+      "hidden": false,
+      "repeatable": false
+    },
+    {
+      "id": "com.perlantir.stormblocks.achievement.storm_trail_region_complete",
+      "referenceName": "Storm Trail Region Complete",
+      "title": "Trail Guide",
+      "preEarnedDescription": "Complete a full Storm Trail region.",
+      "earnedDescription": "You completed a Storm Trail region.",
+      "points": 50,
+      "hidden": false,
+      "repeatable": false
+    },
+    {
+      "id": "com.perlantir.stormblocks.achievement.tempest_trial_complete",
+      "referenceName": "Tempest Trial Complete",
+      "title": "Trial Runner",
+      "preEarnedDescription": "Complete a weekly Tempest Trial run.",
+      "earnedDescription": "You completed a Tempest Trial run.",
+      "points": 20,
+      "hidden": false,
+      "repeatable": false
+    },
+    {
+      "id": "com.perlantir.stormblocks.achievement.cosmetic_collector",
+      "referenceName": "Cosmetic Collector",
+      "title": "Camp Stylist",
+      "preEarnedDescription": "Unlock a collection of cosmetic-only rewards.",
+      "earnedDescription": "You unlocked a collection of cosmetics.",
+      "points": 20,
+      "hidden": false,
+      "repeatable": false
+    }
+  ]
+}

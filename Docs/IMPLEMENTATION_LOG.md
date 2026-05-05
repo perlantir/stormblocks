@@ -311,7 +311,7 @@ Evidence:
 Known risks / not done:
 
 - Fastlane credentialed lanes still require App Store Connect API key environment variables or Apple ID app-specific password.
-- The App Store Connect app record for `com.perlantir.stormblocks` is still missing until `fastlane ios create_app_record` or the App Store Connect UI creates it.
+- The App Store Connect app record for `com.perlantir.stormblocks` is still missing until `Scripts/fastlane_release.sh ios create_app_record` or the App Store Connect UI creates it.
 
 ## 2026-05-05 — Machine-verifiable release audit
 
@@ -364,6 +364,27 @@ Evidence:
 Known risks / not done:
 
 - The wrapper fixes local lane execution, but credentialed lanes still need App Store Connect API-key variables or Apple ID credentials.
+
+## 2026-05-05 — App Store metadata and Game Center manifest package
+
+- Added `Docs/APP_STORE_CONNECT_MANIFEST.json` with the App Store record fields, metadata URLs, screenshot set, Game Center leaderboard identifiers, and Game Center achievement definitions.
+- Added customer-facing support and privacy page drafts at `Docs/PUBLIC_SUPPORT.md` and `Docs/PUBLIC_PRIVACY.md`.
+- Added tracked Fastlane metadata under `fastlane/metadata/en-US/` and copied the current five generated 1170 x 2532 screenshots into `fastlane/screenshots/en-US/`.
+- Added `Scripts/verify_release_assets.sh` to validate App Store metadata length/byte limits, screenshot dimensions, and Game Center identifier alignment across the manifest, setup docs, and runtime GameKit adapter.
+- Added Fastlane lanes for local release-asset validation and metadata/screenshot upload after the App Store Connect app record exists.
+- Updated App Store, Game Center, release audit, and build/test docs to reference the new release-asset package.
+
+Evidence:
+
+- `Scripts/verify_release_assets.sh` passes.
+- `Scripts/fastlane_release.sh lanes` lists `ios validate_release_assets`, `ios upload_metadata`, `ios create_app_record`, `ios upload_testflight`, and `ios release_candidate_upload`.
+- `Scripts/fastlane_release.sh ios validate_release_assets` runs successfully and the wrapper removes the generated Fastlane `report.xml` artifact afterward.
+- `Scripts/release_audit.sh full` reports 26 pass, 0 fail, and the same 7 external open gates.
+
+Known risks / not done:
+
+- The support, marketing, and privacy URLs in the manifest still need public reachability/customer-support review before App Store submission.
+- The metadata upload lane remains credentialed and cannot run until the App Store Connect app record and credentials are available.
 
 ## 2026-05-05 — Gate 12 pooling and Low Detail fallback
 

@@ -15,6 +15,14 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ## iOS
 
+### ios validate_release_assets
+
+```sh
+[bundle exec] fastlane ios validate_release_assets
+```
+
+Validate App Store metadata, screenshots, and Game Center identifier manifest locally.
+
 ### ios create_app_record
 
 ```sh
@@ -22,6 +30,14 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 ```
 
 Create the missing App Store Connect app record and enable Game Center capability.
+
+### ios upload_metadata
+
+```sh
+[bundle exec] fastlane ios upload_metadata
+```
+
+Upload App Store metadata and screenshots after the app record exists.
 
 ### ios upload_testflight
 

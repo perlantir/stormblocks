@@ -18,6 +18,10 @@ The current output directory is ignored by git:
 
 `StormBlocksUnity/Builds/AppStoreScreens/`
 
+The release handoff copies the current set into Fastlane's tracked screenshot package:
+
+`fastlane/screenshots/en-US/`
+
 Current files:
 
 - `01_place_blocks_save_camp.png` - core loop, warm camp, readable board.
@@ -33,3 +37,4 @@ Each generated image targets iPhone portrait composition at 1170 x 2532.
 - The screenshots use the procedural 3D art direction currently in the Unity project.
 - The scenes are draft store assets until final art/audio/signing review.
 - The output should be regenerated after any major visual, UI, mode, or monetization-surface change.
+- After regeneration, copy the five PNGs into `fastlane/screenshots/en-US/` and rerun `Scripts/verify_release_assets.sh`.

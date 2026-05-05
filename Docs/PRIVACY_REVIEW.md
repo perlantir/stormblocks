@@ -51,6 +51,10 @@ Current draft posture:
 - Game Center data is handled by Apple's Game Center when the user signs in.
 - User-initiated sharing sends only the generated share text/card the player chooses to share.
 
+Customer-facing policy draft:
+
+- `Docs/PUBLIC_PRIVACY.md`
+
 Credentialed follow-up before submission:
 
 - Re-review after adding any production analytics, crash reporting, cloud save, remote config, or App Store Connect services.

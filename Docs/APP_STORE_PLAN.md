@@ -24,6 +24,11 @@ Treat as working title until App Store/trademark/domain checks are completed.
 
 - App icon source: `StormBlocksUnity/Assets/StormBlocks/Art/Generated/AppIconDraft.png`
 - Screenshot directory: `StormBlocksUnity/Builds/AppStoreScreens/`
+- Fastlane screenshot package: `fastlane/screenshots/en-US/`
+- Fastlane metadata package: `fastlane/metadata/en-US/`
+- App Store Connect/Game Center manifest: `Docs/APP_STORE_CONNECT_MANIFEST.json`
+- Customer-facing support page draft: `Docs/PUBLIC_SUPPORT.md`
+- Customer-facing privacy policy draft: `Docs/PUBLIC_PRIVACY.md`
 - Screenshot notes: `Docs/APP_STORE_SCREENSHOTS.md`
 - iOS export: `StormBlocksUnity/Builds/iOS/StormBlocks/Unity-iPhone.xcodeproj`
 
@@ -76,7 +81,11 @@ Scripts/ios_release_gates.sh upload-probe
 Fastlane credentialed lanes are also scaffolded:
 
 ```bash
-fastlane ios create_app_record
-fastlane ios upload_testflight
-fastlane ios release_candidate_upload
+Scripts/fastlane_release.sh ios validate_release_assets
+Scripts/fastlane_release.sh ios create_app_record
+Scripts/fastlane_release.sh ios upload_metadata
+Scripts/fastlane_release.sh ios upload_testflight
+Scripts/fastlane_release.sh ios release_candidate_upload
 ```
+
+Before App Store submission, confirm the support, marketing, and privacy URLs in `Docs/APP_STORE_CONNECT_MANIFEST.json` are publicly reachable and acceptable for customer-facing use. Apple documents the current metadata limits and support URL expectations in App Store Connect Help: app name and subtitle are capped at 30 characters, promotional text at 170 characters, description at 4000 characters, and keywords at 100 bytes; support URL must lead to actual contact information.

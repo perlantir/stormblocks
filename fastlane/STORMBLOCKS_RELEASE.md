@@ -29,10 +29,22 @@ For upload-only lanes, `FASTLANE_APPLE_APPLICATION_SPECIFIC_PASSWORD` can be use
 
 ## Lanes
 
+Validate local metadata, screenshot, and Game Center identifier assets:
+
+```bash
+Scripts/fastlane_release.sh ios validate_release_assets
+```
+
 Create the missing App Store Connect app record:
 
 ```bash
 Scripts/fastlane_release.sh ios create_app_record
+```
+
+Upload App Store metadata and screenshots after the app record exists:
+
+```bash
+Scripts/fastlane_release.sh ios upload_metadata
 ```
 
 Upload the exported IPA:

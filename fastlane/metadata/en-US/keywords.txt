@@ -1,0 +1,1 @@
+puzzle,rescue,lines,tiles,camp,daily,trail,tempest,casual,logic,brain,cozy,challenge

@@ -2,13 +2,16 @@ opt_out_usage
 
 default_platform(:ios)
 
+PROJECT_ROOT = File.expand_path("..", __dir__)
 APP_IDENTIFIER = "com.perlantir.stormblocks"
 APP_NAME = "Storm Blocks"
 SKU = "stormblocks-ios"
 VERSION = "0.1.0"
 TEAM_ID = "7JL22TDB44"
 PROVIDER_PUBLIC_ID = "ae62de71-9179-4836-a662-2c92a63e965e"
-IPA_PATH = "StormBlocksUnity/Builds/iOS/ExportAppStoreTeam7JL/StormBlocks.ipa"
+IPA_PATH = File.join(PROJECT_ROOT, "StormBlocksUnity/Builds/iOS/ExportAppStoreTeam7JL/StormBlocks.ipa")
+METADATA_PATH = File.join(PROJECT_ROOT, "fastlane/metadata")
+SCREENSHOTS_PATH = File.join(PROJECT_ROOT, "fastlane/screenshots")
 
 def configure_app_store_connect_api_key_if_available
   key_id = ENV["APP_STORE_CONNECT_API_KEY_KEY_ID"]
@@ -50,7 +53,16 @@ def require_ipa!
   UI.user_error!("Missing IPA at #{IPA_PATH}. Run Scripts/ios_release_gates.sh export-appstore first.") unless File.exist?(IPA_PATH)
 end
 
+def verify_release_assets!
+  sh(File.join(PROJECT_ROOT, "Scripts/verify_release_assets.sh"))
+end
+
 platform :ios do
+  desc "Validate App Store metadata, screenshots, and Game Center identifier manifest locally."
+  lane :validate_release_assets do
+    verify_release_assets!
+  end
+
   desc "Create the missing App Store Connect app record and enable Game Center capability."
   lane :create_app_record do
     require_app_store_auth!
@@ -75,6 +87,24 @@ platform :ios do
     produce(produce_options)
   end
 
+  desc "Upload App Store metadata and screenshots after the app record exists."
+  lane :upload_metadata do
+    require_app_store_auth!
+    verify_release_assets!
+
+    deliver(
+      app_identifier: APP_IDENTIFIER,
+      team_id: TEAM_ID,
+      metadata_path: METADATA_PATH,
+      screenshots_path: SCREENSHOTS_PATH,
+      skip_binary_upload: true,
+      skip_metadata: false,
+      skip_screenshots: false,
+      submit_for_review: false,
+      force: true
+    )
+  end
+
   desc "Upload the already exported Storm Blocks IPA to TestFlight."
   lane :upload_testflight do
     require_app_store_auth!
@@ -94,6 +124,8 @@ platform :ios do
   desc "Create the App Store Connect app record if needed, then upload the exported IPA."
   lane :release_candidate_upload do
     create_app_record
+    validate_release_assets
+    upload_metadata
     upload_testflight
   end
 end

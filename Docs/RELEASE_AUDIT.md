@@ -32,6 +32,7 @@ This maps the launch request and repo release gates to concrete evidence. The pr
 | Physical-device launch | `/tmp/stormblocks-device-launch.json` failed only because the iPhone was locked. | Blocked by locked device |
 | Xcode archive | `/tmp/stormblocks-xcode-team7jl-archive.log` reports `** ARCHIVE SUCCEEDED **`. | Pass |
 | App Store Connect IPA export | `/tmp/stormblocks-xcode-team7jl-export-appstore.log` reports `** EXPORT SUCCEEDED **`; IPA at `StormBlocksUnity/Builds/iOS/ExportAppStoreTeam7JL/StormBlocks.ipa`. | Pass |
+| App Store metadata package | `fastlane/metadata/en-US/`, `fastlane/screenshots/en-US/`, and `Docs/APP_STORE_CONNECT_MANIFEST.json` are verified by `Scripts/verify_release_assets.sh`. | Local pass; public URL review pending |
 | TestFlight upload | Upload probe authenticated to App Store Connect, then failed at `IDEDistributionFetchAppRecordStep` with `missingApp(bundleId: "com.perlantir.stormblocks")`. | Blocked by missing app record |
 
 ## Open Release Gates
@@ -63,7 +64,9 @@ Scripts/ios_release_gates.sh upload-probe
 Credentialed Fastlane lanes are available after App Store Connect credentials are set:
 
 ```bash
+Scripts/verify_release_assets.sh
 Scripts/fastlane_release.sh ios create_app_record
+Scripts/fastlane_release.sh ios upload_metadata
 Scripts/fastlane_release.sh ios upload_testflight
 Scripts/fastlane_release.sh ios release_candidate_upload
 ```

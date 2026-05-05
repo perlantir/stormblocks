@@ -22,4 +22,8 @@ if ! bundle -v >/dev/null 2>&1; then
 fi
 
 export FASTLANE_SKIP_UPDATE_CHECK="${FASTLANE_SKIP_UPDATE_CHECK:-1}"
-exec bundle exec fastlane "$@"
+set +e
+bundle exec fastlane "$@"
+status=$?
+rm -f "$ROOT/fastlane/report.xml"
+exit "$status"

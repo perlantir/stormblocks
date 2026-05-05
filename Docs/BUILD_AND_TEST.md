@@ -110,6 +110,8 @@ Outputs are written to ignored path `StormBlocksUnity/Builds/AppStoreScreens/`:
 
 Current evidence: `/tmp/stormblocks-appstore-polish.log` completed with no C# errors or Unity exceptions, and regenerated all five 1170 x 2532 PNGs with visible UI labels.
 
+The current Fastlane handoff package includes tracked copies under `fastlane/screenshots/en-US/`. `Scripts/verify_release_assets.sh` validates the five expected PNGs at 1170 x 2532.
+
 ## iOS Xcode Export
 
 iOS Build Support must be installed for Unity 6000.4.5f1:
@@ -302,8 +304,9 @@ Current evidence:
 The non-UI credential probes currently require human/App Store Connect credentials:
 
 - `xcrun altool --list-providers` reports that either JWT API-key auth or username/app-password auth is required.
-- `FASTLANE_SKIP_UPDATE_CHECK=1 fastlane ios create_app_record` refuses to run until App Store Connect API key variables or `STORMBLOCKS_APPLE_ID`/`APPLE_ID` are set.
+- `Scripts/fastlane_release.sh ios create_app_record` refuses to run until App Store Connect API key variables or `STORMBLOCKS_APPLE_ID`/`APPLE_ID` are set.
 - `Scripts/fastlane_release.sh lanes` runs Fastlane through Bundler using Homebrew Ruby, avoiding the system Ruby 2.6 `/usr/bin/bundle` mismatch with `Gemfile.lock`.
+- `Scripts/verify_release_assets.sh` validates App Store metadata limits, tracked screenshot dimensions, and Game Center identifier alignment between `Docs/APP_STORE_CONNECT_MANIFEST.json`, `Docs/GAME_CENTER_SETUP.md`, and `UnityGameCenterServices.cs`.
 
 ## Credentialed Follow-Up
 

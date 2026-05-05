@@ -65,7 +65,9 @@ require_absent_glob_find() {
 require_fastlane_wrapper() {
   local output
   if output="$(FASTLANE_SKIP_UPDATE_CHECK=1 "$ROOT/Scripts/fastlane_release.sh" lanes 2>&1)" \
+      && grep -q "ios validate_release_assets" <<<"$output" \
       && grep -q "ios create_app_record" <<<"$output" \
+      && grep -q "ios upload_metadata" <<<"$output" \
       && grep -q "ios upload_testflight" <<<"$output" \
       && grep -q "ios release_candidate_upload" <<<"$output"; then
     pass "Fastlane wrapper runs lanes through Bundler"
@@ -131,9 +133,16 @@ audit_local_evidence() {
   require_ipa_entitlement
 
   require_grep "$ROOT/fastlane/Fastfile" "lane :create_app_record" "Fastlane app-record lane exists"
+  require_grep "$ROOT/fastlane/Fastfile" "lane :upload_metadata" "Fastlane metadata lane exists"
   require_grep "$ROOT/fastlane/Fastfile" "lane :upload_testflight" "Fastlane TestFlight lane exists"
   require_file "$ROOT/Scripts/fastlane_release.sh" "Fastlane release wrapper exists"
   require_fastlane_wrapper
+  require_file "$ROOT/Scripts/verify_release_assets.sh" "Release asset verifier exists"
+  if "$ROOT/Scripts/verify_release_assets.sh" >/tmp/stormblocks-release-assets-audit.log 2>&1; then
+    pass "Release asset verifier passes"
+  else
+    fail "Release asset verifier failed; see /tmp/stormblocks-release-assets-audit.log"
+  fi
   require_grep "$ROOT/Scripts/ios_release_gates.sh" "upload-probe" "iOS release gate runner includes upload probe"
 
   require_absent_glob_find "No transient Unity/Fastlane artifacts remain" \

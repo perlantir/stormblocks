@@ -18,6 +18,8 @@ Create these identifiers in App Store Connect Game Center:
 - `com.perlantir.stormblocks.leaderboard.daily_storm`
 - `com.perlantir.stormblocks.leaderboard.tempest_trials_weekly`
 
+The machine-readable setup manifest lives at `Docs/APP_STORE_CONNECT_MANIFEST.json` and includes reference names, display names, score sort order, and score format for these leaderboards.
+
 ## Achievements
 
 Create these identifiers in App Store Connect Game Center:
@@ -31,6 +33,8 @@ Create these identifiers in App Store Connect Game Center:
 - `com.perlantir.stormblocks.achievement.tempest_trial_complete`
 - `com.perlantir.stormblocks.achievement.cosmetic_collector`
 
+The manifest also includes achievement reference names, display titles, pre-earned/earned descriptions, point values, and hidden/repeatable flags.
+
 ## Verification
 
 Current local proof:
@@ -43,6 +47,7 @@ Current local proof:
 - Unsigned Xcode `Release-iphoneos` build succeeds with `CODE_SIGNING_ALLOWED=NO`.
 - Signed Xcode `Release-iphoneos` build succeeds under team `7JL22TDB44`.
 - App Store IPA export succeeds with Game Center entitlement and `beta-reports-active = true`.
+- `Scripts/verify_release_assets.sh` verifies that every Game Center identifier in `Docs/APP_STORE_CONNECT_MANIFEST.json` appears in both `UnityGameCenterServices.cs` and this setup document.
 
 Credentialed follow-up:
 
