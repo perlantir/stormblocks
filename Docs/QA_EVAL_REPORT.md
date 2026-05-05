@@ -4,10 +4,10 @@ Current eval date: 2026-05-05.
 
 ## Automated Coverage
 
-- EditMode: 25 total, 25 passed, 0 failed at `2026-05-05 12:22:09Z`.
-- PlayMode: 7 total, 7 passed, 0 failed at `2026-05-05 12:23:33Z`.
+- EditMode: 25 total, 25 passed, 0 failed at `2026-05-05 13:20:30Z`.
+- PlayMode: 7 total, 7 passed, 0 failed at `2026-05-05 13:20:37Z`.
 - Covered core evals: placement, valid move detection, line clears, scoring, storm spread, automatic Storm Pushback, clutch save, game-over states, daily seed determinism, save/load, progression, service seams, normal-flow console cleanliness, portrait safe-area controls, results/retry, UI shell navigation, and mobile scene budgets.
-- Current rounded-visuals PlayMode budget: 409 renderers, 136,600 mesh triangles, 1 audio listener, 1 canvas.
+- Current safe-palette PlayMode budget: 421 renderers, 142,792 mesh triangles, 1 audio listener, 1 canvas.
 - Local Gate 12 performance coverage now includes primitive pooling for dynamic board/tray/drag/VFX presentation and a persisted Low Detail setting with older-device auto fallback heuristics.
 
 ## Build And Runtime Proof
@@ -18,7 +18,7 @@ Current eval date: 2026-05-05.
 - Unsigned `Release-iphoneos` Xcode build succeeded: `/tmp/stormblocks-xcode-lowdetail-pool-unsigned.log`.
 - Signed `Release-iphoneos` Xcode build succeeded under team `7JL22TDB44`: `/tmp/stormblocks-xcode-team7jl-default-signed.log`.
 - Signed app installed on paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D`: `/tmp/stormblocks-device-install.json`.
-- Device launch probe is blocked by locked-device state, not signing: `/tmp/stormblocks-device-launch.json`.
+- Physical-device launch succeeded on paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D`: `/tmp/stormblocks-device-launch.json`.
 - Xcode archive succeeded: `/tmp/stormblocks-xcode-team7jl-archive.log`.
 - App Store Connect IPA export succeeded: `/tmp/stormblocks-xcode-team7jl-export-appstore.log`, output `StormBlocksUnity/Builds/iOS/ExportAppStoreTeam7JL/StormBlocks.ipa`.
 - App Store Connect upload probe authenticated but found no app record for bundle id `com.perlantir.stormblocks`: `/tmp/stormblocks-xcode-team7jl-upload-appstore.log`.
@@ -30,7 +30,7 @@ These are not final human scores. They are current local QA estimates from autom
 - Instant understandability: 4/5 local estimate; first-run flow is visual and menu-free once gameplay starts.
 - One-more-run pull: pending human five-run test.
 - Board readability: 4/5 local estimate; automated safe-area and mobile budget checks pass.
-- Visual polish: 4/5 local estimate for cohesive procedural launch art; final device visual review is still required.
+- Visual polish: 4/5 local estimate for cohesive procedural launch art after the safe-palette pass; final device visual review is still required.
 - Storm Pushback satisfaction: 4/5 local estimate; automatic mechanic, VFX, score feedback, audio, and haptic hooks are present.
 - Touch feel: pending signed-device test.
 - Performance: pending physical-device profiling; structural scene budget is under guardrails and now includes a Low Detail fallback path.

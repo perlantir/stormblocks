@@ -55,7 +55,7 @@ Free to play. No forced ads. No pay-to-win.
 - Unity iOS export succeeds.
 - Unsigned Xcode `Release-iphoneos` build succeeds with `CODE_SIGNING_ALLOWED=NO`.
 - Signed Xcode `Release-iphoneos` build succeeds under team `7JL22TDB44`.
-- Signed app installs on paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D`; launch is pending because the device was locked during the probe.
+- Signed app installs and launches on paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D`.
 - Xcode archive succeeds at `StormBlocksUnity/Builds/iOS/Archives/StormBlocks-Team7JL.xcarchive`.
 - App Store Connect IPA export succeeds at `StormBlocksUnity/Builds/iOS/ExportAppStoreTeam7JL/StormBlocks.ipa`.
 - Upload remains blocked because App Store Connect currently returns zero apps for bundle id `com.perlantir.stormblocks`; create the app record under team `7JL22TDB44` / `UBER KIWI LLC`, then upload the exported IPA or rerun the upload export.

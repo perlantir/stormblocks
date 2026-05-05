@@ -1,6 +1,6 @@
 # Physical QA Runbook
 
-Use this runbook after the paired iPhone is unlocked and the App Store Connect app record exists. The automated release audit must stay green except for gates that this runbook is actively closing.
+Use this runbook with the paired iPhone available and awake. Game Center and TestFlight checks require the App Store Connect app record first; physical QA and profiling can be recorded before that. The automated release audit must stay green except for gates that this runbook is actively closing.
 
 ## Device And Build
 

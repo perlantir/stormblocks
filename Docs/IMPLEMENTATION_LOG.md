@@ -567,3 +567,28 @@ Evidence:
 - Upload probe log: `/tmp/stormblocks-xcode-team7jl-upload-appstore.log`.
 - App Store Connect distribution log: `/var/folders/b2/cl2rv8q13bg48zl073ctm_fc0000gq/T/Unity-iPhone_2026-05-05_08-00-41.823.xcdistributionlogs/IDEDistributionAppStoreConnect.log`.
 - `Scripts/release_audit.sh full` now reports 33 pass, 0 fail, and 6 open external gates.
+
+## 2026-05-05 — Safe-palette gameplay presentation refresh
+
+- Rebalanced the gameplay capture after reference review: lighter lavender board cells for readability, less muddy storm-sunset backdrop, lower tray framing, added foreground haze/cloud fill, and rounded system-font preference for HUD/screen labels before the Unity fallback font.
+- Tested a global lit-shader pass, rejected it because it over-warmed the board and camp away from the blue-purple storm target, and kept the safer unlit/toy-texture path.
+- Regenerated the portrait gameplay capture and all five App Store screenshot PNGs, then refreshed the tracked Fastlane screenshot copies.
+- Updated release evidence docs, QA docs, physical-QA wording, and audit scripts for the new scene-budget baseline and the already-cleared physical launch gate.
+
+Evidence:
+
+- Portrait visual capture: `/tmp/stormblocks-visual-safe-palette.log` completed successfully and wrote `StormBlocksUnity/Builds/VisualChecks/stormblocks-gameplay.png`.
+- App Store screenshot capture: `/tmp/stormblocks-appstore-safe-palette.log` completed successfully and regenerated the five 1170 x 2532 PNGs under `StormBlocksUnity/Builds/AppStoreScreens/`; the files were copied into `fastlane/screenshots/en-US/`.
+- EditMode tests: `StormBlocksUnity/editmode-results.xml` reports 25 total, 25 passed, 0 failed at `2026-05-05 13:20:30Z`.
+- PlayMode tests: `StormBlocksUnity/playmode-results.xml` reports 7 total, 7 passed, 0 failed at `2026-05-05 13:20:37Z`.
+- Current logged mobile baseline: 421 renderers, 142,792 mesh triangles, 1 audio listener, 1 canvas.
+- `Scripts/verify_release_assets.sh` passes locally: 32 pass, 0 fail.
+- `Scripts/verify_prompt_compliance.sh` passes locally: 73 pass, 0 fail.
+- `Scripts/ios_release_gates.sh all-local` refreshed Unity iOS export, signed build, physical install, archive, and App Store IPA export; final status initially required the stale 424/143,584 budget, then the audit scripts were updated to the actual PlayMode rerun baseline.
+- `Scripts/ios_release_gates.sh launch-device` succeeded after the refreshed install at `2026-05-05 13:30:29Z`.
+- `Scripts/ios_release_gates.sh upload-probe` still fails at `2026-05-05 13:30:39Z` because App Store Connect returns `data: []` and `missingApp(bundleId: "com.perlantir.stormblocks")`; current distribution log is `/var/folders/b2/cl2rv8q13bg48zl073ctm_fc0000gq/T/Unity-iPhone_2026-05-05_08-30-37.610.xcdistributionlogs/IDEDistributionAppStoreConnect.log`.
+
+Known risks / not done:
+
+- This improves the current procedural Unity art direction, but it still is not a substitute for bespoke layered production art/modeling. The GPT-image-2 target-frame route remains blocked on OpenAI organization verification.
+- Physical-device visual QA, touch feel, haptics/audio feel, and physical performance profiling remain required before release signoff.

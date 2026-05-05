@@ -27,7 +27,7 @@ Use the project test runner for batch verification. Unity 6000 can skip `-runTes
   -logFile /tmp/stormblocks-editmode-lowdetail.log
 ```
 
-Current evidence: `StormBlocksUnity/editmode-results.xml` reports 25 total, 25 passed, 0 failed at `2026-05-05 12:22:09Z`.
+Current evidence: `StormBlocksUnity/editmode-results.xml` reports 25 total, 25 passed, 0 failed at `2026-05-05 13:20:30Z`.
 
 ## PlayMode Tests
 
@@ -40,7 +40,7 @@ Current evidence: `StormBlocksUnity/editmode-results.xml` reports 25 total, 25 p
   -logFile /tmp/stormblocks-playmode-lowdetail.log
 ```
 
-Current evidence: `StormBlocksUnity/playmode-results.xml` reports 7 total, 7 passed, 0 failed at `2026-05-05 12:53:21Z`.
+Current evidence: `StormBlocksUnity/playmode-results.xml` reports 7 total, 7 passed, 0 failed at `2026-05-05 13:20:37Z`.
 
 The PlayMode suite includes release smoke guards for the normal flow and active touch controls:
 
@@ -49,8 +49,8 @@ The PlayMode suite includes release smoke guards for the normal flow and active 
 
 The PlayMode suite includes a lightweight mobile scene-budget guard. Current logged baseline:
 
-- 409 renderers.
-- 136,600 mesh triangles.
+- 421 renderers.
+- 142,792 mesh triangles.
 - 1 audio listener.
 - 1 canvas.
 
@@ -72,7 +72,7 @@ Current optimization notes:
 
 Output is written to ignored path `StormBlocksUnity/Builds/VisualChecks/stormblocks-gameplay.png`.
 
-Current evidence: `/tmp/stormblocks-visual-capture-design6.log` completed with no C# errors or Unity exceptions. The capture includes the runtime HUD and uses the same visible text path as the generated store screenshots.
+Current evidence: `/tmp/stormblocks-visual-safe-palette.log` completed with no C# errors or Unity exceptions. The capture includes the runtime HUD and uses the same visible text path as the generated store screenshots.
 
 ## App Icon Draft
 
@@ -108,7 +108,7 @@ Outputs are written to ignored path `StormBlocksUnity/Builds/AppStoreScreens/`:
 - `04_tempest_trials_weekly.png`
 - `05_cosmetic_profile.png`
 
-Current evidence: `/tmp/stormblocks-appstore-polish.log` completed with no C# errors or Unity exceptions, and regenerated all five 1170 x 2532 PNGs with visible UI labels.
+Current evidence: `/tmp/stormblocks-appstore-safe-palette.log` completed with no C# errors or Unity exceptions, and regenerated all five 1170 x 2532 PNGs with visible UI labels.
 
 The current Fastlane handoff package includes tracked copies under `fastlane/screenshots/en-US/`. `Scripts/verify_release_assets.sh` validates the five expected PNGs at 1170 x 2532.
 
@@ -245,9 +245,9 @@ xcrun devicectl device process launch \
 
 Current evidence:
 
-- Launch was blocked because the iPhone was locked: `/tmp/stormblocks-device-launch.json` reports `FBSOpenApplicationErrorDomain` code `7`, `Locked`.
-- Latest retry at `2026-05-05 06:11Z` reached the device tunnel and failed for the same device-state reason: `Unable to launch com.perlantir.stormblocks because the device was not, or could not be, unlocked`.
-- This is a device state blocker, not a signing or install blocker.
+- `Scripts/ios_release_gates.sh launch-device` succeeded after the latest signed install at `2026-05-05 13:30:29Z`.
+- `/tmp/stormblocks-device-launch.json` reports `outcome = success`.
+- `/tmp/stormblocks-device-launch.log` includes `Launched application with com.perlantir.stormblocks bundle identifier.`
 
 ## Xcode Archive and App Store IPA Export
 
@@ -299,7 +299,8 @@ Current evidence:
 - `/tmp/stormblocks-xcode-team7jl-upload-appstore.log` fails with `exportArchive Error Downloading App Information`.
 - Distribution logs show Xcode authenticated to App Store Connect provider `ae62de71-9179-4836-a662-2c92a63e965e` and queried bundle id `com.perlantir.stormblocks`.
 - App Store Connect returned `data: []` and `total: 0`, meaning no app record currently exists for `com.perlantir.stormblocks` under the selected provider/team.
-- Latest Xcode retry at `2026-05-05 06:11Z` failed at `IDEDistributionFetchAppRecordStep` with `IDEDistribution.DistributionAppRecordProviderError.missingApp(bundleId: "com.perlantir.stormblocks")`.
+- Latest Xcode retry at `2026-05-05 13:30:39Z` failed at `IDEDistributionFetchAppRecordStep` with `IDEDistribution.DistributionAppRecordProviderError.missingApp(bundleId: "com.perlantir.stormblocks")`.
+- Current distribution log: `/var/folders/b2/cl2rv8q13bg48zl073ctm_fc0000gq/T/Unity-iPhone_2026-05-05_08-30-37.610.xcdistributionlogs/IDEDistributionAppStoreConnect.log`.
 
 The non-UI credential probes currently require human/App Store Connect credentials:
 
