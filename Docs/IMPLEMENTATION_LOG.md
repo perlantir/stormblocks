@@ -508,3 +508,24 @@ Known risks / not done:
 
 - This pass materially improves the procedural Unity presentation, but it is still not equivalent to bespoke production illustration/modeling. Importing supplied layered design assets or generated target frames would allow a much closer match.
 - Physical-device readability, haptics/audio feel, performance, and thermal profiling remain required before release signoff.
+
+## 2026-05-05 — External gate reprobe after visual pass
+
+- Rechecked the remaining Apple/device gates after pushing commit `def09d6`.
+- Confirmed branch-head GitHub Actions static verification passed for `def09d6`: `https://github.com/perlantir/stormblocks/actions/runs/25376369090`.
+- Re-ran `Scripts/ios_release_gates.sh upload-probe`; Xcode authenticated to App Store Connect, queried bundle id `com.perlantir.stormblocks`, received HTTP 200 with `data: []`, and failed with `missingApp(bundleId: "com.perlantir.stormblocks")`.
+- Re-ran the physical-device launch gate; `devicectl` connected to paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D`, but launch was denied because the device was locked.
+- Rechecked desktop automation availability; Computer Use still reports `Sender process is not authenticated`, so App Store Connect browser setup cannot be driven by automation from this session.
+
+Evidence:
+
+- GitHub Actions run: `https://github.com/perlantir/stormblocks/actions/runs/25376369090`.
+- Upload probe log: `/tmp/stormblocks-xcode-team7jl-upload-appstore.log`.
+- App Store Connect distribution log: `/var/folders/b2/cl2rv8q13bg48zl073ctm_fc0000gq/T/Unity-iPhone_2026-05-05_07-30-41.300.xcdistributionlogs/IDEDistributionAppStoreConnect.log`.
+- Device list: `/tmp/stormblocks-devicectl-list.json`.
+- Device launch failure: `/tmp/stormblocks-device-launch.json` and `/tmp/stormblocks-device-launch.log`.
+
+Known risks / not done:
+
+- App Store Connect app record still must be created for `com.perlantir.stormblocks`.
+- Live Game Center identifiers, TestFlight upload/install, unlocked-device launch, physical QA, and physical performance profiling remain open.

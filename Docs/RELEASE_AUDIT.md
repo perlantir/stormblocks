@@ -28,15 +28,15 @@ This maps the launch request and repo release gates to concrete evidence. The pr
 | Prompt compliance verifier | `Scripts/verify_prompt_compliance.sh` checks required docs/design refs, major gameplay/system surfaces, passing test result files, and non-monetization/copyright guardrails. | Pass |
 | Performance optimization | Primitive pooling, Low Detail fallback, URP mobile settings, and scene-budget guard exist; latest budget is 337 renderers and 75,850 triangles. | Local pass; physical profiling pending |
 | Physical QA handoff | `Docs/PHYSICAL_QA_RUNBOOK.md` and `Scripts/device_qa_session.sh` define launch, five-run QA, Game Center, TestFlight, and profiling steps. | Local pass; physical execution pending |
-| GitHub static verification | `.github/workflows/release-static.yml` runs `Scripts/ci_static_checks.sh` for shell syntax, release metadata, screenshots, manifest JSON, and transient artifacts. | Workflow added; remote run pending |
+| GitHub static verification | `.github/workflows/release-static.yml` runs `Scripts/ci_static_checks.sh`; branch-head run `25376369090` passed for commit `def09d6` at `https://github.com/perlantir/stormblocks/actions/runs/25376369090`. | Pass |
 | iOS unsigned build | `/tmp/stormblocks-xcode-lowdetail-pool-unsigned.log` reports `** BUILD SUCCEEDED **`. | Pass |
 | iOS signed build | `/tmp/stormblocks-xcode-team7jl-default-signed.log` reports `** BUILD SUCCEEDED **`; team `7JL22TDB44`, Game Center entitlement. | Pass |
 | Physical-device install | `/tmp/stormblocks-device-install.json` reports success for `com.perlantir.stormblocks` on paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D`. | Pass |
-| Physical-device launch | `/tmp/stormblocks-device-launch.json` failed only because the iPhone was locked. | Blocked by locked device |
+| Physical-device launch | `xcrun devicectl list devices --json-output /tmp/stormblocks-devicectl-list.json` sees paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D` as available; `Scripts/ios_release_gates.sh launch-device` still failed at `2026-05-05 07:32:09` because the iPhone was locked. | Blocked by locked device |
 | Xcode archive | `/tmp/stormblocks-xcode-team7jl-archive.log` reports `** ARCHIVE SUCCEEDED **`. | Pass |
 | App Store Connect IPA export | `/tmp/stormblocks-xcode-team7jl-export-appstore.log` reports `** EXPORT SUCCEEDED **`; IPA at `StormBlocksUnity/Builds/iOS/ExportAppStoreTeam7JL/StormBlocks.ipa`. | Pass |
 | App Store metadata package | `fastlane/metadata/en-US/`, `fastlane/screenshots/en-US/`, and `Docs/APP_STORE_CONNECT_MANIFEST.json` are verified by `Scripts/verify_release_assets.sh`. | Local pass; public URL review pending |
-| TestFlight upload | Upload probe authenticated to App Store Connect, then failed at `IDEDistributionFetchAppRecordStep` with `missingApp(bundleId: "com.perlantir.stormblocks")`. | Blocked by missing app record |
+| TestFlight upload | Fresh upload probe authenticated to App Store Connect at `2026-05-05 12:30:44Z`; Apple returned HTTP 200 with `data: []` for `filter[bundleId]=com.perlantir.stormblocks`, then Xcode failed at `IDEDistributionFetchAppRecordStep` with `missingApp(bundleId: "com.perlantir.stormblocks")`. | Blocked by missing app record |
 
 ## Open Release Gates
 
