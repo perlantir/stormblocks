@@ -434,6 +434,25 @@ Known risks / not done:
 
 - The verifier is a static guardrail. It complements but does not replace the still-open physical-device, App Store Connect, Game Center, and TestFlight gates.
 
+## 2026-05-05 — GitHub external release gate tracking
+
+- Created GitHub milestone `Release Candidate External Gates` to track Apple, TestFlight, Game Center, and physical-device tasks that cannot be completed without external credentials/device state.
+- Created focused release-gate issues for the remaining external work:
+  - App Store Connect app record: https://github.com/perlantir/stormblocks/issues/1
+  - Live Game Center identifiers and validation: https://github.com/perlantir/stormblocks/issues/2
+  - TestFlight upload/install/launch validation: https://github.com/perlantir/stormblocks/issues/7
+  - Physical performance and thermal profiling: https://github.com/perlantir/stormblocks/issues/8
+  - Physical-device QA and five-run playability test: https://github.com/perlantir/stormblocks/issues/9
+- Updated `Docs/RELEASE_AUDIT.md` so every open external gate points to the corresponding GitHub issue.
+
+Evidence:
+
+- `gh issue list --repo perlantir/stormblocks --state open --milestone "Release Candidate External Gates"` lists the five open external gate issues above.
+
+Known risks / not done:
+
+- The issues track the work but do not close any release checklist gate until the Apple/device tasks are actually completed and evidence is recorded.
+
 ## 2026-05-05 — Gate 12 pooling and Low Detail fallback
 
 - Added primitive pooling for dynamic presentation cubes/spheres used by board refreshes, tray rebuilds, drag ghosts, survivors, storm cells, block cells, and Storm Pushback VFX.

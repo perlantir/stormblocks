@@ -40,17 +40,15 @@ This maps the launch request and repo release gates to concrete evidence. The pr
 
 ## Open Release Gates
 
-- Create the App Store Connect app record for bundle id `com.perlantir.stormblocks` under team `7JL22TDB44` / `UBER KIWI LLC`.
-- Create and enable the Game Center leaderboard and achievement identifiers in `Docs/GAME_CENTER_SETUP.md`.
-- Unlock the paired iPhone and rerun `Scripts/ios_release_gates.sh launch-device`.
-- Validate Game Center authentication, leaderboard submission, achievement reporting, and Game Center UI on a signed physical device.
-- Complete physical-device QA on the notched/Dynamic Island iPhone that already installed the app.
-- Complete physical performance and thermal profiling on one modern and one older supported iPhone.
-- Upload the exported IPA to TestFlight after the App Store Connect app record exists.
-- Install and launch the TestFlight build.
-- Run the human five-run playability test.
+- Create the App Store Connect app record for bundle id `com.perlantir.stormblocks` under team `7JL22TDB44` / `UBER KIWI LLC`: https://github.com/perlantir/stormblocks/issues/1
+- Create and enable the Game Center leaderboard and achievement identifiers in `Docs/GAME_CENTER_SETUP.md`, then validate them on device: https://github.com/perlantir/stormblocks/issues/2
+- Unlock the paired iPhone, rerun `Scripts/ios_release_gates.sh launch-device`, and complete physical-device QA plus the human five-run playability test: https://github.com/perlantir/stormblocks/issues/9
+- Complete physical performance and thermal profiling on one modern and one older supported iPhone: https://github.com/perlantir/stormblocks/issues/8
+- Upload the exported IPA to TestFlight after the App Store Connect app record exists, then install and launch the TestFlight build: https://github.com/perlantir/stormblocks/issues/7
 - Provide App Store Connect API key credentials or Apple ID app-specific password if using the Fastlane lanes.
 - Grant desktop automation permission or drive the App Store Connect browser/Xcode UI manually; the current desktop automation channel reports `Sender process is not authenticated`.
+
+GitHub tracking milestone: https://github.com/perlantir/stormblocks/milestone/1
 
 ## Reproduction Commands
 
