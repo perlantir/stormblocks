@@ -85,6 +85,9 @@ namespace StormBlocks.Presentation
         private Sprite _modalPanelSprite;
         private Sprite _buttonSprite;
         private Sprite _buttonWarmSprite;
+        private Sprite _scoreIconSprite;
+        private Sprite _rescuedIconSprite;
+        private Sprite _bestIconSprite;
         private GameObject _sourceBlockCharmPrefab;
 
         private StormRunSession _session;
@@ -639,6 +642,9 @@ namespace StormBlocks.Presentation
             _modalPanelSprite = CreateRoundedPanelSprite("SB Modal Rounded Panel Sprite", 180, 220, 30f, 7f, new Color(0.21f, 0.18f, 0.42f, 0.96f), new Color(0.78f, 0.70f, 1.0f, 0.65f), new Color(0.62f, 0.54f, 0.90f, 0.30f));
             _buttonSprite = CreateRoundedPanelSprite("SB Button Rounded Purple Sprite", 150, 72, 24f, 6f, new Color(0.40f, 0.34f, 0.66f, 0.98f), new Color(0.75f, 0.68f, 1.0f, 0.65f), new Color(0.72f, 0.64f, 1.0f, 0.32f));
             _buttonWarmSprite = CreateRoundedPanelSprite("SB Button Warm Rounded Sprite", 150, 72, 24f, 6f, new Color(0.82f, 0.47f, 0.24f, 0.98f), new Color(1.0f, 0.82f, 0.38f, 0.85f), new Color(1.0f, 0.88f, 0.65f, 0.38f));
+            _scoreIconSprite = CreateHudIconSprite("SB Score Lightning Icon", HudIconKind.Lightning, new Color(1.0f, 0.86f, 0.18f, 1f), new Color(1.0f, 0.47f, 0.06f, 1f));
+            _rescuedIconSprite = CreateHudIconSprite("SB Rescued Heart Icon", HudIconKind.Heart, new Color(1.0f, 0.36f, 0.55f, 1f), new Color(1.0f, 0.76f, 0.86f, 1f));
+            _bestIconSprite = CreateHudIconSprite("SB Best Trophy Icon", HudIconKind.Trophy, new Color(1.0f, 0.74f, 0.16f, 1f), new Color(1.0f, 0.94f, 0.50f, 1f));
         }
 
         private Sprite CreateRoundedPanelSprite(string spriteName, int width, int height, float radius, float border, Color fill, Color edge, Color highlight)
@@ -707,6 +713,94 @@ namespace StormBlocks.Presentation
             }
 
             return color;
+        }
+
+        private Sprite CreateHudIconSprite(string spriteName, HudIconKind kind, Color fill, Color highlight)
+        {
+            const int size = 72;
+            var texture = new Texture2D(size, size, TextureFormat.RGBA32, false)
+            {
+                name = spriteName + " Texture",
+                hideFlags = HideFlags.HideAndDontSave
+            };
+            texture.wrapMode = TextureWrapMode.Clamp;
+            texture.filterMode = FilterMode.Bilinear;
+
+            var pixels = new Color32[size * size];
+            for (int y = 0; y < size; y++)
+            {
+                for (int x = 0; x < size; x++)
+                {
+                    pixels[y * size + x] = HudIconPixel(x, y, size, kind, fill, highlight);
+                }
+            }
+
+            texture.SetPixels32(pixels);
+            texture.Apply(false, true);
+
+            var sprite = Sprite.Create(texture, new Rect(0f, 0f, size, size), new Vector2(0.5f, 0.5f), 100f);
+            sprite.name = spriteName;
+            sprite.hideFlags = HideFlags.HideAndDontSave;
+            _runtimeUiAssets.Add(texture);
+            _runtimeUiAssets.Add(sprite);
+            return sprite;
+        }
+
+        private static Color HudIconPixel(int x, int y, int size, HudIconKind kind, Color fill, Color highlight)
+        {
+            float u = (x + 0.5f) / size;
+            float v = (y + 0.5f) / size;
+            bool inside = false;
+            switch (kind)
+            {
+                case HudIconKind.Lightning:
+                    inside = PointInTriangle(u, v, 0.56f, 0.08f, 0.25f, 0.53f, 0.48f, 0.53f) ||
+                        PointInTriangle(u, v, 0.44f, 0.92f, 0.76f, 0.43f, 0.52f, 0.43f);
+                    break;
+                case HudIconKind.Heart:
+                    float hx = (u - 0.5f) * 2.35f;
+                    float hy = (v - 0.50f) * 2.35f;
+                    float heart = hx * hx + hy * hy - 0.92f;
+                    inside = heart * heart * heart - hx * hx * hy * hy * hy <= 0f && v > 0.16f && v < 0.88f;
+                    break;
+                case HudIconKind.Trophy:
+                    inside = (u > 0.28f && u < 0.72f && v > 0.30f && v < 0.72f) ||
+                        (u > 0.40f && u < 0.60f && v > 0.18f && v < 0.34f) ||
+                        (u > 0.30f && u < 0.70f && v > 0.10f && v < 0.20f) ||
+                        Ellipse(u, v, 0.23f, 0.54f, 0.16f, 0.20f) ||
+                        Ellipse(u, v, 0.77f, 0.54f, 0.16f, 0.20f);
+                    break;
+            }
+
+            if (!inside)
+            {
+                return Color.clear;
+            }
+
+            float glow = Mathf.Clamp01((v - 0.35f) * 2.4f + (1f - Mathf.Abs(u - 0.38f) * 3f) * 0.25f);
+            return Color.Lerp(fill, highlight, glow * 0.62f);
+        }
+
+        private static bool PointInTriangle(float px, float py, float ax, float ay, float bx, float by, float cx, float cy)
+        {
+            float d1 = Sign(px, py, ax, ay, bx, by);
+            float d2 = Sign(px, py, bx, by, cx, cy);
+            float d3 = Sign(px, py, cx, cy, ax, ay);
+            bool hasNegative = d1 < 0f || d2 < 0f || d3 < 0f;
+            bool hasPositive = d1 > 0f || d2 > 0f || d3 > 0f;
+            return !(hasNegative && hasPositive);
+        }
+
+        private static float Sign(float px, float py, float ax, float ay, float bx, float by)
+        {
+            return (px - bx) * (ay - by) - (ax - bx) * (py - by);
+        }
+
+        private static bool Ellipse(float u, float v, float cx, float cy, float rx, float ry)
+        {
+            float dx = (u - cx) / rx;
+            float dy = (v - cy) / ry;
+            return dx * dx + dy * dy <= 1f;
         }
 
         private void SetupCameraAndLights()
@@ -952,12 +1046,16 @@ namespace StormBlocks.Presentation
             RectTransform safeRoot = CreateSafeAreaRoot(canvasObject.transform);
 
             CreateFloatingHudText(safeRoot, "STORM BLOCKS", new Vector2(0f, 1194f), new Vector2(620f, 62f), 42f, new Color(0.96f, 0.94f, 1f));
-            CreateDecorativePanel(safeRoot, "Connected Toy HUD Backplate", new Vector2(0f, 1080f), new Vector2(920f, 162f), new Color(0.54f, 0.47f, 0.80f, 0.82f), _hudPanelSprite, true);
-            _scoreLabel = CreateHudPanel(safeRoot, "0\nSCORE", new Vector2(-320f, 1080f), new Vector2(268f, 120f), new Color(0.58f, 0.50f, 0.82f, 0.44f));
-            _rescuedLabel = CreateHudPanel(safeRoot, "0\nRESCUED", new Vector2(0f, 1080f), new Vector2(250f, 138f), new Color(0.70f, 0.62f, 0.90f, 0.38f));
-            _bestLabel = CreateHudPanel(safeRoot, "BEST 0", new Vector2(320f, 1080f), new Vector2(305f, 120f), new Color(0.58f, 0.50f, 0.82f, 0.44f));
+            CreateDecorativePanel(safeRoot, "Connected Toy HUD Backplate", new Vector2(0f, 1080f), new Vector2(950f, 162f), new Color(0.56f, 0.50f, 0.82f, 0.88f), _hudPanelSprite, true);
+            CreateDecorativePanel(safeRoot, "Warm HUD underglow", new Vector2(0f, 1008f), new Vector2(560f, 28f), new Color(1.0f, 0.58f, 0.18f, 0.42f), _hudWarmSprite, false);
+            _scoreLabel = CreateHudPanel(safeRoot, "0\nSCORE", new Vector2(-326f, 1080f), new Vector2(286f, 120f), new Color(0.58f, 0.50f, 0.82f, 0.52f));
+            _rescuedLabel = CreateHudPanel(safeRoot, "0\nRESCUED", new Vector2(0f, 1080f), new Vector2(270f, 138f), new Color(0.72f, 0.64f, 0.92f, 0.48f));
+            _bestLabel = CreateHudPanel(safeRoot, "BEST 0", new Vector2(326f, 1080f), new Vector2(318f, 120f), new Color(0.58f, 0.50f, 0.82f, 0.52f));
+            CreateHudIcon(safeRoot, "HUD score lightning icon", _scoreIconSprite, new Vector2(-404f, 1098f), new Vector2(48f, 48f));
+            CreateHudIcon(safeRoot, "HUD rescued heart icon", _rescuedIconSprite, new Vector2(-82f, 1100f), new Vector2(42f, 42f));
+            CreateHudIcon(safeRoot, "HUD best trophy icon", _bestIconSprite, new Vector2(214f, 1100f), new Vector2(42f, 42f));
             _modeLabel = CreateHudPanel(safeRoot, "ENDLESS STORM", new Vector2(0f, 950f), new Vector2(470f, 72f), new Color(0.86f, 0.48f, 0.25f, 0.96f));
-            _phaseLabel = CreateHudPanel(safeRoot, "CALM", new Vector2(0f, 1005f), new Vector2(190f, 48f), new Color(0.38f, 0.32f, 0.62f, 0.70f));
+            _phaseLabel = CreateHudPanel(safeRoot, "CALM", new Vector2(0f, 1005f), new Vector2(210f, 50f), new Color(0.38f, 0.32f, 0.62f, 0.76f));
             _toastLabel = CreateHudPanel(safeRoot, string.Empty, new Vector2(0f, 715f), new Vector2(470f, 90f), new Color(1.0f, 0.62f, 0.18f, 0.0f));
             _toastLabel.gameObject.transform.parent.gameObject.SetActive(false);
 
@@ -1047,6 +1145,22 @@ namespace StormBlocks.Presentation
             return tmp;
         }
 
+        private void CreateHudIcon(Transform parent, string objectName, Sprite sprite, Vector2 anchoredPosition, Vector2 size)
+        {
+            var icon = new GameObject(objectName);
+            icon.transform.SetParent(parent, false);
+            var image = icon.AddComponent<Image>();
+            image.sprite = sprite;
+            image.color = Color.white;
+            image.raycastTarget = false;
+            AddGraphicShadow(image, new Color(0.04f, 0.02f, 0.08f, 0.42f), new Vector2(0f, -3f));
+            var rect = icon.GetComponent<RectTransform>();
+            rect.anchorMin = new Vector2(0.5f, 0.5f);
+            rect.anchorMax = new Vector2(0.5f, 0.5f);
+            rect.anchoredPosition = anchoredPosition;
+            rect.sizeDelta = size;
+        }
+
         private static void AddGraphicShadow(Graphic graphic, Color color, Vector2 distance)
         {
             var shadow = graphic.gameObject.AddComponent<Shadow>();
@@ -1123,9 +1237,9 @@ namespace StormBlocks.Presentation
             var label = new GameObject("Label");
             label.transform.SetParent(buttonObject.transform, false);
             var tmp = label.AddComponent<Text>();
-            tmp.text = text;
+            tmp.text = text == "MENU" ? "II" : text;
             tmp.font = UiFont();
-            tmp.fontSize = text.Length > 6 ? 24 : 28;
+            tmp.fontSize = text == "MENU" ? 38 : text.Length > 6 ? 24 : 28;
             tmp.fontStyle = FontStyle.Bold;
             tmp.alignment = TextAnchor.MiddleCenter;
             tmp.color = Color.white;
@@ -2737,6 +2851,13 @@ namespace StormBlocks.Presentation
             public Transform Root;
             public Vector3 Center;
             public Vector2 HalfSize;
+        }
+
+        private enum HudIconKind
+        {
+            Lightning,
+            Heart,
+            Trophy
         }
 
         private sealed class PooledPrimitive : MonoBehaviour

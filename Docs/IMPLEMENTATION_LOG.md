@@ -711,3 +711,24 @@ Known risks / not done:
 
 - This is a partial modern-device profiling pass, not final release performance signoff.
 - Still need an older supported iPhone trace and longer manual interactive profiling through normal play, near-death storm, Storm Pushback, menus/results, and reduced-motion/Low Detail paths.
+
+## 2026-05-05 — Runtime HUD polish pass
+
+- Updated the actual runtime HUD with procedural score/rescue/best icon sprites, a warmer connected HUD underglow, and a pause-style menu control while preserving the tested `MENU Mode Button` object name.
+- Kept the pass scoped to presentation; no gameplay rules or mode systems changed.
+- Regenerated portrait gameplay and App Store screenshot captures after the HUD polish.
+
+Evidence:
+
+- Visual capture: `/tmp/stormblocks-visual-hud-polish-2.log` completed successfully and wrote `StormBlocksUnity/Builds/VisualChecks/stormblocks-gameplay.png`.
+- App Store screenshot capture: `/tmp/stormblocks-appstore-hud-polish.log` completed successfully and regenerated all five PNGs under `StormBlocksUnity/Builds/AppStoreScreens/`; the files were copied into `fastlane/screenshots/en-US/`.
+- EditMode tests: `StormBlocksUnity/editmode-results.xml` reports 25 total, 25 passed, 0 failed at `2026-05-05 16:03:53Z`.
+- PlayMode tests: `StormBlocksUnity/playmode-results.xml` reports 7 total, 7 passed, 0 failed at `2026-05-05 16:04:01Z`.
+- Current logged full-detail mobile baseline after the HUD polish pass: 432 renderers, 156,984 mesh triangles, 1 audio listener, and 1 canvas.
+- `Scripts/ios_release_gates.sh all-local` refreshed Unity iOS export, signed build, paired-iPhone install, Xcode archive, and App Store IPA export for the current HUD-polish source; latest install evidence is `/tmp/stormblocks-device-install.json` from `2026-05-05 16:05:10Z`, and the exported IPA was refreshed at `2026-05-05 16:08:24Z`.
+- `Scripts/ios_release_gates.sh launch-device` launched the current-source signed app on the paired iPhone at `2026-05-05 16:09:13Z`.
+- `Scripts/ios_release_gates.sh upload-probe` retried against the current-source archive at `2026-05-05 16:09:18Z`; App Store Connect returned HTTP 200 with `data: []` and `total: 0` for `com.perlantir.stormblocks`. Current distribution log: `/var/folders/b2/cl2rv8q13bg48zl073ctm_fc0000gq/T/Unity-iPhone_2026-05-05_11-09-16.316.xcdistributionlogs/IDEDistributionAppStoreConnect.log`.
+
+Known risks / not done:
+
+- App Store Connect upload still requires an app record for bundle id `com.perlantir.stormblocks`; the upload probe is expected to stay blocked until that external record exists.

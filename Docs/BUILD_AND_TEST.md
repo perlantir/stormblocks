@@ -27,7 +27,7 @@ Use the project test runner for batch verification. Unity 6000 can skip `-runTes
   -logFile /tmp/stormblocks-editmode-lowdetail.log
 ```
 
-Current evidence: `StormBlocksUnity/editmode-results.xml` reports 25 total, 25 passed, 0 failed at `2026-05-05 15:31:36Z`.
+Current evidence: `StormBlocksUnity/editmode-results.xml` reports 25 total, 25 passed, 0 failed at `2026-05-05 16:03:53Z`.
 
 ## PlayMode Tests
 
@@ -40,7 +40,7 @@ Current evidence: `StormBlocksUnity/editmode-results.xml` reports 25 total, 25 p
   -logFile /tmp/stormblocks-playmode-lowdetail.log
 ```
 
-Current evidence: `StormBlocksUnity/playmode-results.xml` reports 7 total, 7 passed, 0 failed at `2026-05-05 15:31:44Z`.
+Current evidence: `StormBlocksUnity/playmode-results.xml` reports 7 total, 7 passed, 0 failed at `2026-05-05 16:04:01Z`.
 
 The PlayMode suite includes release smoke guards for the normal flow and active touch controls:
 
@@ -49,8 +49,8 @@ The PlayMode suite includes release smoke guards for the normal flow and active 
 
 The PlayMode suite includes a lightweight mobile scene-budget guard. Current logged baseline:
 
-- 423 renderers.
-- 154,152 mesh triangles.
+- 432 renderers.
+- 156,984 mesh triangles.
 - 1 audio listener.
 - 1 canvas.
 
@@ -73,7 +73,7 @@ Current optimization notes:
 
 Output is written to ignored path `StormBlocksUnity/Builds/VisualChecks/stormblocks-gameplay.png`.
 
-Current evidence: `/tmp/stormblocks-visual-board-pass-2b.log` completed with no C# errors or Unity exceptions. The capture includes the runtime HUD and uses the same visible text path as the generated store screenshots.
+Current evidence: `/tmp/stormblocks-visual-hud-polish-2.log` completed with no C# errors or Unity exceptions. The capture includes the runtime HUD and uses the same visible text path as the generated store screenshots.
 
 ## App Icon Draft
 
@@ -109,7 +109,7 @@ Outputs are written to ignored path `StormBlocksUnity/Builds/AppStoreScreens/`:
 - `04_tempest_trials_weekly.png`
 - `05_cosmetic_profile.png`
 
-Current evidence: `/tmp/stormblocks-appstore-board-pass-2.log` completed with no C# errors or Unity exceptions, and regenerated all five 1170 x 2532 PNGs with visible UI labels.
+Current evidence: `/tmp/stormblocks-appstore-hud-polish.log` completed with no C# errors or Unity exceptions, and regenerated all five 1170 x 2532 PNGs with visible UI labels.
 
 The current Fastlane handoff package includes tracked copies under `fastlane/screenshots/en-US/`. `Scripts/verify_release_assets.sh` validates the five expected PNGs at 1170 x 2532.
 
@@ -300,7 +300,7 @@ Current evidence:
 - `/tmp/stormblocks-xcode-team7jl-upload-appstore.log` fails with `exportArchive Error Downloading App Information`.
 - Distribution logs show Xcode authenticated to App Store Connect provider `ae62de71-9179-4836-a662-2c92a63e965e` and queried bundle id `com.perlantir.stormblocks`.
 - App Store Connect returned `data: []` and `total: 0`, meaning no app record currently exists for `com.perlantir.stormblocks` under the selected provider/team.
-- Latest Xcode retry at `2026-05-05 15:16:59Z` failed at `IDEDistributionFetchAppRecordStep` with `IDEDistribution.DistributionAppRecordProviderError.missingApp(bundleId: "com.perlantir.stormblocks")`.
+- Latest Xcode retry at `2026-05-05 16:09:18Z` authenticated to App Store Connect, received HTTP 200 with `data: []` / `total: 0`, and failed while downloading app information because no app record exists for `com.perlantir.stormblocks`.
 - Current distribution log: `/var/folders/b2/cl2rv8q13bg48zl073ctm_fc0000gq/T/Unity-iPhone_2026-05-05_10-16-57.253.xcdistributionlogs/IDEDistributionAppStoreConnect.log`.
 
 The non-UI credential probes currently require human/App Store Connect credentials:

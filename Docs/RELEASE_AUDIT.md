@@ -24,19 +24,19 @@ This maps the launch request and repo release gates to concrete evidence. The pr
 | Audio/haptics | Service interfaces and Unity feedback service exist; release checklist marks hooks present. | Pass |
 | No forced ads, paid power, gacha, loot boxes, or paid speedups | Package/settings review in implementation log and privacy/app-store docs; Unity Ads/Purchasing disabled. | Pass |
 | Design references and visual target | Procedural 3D board, storm, camp, survivors, app icon, regenerated screenshots, optimized design-source GLB imports, and blurred design-source storm backdrop exist; visual quality still needs final physical-device human review. | Local pass; human review pending |
-| QA tests | Latest EditMode: 25/25 at `2026-05-05 15:31:36Z`; latest PlayMode: 7/7 at `2026-05-05 15:31:44Z`. | Pass |
+| QA tests | Latest EditMode: 25/25 at `2026-05-05 16:03:53Z`; latest PlayMode: 7/7 at `2026-05-05 16:04:01Z`. | Pass |
 | Prompt compliance verifier | `Scripts/verify_prompt_compliance.sh` checks required docs/design refs, major gameplay/system surfaces, passing test result files, and non-monetization/copyright guardrails. | Pass |
-| Performance optimization | Primitive pooling, Low Detail fallback, URP mobile settings, optimized design-source imports, scene-budget guard, and modern-iPhone Game Performance/Power traces exist; latest full-detail budget is 423 renderers and 154,152 triangles. | Partial physical pass; older-device profiling pending |
+| Performance optimization | Primitive pooling, Low Detail fallback, URP mobile settings, optimized design-source imports, scene-budget guard, and modern-iPhone Game Performance/Power traces exist; latest full-detail budget is 432 renderers and 156,984 triangles. | Partial physical pass; older-device profiling pending |
 | Physical QA handoff | `Docs/PHYSICAL_QA_RUNBOOK.md` and `Scripts/device_qa_session.sh` define launch, five-run QA, Game Center, TestFlight, and profiling steps. | Local pass; physical execution pending |
 | GitHub static verification | Design-pass `Release Static Checks` passed for commit `b9a2d97`; run `25384474864`: `https://github.com/perlantir/stormblocks/actions/runs/25384474864`. Branch-head status should be checked after any follow-up docs-only commit. | Pass |
 | iOS unsigned build | `/tmp/stormblocks-xcode-lowdetail-pool-unsigned.log` reports `** BUILD SUCCEEDED **`. | Pass |
 | iOS signed build | Current-source `/tmp/stormblocks-xcode-team7jl-default-signed.log` reports `** BUILD SUCCEEDED **`; team `7JL22TDB44`, Game Center entitlement. | Pass |
 | Physical-device install | Current-source `/tmp/stormblocks-device-install.json` reports success for `com.perlantir.stormblocks` on paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D`. | Pass |
-| Physical-device launch | Current-source `Scripts/ios_release_gates.sh launch-device` succeeded after the latest signed install at `2026-05-05 15:37:02Z`; `/tmp/stormblocks-device-launch.json` reports `"outcome" : "success"` and launched `com.perlantir.stormblocks` on paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D`. | Pass |
+| Physical-device launch | Current-source `Scripts/ios_release_gates.sh launch-device` succeeded after the latest signed install at `2026-05-05 16:09:13Z`; `/tmp/stormblocks-device-launch.json` reports `"outcome" : "success"` and launched `com.perlantir.stormblocks` on paired iPhone `907E2EE7-9C7B-5D0D-9EC0-32E69912287D`. | Pass |
 | Xcode archive | Current-source `/tmp/stormblocks-xcode-team7jl-archive.log` reports `** ARCHIVE SUCCEEDED **`. | Pass |
 | App Store Connect IPA export | Current-source `/tmp/stormblocks-xcode-team7jl-export-appstore.log` reports `** EXPORT SUCCEEDED **`; IPA at `StormBlocksUnity/Builds/iOS/ExportAppStoreTeam7JL/StormBlocks.ipa`. | Pass |
 | App Store metadata package | `fastlane/metadata/en-US/`, `fastlane/screenshots/en-US/`, and `Docs/APP_STORE_CONNECT_MANIFEST.json` are verified by `Scripts/verify_release_assets.sh`. | Local pass; public URL review pending |
-| TestFlight upload | Current-source upload probe authenticated to App Store Connect at `2026-05-05 15:37:05Z`; Apple returned HTTP 200 with `data: []` for `filter[bundleId]=com.perlantir.stormblocks`, then Xcode failed at `IDEDistributionFetchAppRecordStep` with `missingApp(bundleId: "com.perlantir.stormblocks")`. | Blocked by missing app record |
+| TestFlight upload | Current-source upload probe authenticated to App Store Connect at `2026-05-05 16:09:18Z`; Apple returned HTTP 200 with `data: []` and `total: 0` for `filter[bundleId]=com.perlantir.stormblocks`, then Xcode failed while downloading app information because no app record exists. | Blocked by missing app record |
 
 ## Open Release Gates
 
