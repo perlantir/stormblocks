@@ -921,7 +921,6 @@ Known risks / not done:
 
 - This strengthens modern-device profiling evidence, but it does not close the release performance gate. An older supported iPhone profile and a longer interactive trace covering large clears, near-death storm, Storm Pushback, menus/results, and reduced-motion/Low Detail paths remain required.
 - App Store Connect app record creation, live Game Center validation, TestFlight upload/install, and human five-run QA remain open.
-- Pending GitHub branch-head static check refresh for this profiling evidence docs commit.
 
 ## 2026-05-05 — Structured five-run QA handoff
 
@@ -934,6 +933,7 @@ Evidence:
 
 - `Scripts/ci_static_checks.sh` passes locally after the scorecard handoff update.
 - `Scripts/release_audit.sh full` now reports 34 pass, 0 fail, and 6 open external gates; it exits nonzero because those open gates remain unresolved.
+- GitHub `Release Static Checks` passed for pushed scorecard commit `72f7932`: `https://github.com/perlantir/stormblocks/actions/runs/25394157328`.
 
 Known risks / not done:
 
